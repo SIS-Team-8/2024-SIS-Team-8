@@ -1,4 +1,4 @@
-# SIS-Team-8
+# Software Innovation Studio - Team 8
 
 ## EmoteLog: Daily Emoji Journal
 
