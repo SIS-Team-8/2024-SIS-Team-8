@@ -15,7 +15,7 @@
 * [Perry Stamoulos](https://www.linkedin.com/in/perry-stamoulos-5b6b5b1a3)
 * [Pulkit Jain](https://www.linkedin.com/in/pulkit-jain-11592761)
 
-## Development Conventions:
+## Development Conventions
 
 ### Branch Name
 
