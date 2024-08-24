@@ -9,7 +9,7 @@
 
 ## Team Members
 * [Andreas Skotadis](https://linkedin.com/in/andreas-skotadis/)
-* [Alexandar Nikolic](https://www.linkedin.com/in/{insert-here})
+* [Alexandar Nikolic](https://linkedin.com/in/alexandar-nikolic-26411b23b)
 * [Ishaan Verma](https://www.linkedin.com/in/ishaan-verma-uts)
 * [Marcus Karozis](https://linkedin.com/in/marcus-karozis)
 * [Perry Stamoulos](https://www.linkedin.com/in/perry-stamoulos-5b6b5b1a3)
