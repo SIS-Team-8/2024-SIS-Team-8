@@ -13,7 +13,7 @@
 * [Ishaan Verma](https://www.linkedin.com/in/ishaan-verma-uts)
 * [Marcus Karozis](https://linkedin.com/in/marcus-karozis)
 * [Perry Stamoulos](https://www.linkedin.com/in/perry-stamoulos-5b6b5b1a3)
-* [Pulkit Jain](linkedin.com/in/pulkit-jain-11592761)
+* [Pulkit Jain](https://www.linkedin.com/in/pulkit-jain-11592761)
 
 ## Development Conventions:
 
