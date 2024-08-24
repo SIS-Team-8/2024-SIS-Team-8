@@ -24,7 +24,7 @@
 ### Pull Request Reviews
 
 * As a reviewer, only leave comments, approvals or change requests - Let the PR creator administrate (e.g. merge, delete the branch) the PR.
-* Each PR will require at least **2** approvals
+* Each PR will require at least **2** approvals.
 * Pay attention to merge conflicts, they must be resolved before being merged.
 
 ### Documentation
