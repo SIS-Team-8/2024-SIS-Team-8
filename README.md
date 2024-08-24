@@ -10,10 +10,10 @@
 ## Team Members
 * [Andreas Skotadis](https://linkedin.com/in/andreas-skotadis/) [(14183370)](https://github.com/skottydeveloper)
 * [Alexandar Nikolic](https://www.linkedin.com/in/{insert-here}) [(????????)](https://github.com/{insert-here})
-* [Ishaan Verma](https://www.linkedin.com/in/{insert-here}) [(????????)](https://github.com/{insert-here})
-* [Marcus Karozis](https://www.linkedin.com/in/{insert-here}) [(????????)](https://github.com/{insert-here})
-* [Perry Stamoulos](https://www.linkedin.com/in/{insert-here}) [(????????)](https://github.com/{insert-here})
-* [Pulkit Jain](https://www.linkedin.com/in/{insert-here}) [(????????)](https://github.com/{insert-here})
+* [Ishaan Verma](https://www.linkedin.com/in/ishaan-verma-uts) [(????????)](https://github.com/{insert-here})
+* [Marcus Karozis](https://linkedin.com/in/marcus-karozis) [(????????)](https://github.com/{insert-here})
+* [Perry Stamoulos](https://www.linkedin.com/in/perry-stamoulos-5b6b5b1a3) [(????????)](https://github.com/{insert-here})
+* [Pulkit Jain](linkedin.com/in/pulkit-jain-11592761) [(????????)](https://github.com/{insert-here})
 
 ## Development Conventions:
 
