@@ -1,14 +1,14 @@
 {
   "name": "2024-sis-team-8",
   "version": "0.0.1",
-  "description": "## EmoteLog: Daily Emoji Journal",
-  "main": "index.js",
+  "description": "EmoteLog: Daily Emoji Journal",
+  "main": "server.js",
   "scripts": {
     "start": "npm run build-client && npm run start-server-dev",
     "start-client": "cd client && npm start",
     "build-client": "cd client && npm run build",
-    "start-server": "node index.js",
-    "start-server-dev": "nodemon index.js",
+    "start-server": "node server.js",
+    "start-server-dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
