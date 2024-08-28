@@ -3,11 +3,13 @@
 ## EmoteLog: Daily Emoji Journal
 
 ### Tech Stack
-* **Frontend**: TBD
-* **Backend**: TBD
-* **Database**: TBD
+
+* **Frontend**: React
+* **Backend**: Express.js/Node.js
+* **Database**: MongoDB
 
 ## Team Members
+
 * [Andreas Skotadis](https://linkedin.com/in/andreas-skotadis/)
 * [Alexandar Nikolic](https://linkedin.com/in/alexandar-nikolic-26411b23b)
 * [Ishaan Verma](https://www.linkedin.com/in/ishaan-verma-uts)
@@ -31,3 +33,27 @@
 
 * Leave comments for each function in regards to their purpose, and possibly an explanation of the process.
 * Don't be afraid to leave small notes and comments whilst developing.
+
+### Getting Started
+
+* clone repository.
+* Open in vscode.
+* run `npm install` in root directory.
+* cd into the client directory and run `npm install`.
+* return to the root directory with cd.
+* To run only the client run `npm run start-client`.
+* Server side is till in development so stay tuned for updates.
+
+### Getting Started - Full Stack (DO NOT ATTEMP UNLESS YOU KNOW WHAT YOU ARE DOING)
+
+* clone repository.
+* Open in vscode.
+* run `npm install` in both the client and server directories.
+* create a `.env` file in the server directory and add the following:
+
+```text
+PORT=
+MONGO_URI=
+```
+
+* To run the full stack application run `npm run start`.
