@@ -52,8 +52,11 @@
 * create a `.env` file in the server directory and add the following:
 
 ```text
-PORT=
-MONGO_URI=
+MONGODB_HOST=
+MONGODB_DB=
+MONGODB_PORT=
+MONGODB_USER=
+MONGODB_PASS=
 ```
 
 * To run the full stack application run `npm run start`.
