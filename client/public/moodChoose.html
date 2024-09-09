@@ -1,9 +1,69 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Mood Logging Screen</title>
+        <title>Mood Selection Screen</title>
+        <style>
+            .grid-container1 {
+                display: grid;
+                grid-template-columns: auto auto auto;
+                padding: 10px;
+            }
+            .grid-container2 {
+                display: grid;
+                grid-template-columns: auto auto auto auto auto;
+                padding: 10px;
+            }
+            img {
+                width: 300px;
+                height: auto;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            h1 {text-align: center;}
+            h2 {text-align: center;}
+        </style>
     </head>
     <body>
-        
+        <div class="grid-container1">
+            <div class="grid-item">
+            </div>
+            <div class="grid-item">
+                <h1>Mood Selection</h1><br><br>
+            </div>
+            <div class="grid-item">
+            </div>
+            <div class="grid-item">
+            </div>
+            <div class="grid-item">
+                <h2>How Are You Feeling?</h2>
+            </div>
+            <div class="grid-item">
+            </div>
+        </div>
+        <div class="grid-container2">
+            <div class="grid-item">
+                <img src="Angry Face.png"/>
+            </div>
+            <div class="grid-item">
+                <img src="Worried Face.png"/>
+            </div>
+            <div class="grid-item">
+                <img src="Happy Face.png"/>
+            </div>
+            <div class="grid-item">
+                <img src="Neutral Face.png"/>
+            </div>
+            <div class="grid-item">
+                <img src="Scared Face.png"/>
+            </div>
+        </div>
+        <div class="grid-container1">
+            <div class="grid-item">
+                <button type="button">
+                    <img src="Exit Arrow.png" width="100" height="100"/>
+                </button>
+            </div>
+        </div>
     </body>
 </html>
