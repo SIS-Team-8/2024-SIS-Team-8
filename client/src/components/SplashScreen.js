@@ -3,15 +3,24 @@ import logo from '../assets/logo.png';
 
 const SplashScreen = () => {
     const [showSplash, setShowSplash] = useState(true);
+    const [fadeOut, setFadeOut] = useState(false);
 
     useEffect(() => {
+        // Trigger fade-out animation right before the splash screen disappears.
+        const fadeTimer = setTimeout(() => {
+            setFadeOut(true);
+        }, 1500);
+
         // Set a timer to hide the splash screen after 3 seconds.
         const timer = setTimeout(() => {
             setShowSplash(false);
         }, 3000);
 
-        // Clean up the timer.
-        return () => clearTimeout(timer);
+        // Clean up both timers.
+        return () => {
+            clearTimeout(fadeTimer);
+            clearTimeout(timer);
+        };
     }, []);
 
     // Make sure the splash screen doesn't render after the timer ends.
@@ -20,10 +29,9 @@ const SplashScreen = () => {
     }
 
     return (
-        <div style={splashStyle}>
+        <div style={splashStyle} className={fadeOut ? 'fadeOut' : ''}>
             <h1>EmoteLog</h1>
             <img src={logo} alt="App Logo" style={logoStyle} />
-            <p>Loading...</p>
         </div>
     );
 };
