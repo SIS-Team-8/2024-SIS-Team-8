@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import logo from '../assets/logo.png';
 
 const SplashScreen = () => {
     const [showSplash, setShowSplash] = useState(true);
@@ -21,6 +22,7 @@ const SplashScreen = () => {
     return (
         <div style={splashStyle}>
             <h1>EmoteLog</h1>
+            <img src={logo} alt="App Logo" style={logoStyle} />
             <p>Loading...</p>
         </div>
     );
@@ -34,6 +36,11 @@ const splashStyle = {
     flexDirection: 'column',
     backgroundColor: '#189AB4',
     color: 'white',
+};
+
+const logoStyle = {
+    width: '150px',
+    marginBottom: '20px',
 };
 
 export default SplashScreen;
