@@ -37,3 +37,9 @@ button {
 .conPassLine {
     margin-right: 96px;
 }
+
+.onboardingButton {
+    border-radius: 50%;
+    height: 100px;
+    width: 350px;
+}
