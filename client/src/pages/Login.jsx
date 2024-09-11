@@ -1,17 +1,21 @@
 import styles from "./pages.module.css"
+import logo from "./assets/logo.png"
 
 export function Login() {
     return (
         <body>
-        <div className={styles.main}>
-                <h1>Log in</h1>
-                <p>Username <input></input></p>
-                <p className={styles.passLine}>Password <input type="password"></input></p>
-                <button>Login</button>
+            <div className={styles.container}>
+                <img src={logo} alt="App Logo" className={styles.logoStyle}/>
+                <div className={styles.inputBoxes}>
+                    <form>
+                        <input className={styles.userBox} placeholder='Username'></input>
+                        <p></p>
+                        <input className={styles.passBox} placeholder='Password' type="password"></input>
+                    </form>
+                    <button>Login</button>
+                    <p className={styles.bottom}><a>Sign Up</a> <a className={styles.forgotPassword}>Forgot password?</a></p>
+                </div>
             </div>
-            <div className={styles.bottom}>
-            <p><a>Sign Up</a> | <a>Alternate Sign Up</a></p>
-          </div>
         </body>
     );
 }
