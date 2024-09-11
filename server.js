@@ -20,14 +20,14 @@ app.use(express.urlencoded({ extended: true })); // For URL-encoded request bodi
 //   res.send("This is from express.js");
 // });
 
-//app.use('/db', mongoRouter);
+app.use('/db', mongoRouter);
 
 // handle react app routing
 app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
-// start express server on port 5000
+// start express server
 app.listen(svConfig.server.port, () => {
   console.log("server started on port " + svConfig.server.port);
 });

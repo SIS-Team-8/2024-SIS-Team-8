@@ -34,17 +34,29 @@
 * Leave comments for each function in regards to their purpose, and possibly an explanation of the process.
 * Don't be afraid to leave small notes and comments whilst developing.
 
-### Getting Started
+### Getting Started - Client Only
 
 * clone repository.
 * Open in vscode.
 * run `npm install` in root directory.
 * cd into the client directory and run `npm install`.
 * return to the root directory with cd.
-* To run only the client run `npm run start-client`.
-* Server side is till in development so stay tuned for updates.
 
-### Getting Started - Full Stack (DO NOT ATTEMP UNLESS YOU KNOW WHAT YOU ARE DOING)
+#### Startup Procedure
+
+* To run only the client run `npm run start-client`.
+
+#### Testing
+
+* go to [application](http://localhost:3000) in your browser.
+
+#### Shutdown procedure
+
+* To stop the client run `ctrl/cmd + c` in the terminal.
+
+### Getting Started - Full Stack
+
+#### Setup
 
 * clone repository.
 * Open in vscode.
@@ -52,8 +64,26 @@
 * create a `.env` file in the server directory and add the following:
 
 ```text
-PORT=
-MONGO_URI=
+MONGODB_URI=mongodb://dev:Endless2-Drift-Turf@localhost:28018
+MONGODB_DB=SIS-Team-8-dev
 ```
 
+#### Startup Procedure
+
+* make sure docker is installed and the daemon is running.
+* Start the development database by running `docker compose -f docker-compose.dev.yaml up -d` in the root directory.
 * To run the full stack application run `npm run start`.
+
+#### Testing
+
+* go to [application](http://localhost:3000) in your browser.
+* go to [mongo express](http://localhost:8081) in your browser.
+
+#### Shutdown procedure
+
+* To stop the full stack application run `ctrl/cmd + c` in the terminal.
+* shut down the database with `docker compose -f docker-compose.dev.yaml down`
+
+## TODO
+
+* create config file setup function in server.js
