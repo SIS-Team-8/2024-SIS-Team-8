@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+    background-color: #189ab4;
+    text-align: center;
+    font-family: 'Poppins';
+    color: white;
+}
+
+input {
+    height: 35px;
+    width: 300px;
+    background: rgba(0,0,0,0);
+    border-color: white;
+}
+
+form {
+    padding-bottom: 50px;
+}
+
+::placeholder {
+    color: white;
+    font-family: 'Poppins';
+    padding-left: 40px;
+}
+
+button {
+    padding: 7px;
+    font-size: large;
+    width: 308px;
+    font-family: 'Poppins';
+    background-color: white;
+    color: #189ab4;
+    border: none;
+}
+
+.container {
+    padding: 50px; 
+}
+
+.bottom {
+    margin: auto;
+    margin-top: 5px;
+    font-size: small;
+    width: 308px;
+    text-align: start;
+
+}
+
+.forgotPassword {
+    float: right;
+}
+
+.passLine {
+    margin-left: 8px;
+}
+
+.conPassLine {
+    margin-right: 96px;
+}
+
+.onboardingButton {
+    border-radius: 50%;
+    height: 100px;
+    width: 350px;
+}
+
+.logoStyle {
+    width: 192px;
+}
+
+.inputBoxes {
+    padding-bottom: 25px;
+}
+
+.emailBox {
+    background-image: url(../assets/email-icon.png);
+    background-repeat: no-repeat;
+    background-size: 25px, 25px;
+    background-position: 9px 6px; 
+}
+
+.userBox {
+    background-image: url(../assets/user-icon.png);
+    background-repeat: no-repeat;
+    background-size: 25px, 25px;
+    background-position: 9px 5px; 
+}
+
+.passBox {
+    background-image: url(../assets/password-icon.png);
+    background-repeat: no-repeat;
+    background-size: 25px, 25px;
+    background-position: 9px 5px; 
+}
