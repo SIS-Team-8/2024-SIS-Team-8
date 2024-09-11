@@ -5,15 +5,9 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 // Connect to MongoDB server using environment variables
-const mogoURI = "mongodb://" +
-    process.env.MONGODB_USER + ":" +
-    process.env.MONGODB_PASS + "@" +
-    process.env.MONGODB_HOST + ":" +
-    process.env.MONGODB_PORT;
+const mogoURI = process.env.MONGODB_URI;
 //console.log(mogoURI);
 mongoose.connect(mogoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
     dbName: process.env.MONGODB_DB,
 });
 
@@ -27,6 +21,7 @@ db.once('open', () => {
 const userSchema = new mongoose.Schema({
     _id: String,
     //user_type: Number,              // 0: admin, 1: user
+    email: String,
     password_cleartext: String,     // NEED TO HASH AT LATER DATE
     first_name: String,
     last_name: String,
@@ -34,7 +29,7 @@ const userSchema = new mongoose.Schema({
         {
             _id: String,
             time_code: [Date],
-            emoji: String,           // 0: happy, 1: sad, 2: angry, 3: anxious, 4: tired, 5: excited, 6: relaxed
+            emoji: String,      // change to int     // 0: happy, 1: sad, 2: angry, 3: anxious, 4: tired, 5: excited, 6: relaxed
             text: String,
             image: String
         }
