@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from './assets/logo.png';
 import './App.css';
-import SplashScreen from './components/SplashScreen';
+import SplashScreen from './pages/SplashScreen';
 
 function App() {
     const [isLoaded, setIsLoaded] = useState(false);
