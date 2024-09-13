@@ -1,36 +1,54 @@
-nav {
+.custom-navbar {
     background-color: #189ab4;
     padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 15px;
-}
-
-li {
-    margin-right: 20px;
-}
-
-a {
-    text-decoration: none;
+.custom-navbar .navbar-brand {
+    font-size: 1.5rem;
     color: white;
+    font-weight: 600;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.custom-navbar .navbar-brand:hover {
+    color: white;
+}
+
+.custom-navbar .navbar-brand:focus {
+    color: white;
+}
+
+.custom-navbar .nav-link {
+    margin-right: 20px;
+    text-decoration: none;
+    color: white !important;
     font-weight: 600;
     font-size: 1.2rem;
     transition: color 0.3s ease;
 }
 
-a:hover {
-    color: #61dafb;
+.custom-navbar .nav-link:hover {
+    color: white;
 }
 
-.active a {
-    color: #61dafb;
+.custom-navbar .nav-link.active {
+    color: white;
+}
+
+.custom-navbar .nav-link:focus {
+    color:white;
+}
+
+.custom-navbar .offcanvas {
+    background-color: #189ab4;
+}
+
+.custom-navbar .offcanvas-title {
+    color: white;
 }

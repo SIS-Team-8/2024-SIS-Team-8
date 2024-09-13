@@ -4,9 +4,9 @@ import './Navbar.css';
 
 export default function CustomNavbar() {
     return (
-        <Navbar bg="light" expand={false} className="mb-3">
+        <Navbar expand={false} className="custom-navbar">
             <Container fluid>
-                <Navbar.Brand as={Link} to="/">Navbar Offcanvas</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/" className="navbar-brand">EmoteLog</Navbar.Brand>
                 <Navbar.Toggle aria-controls="offcanvasNavbar" />
                 <Navbar.Offcanvas id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" placement="end">
                     <Offcanvas.Header closeButton>
@@ -33,7 +33,7 @@ function CustomLink({ to, children, ...props }) {
     const isActive = useMatch({ path: resolvedPath.pathname, end: true });
 
     return (
-        <Nav.Link as={Link} to={to} className={isActive ? "active" : ""} {...props}>
+        <Nav.Link as={Link} to={to} className={isActive ? "active custom-link" : "custom-link"} {...props}>
             {children}
         </Nav.Link>
     );
