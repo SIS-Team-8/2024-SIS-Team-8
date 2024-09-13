@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import logo from './assets/logo.png';
+import dizzy from './assets/face-with-spiral-eyes.svg';
 import './App.css';
 
 import SplashScreen from './pages/SplashScreen';
@@ -59,7 +61,18 @@ function App() {
     }
 
     function NotFound() {
-        return <h2>404: Page Not Found</h2>;
+        return (
+            <div>
+                <header className="App-header">
+                    <img src={dizzy} className="App-logo" alt="dizzy" />
+                    <h2 class="noselect">404: Page Not Found</h2>
+
+                    <Link to="/">
+                        <button id="error-button" class="noselect">Go Home</button>
+                    </Link>
+                </header>
+            </div>
+        );
     }
 }
 
