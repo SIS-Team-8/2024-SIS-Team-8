@@ -30,7 +30,7 @@ const SplashScreen = () => {
 
     return (
         <div style={splashStyle} className={fadeOut ? 'fadeOut' : ''}>
-            <h1>EmoteLog</h1>
+            <h1 class="noselect">EmoteLog</h1>
             <img src={logo} alt="App Logo" style={logoStyle} />
         </div>
     );
