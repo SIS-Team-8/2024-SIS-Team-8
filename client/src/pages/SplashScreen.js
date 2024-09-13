@@ -44,6 +44,7 @@ const splashStyle = {
     flexDirection: 'column',
     backgroundColor: '#189AB4',
     color: 'white',
+    fontFamily: 'Poppins',
 };
 
 const logoStyle = {
