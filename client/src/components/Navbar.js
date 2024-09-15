@@ -7,7 +7,7 @@ export default function CustomNavbar() {
         <Navbar expand={false} className="custom-navbar">
             <Container fluid>
                 <Navbar.Brand as={Link} to="/" className="navbar-brand">EmoteLog</Navbar.Brand>
-                <Navbar.Toggle aria-controls="offcanvasNavbar" />
+                <Navbar.Toggle className="hamburger-button" aria-controls="offcanvasNavbar" />
                 <Navbar.Offcanvas id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" placement="end">
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title className="navbar-label" id="offcanvasNavbarLabel">Menu</Offcanvas.Title>

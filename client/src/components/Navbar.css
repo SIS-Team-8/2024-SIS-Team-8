@@ -53,6 +53,26 @@
     color: white;
 }
 
+.hamburger-button {
+    font-family: 'Poppins', sans-serif;
+    background-color: white;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 10px 15px;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.hamburger-button .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.hamburger-button:hover,
+.hamburger-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 .navbar-label {
     font-family: 'Poppins', sans-serif;
     -webkit-user-drag: none;
