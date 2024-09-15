@@ -52,3 +52,16 @@
 .custom-navbar .offcanvas-title {
     color: white;
 }
+
+.navbar-label {
+    font-family: 'Poppins', sans-serif;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.justify-content-end {
+    font-family: 'Poppins', sans-serif;
+}
