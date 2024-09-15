@@ -55,6 +55,10 @@ function App() {
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
                     <h1 class="noselect">Welcome!</h1>
+
+                    <Link to="/mood-selection">
+                        <button id="mood-selection" class="noselect">Log Daily Emotion</button>
+                    </Link>
                 </header>
             </div>
         );

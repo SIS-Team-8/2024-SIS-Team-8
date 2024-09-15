@@ -44,6 +44,17 @@ body {
     overflow: hidden;
 }
 
+#mood-selection {
+    padding: 7px;
+    font-size: large;
+    font-family: 'Poppins';
+    background-color: white;
+    color: #189ab4;
+    border: none;
+    margin-top: 20px;
+    width: 197px;
+}
+
 #error-button {
     padding: 7px;
     font-size: large;
