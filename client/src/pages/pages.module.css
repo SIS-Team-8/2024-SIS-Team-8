@@ -34,6 +34,10 @@ button {
     border: none;
 }
 
+.link {
+    color: white;
+}
+
 .container {
     padding: 50px; 
 }
@@ -92,4 +96,46 @@ button {
     background-repeat: no-repeat;
     background-size: 25px, 25px;
     background-position: 9px 5px; 
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.column {
+    float: center;
+    width: 12%;
+    padding: 5px;   
+}
+
+.flexContainer {
+    display: flex;
+}
+
+.log {
+    height: 150px;
+    width: 775px;
+    background-image: url(../assets/camera-icon.png);
+    background-repeat: no-repeat;
+    background-size: 32px, 32px;
+    background-position: 735px 5px; 
+    float: center;
+}
+
+.imageButton {
+    background-color: transparent;
+    margin-top: auto;
+    padding: 0;
+}
+
+.back {
+    height: 86px;
+    width: 86px;
+}
+
+.submit {
+    height: 86px;
+    width: 86px;
 }

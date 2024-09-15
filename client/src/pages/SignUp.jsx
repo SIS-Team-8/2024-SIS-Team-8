@@ -1,4 +1,6 @@
 import styles from "./pages.module.css"
+import logo from "../assets/logo.png"
+import { Link } from "react-router-dom";
 
 export function SignUp() {
     return (
@@ -14,7 +16,7 @@ export function SignUp() {
                 <input className={styles.passBox} placeholder='Confirm Password' type="password"></input>
             </form>
             <button>Create Account</button>
-            <p className={styles.bottom}><a>Login</a></p>
+            <p className={styles.bottom}><Link to="/login" className={styles.link}>Login</Link></p>
         </div>
     )
 }
