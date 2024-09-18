@@ -18,7 +18,7 @@ function Help() {
     return (
         <div className="help-screen">
             <h1 className="help-title">Help Screen</h1>
-            <div className="help-content">
+            <div className="help-container">
                 <div className="faq-section">
                     <h2>Frequently Asked Questions (FAQ)</h2>
                     <ul className="faq-list">
