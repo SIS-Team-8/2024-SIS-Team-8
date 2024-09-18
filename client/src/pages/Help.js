@@ -22,6 +22,7 @@ function Help() {
     );
 }
 
-export default function Help() {
+export default Help;
+/*export default function Help() {
     return <h1>Help</h1>
-}
+}*/
