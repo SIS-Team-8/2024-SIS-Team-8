@@ -1,8 +1,15 @@
+import React from 'react';
+import { useNavigate, Link } from "react-router-dom";
 import logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
 import './SignUp.css';
 
 export default function SignUp() {
+    const navigate = useNavigate();
+
+    const handleSignUpClick = () => {
+        navigate("/login");
+    };
+
     return (
         <div id="signup-container">
             <img src={logo} alt="App Logo" id="logo" />
@@ -18,7 +25,7 @@ export default function SignUp() {
                     <input id="passBox" placeholder="Confirm Password" type="password"></input>
                 </form>
 
-                <button id="button">Create Account</button>
+                <button id="button" onClick={handleSignUpClick}>Create Account</button>
 
                 <p id="bottomText">
                     <Link to="/login" id="link">Login</Link>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo from './assets/logo.png';
 import dizzy from './assets/face-with-spiral-eyes.svg';
 import './App.css';
@@ -22,18 +22,19 @@ function App() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsLoaded(true);
 
-            if (!isAuthenticated) {
+            if (!isAuthenticated && location.pathname !== "/sign-up") {
                 navigate("/login");
             }
         }, 3000);
 
         return () => clearTimeout(timer);
-    }, [isAuthenticated, navigate]);
+    }, [isAuthenticated, navigate, location]);
 
     const handleLogin = () => {
         setIsAuthenticated(true);
