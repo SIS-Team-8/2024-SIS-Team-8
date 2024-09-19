@@ -12,6 +12,10 @@ import Help from "./pages/Help";
 import History from "./pages/History";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
+import MoodSelection from "./pages/MoodSelection";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+
 
 import { Route, Routes } from "react-router-dom";
 
@@ -44,6 +48,9 @@ function App() {
                 <Route path="/history" element={<History />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/mood-selection" element={<MoodSelection />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/sign-up" element={<SignUp />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </div>

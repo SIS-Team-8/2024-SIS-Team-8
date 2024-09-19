@@ -1,0 +1,6 @@
+#emailBox {
+    background-image: url(../assets/email-icon.png);
+    background-repeat: no-repeat;
+    background-size: 25px, 25px;
+    background-position: 8px 3px; 
+}
