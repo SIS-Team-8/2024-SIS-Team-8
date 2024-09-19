@@ -1,0 +1,68 @@
+html {
+    background-color: #189ab4;
+}
+
+textarea {
+    background: transparent;
+    border-color: white;
+    color: white;
+}
+
+textarea::placeholder {
+    padding-left: 5px;
+}
+
+#container {
+    padding: 30px;
+}
+
+#row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.column {
+    float: center;
+    width: 12%;
+    padding: 5px;   
+}
+
+.subColumn {
+    float: center;
+    width: 12%;
+    padding: 40px;
+}
+
+#subRow::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#subRow {
+    height: 150px;
+}
+
+#flexContainer {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+}
+
+#log {
+    height: 150px;
+    width: 775px;
+    background-image: url(../assets/camera-icon.png);
+    background-repeat: no-repeat;
+    background-size: 32px, 32px;
+    background-position: 735px 1px; 
+    margin-left: 86px;
+}
+
+#submit {
+    margin-top: auto;
+    width: 86px;
+    height: 86px;
+}

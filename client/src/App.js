@@ -1,19 +1,8 @@
-
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Login } from './pages/Login';
-import { SignUp } from './pages/SignUp';
-import { Mood } from './pages/Mood';
-
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import logo from './assets/logo.png';
 import dizzy from './assets/face-with-spiral-eyes.svg';
 import './App.css';
-<<<<<<< HEAD
-import SplashScreen from './components/SplashScreen';
-import styles from './pages/pages.module.css';
-
-=======
 
 import SplashScreen from './pages/SplashScreen';
 import Navbar from "./components/Navbar";
@@ -23,9 +12,12 @@ import Help from "./pages/Help";
 import History from "./pages/History";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
+import MoodSelection from "./pages/MoodSelection";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+
 
 import { Route, Routes } from "react-router-dom";
->>>>>>> andreas/home-screen
 
 function App() {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -45,17 +37,6 @@ function App() {
     }
 
     return (
-<<<<<<< HEAD
-        <div>
-            <BrowserRouter>
-                <Routes>
-                    <Route index element={<Login />}/>
-                    <Route path="/login" element={<Login />}/>
-                    <Route path="/signUp" element={<SignUp/>}/>
-                    <Route path="/mood" element={<Mood/>}/>
-                </Routes>
-            </BrowserRouter>
-=======
         <div className="App">
             <Navbar />
 
@@ -67,9 +48,11 @@ function App() {
                 <Route path="/history" element={<History />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/mood-selection" element={<MoodSelection />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/sign-up" element={<SignUp />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
->>>>>>> andreas/home-screen
         </div>
     );
 

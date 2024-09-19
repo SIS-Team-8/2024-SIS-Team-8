@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 .App {
     text-align: center;
 }
@@ -32,6 +34,17 @@ img {
     -ms-user-select: none;
 }
 
+input {
+    height: 35px;
+    width: 308px;
+    background: transparent;
+    border-color: white;
+}
+
+form {
+    padding-bottom: 50px;
+}
+
 .noselect {
     -webkit-user-drag: none;
     -webkit-touch-callout: none;
@@ -42,6 +55,7 @@ img {
 
 body {
     overflow: hidden;
+    font-family: 'Poppins';
 }
 
 #mood-selection {
@@ -64,4 +78,54 @@ body {
     border: none;
     margin-top: 20px;
     width: 197px;
+}
+
+#button {
+    padding: 7px;
+    font-size: large;
+    width: 308px;
+    font-family: 'Poppins';
+    background-color: white;
+    color: #189ab4;
+    border: none;
+}
+
+#logo {
+    width: 192px;
+}
+
+#inputBoxes {
+    padding-bottom: 25px;
+}
+
+#userBox {
+    background-image: url(./assets/user-icon.png);
+    background-repeat: no-repeat;
+    background-size: 25px, 25px;
+    background-position: 8px 2px; 
+}
+
+#passBox {
+    background-image: url(./assets/password-icon.png);
+    background-repeat: no-repeat;
+    background-size: 25px, 25px;
+    background-position: 8px 2px; 
+}
+
+#bottomText {
+    margin: auto;
+    margin-top: 5px;
+    font-size: small;
+    width: 308px;
+    text-align: start;
+}
+
+#link {
+    color: white;    
+}
+
+::placeholder {
+    color: white;
+    font-family: 'Poppins';
+    padding-left: 40px;
 }
