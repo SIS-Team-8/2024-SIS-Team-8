@@ -6,17 +6,24 @@ export default function SignUp() {
     return (
         <div id="signup-container">
             <img src={logo} alt="App Logo" id="logo" />
-            <form>
-                <input id="emailBox" placeholder="Email" type="email" />
-                <p></p>
-                <input id="userBox" placeholder="Username" />
-                <p></p>
-                <input id="passBox" placeholder="Password" type="password" />
-                <p></p>
-                <input id="passBox" placeholder="Confirm Password" type="password" />
-            </form>
+
+            <div id="inputBox">
+                <form>
+                    <input id="emailBox" placeholder="Email" type="email"></input>
+                    <p></p>
+                    <input id="userBox" placeholder="Username"></input>
+                    <p></p>
+                    <input id="passBox" placeholder="Password" type="password"></input>
+                    <p></p>
+                    <input id="passBox" placeholder="Confirm Password" type="password"></input>
+                </form>
+            </div>
+
             <button id="button">Create Account</button>
-            <p id="bottomText"><Link to="/login" id="link">Login</Link></p>
+
+            <p id="bottomText">
+                <Link to="/login" id="link">Login</Link>
+            </p>
         </div>
     );
 }
