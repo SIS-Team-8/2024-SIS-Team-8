@@ -17,13 +17,13 @@ export default function SignUp() {
                     <p></p>
                     <input id="passBox" placeholder="Confirm Password" type="password"></input>
                 </form>
+
+                <button id="button">Create Account</button>
+
+                <p id="bottomText">
+                    <Link to="/login" id="link">Login</Link>
+                </p>
             </div>
-
-            <button id="button">Create Account</button>
-
-            <p id="bottomText">
-                <Link to="/login" id="link">Login</Link>
-            </p>
         </div>
     );
 }
