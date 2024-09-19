@@ -1,11 +1,30 @@
 html {
     background-color: #189ab4;
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100%;
 }
 
 textarea {
     background: transparent;
     border-color: white;
     color: white;
+    resize: none;
+    width: 100%;
 }
 
 textarea::placeholder {
@@ -19,61 +38,74 @@ textarea::placeholder {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 
-#row {
+#row, #subRow {
     display: flex;
-    height: 160px;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    margin-bottom: 30px;
+    width: 100%;
 }
 
 .column {
     padding: 5px;
-    width: 12%;
+    flex: 1;
+    max-width: 150px;
     height: auto;
 }
 
-#subRow {
-    display: flex;
-    height: 150px;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 80px;
-}
-
 .subColumn {
-    padding: 10px;
-    width: 10%;
+    padding: 5px;
+    flex: 1;
+    max-width: 125px;
     height: auto;
 }
 
 #flexContainer {
     display: flex;
     justify-content: center;
-    position: relative;
-    align-items: center;
     font-family: 'Poppins';
-    height: auto;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
 }
 
 #log {
-    height: 150px;
-    min-height: 50px;
-    width: 775px;
+    width: 90%;
+    max-width: 775px;
+    min-height: 150px;
     background-image: url(../assets/camera-icon.png);
     background-repeat: no-repeat;
     background-size: 32px, 32px;
-    background-position: 735px 50%;
+    background-position: calc(100% - 20px) center;
     margin-right: 20px;
     padding: 10px;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 #submit {
     width: 50px;
     height: 50px;
-    margin-left: 10px;
+    margin-top: 10px;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    #row, #subRow {
+        flex-direction: column;
+    }
+
+    .column, .subColumn {
+        width: 60%;
+    }
+
+    #log {
+        width: 100%;
+        background-position: right 10px center;
+    }
 }
