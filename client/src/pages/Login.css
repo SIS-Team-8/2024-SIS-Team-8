@@ -18,38 +18,67 @@
     align-items: center;
 }
 
-#userBox, #passBox {
-    background-color: transparent;
-    border: 1px solid white;
-    color: white;
-    padding-left: 40px;
+form {
+    padding-bottom: 50px;
+}
+
+input {
     height: 35px;
     width: 308px;
-    margin-bottom: 15px;
+    background: transparent;
+    border-color: white;
+    color: white;
+    font-family: 'Poppins';
+}
+
+#userBox, #passBox {
+    background-repeat: no-repeat;
+    background-size: 25px, 25px;
+    background-position: 8px 2px;
+    padding-left: 40px;
+    font-family: 'Poppins';
+}
+
+#userBox {
+    background-image: url(../assets/user-icon.png);
+}
+
+#passBox {
+    background-image: url(../assets/password-icon.png);
 }
 
 #button {
-    padding: 10px;
+    padding: 7px;
     font-size: large;
     width: 308px;
     font-family: 'Poppins';
     background-color: white;
     color: #189ab4;
     border: none;
-    margin-bottom: 20px;
 }
 
 #bottomText {
+    margin: auto;
+    margin-top: 5px;
     font-size: small;
     width: 308px;
     text-align: start;
-    color: white;
 }
 
-#link, #forgotPassword {
+#link {
     color: white;
+    font-family: 'Poppins';
+    text-decoration: none;
+}
+
+::placeholder {
+    color: white;
+    font-family: 'Poppins';
 }
 
 #forgotPassword {
     float: right;
+    font-family: 'Poppins';
+    color: white;
+    text-decoration: none;
 }

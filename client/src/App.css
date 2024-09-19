@@ -34,17 +34,6 @@ img {
     -ms-user-select: none;
 }
 
-input {
-    height: 35px;
-    width: 308px;
-    background: transparent;
-    border-color: white;
-}
-
-form {
-    padding-bottom: 50px;
-}
-
 .noselect {
     -webkit-user-drag: none;
     -webkit-touch-callout: none;
@@ -58,7 +47,7 @@ body {
     font-family: 'Poppins';
 }
 
-#mood-selection {
+#mood-selection, #error-button {
     padding: 7px;
     font-size: large;
     font-family: 'Poppins';
@@ -67,65 +56,8 @@ body {
     border: none;
     margin-top: 20px;
     width: 197px;
-}
-
-#error-button {
-    padding: 7px;
-    font-size: large;
-    font-family: 'Poppins';
-    background-color: white;
-    color: #189ab4;
-    border: none;
-    margin-top: 20px;
-    width: 197px;
-}
-
-#button {
-    padding: 7px;
-    font-size: large;
-    width: 308px;
-    font-family: 'Poppins';
-    background-color: white;
-    color: #189ab4;
-    border: none;
 }
 
 #logo {
     width: 192px;
-}
-
-#inputBoxes {
-    padding-bottom: 25px;
-}
-
-#userBox {
-    background-image: url(./assets/user-icon.png);
-    background-repeat: no-repeat;
-    background-size: 25px, 25px;
-    background-position: 8px 2px; 
-}
-
-#passBox {
-    background-image: url(./assets/password-icon.png);
-    background-repeat: no-repeat;
-    background-size: 25px, 25px;
-    background-position: 8px 2px; 
-}
-
-#bottomText {
-    margin: auto;
-    margin-top: 5px;
-    font-size: small;
-    width: 308px;
-    text-align: start;
-}
-
-#link {
-    color: white;    
-}
-
-::placeholder {
-    color: white;
-    font-family: 'Poppins';
-    padding-left: 40px;
 }
