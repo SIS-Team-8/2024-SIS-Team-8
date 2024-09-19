@@ -16,32 +16,28 @@ textarea::placeholder {
     padding: 30px;
 }
 
-#row::after {
-    content: "";
-    clear: both;
-    display: table;
+#row {
+    display: flex;
+    height: 160px;
+    align-items: center;
+    justify-content: center;
 }
 
 .column {
-    float: center;
-    width: 12%;
     padding: 5px;   
-}
-
-.subColumn {
-    float: center;
     width: 12%;
-    padding: 40px;
-}
-
-#subRow::after {
-    content: "";
-    clear: both;
-    display: table;
 }
 
 #subRow {
+    display: flex;
     height: 150px;
+    align-items: center;
+    justify-content: center;
+}
+
+.subColumn {
+    padding: 40px;
+    width: 12%;
 }
 
 #flexContainer {
@@ -57,12 +53,11 @@ textarea::placeholder {
     background-image: url(../assets/camera-icon.png);
     background-repeat: no-repeat;
     background-size: 32px, 32px;
-    background-position: 735px 1px; 
+    background-position: 735px 50%; 
     margin-left: 86px;
 }
 
 #submit {
-    margin-top: auto;
-    width: 86px;
-    height: 86px;
+    width: 64px;
+    height: 64px;
 }
