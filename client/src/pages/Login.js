@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import '../App.css';
 import './Login.css';
 
 export default function Login({ onLogin }) {
@@ -10,7 +9,7 @@ export default function Login({ onLogin }) {
     };
 
     return (
-        <div>
+        <div id="login-container">
             <img src={logo} alt="App Logo" id="logo"/>
 
             <div id="inputBox">

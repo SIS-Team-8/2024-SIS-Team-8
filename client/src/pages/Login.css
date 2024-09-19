@@ -1,4 +1,55 @@
+#login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #189ab4;
+    flex-direction: column;
+}
+
+#logo {
+    width: 192px;
+    margin-bottom: 30px;
+}
+
+#inputBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#userBox, #passBox {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding-left: 40px;
+    height: 35px;
+    width: 308px;
+    margin-bottom: 15px;
+}
+
+#button {
+    padding: 10px;
+    font-size: large;
+    width: 308px;
+    font-family: 'Poppins';
+    background-color: white;
+    color: #189ab4;
+    border: none;
+    margin-bottom: 20px;
+}
+
+#bottomText {
+    font-size: small;
+    width: 308px;
+    text-align: start;
+    color: white;
+}
+
+#link, #forgotPassword {
+    color: white;
+}
+
 #forgotPassword {
     float: right;
-    color: white;
 }
