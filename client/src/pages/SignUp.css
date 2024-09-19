@@ -36,6 +36,7 @@ input {
     background-size: 25px, 25px;
     background-position: 8px 2px;
     padding-left: 40px;
+    font-family: 'Poppins';
 }
 
 #emailBox {

@@ -58,6 +58,8 @@ input {
 }
 
 #bottomText {
+    font-family: 'Poppins';
+    color: white;
     margin: auto;
     margin-top: 5px;
     font-size: small;
