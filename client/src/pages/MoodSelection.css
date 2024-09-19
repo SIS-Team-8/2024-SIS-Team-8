@@ -9,11 +9,16 @@ textarea {
 }
 
 textarea::placeholder {
-    padding-left: 5px;
+    color: #D3D3D3;
 }
 
 #container {
     padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 #row {
@@ -21,11 +26,13 @@ textarea::placeholder {
     height: 160px;
     align-items: center;
     justify-content: center;
+    margin-bottom: 30px;
 }
 
 .column {
-    padding: 5px;   
+    padding: 5px;
     width: 12%;
+    height: auto;
 }
 
 #subRow {
@@ -33,11 +40,13 @@ textarea::placeholder {
     height: 150px;
     align-items: center;
     justify-content: center;
+    margin-bottom: 80px;
 }
 
 .subColumn {
-    padding: 40px;
-    width: 12%;
+    padding: 10px;
+    width: 10%;
+    height: auto;
 }
 
 #flexContainer {
@@ -45,19 +54,26 @@ textarea::placeholder {
     justify-content: center;
     position: relative;
     align-items: center;
+    font-family: 'Poppins';
+    height: auto;
 }
 
 #log {
     height: 150px;
+    min-height: 50px;
     width: 775px;
     background-image: url(../assets/camera-icon.png);
     background-repeat: no-repeat;
     background-size: 32px, 32px;
-    background-position: 735px 50%; 
-    margin-left: 86px;
+    background-position: 735px 50%;
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 8px;
 }
 
 #submit {
-    width: 64px;
-    height: 64px;
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    cursor: pointer;
 }
