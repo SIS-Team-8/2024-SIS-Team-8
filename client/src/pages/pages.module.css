@@ -93,3 +93,15 @@ button {
     background-size: 25px, 25px;
     background-position: 9px 5px; 
 }
+
+.column {
+    flex: 1; /* Make each column take equal width */
+    padding: 10px;
+    box-sizing: border-box; /* Include padding in the width */
+}
+
+.gridcontainer {
+    display: grid;
+    grid-template-columns: 100px 200px;
+    grid-template-rows: auto auto;
+}
