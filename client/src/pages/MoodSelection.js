@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import './MoodSelection.css'
 import veryAngry from '../assets/emoji/very-angry.png'
 import sad from '../assets/emoji/sad.png'
@@ -76,26 +77,31 @@ export default function MoodSelection() {
 
     return (
         <html>
-        <div id='container'>
-        <div id='row'>
-            <img id="angry" className="column" onClick={angryImageSrc} alt="angry" src={veryAngry}/>
-            <img id="sad" className="column" onClick={sadImageSrc} alt="sad" src={sad}/>
-            <img id="happy" className="column" onClick={happyImageSrc} alt="happy" src={happy}/>
-            <img id="bored" className="column" onClick={boredImageSrc} alt="bored" src={bored}/>
-            <img id="scared" className="column" onClick={scaredImageSrc} alt="scared" src={scared}/>
-        </div>
-        <div id="subRow">
-            <img id="first" className="subColumn" alt="" src={firstImageSrc}/>
-            <img id="second" className="subColumn" alt="" src={secondImageSrc}/>
-            <img id="third" className="subColumn" alt="" src={thirdImageSrc}/>
-            <img id="forth" className="subColumn" alt="" src={forthImageSrc}/>
-            <img id="fifth" className="subColumn" alt="" src={fifthImageSrc}/>
-        </div>
-        <div id="flexContainer">
-            <textarea id="log" placeholder='Add Note...'/>
-            <img id="submit" alt="submit" src={submit}/>
-        </div>
-        </div>
+            <div id='container'>
+                <div id='row'>
+                    <img id="angry" className="column" onClick={angryImageSrc} alt="angry" src={veryAngry}/>
+                    <img id="sad" className="column" onClick={sadImageSrc} alt="sad" src={sad}/>
+                    <img id="happy" className="column" onClick={happyImageSrc} alt="happy" src={happy}/>
+                    <img id="bored" className="column" onClick={boredImageSrc} alt="bored" src={bored}/>
+                    <img id="scared" className="column" onClick={scaredImageSrc} alt="scared" src={scared}/>
+                </div>
+
+                <div id="subRow">
+                    <img id="first" className="subColumn" alt="" src={firstImageSrc}/>
+                    <img id="second" className="subColumn" alt="" src={secondImageSrc}/>
+                    <img id="third" className="subColumn" alt="" src={thirdImageSrc}/>
+                    <img id="forth" className="subColumn" alt="" src={forthImageSrc}/>
+                    <img id="fifth" className="subColumn" alt="" src={fifthImageSrc}/>
+                </div>
+
+                <div id="flexContainer">
+                    <textarea id="log" placeholder='Add Note...'/>
+
+                    <Link to="/">
+                        <img id="submit" alt="submit" src={submit}/>
+                    </Link>
+                </div>
+            </div>
         </html>
     );
 }
