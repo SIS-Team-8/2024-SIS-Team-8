@@ -1,6 +1,89 @@
-#emailBox {
-    background-image: url(../assets/email-icon.png);
+#signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #189ab4;
+    flex-direction: column;
+}
+
+#logo {
+    width: 192px;
+    margin-bottom: 30px;
+}
+
+#inputBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    padding-bottom: 50px;
+}
+
+input {
+    height: 35px;
+    width: 308px;
+    background: transparent;
+    border-color: white;
+    color: white;
+    font-family: 'Poppins';
+}
+
+#emailBox, #userBox, #passBox {
     background-repeat: no-repeat;
     background-size: 25px, 25px;
-    background-position: 8px 3px; 
+    background-position: 8px 2px;
+    padding-left: 40px;
+}
+
+#emailBox {
+    background-image: url(../assets/email-icon.png);
+}
+
+#userBox {
+    background-image: url(../assets/user-icon.png);
+}
+
+#passBox {
+    background-image: url(../assets/password-icon.png);
+}
+
+#button {
+    padding: 7px;
+    font-size: large;
+    width: 308px;
+    font-family: 'Poppins';
+    background-color: white;
+    color: #189ab4;
+    border: none;
+}
+
+#bottomText {
+    font-family: 'Poppins';
+    color: white;
+    margin: auto;
+    margin-top: 5px;
+    font-size: small;
+    width: 308px;
+    text-align: start;
+}
+
+#link {
+    color: white;
+    font-family: 'Poppins';
+    text-decoration: none;
+}
+
+::placeholder {
+    color: white;
+    font-family: 'Poppins';
+}
+
+#forgotPassword {
+    float: right;
+    font-family: 'Poppins';
+    color: white;
+    text-decoration: none;
 }
