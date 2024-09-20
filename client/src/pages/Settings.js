@@ -45,7 +45,7 @@ const App = () => {
 
   return (
     <div style={{ padding: '20px', textAlign: 'left' }}>
-      <h1 style={{ fontSize: '48px', marginBottom: '20px', textAlign: 'center' }}>Settings Screen</h1>
+      <h1 style={{ fontSize: '24px', marginBottom: '20px', textAlign: 'center' }}>Settings Screen</h1>
 
       <div style={{ margin: '0 auto', maxWidth: '400px' }}>
         <CheckboxRow title="Frequency of Reminders" checkboxes={firstCheckboxes} />
@@ -69,6 +69,11 @@ const App = () => {
             <p style={{ margin: '0', fontSize: '14px' }}>Second Line of Text</p>
             <p style={{ margin: '0', fontSize: '14px' }}>Third Line of Text</p>
           </div>
+        </div>
+
+        {/* Button Added Here */}
+        <div style={{ marginTop: '30px', textAlign: 'center' }}>
+          <button style={{ padding: '10px 20px', fontSize: '16px' }}>Home Page</button>
         </div>
       </div>
     </div>
