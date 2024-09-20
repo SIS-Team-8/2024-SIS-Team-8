@@ -105,3 +105,12 @@ button {
     grid-template-columns: 100px 200px;
     grid-template-rows: auto auto;
 }
+
+.row {
+    display: flex;
+}
+
+.checkbox-label {
+    margin-left: 10px;
+  }
+  
