@@ -63,7 +63,7 @@ function Help() {
             <div style={{ margin: '0 auto', maxWidth: '800px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 {/* FAQ Section */}
                 <div style={{ flex: '1', marginRight: '20px' }}>
-                    <h2 style={{ fontSize: '18px', marginBottom: '10px', borderBottom: '2px solid #0000FF', paddingBottom: '5px' }}>Frequently Asked Questions (FAQ)</h2>
+                    <h2 style={{ fontSize: '18px', marginBottom: '10px', borderBottom: '2px solid #189ab4', paddingBottom: '5px' }}>Frequently Asked Questions (FAQ)</h2>
 
                     {Object.keys(categories).map((category, catIndex) => (
                         <div key={catIndex} style={{ marginBottom: '20px' }}>
@@ -95,7 +95,7 @@ function Help() {
                 <div style={{ flex: '1', marginLeft: '20px' }}>
                     <h2 style={{ fontSize: '18px', marginBottom: '10px', borderBottom: '2px solid #0000FF', paddingBottom: '5px' }}>Contact Support</h2>
                     <p style={{ margin: '10px 0', fontSize: '16px' }}>For support with using this program, please:</p>
-                    <p style={{ margin: '10px 0', fontSize: '16px' }}>Email: support@example.com</p>
+                    <p style={{ margin: '10px 0', fontSize: '16px' }}>Email: Pulkitjain9918@gmail.com</p>
                     <p style={{ margin: '10px 0', fontSize: '16px' }}>Chat: Available 9am-5pm</p>
                 </div>
             </div>
@@ -105,9 +105,9 @@ function Help() {
                     <button style={{
                         padding: '10px 20px',
                         fontSize: '16px',
-                        border: '2px solid #0000FF',
+                        border: '2px solid #189ab4',
                         backgroundColor: 'transparent',
-                        color: '#0000FF',
+                        color: '#189ab4',
                         cursor: 'pointer'
                     }}>
                         Home Page
