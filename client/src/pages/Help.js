@@ -93,7 +93,7 @@ function Help() {
 
                 {/* Contact Support Section */}
                 <div style={{ flex: '1', marginLeft: '20px' }}>
-                    <h2 style={{ fontSize: '18px', marginBottom: '10px', borderBottom: '2px solid #0000FF', paddingBottom: '5px' }}>Contact Support</h2>
+                    <h2 style={{ fontSize: '18px', marginBottom: '10px', borderBottom: '2px solid #189ab4', paddingBottom: '5px' }}>Contact Support</h2>
                     <p style={{ margin: '10px 0', fontSize: '16px' }}>For support with using this program, please:</p>
                     <p style={{ margin: '10px 0', fontSize: '16px' }}>Email: Pulkitjain9918@gmail.com</p>
                     <p style={{ margin: '10px 0', fontSize: '16px' }}>Chat: Available 9am-5pm</p>
