@@ -54,6 +54,11 @@ const CalendarScreen = () => {
         return new Date(year, month + 1, 0).getDate();
     };
 
+    // Function to get the day of the week the month starts on
+    const getStartDayOfWeek = (month, year) => {
+        return new Date(year, month, 1).getDay(); // 0 = Sunday, 1 = Monday, etc.
+    };
+
     // Change the current month (previous or next)
     const changeMonth = (direction) => {
         const newMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
@@ -62,18 +67,28 @@ const CalendarScreen = () => {
 
     // Get the total number of days in the current month
     const daysInMonth = getDaysInMonth(currentMonth.getMonth(), currentMonth.getFullYear());
-    const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+    const startDayOfWeek = getStartDayOfWeek(currentMonth.getMonth(), currentMonth.getFullYear());
 
-    // Generate a key for each day
+    // Helper function to generate a date key in YYYY-MM-DD format
     const generateDateKey = (day) => {
         const year = currentMonth.getFullYear();
         const month = currentMonth.getMonth() + 1;
         return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
     };
 
+    // Create an array of all days for the month, including empty days for alignment
+    const daysArray = Array.from({ length: startDayOfWeek }).fill(null) // Fill empty days before the start of the month
+        .concat(Array.from({ length: daysInMonth }, (_, i) => i + 1));  // Add days of the month
+
+    // Split days into weeks (7 days per row)
+    const weeksArray = [];
+    for (let i = 0; i < daysArray.length; i += 7) {
+        weeksArray.push(daysArray.slice(i, i + 7));
+    }
+
     // Get summary statistics for the current month
     const monthData = {};
-    daysArray.forEach(day => {
+    Array.from({ length: daysInMonth }, (_, i) => i + 1).forEach(day => {
         const dateKey = generateDateKey(day);
         if (moodData[dateKey]) {
             monthData[dateKey] = moodData[dateKey];
@@ -103,15 +118,19 @@ const CalendarScreen = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {daysArray.map((day, index) => {
-                        const dateKey = generateDateKey(day);
-                        const moodEntry = moodData[dateKey];
-                        return (
-                            <td key={index} onClick={() => navigate(`/daily-view/${dateKey}`)} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF" }}>
-                                {day}
-                            </td>
-                        );
-                    })}
+                    {weeksArray.map((week, weekIndex) => (
+                        <tr key={weekIndex}>
+                            {week.map((day, dayIndex) => {
+                                const dateKey = day ? generateDateKey(day) : null;
+                                const moodEntry = day ? moodData[dateKey] : null;
+                                return (
+                                    <td key={dayIndex} onClick={day ? () => navigate(`/daily-view/${dateKey}`) : null} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF" }}>
+                                        {day || ''}
+                                    </td>
+                                );
+                            })}
+                        </tr>
+                    ))}
                 </tbody>
             </table>
 
