@@ -73,7 +73,7 @@ function Help() {
                             </h3>
 
                             {expandedCategory === category && (
-                                <ul style={{ listStyle: 'none', padding: '0', fontSize: '16px' }}>
+                                <ul style={{ listStyle: 'none', padding: '0', fontSize: '15px' }}>
                                     {categories[category].map((faq, index) => (
                                         <li key={index} style={{ marginBottom: '10px', cursor: 'pointer', borderBottom: '1px dashed #fff', paddingBottom: '5px' }} onClick={() => toggleFaq(category, index)}>
                                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -94,8 +94,8 @@ function Help() {
                 {/* Contact Support Section */}
                 <div style={{ flex: '1', marginLeft: '20px' }}>
                     <h2 className="custom-header">Contact Support</h2>
-                    <p style={{ margin: '10px 0', fontSize: '16px' }}><u>Email:</u> support@emotelog.com</p>
-                    <p style={{ margin: '10px 0', fontSize: '16px' }}><u>Support Hours:</u> Available from 9am-5pm.</p>
+                    <p style={{ margin: '10px 0', fontSize: '15px' }}><u>Email:</u> support@emotelog.com</p>
+                    <p style={{ margin: '10px 0', fontSize: '15px' }}><u>Support Hours:</u> Available from 9am-5pm.</p>
                 </div>
             </div>
 
