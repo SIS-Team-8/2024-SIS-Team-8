@@ -4,24 +4,46 @@ import './calender.css'; // Import the CSS for styling
 
 // Dummy mood data for the calendar for September
 const moodData = {
-    "2024-09-01": { mood: "happy", intensity: 4, notes: "Had a great start to the month!" },
-    "2024-09-02": { mood: "sad", intensity: 2, notes: "Feeling a bit down today." },
+    "2024-09-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
+    "2024-09-02": { mood: "happy", intensity: 4, notes: "Good day." },
     "2024-09-03": { mood: "neutral", intensity: 3, notes: "An average day." },
-    "2024-09-04": { mood: "happy", intensity: 5, notes: "Fantastic day!" },
-    "2024-09-05": { mood: "sad", intensity: 1, notes: "Not a good day." },
-    "2024-09-06": { mood: "happy", intensity: 4, notes: "Enjoyed the weekend!" },
+    "2024-09-04": { mood: "sad", intensity: 2, notes: "Feeling a bit down." },
+    "2024-09-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." },
+    "2024-09-06": { mood: "happy", intensity: 4, notes: "Great weekend!" },
     // Add more dates for September...
+};
+
+// Helper function to get the emoji based on mood type
+const getMoodEmoji = (mood) => {
+    switch (mood) {
+        case "very happy":
+            return "😄"; // Very happy emoji
+        case "happy":
+            return "😊"; // Happy emoji
+        case "neutral":
+            return "😐"; // Neutral emoji
+        case "sad":
+            return "😢"; // Sad emoji
+        case "very sad":
+            return "😭"; // Very sad emoji
+        default:
+            return "😶"; // Default emoji for no mood data
+    }
 };
 
 // Helper function to get the color based on mood type
 const getMoodColor = (mood) => {
     switch (mood) {
+        case "very happy":
+            return "#00FF00"; // Bright green for very happy
         case "happy":
-            return "#00FF00"; // Green for happy
-        case "sad":
-            return "#FF0000"; // Red for sad
+            return "#A8E6CF"; // Light green for happy
         case "neutral":
-            return "#FFFF00"; // Yellow for neutral
+            return "#FFD700"; // Yellow for neutral
+        case "sad":
+            return "#FFB6C1"; // Light red for sad
+        case "very sad":
+            return "#FF6347"; // Red for very sad
         default:
             return "#FFFFFF"; // Default color for no mood data
     }
@@ -124,8 +146,11 @@ const CalendarScreen = () => {
                                 const dateKey = day ? generateDateKey(day) : null;
                                 const moodEntry = day ? moodData[dateKey] : null;
                                 return (
-                                    <td key={dayIndex} onClick={day ? () => navigate(`/daily-view/${dateKey}`) : null} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF" }}>
-                                        {day || ''}
+                                    <td key={dayIndex} onClick={day ? () => navigate(`/daily-view/${dateKey}`) : null} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF", position: 'relative' }}>
+                                        <div style={{ position: 'absolute', top: '2px', right: '5px', fontSize: '12px' }}>{day || ''}</div>
+                                        <div style={{ fontSize: '24px', textAlign: 'center' }}>
+                                            {day && moodEntry ? getMoodEmoji(moodEntry.mood) : ''}
+                                        </div>
                                     </td>
                                 );
                             })}
@@ -137,7 +162,7 @@ const CalendarScreen = () => {
             <div className="summary-statistics">
                 <h3>Summary Statistics for {currentMonth.toLocaleString('default', { month: 'long' })}</h3>
                 <p>Average Mood Intensity: {summary.averageIntensity}</p>
-                <p>Most Common Mood: {summary.mostCommonMood}</p>
+                <p>Most Common Mood: {getMoodEmoji(summary.mostCommonMood)}</p>
             </div>
         </div>
     );
