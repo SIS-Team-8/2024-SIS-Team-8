@@ -11,46 +11,6 @@
     padding: 20px;
 }
 
-/* Container for the help content */
-.help-container .container {
-    padding: 50px;
-}
-
-/* Text styling */
-.help-container .bottom {
-    margin: auto;
-    margin-top: 5px;
-    font-size: small;
-    width: 308px;
-    text-align: start;
-}
-
-.help-container .forgotPassword {
-    float: right;
-}
-
-.help-container .passLine {
-    margin-left: 8px;
-}
-
-.help-container .conPassLine {
-    margin-right: 96px;
-}
-
-.help-container .onboardingButton {
-    border-radius: 50%;
-    height: 100px;
-    width: 350px;
-}
-
-.help-container .logoStyle {
-    width: 192px;
-}
-
-.help-container .inputBoxes {
-    padding-bottom: 25px;
-}
-
 .help-container .button {
     padding: 7px;
     font-size: large;
@@ -66,10 +26,21 @@
     color: white;
 }
 
+.help-container h1 {
+    padding-bottom: 50px;
+}
+
+.help-container h2 {
+    font-size: 24px;
+}
+
+.help-container h3 {
+    font-size: 20px;
+}
+
 /* Underlines for the headers */
 .help-container .custom-header {
-    font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     border-bottom: 2px solid white;
     padding-bottom: 5px;
     color: white;
