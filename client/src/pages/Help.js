@@ -99,7 +99,7 @@ function Help() {
                 </div>
             </div>
 
-            <div style={{ marginTop: '30px', textAlign: 'center' }}>
+            <div style={{ marginTop: '15px', textAlign: 'center' }}>
                 <Link to="/">
                     <button className="button">Go Home</button>
                 </Link>
