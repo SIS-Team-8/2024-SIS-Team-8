@@ -147,10 +147,15 @@ const CalendarScreen = () => {
                                 const moodEntry = day ? moodData[dateKey] : null;
                                 return (
                                     <td key={dayIndex} onClick={day ? () => navigate(`/daily-view/${dateKey}`) : null} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF", position: 'relative' }}>
-                                        <div style={{ position: 'absolute', top: '2px', right: '5px', fontSize: '12px' }}>{day || ''}</div>
-                                        <div style={{ fontSize: '24px', textAlign: 'center' }}>
-                                            {day && moodEntry ? getMoodEmoji(moodEntry.mood) : ''}
-                                        </div>
+                                        {/* Display date in top right if there is an emoji, otherwise centered */}
+                                        {moodEntry ? (
+                                            <>
+                                                <div style={{ position: 'absolute', top: '2px', right: '5px', fontSize: '12px' }}>{day}</div>
+                                                <div style={{ fontSize: '24px', textAlign: 'center' }}>{getMoodEmoji(moodEntry.mood)}</div>
+                                            </>
+                                        ) : (
+                                            <div style={{ textAlign: 'center', fontSize: '16px' }}>{day || ''}</div>
+                                        )}
                                     </td>
                                 );
                             })}
