@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import './help.css'; // Ensure this CSS file exists for styling
+import './Help.css'; // Ensure this CSS file exists for styling
 
 function Help() {
     // State to manage which category and FAQ is expanded

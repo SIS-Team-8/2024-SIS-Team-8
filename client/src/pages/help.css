@@ -1,12 +1,5 @@
-body {
-    background-color: #189ab4;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    color: white;
-}
-
 .container {
-    padding: 50px; 
+    padding: 50px;
 }
 
 .bottom {
@@ -41,27 +34,6 @@ body {
 
 .inputBoxes {
     padding-bottom: 25px;
-}
-
-.emailBox {
-    background-image: url(../assets/email-icon.png);
-    background-repeat: no-repeat;
-    background-size: 25px, 25px;
-    background-position: 9px 6px; 
-}
-
-.userBox {
-    background-image: url(../assets/user-icon.png);
-    background-repeat: no-repeat;
-    background-size: 25px, 25px;
-    background-position: 9px 5px; 
-}
-
-.passBox {
-    background-image: url(../assets/password-icon.png);
-    background-repeat: no-repeat;
-    background-size: 25px, 25px;
-    background-position: 9px 5px; 
 }
 
 /* Blue border around Home Page button */
