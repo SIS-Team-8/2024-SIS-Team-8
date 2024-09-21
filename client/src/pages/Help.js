@@ -57,13 +57,13 @@ function Help() {
     };
 
     return (
-        <div style={{ padding: '20px', textAlign: 'left' }}>
-            <h1 style={{ fontSize: '24px', marginBottom: '20px', textAlign: 'center' }}>Help Screen</h1>
+        <div className="help-container">
+            <h1 style={{ marginBottom: '20px', textAlign: 'center' }}>Help</h1>
 
             <div style={{ margin: '0 auto', maxWidth: '800px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 {/* FAQ Section */}
                 <div style={{ flex: '1', marginRight: '20px' }}>
-                    <h2 style={{ fontSize: '18px', marginBottom: '10px', borderBottom: '2px solid #189ab4', paddingBottom: '5px' }}>Frequently Asked Questions (FAQ)</h2>
+                    <h2 className="custom-header">Frequently Asked Questions (FAQ)</h2>
 
                     {Object.keys(categories).map((category, catIndex) => (
                         <div key={catIndex} style={{ marginBottom: '20px' }}>
@@ -75,13 +75,13 @@ function Help() {
                             {expandedCategory === category && (
                                 <ul style={{ listStyle: 'none', padding: '0', fontSize: '16px' }}>
                                     {categories[category].map((faq, index) => (
-                                        <li key={index} style={{ marginBottom: '10px', cursor: 'pointer', borderBottom: '1px dashed #000', paddingBottom: '5px' }} onClick={() => toggleFaq(category, index)}>
+                                        <li key={index} style={{ marginBottom: '10px', cursor: 'pointer', borderBottom: '1px dashed #fff', paddingBottom: '5px' }} onClick={() => toggleFaq(category, index)}>
                                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                                 {faq.question}
                                                 <span>{expandedFaq === `${category}-${index}` ? '▼' : '►'}</span>
                                             </div>
                                             {expandedFaq === `${category}-${index}` && (
-                                                <div style={{ marginTop: '5px', paddingLeft: '20px', color: '#555' }}>{faq.answer}</div>
+                                                <div style={{ marginTop: '5px', paddingLeft: '20px', color: '#ddd' }}>{faq.answer}</div>
                                             )}
                                         </li>
                                     ))}
@@ -93,7 +93,7 @@ function Help() {
 
                 {/* Contact Support Section */}
                 <div style={{ flex: '1', marginLeft: '20px' }}>
-                    <h2 style={{ fontSize: '18px', marginBottom: '10px', borderBottom: '2px solid #189ab4', paddingBottom: '5px' }}>Contact Support</h2>
+                    <h2 className="custom-header">Contact Support</h2>
                     <p style={{ margin: '10px 0', fontSize: '16px' }}>For support with using this program, please:</p>
                     <p style={{ margin: '10px 0', fontSize: '16px' }}>Email: Pulkitjain9918@gmail.com</p>
                     <p style={{ margin: '10px 0', fontSize: '16px' }}>Chat: Available 9am-5pm</p>
@@ -102,16 +102,7 @@ function Help() {
 
             <div style={{ marginTop: '30px', textAlign: 'center' }}>
                 <Link to="/">
-                    <button style={{
-                        padding: '10px 20px',
-                        fontSize: '16px',
-                        border: '2px solid #189ab4',
-                        backgroundColor: 'transparent',
-                        color: '#189ab4',
-                        cursor: 'pointer'
-                    }}>
-                        Home Page
-                    </button>
+                    <button className="button">Go Home</button>
                 </Link>
             </div>
         </div>

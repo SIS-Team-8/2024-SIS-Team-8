@@ -1,8 +1,23 @@
-.container {
+.help-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #189ab4;
+    flex-direction: column;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    text-align: left;
+    padding: 20px;
+}
+
+/* Container for the help content */
+.help-container .container {
     padding: 50px;
 }
 
-.bottom {
+/* Text styling */
+.help-container .bottom {
     margin: auto;
     margin-top: 5px;
     font-size: small;
@@ -10,56 +25,66 @@
     text-align: start;
 }
 
-.forgotPassword {
+.help-container .forgotPassword {
     float: right;
 }
 
-.passLine {
+.help-container .passLine {
     margin-left: 8px;
 }
 
-.conPassLine {
+.help-container .conPassLine {
     margin-right: 96px;
 }
 
-.onboardingButton {
+.help-container .onboardingButton {
     border-radius: 50%;
     height: 100px;
     width: 350px;
 }
 
-.logoStyle {
+.help-container .logoStyle {
     width: 192px;
 }
 
-.inputBoxes {
+.help-container .inputBoxes {
     padding-bottom: 25px;
 }
 
-/* Blue border around Home Page button */
-.custom-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: 2px solid #189ab4; /* Matching navbar color */
-    background-color: transparent;
-    color: #189ab4; /* Matching navbar color for text */
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+.help-container .button {
+    padding: 7px;
+    font-size: large;
+    width: 308px;
+    font-family: 'Poppins';
+    background-color: white;
+    color: #189ab4;
+    border: none;
 }
 
-.custom-button:hover {
-    background-color: #189ab4; /* Fill the button with color on hover */
-    color: white; /* Text changes to white on hover */
+.help-container .custom-button:hover {
+    background-color: #189ab4;
+    color: white;
 }
 
 /* Underlines for the headers */
-.custom-header {
+.help-container .custom-header {
     font-size: 18px;
     margin-bottom: 10px;
-    border-bottom: 2px solid #189ab4; /* Matching navbar color for underline */
+    border-bottom: 2px solid white;
     padding-bottom: 5px;
+    color: white;
 }
 
-.custom-header:hover {
-    border-bottom-color: #189ab4; /* Keep the same color on hover */
+.help-container .custom-header:hover {
+    border-bottom-color: white;
+}
+
+/* Text inside the FAQ section */
+.help-container h2, .help-container h3, .help-container p {
+    color: white;
+}
+
+/* FAQ items */
+.help-container ul li {
+    color: white;
 }
