@@ -6,11 +6,9 @@ import './calender.css'; // Import the CSS for styling
 const moodData = {
     "2024-07-26": { mood: "happy", intensity: 4, notes: "Had a great day!" },
     "2024-07-27": { mood: "sad", intensity: 2, notes: "Feeling down today." },
-    "2024-07-28": { mood: "neutral", intensity: 3, notes: "Average day" },
-    "2024-07-29": { mood: "happy", intensity: 5, notes: "Feeling great!" },
-    "2024-07-30": { mood: "sad", intensity: 1, notes: "Bad day" },
-    "2024-07-31": { mood: "happy", intensity: 4, notes: "Had a good time!" },
-    // Add more mood data entries...
+    "2024-07-28": { mood: "neutral", intensity: 3, notes: "An average day." },
+    "2024-07-29": { mood: "happy", intensity: 5, notes: "Feeling fantastic!" },
+    // Add more data as required
 };
 
 // Helper function to get the color based on mood type
@@ -27,7 +25,7 @@ const getMoodColor = (mood) => {
     }
 };
 
-// Function to calculate the summary statistics for the selected month
+// Function to calculate summary statistics for the selected month
 const getSummaryStatistics = (monthData) => {
     const moods = Object.values(monthData);
     if (moods.length === 0) return { averageIntensity: 0, mostCommonMood: "N/A" };
@@ -49,12 +47,12 @@ const CalendarScreen = () => {
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(new Date());
 
-    // Function to get the number of days in a month
+    // Get number of days in the current month
     const getDaysInMonth = (month, year) => {
         return new Date(year, month + 1, 0).getDate();
     };
 
-    // Function to get the day of the week the month starts on
+    // Get the day of the week the month starts on
     const getStartDayOfWeek = (month, year) => {
         return new Date(year, month, 1).getDay(); // 0 = Sunday, 1 = Monday, etc.
     };
