@@ -67,17 +67,17 @@ router.get('/getUserById', async (req, res) => {
 // POST Requests
 
 // Define the POST request for the users collection
-router.post('/users', async (req, res) => {
-    try {
-        const userData = req.body;
-        const user = new User(userData);
-        await user.save({ upset: true });
-        res.json(user);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Server Error');
-    }
-});
+// router.post('/users', async (req, res) => {
+//     try {
+//         const userData = req.body;
+//         const user = new User(userData);
+//         await user.save({ upset: true });
+//         res.json(user);
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).send('Server Error');
+//     }
+// });
 
 //Update the user enrolment through post request ## NEED TO UPDATE TO INTEGRATE DAILY EMOJI UPDATES THROUGH THIS ROUTE
 router.post('/updateUserById', async (req, res) => {
