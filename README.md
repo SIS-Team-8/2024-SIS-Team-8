@@ -66,7 +66,10 @@
 ```text
 MONGODB_URI=mongodb://dev:Endless2-Drift-Turf@localhost:28018
 MONGODB_DB=SIS-Team-8-dev
+TOKEN_KEY=secret
 ```
+
+* return to the root directory with cd.
 
 #### Startup Procedure
 
