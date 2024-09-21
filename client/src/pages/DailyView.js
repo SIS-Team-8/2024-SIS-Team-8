@@ -1,40 +1,44 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import './dailyview.css'; // Import the CSS for styling
+import './dailyview.css';
 
-// Dummy mood data for individual days
+// Dummy mood data for the detailed view
 const moodData = {
-    "2024-07-26": { mood: "happy", intensity: 4, notes: "Had a great day!" },
-    "2024-07-27": { mood: "sad", intensity: 2, notes: "Feeling down today." },
-    "2024-07-28": { mood: "neutral", intensity: 3, notes: "An average day." },
-    "2024-07-29": { mood: "happy", intensity: 5, notes: "Feeling fantastic!" },
-    // Add more data as required
+    "2024-09-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
+    "2024-09-02": { mood: "happy", intensity: 4, notes: "Good day." },
+    "2024-09-03": { mood: "neutral", intensity: 3, notes: "An average day." },
+    "2024-09-04": { mood: "sad", intensity: 2, notes: "Feeling a bit down." },
+    "2024-09-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." },
+    // Add more dates...
+};
+
+const getMoodEmoji = (mood) => {
+    switch (mood) {
+        case "very happy":
+            return "😄"; // Very happy emoji
+        case "happy":
+            return "😊"; // Happy emoji
+        case "neutral":
+            return "😐"; // Neutral emoji
+        case "sad":
+            return "😢"; // Sad emoji
+        case "very sad":
+            return "😭"; // Very sad emoji
+        default:
+            return "😶"; // Default emoji for no mood data
+    }
 };
 
 const DailyView = () => {
-    const { date } = useParams(); // Get the date from the URL
+    const { date } = useParams(); // Retrieves the date from the URL parameter
     const navigate = useNavigate();
-    const [moodEntry, setMoodEntry] = useState(moodData[date] || { mood: "neutral", intensity: 3, notes: "No entry for this day." });
-    
-    // Handle the deletion of the entry
+
+    const moodEntry = moodData[date] || { mood: "neutral", intensity: 3, notes: "No entry for this day." }; // Default mood if no entry
+
     const handleDelete = () => {
         if (window.confirm("Are you sure you want to delete this entry?")) {
             delete moodData[date]; // Remove the entry from the data
             navigate('/calendar'); // Redirect back to the calendar after deletion
-        }
-    };
-
-    // Get the emoji corresponding to the mood
-    const getEmoji = (mood) => {
-        switch (mood) {
-            case "happy":
-                return "😊";
-            case "sad":
-                return "😢";
-            case "neutral":
-                return "😐";
-            default:
-                return "😶"; // Default emoji
         }
     };
 
@@ -43,24 +47,23 @@ const DailyView = () => {
             <button className="back-button" onClick={() => navigate('/calendar')}>
                 ⬅ Back to Calendar
             </button>
-            <div className="daily-view-content">
-            <h1>On {date}, you were feeling</h1>
-            <div className="emoji">{getEmoji(moodEntry.mood)}</div>
-            <p className="notes">Notes: {moodEntry.notes}</p>
-            <p className="intensity">Mood Intensity: {moodEntry.intensity}/5</p>
-            
-            {/* Edit Button (Currently a placeholder - replace with an actual edit modal if needed) */}
-            <button className="edit-button" onClick={() => alert("Edit functionality coming soon!")}>
-                ✏ Edit Entry
-            </button>
 
-            {/* Delete Button */}
-            <button className="delete-button" onClick={handleDelete}>
-                🗑 Delete Entry
-            </button>
+            <div className="daily-view-content">
+                <h1>On {date}, you were feeling</h1>
+                <div className="emoji">{getMoodEmoji(moodEntry.mood)}</div>
+                <p className="intensity">Mood Intensity: {moodEntry.intensity}/5</p>
+                <p className="notes">Notes: {moodEntry.notes}</p>
+
+                {/* Edit and Delete Buttons */}
+                <button className="edit-button" onClick={() => alert("Edit functionality coming soon!")}>
+                    ✏ Edit Entry
+                </button>
+                <button className="delete-button" onClick={handleDelete}>
+                    🗑 Delete Entry
+                </button>
+            </div>
         </div>
-    </div>
-);
+    );
 };
 
 export default DailyView;

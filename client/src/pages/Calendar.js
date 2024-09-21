@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './calender.css'; // Import the CSS for styling
+import './calender.css'; // Import your CSS for styling
 
 // Dummy mood data for the calendar for September
 const moodData = {
@@ -9,7 +9,6 @@ const moodData = {
     "2024-09-03": { mood: "neutral", intensity: 3, notes: "An average day." },
     "2024-09-04": { mood: "sad", intensity: 2, notes: "Feeling a bit down." },
     "2024-09-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." },
-    "2024-09-06": { mood: "happy", intensity: 4, notes: "Great weekend!" },
     // Add more dates for September...
 };
 

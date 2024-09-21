@@ -38,7 +38,7 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/daily-view" element={<DailyView />} />
+                <Route path="/daily-view/:date" element={<DailyView/>} />
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/help" element={<Help />} />
                 <Route path="/history" element={<History />} />
