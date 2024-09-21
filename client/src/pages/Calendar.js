@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './calender.css'; // Import the CSS for styling
 
-// Dummy mood data for the calendar
+// Dummy mood data for the calendar for September
 const moodData = {
-    "2024-07-26": { mood: "happy", intensity: 4, notes: "Had a great day!" },
-    "2024-07-27": { mood: "sad", intensity: 2, notes: "Feeling down today." },
-    "2024-07-28": { mood: "neutral", intensity: 3, notes: "An average day." },
-    "2024-07-29": { mood: "happy", intensity: 5, notes: "Feeling fantastic!" },
-    // Add more data as required
+    "2024-09-01": { mood: "happy", intensity: 4, notes: "Had a great start to the month!" },
+    "2024-09-02": { mood: "sad", intensity: 2, notes: "Feeling a bit down today." },
+    "2024-09-03": { mood: "neutral", intensity: 3, notes: "An average day." },
+    "2024-09-04": { mood: "happy", intensity: 5, notes: "Fantastic day!" },
+    "2024-09-05": { mood: "sad", intensity: 1, notes: "Not a good day." },
+    "2024-09-06": { mood: "happy", intensity: 4, notes: "Enjoyed the weekend!" },
+    // Add more dates for September...
 };
 
 // Helper function to get the color based on mood type
@@ -21,11 +23,11 @@ const getMoodColor = (mood) => {
         case "neutral":
             return "#FFFF00"; // Yellow for neutral
         default:
-            return "#FFFFFF"; // Default color
+            return "#FFFFFF"; // Default color for no mood data
     }
 };
 
-// Function to calculate summary statistics for the selected month
+// Function to calculate the summary statistics for the selected month
 const getSummaryStatistics = (monthData) => {
     const moods = Object.values(monthData);
     if (moods.length === 0) return { averageIntensity: 0, mostCommonMood: "N/A" };
@@ -45,9 +47,9 @@ const getSummaryStatistics = (monthData) => {
 
 const CalendarScreen = () => {
     const navigate = useNavigate();
-    const [currentMonth, setCurrentMonth] = useState(new Date());
+    const [currentMonth, setCurrentMonth] = useState(new Date(2024, 8)); // Initialize to September 2024
 
-    // Get number of days in the current month
+    // Get the number of days in the current month
     const getDaysInMonth = (month, year) => {
         return new Date(year, month + 1, 0).getDate();
     };
