@@ -8,7 +8,6 @@
     color: white;
     font-family: 'Poppins', sans-serif;
     text-align: left;
-    padding: 20px;
 }
 
 .help-container .button {
@@ -27,7 +26,7 @@
 }
 
 .help-container h1 {
-    padding-bottom: 35px;
+    padding-bottom: 30px;
 }
 
 .help-container h2 {
