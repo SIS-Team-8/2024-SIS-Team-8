@@ -181,3 +181,30 @@ button {
     background-size: 25px, 25px;
     background-position: 9px 5px; 
 }
+
+/* Blue border around Home Page button */
+.custom-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid #0000FF; /* Blue border */
+    background-color: transparent;
+    color: #0000FF; /* Blue text color */
+    cursor: pointer;
+}
+
+.custom-button:hover {
+    background-color: #0000FF;
+    color: white; /* Text changes to white on hover */
+}
+
+/* Underlines for the headers */
+.custom-header {
+    font-size: 18px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #0000FF; /* Blue underline */
+    padding-bottom: 5px;
+}
+
+.custom-header:hover {
+    border-bottom-color: #FF0000; /* Optional: Change underline color on hover (e.g., red) */
+}

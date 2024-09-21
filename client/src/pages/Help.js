@@ -7,7 +7,7 @@ function Help() {
     const [expandedCategory, setExpandedCategory] = useState(null);
     const [expandedFaq, setExpandedFaq] = useState(null);
 
-    // Example categorized FAQs
+    // Using the exact provided questions and answers
     const categories = {
         "Login Issues": [
             { question: "Why can't I log in?", answer: "Check credentials or internet connection" },
@@ -25,7 +25,7 @@ function Help() {
             { question: "How can I view the help guide?", answer: "Visit the 'Help' section for detailed guides" },
         ],
         "Profile Settings": [
-            { question: "How can I update my profile information?", answer: "Click on 'Edit Prfofile' in Profile page" },
+            { question: "How can I update my profile information?", answer: "Click on 'Edit Profile' in Profile page" },
             { question: "How can I change my email address?", answer: "Go to 'Profile' > 'Edit Profile'" },
             { question: "How do I reset my password?", answer: "Visit 'Profile' and select 'Reset Password'" },
         ],
@@ -63,7 +63,7 @@ function Help() {
             <div style={{ margin: '0 auto', maxWidth: '800px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 {/* FAQ Section */}
                 <div style={{ flex: '1', marginRight: '20px' }}>
-                    <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>Frequently Asked Questions (FAQ)</h2>
+                    <h2 style={{ fontSize: '18px', marginBottom: '10px', borderBottom: '2px solid #0000FF', paddingBottom: '5px' }}>Frequently Asked Questions (FAQ)</h2>
 
                     {Object.keys(categories).map((category, catIndex) => (
                         <div key={catIndex} style={{ marginBottom: '20px' }}>
@@ -93,7 +93,7 @@ function Help() {
 
                 {/* Contact Support Section */}
                 <div style={{ flex: '1', marginLeft: '20px' }}>
-                    <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>Contact Support</h2>
+                    <h2 style={{ fontSize: '18px', marginBottom: '10px', borderBottom: '2px solid #0000FF', paddingBottom: '5px' }}>Contact Support</h2>
                     <p style={{ margin: '10px 0', fontSize: '16px' }}>For support with using this program, please:</p>
                     <p style={{ margin: '10px 0', fontSize: '16px' }}>Email: support@example.com</p>
                     <p style={{ margin: '10px 0', fontSize: '16px' }}>Chat: Available 9am-5pm</p>
@@ -102,7 +102,16 @@ function Help() {
 
             <div style={{ marginTop: '30px', textAlign: 'center' }}>
                 <Link to="/">
-                    <button style={{ padding: '10px 20px', fontSize: '16px' }}>Home Page</button>
+                    <button style={{
+                        padding: '10px 20px',
+                        fontSize: '16px',
+                        border: '2px solid #0000FF',
+                        backgroundColor: 'transparent',
+                        color: '#0000FF',
+                        cursor: 'pointer'
+                    }}>
+                        Home Page
+                    </button>
                 </Link>
             </div>
         </div>
