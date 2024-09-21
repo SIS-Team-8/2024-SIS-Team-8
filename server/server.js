@@ -2,7 +2,7 @@ require('dotenv').config();
 svConfig = require('../config/server.json');
 gblConfig = require('../config/global.json');
 
-//const path = require("path");
+const path = require("path");
 const cors = require("cors");
 const express = require("express");
 const mongoose = require('mongoose');
@@ -37,17 +37,18 @@ app.use(express.json()); // For JSON request bodies
 app.use(express.urlencoded({ extended: true })); // For URL-encoded request bodies
 app.use(cookieParser());
 
-//app.use(express.static(path.join(__dirname, ".." , "client", "build")));
-//app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, ".." , "client", "build")));
+app.use(express.static("public"));
 
 
 // app.get("/", (req, res) => {
 //   res.send("This is from express.js");
 // });
 
-app.use('/', authRoute);
+
+app.use('/api', authRoute);
 
 // handle react app routing
-// app.use((req, res, next) => {
-//   res.sendFile(path.join(__dirname, ".." , "client", "build", "index.html"));
-// });
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, ".." , "client", "build", "index.html"));
+});
