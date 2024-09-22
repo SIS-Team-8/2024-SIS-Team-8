@@ -18,6 +18,7 @@
     flex-direction: column;
     gap: 15px;
     width: 200px;
+    padding: 20px;
 }
 
 .menu-button {
@@ -61,18 +62,15 @@
 /* Profile details section */
 .profile-details {
     width: 100%;
-    text-align: left;
+    text-align: center;
 }
 
-/* Input field styling for profile details */
-.profile-details input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 16px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font-family: 'Poppins', sans-serif;
+/* Row for name and email */
+.details-row {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    font-size: 18px;
 }
 
 /* Additional details and settings layout */
@@ -80,10 +78,12 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    width: 100%;
 }
 
 .other-details, .settings-details {
     width: 45%;
+    text-align: left;
 }
 
 h3 {
