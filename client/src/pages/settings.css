@@ -60,12 +60,11 @@
     display: flex;
     justify-content: space-between; /* Ensure buttons are evenly spaced */
     flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
-    gap: 20px; /* Add consistent spacing between buttons */
+    gap: 10px; /* Add consistent spacing between buttons */
 }
 
 .privacy-button {
-    flex-grow: 1; /* Allow buttons to stretch evenly */
-    padding: 10px;
+    padding: 10px 20px; /* Adjusted button size to match the Home Page button */
     font-size: 14px;
     background-color: #189ab4;
     color: white;

@@ -14,7 +14,6 @@ const translations = {
         dataExport: "Data Export",
         deleteAccount: "Delete Account",
         disableTracking: "Disable Tracking",
-        managePermissions: "Manage Permissions",
         homePage: "Home Page"
     },
     Spanish: {
@@ -28,7 +27,6 @@ const translations = {
         dataExport: "Exportar Datos",
         deleteAccount: "Eliminar Cuenta",
         disableTracking: "Deshabilitar Seguimiento",
-        managePermissions: "Gestionar Permisos",
         homePage: "Página Principal"
     }
 };
@@ -158,9 +156,6 @@ const Settings = () => {
                         </button>
                         <button className="privacy-button" onClick={() => alert(t.disableTracking)}>
                             {t.disableTracking}
-                        </button>
-                        <button className="privacy-button" onClick={() => alert(t.managePermissions)}>
-                            {t.managePermissions}
                         </button>
                     </div>
                 </div>
