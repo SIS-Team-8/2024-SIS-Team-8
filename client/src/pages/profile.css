@@ -1,8 +1,7 @@
 /* General container for the profile screen */
 .profile-container {
     display: flex;
-    flex-direction: column;
-    align-items: center; /* Center items in the container */
+    justify-content: space-between;
     padding: 20px;
     max-width: 1000px;
     margin: 0 auto;
@@ -30,9 +29,6 @@
     gap: 15px;
     width: 200px;
     padding: 20px;
-    position: absolute;
-    left: 20px; /* Adjust position for left menu */
-    top: 100px; /* Adjust position */
 }
 
 .menu-button {
@@ -80,34 +76,32 @@
     text-align: center;
 }
 
-/* Row for name and email */
-.details-row {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-    font-size: 18px;
-}
-
-/* Additional details and settings layout */
-.details-grid {
+/* Profile fields with label and input */
+.profile-field {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.profile-field label {
+    flex: 1;
+    margin-right: 10px;
+    font-size: 18px;
+    text-align: right;
+}
+
+.profile-field input {
+    flex: 2;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
     width: 100%;
 }
 
-.other-details, .settings-details {
-    width: 45%;
-    text-align: left;
-}
-
-h3 {
-    font-size: 18px;
-    color: #189ab4;
-    margin-bottom: 10px;
-}
-
-/* Style for edit/save profile button */
+/* Style for save changes button */
 .edit-profile-section {
     margin-top: 30px;
     text-align: center;
