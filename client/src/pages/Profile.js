@@ -48,7 +48,7 @@ export default function Profile() {
                 <div className="profile-info">
                     <div className="profile-avatar">
                         {/* Placeholder for user profile image */}
-                        <img src={logo} alt="App Logo" id="logo" />
+                        <img src="https://via.placeholder.com/100" alt="Profile Avatar" />
                     </div>
                     <div className="profile-details">
                         <form>

@@ -63,7 +63,7 @@
     text-align: left;
 }
 
-/* Input field styling for profile details */
+
 .profile-details input {
     width: 100%;
     padding: 10px;
@@ -75,7 +75,6 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* Style for edit/save profile button */
 .edit-profile-section {
     margin-top: 30px;
     text-align: center;
