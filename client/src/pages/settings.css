@@ -3,31 +3,42 @@
 .settings-screen {
     padding: 20px;
     font-family: 'Poppins', sans-serif;
-    text-align: center;
+    text-align: left; /* Align content to the left */
+    max-width: 600px; /* Set a max-width for better layout */
+    margin: 0 auto; /* Center the content on the page */
 }
 
 .setting-group {
     margin: 20px 0;
+    display: flex; /* Use flexbox to align heading and options on one line */
+    justify-content: space-between; /* Space out the heading and the options */
+    align-items: center;
 }
 
 .setting-group h2 {
-    margin-bottom: 10px;
+    margin: 0;
     font-size: 18px;
+    width: 200px; /* Adjust this to align headings */
+    text-align: left; /* Ensure headings are aligned to the left */
 }
 
 .options-group {
     display: flex;
-    justify-content: center;
-    gap: 10px; /* Reduced space between the options */
+    gap: 8px; /* Smaller space between the options */
     flex-wrap: nowrap; /* Ensure the options stay on the same line */
     align-items: center;
 }
 
-.options-group label, .options-group select {
+.options-group label {
     font-size: 16px;
     display: flex;
     align-items: center;
-    margin: 0; /* Remove extra margin */
+    margin: 0;
+}
+
+.options-group input[type="checkbox"],
+.options-group input[type="radio"] {
+    margin-right: 4px; /* Smaller space between checkbox/radio and label */
 }
 
 .options-group select {
