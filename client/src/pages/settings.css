@@ -15,16 +15,43 @@
     font-size: 18px;
 }
 
-.setting-group label {
-    display: block;
-    margin-bottom: 8px;
+.options-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between the options */
+    flex-wrap: wrap; /* Allow options to wrap if screen is small */
+}
+
+.options-group label {
     font-size: 16px;
 }
 
-.setting-group select {
+.options-group select {
     padding: 10px;
     font-size: 16px;
     margin-top: 10px;
+}
+
+.privacy-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #189ab4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.privacy-button:hover {
+    background-color: #107d93;
+}
+
+.delete-button {
+    background-color: #ff6347; /* Red for delete */
+}
+
+.delete-button:hover {
+    background-color: #d9534f;
 }
 
 .home-button {
