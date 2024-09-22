@@ -1,7 +1,8 @@
 /* General container for the profile screen */
 .profile-container {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center; /* Center items in the container */
     padding: 20px;
     max-width: 1000px;
     margin: 0 auto;
@@ -9,7 +10,17 @@
     background-color: #f0f8ff;
     color: #333;
     height: 100vh;
-    align-items: flex-start;
+}
+
+/* Center the heading at the top */
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-header h1 {
+    font-size: 36px;
+    color: #333;
 }
 
 /* Left-side menu for buttons */
@@ -19,6 +30,9 @@
     gap: 15px;
     width: 200px;
     padding: 20px;
+    position: absolute;
+    left: 20px; /* Adjust position for left menu */
+    top: 100px; /* Adjust position */
 }
 
 .menu-button {
@@ -48,6 +62,7 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 40px;
+    margin-top: 20px;
 }
 
 /* Profile avatar styling */
