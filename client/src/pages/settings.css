@@ -58,7 +58,7 @@
 
 .privacy-buttons-group {
     display: flex;
-    justify-content: space-between; /* Ensure buttons are evenly spaced */
+    justify-content: center; /* Center align the buttons */
     flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
     gap: 10px; /* Add consistent spacing between buttons */
 }
@@ -87,7 +87,7 @@
 
 .center-button {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 30px; /* Adjusted margin to align with privacy buttons */
 }
 
 .home-button {
