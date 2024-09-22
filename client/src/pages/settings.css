@@ -58,18 +58,20 @@
 
 .privacy-buttons-group {
     display: flex;
-    gap: 10px;
-    justify-content: center; /* Align privacy buttons horizontally */
-    flex-wrap: wrap; /* Allow buttons to wrap if screen is small */
+    justify-content: space-between; /* Ensure buttons are evenly spaced */
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    gap: 20px; /* Add consistent spacing between buttons */
 }
 
 .privacy-button {
-    padding: 8px 16px;
+    flex-grow: 1; /* Allow buttons to stretch evenly */
+    padding: 10px;
     font-size: 14px;
     background-color: #189ab4;
     color: white;
     border: none;
     cursor: pointer;
+    text-align: center;
 }
 
 .privacy-button:hover {
