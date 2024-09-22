@@ -1,18 +1,31 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-import './Profile.css'; // Ensure CSS file exists for styling
+import { useNavigate, Link } from "react-router-dom";
+import './profile.css';  
 
-function Profile() {
-    // State for managing profile details (name, email, other details)
+export default function Profile() {
+    const navigate = useNavigate();
+
+    // State to manage profile data
     const [profile, setProfile] = useState({
-        name: 'Ishaan Verma',  // Replace with actual user data
-        email: 'ishaan.verma@example.com',  // Replace with actual user data
-        otherDetails: ['Address: Sydney', 'Phone: +61 123 456 789', 'DOB: 01-01-1998'], // Sample data
+        name: 'Ishaan Verma',
+        email: 'ishaan.verma@example.com',
+        phone: '+61 123 456 789',
+        address: '123 Sydney Street, Sydney, NSW',
     });
 
-    const handleEditProfile = () => {
-        // Logic for editing the profile
-        alert("Edit Profile Clicked");
+    // Handle change in input fields
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setProfile(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const handleSaveChanges = () => {
+        // Logic to save changes (e.g., API call)
+        console.log('Profile updated: ', profile);
+        // Optionally, redirect or show a success message
     };
 
     return (
@@ -20,7 +33,7 @@ function Profile() {
             <h1 style={{ marginBottom: '20px', textAlign: 'center' }}>Profile Screen</h1>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                {/* Left Section (Buttons) */}
+                {/* Left Menu Section */}
                 <div className="left-menu">
                     <button className="menu-button">Settings</button>
                     <button className="menu-button">Notification Settings</button>
@@ -35,31 +48,47 @@ function Profile() {
                 <div className="profile-info">
                     <div className="profile-avatar">
                         {/* Placeholder for user profile image */}
-                        <img src="https://via.placeholder.com/100" alt="Profile" />
+                        <img src={logo} alt="App Logo" id="logo" />
                     </div>
                     <div className="profile-details">
-                        <p><b>Name:</b> {profile.name}</p>
-                        <p><b>Email:</b> {profile.email}</p>
+                        <form>
+                            <input
+                                id="nameBox"
+                                placeholder="Name"
+                                name="name"
+                                value={profile.name}
+                                onChange={handleChange}
+                            />
+                            <p></p>
+                            <input
+                                id="emailBox"
+                                placeholder="Email"
+                                type="email"
+                                name="email"
+                                value={profile.email}
+                                onChange={handleChange}
+                            />
+                            <p></p>
+                            <input
+                                id="phoneBox"
+                                placeholder="Phone Number"
+                                name="phone"
+                                value={profile.phone}
+                                onChange={handleChange}
+                            />
+                            <p></p>
+                            <input
+                                id="addressBox"
+                                placeholder="Address"
+                                name="address"
+                                value={profile.address}
+                                onChange={handleChange}
+                            />
+                        </form>
 
-                        {/* Other details */}
-                        <div className="other-details">
-                            <h3>Other Details</h3>
-                            {profile.otherDetails.map((detail, index) => (
-                                <p key={index}>{detail}</p>
-                            ))}
-                        </div>
-
-                        {/* Settings */}
-                        <div className="settings-details">
-                            <h3>Settings</h3>
-                            <p>Notification Preferences: Enabled</p>
-                            <p>Privacy Settings: High</p>
-                            <p>Language: English</p>
-                        </div>
-
-                        {/* Edit Profile Button */}
+                        {/* Save Profile Button */}
                         <div className="edit-profile-section">
-                            <button className="edit-profile-button" onClick={handleEditProfile}>Edit Profile</button>
+                            <button className="edit-profile-button" onClick={handleSaveChanges}>Save Changes</button>
                         </div>
                     </div>
                 </div>
@@ -67,5 +96,3 @@ function Profile() {
         </div>
     );
 }
-
-export default Profile;
