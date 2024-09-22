@@ -38,12 +38,18 @@
 
 .options-group input[type="checkbox"],
 .options-group input[type="radio"] {
-    margin-right: 4px; /* Smaller space between checkbox/radio and label */
+    margin-right: 2px; /* Even smaller space between checkbox/radio and label */
 }
 
 .options-group select {
     padding: 5px;
     font-size: 16px;
+}
+
+.privacy-buttons-group {
+    display: flex;
+    gap: 10px; /* Space between privacy buttons */
+    margin-bottom: 10px; /* Space between buttons and checkboxes */
 }
 
 .privacy-button {
