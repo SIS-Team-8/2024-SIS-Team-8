@@ -3,8 +3,9 @@
 .settings-screen {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Align to the top */
     height: 100vh;
+    padding-top: 30px; /* Adds space above */
 }
 
 .settings-container {
@@ -13,19 +14,22 @@
     padding: 20px;
     font-family: 'Poppins', sans-serif;
     text-align: left;
+    background-color: white; /* Adjust background color */
+    border-radius: 8px; /* Rounded edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .setting-group {
     margin: 20px 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; /* Move headings and options left */
     align-items: center;
 }
 
 .setting-group h2 {
     margin: 0;
     font-size: 18px;
-    width: 200px; /* Adjust this width to make the heading align properly */
+    width: 150px; /* Adjust this width for alignment */
 }
 
 .options-group {
@@ -83,7 +87,7 @@
 
 .center-button {
     text-align: center;
-    margin-top: 50px; /* Increased margin to move the button lower */
+    margin-top: 50px; /* Moved home button lower */
 }
 
 .home-button {
