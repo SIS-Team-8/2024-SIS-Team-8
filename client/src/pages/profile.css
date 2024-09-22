@@ -41,7 +41,7 @@
     flex-direction: column;
     gap: 15px;
     width: 200px;
-    padding: 100px;
+    padding: 30px;
     position: absolute;
     left: 0; /* Aligns the menu to the left */
     top: 100px; /* Adjust the top position if needed */
