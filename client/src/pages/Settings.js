@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './settings.css'; // Import the corresponding CSS file
 import { useNavigate } from 'react-router-dom';
 
@@ -79,12 +79,6 @@ const Settings = () => {
     const [reminderFrequency, setReminderFrequency] = useState([]);
     const [theme, setTheme] = useState('light');
     const [language, setLanguage] = useState('English');
-    const [privacySettings, setPrivacySettings] = useState({
-        dataExport: false,
-        deleteAccount: false,
-        disableTracking: false,
-        managePermissions: false
-    });
     const navigate = useNavigate();
 
     const handleCheckboxChange = (event) => {
@@ -108,116 +102,118 @@ const Settings = () => {
 
     return (
         <div className="settings-screen">
-            <h1>{t.title}</h1>
+            <div className="settings-container">
+                <h1>{t.title}</h1>
 
-            {/* Reminder Frequency */}
-            <div className="setting-group">
-                <h2>{t.reminder}</h2>
-                <div className="options-group">
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="Daily"
-                            onChange={handleCheckboxChange}
-                            checked={reminderFrequency.includes('Daily')}
-                        />
-                        {t.daily || "Daily"}
-                    </label>
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="Weekly"
-                            onChange={handleCheckboxChange}
-                            checked={reminderFrequency.includes('Weekly')}
-                        />
-                        {t.weekly || "Weekly"}
-                    </label>
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="Monthly"
-                            onChange={handleCheckboxChange}
-                            checked={reminderFrequency.includes('Monthly')}
-                        />
-                        {t.monthly || "Monthly"}
-                    </label>
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="Custom"
-                            onChange={handleCheckboxChange}
-                            checked={reminderFrequency.includes('Custom')}
-                        />
-                        {t.custom || "Custom"}
-                    </label>
+                {/* Reminder Frequency */}
+                <div className="setting-group">
+                    <h2>{t.reminder}</h2>
+                    <div className="options-group">
+                        <label>
+                            <input
+                                type="checkbox"
+                                value="Daily"
+                                onChange={handleCheckboxChange}
+                                checked={reminderFrequency.includes('Daily')}
+                            />
+                            {t.daily || "Daily"}
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                value="Weekly"
+                                onChange={handleCheckboxChange}
+                                checked={reminderFrequency.includes('Weekly')}
+                            />
+                            {t.weekly || "Weekly"}
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                value="Monthly"
+                                onChange={handleCheckboxChange}
+                                checked={reminderFrequency.includes('Monthly')}
+                            />
+                            {t.monthly || "Monthly"}
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                value="Custom"
+                                onChange={handleCheckboxChange}
+                                checked={reminderFrequency.includes('Custom')}
+                            />
+                            {t.custom || "Custom"}
+                        </label>
+                    </div>
                 </div>
-            </div>
 
-            {/* Theme Options */}
-            <div className="setting-group">
-                <h2>{t.theme}</h2>
-                <div className="options-group">
-                    <label>
-                        <input
-                            type="radio"
-                            value="light"
-                            name="theme"
-                            onChange={handleThemeChange}
-                            checked={theme === 'light'}
-                        />
-                        {t.light}
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            value="dark"
-                            name="theme"
-                            onChange={handleThemeChange}
-                            checked={theme === 'dark'}
-                        />
-                        {t.dark}
-                    </label>
+                {/* Theme Options */}
+                <div className="setting-group">
+                    <h2>{t.theme}</h2>
+                    <div className="options-group">
+                        <label>
+                            <input
+                                type="radio"
+                                value="light"
+                                name="theme"
+                                onChange={handleThemeChange}
+                                checked={theme === 'light'}
+                            />
+                            {t.light}
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                value="dark"
+                                name="theme"
+                                onChange={handleThemeChange}
+                                checked={theme === 'dark'}
+                            />
+                            {t.dark}
+                        </label>
+                    </div>
                 </div>
-            </div>
 
-            {/* Language Preferences */}
-            <div className="setting-group">
-                <h2>{t.language}</h2>
-                <div className="options-group">
-                    <select value={language} onChange={handleLanguageChange}>
-                        <option value="English">English</option>
-                        <option value="Spanish">Spanish</option>
-                        <option value="German">German</option>
-                        <option value="French">French</option>
-                        <option value="Chinese">Chinese</option>
-                    </select>
+                {/* Language Preferences */}
+                <div className="setting-group">
+                    <h2>{t.language}</h2>
+                    <div className="options-group">
+                        <select value={language} onChange={handleLanguageChange}>
+                            <option value="English">English</option>
+                            <option value="Spanish">Spanish</option>
+                            <option value="German">German</option>
+                            <option value="French">French</option>
+                            <option value="Chinese">Chinese</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
-            {/* Privacy Settings */}
-            <div className="setting-group">
-                <h2>{t.privacy}</h2>
-                <div className="privacy-buttons-group">
-                    <button className="privacy-button" onClick={() => alert(t.dataExport)}>
-                        {t.dataExport}
-                    </button>
-                    <button className="privacy-button delete-button" onClick={() => alert(t.deleteAccount)}>
-                        {t.deleteAccount}
-                    </button>
-                    <button className="privacy-button" onClick={() => alert(t.disableTracking)}>
-                        {t.disableTracking}
-                    </button>
-                    <button className="privacy-button" onClick={() => alert(t.managePermissions)}>
-                        {t.managePermissions}
+                {/* Privacy Settings */}
+                <div className="setting-group">
+                    <h2>{t.privacy}</h2>
+                    <div className="privacy-buttons-group">
+                        <button className="privacy-button" onClick={() => alert(t.dataExport)}>
+                            {t.dataExport}
+                        </button>
+                        <button className="privacy-button delete-button" onClick={() => alert(t.deleteAccount)}>
+                            {t.deleteAccount}
+                        </button>
+                        <button className="privacy-button" onClick={() => alert(t.disableTracking)}>
+                            {t.disableTracking}
+                        </button>
+                        <button className="privacy-button" onClick={() => alert(t.managePermissions)}>
+                            {t.managePermissions}
+                        </button>
+                    </div>
+                </div>
+
+                {/* Home Page Button */}
+                <div className="center-button">
+                    <button className="home-button" onClick={() => navigate('/')}>
+                        {t.homePage}
                     </button>
                 </div>
-            </div>
-
-            {/* Home Page Button */}
-            <div className="center-button">
-                <button className="home-button" onClick={() => navigate('/')}>
-                    {t.homePage}
-                </button>
             </div>
         </div>
     );
