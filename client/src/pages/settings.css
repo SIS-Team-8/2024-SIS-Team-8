@@ -18,29 +18,31 @@
 .options-group {
     display: flex;
     justify-content: center;
-    gap: 20px; /* Space between the options */
-    flex-wrap: wrap; /* Allow options to wrap if screen is small */
+    gap: 10px; /* Reduced space between the options */
+    flex-wrap: nowrap; /* Ensure the options stay on the same line */
     align-items: center;
 }
 
-.options-group label {
+.options-group label, .options-group select {
     font-size: 16px;
+    display: flex;
+    align-items: center;
+    margin: 0; /* Remove extra margin */
 }
 
 .options-group select {
-    padding: 10px;
+    padding: 5px;
     font-size: 16px;
-    margin-top: 10px;
 }
 
 .privacy-button {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 8px 16px;
+    font-size: 14px;
     background-color: #189ab4;
     color: white;
     border: none;
     cursor: pointer;
-    margin: 10px;
+    margin: 5px; /* Smaller margin */
 }
 
 .privacy-button:hover {
