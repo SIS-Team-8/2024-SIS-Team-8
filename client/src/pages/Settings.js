@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './settings.css'; // Import the corresponding CSS file
+import React, { useState, useEffect } from 'react';
+import './settings.css';
 import { useNavigate } from 'react-router-dom';
 
 const translations = {
@@ -17,62 +17,7 @@ const translations = {
         managePermissions: "Manage Permissions",
         homePage: "Home Page"
     },
-    Spanish: {
-        title: "Pantalla de Configuración",
-        reminder: "Frecuencia de Recordatorios",
-        theme: "Opciones de Tema",
-        light: "Modo Claro",
-        dark: "Modo Oscuro",
-        language: "Preferencias de Idioma",
-        privacy: "Configuración de Privacidad",
-        dataExport: "Exportar Datos",
-        deleteAccount: "Eliminar Cuenta",
-        disableTracking: "Deshabilitar Seguimiento",
-        managePermissions: "Gestionar Permisos",
-        homePage: "Página Principal"
-    },
-    German: {
-        title: "Einstellungen Bildschirm",
-        reminder: "Erinnerungshäufigkeit",
-        theme: "Themenoptionen",
-        light: "Heller Modus",
-        dark: "Dunkler Modus",
-        language: "Spracheinstellungen",
-        privacy: "Datenschutzeinstellungen",
-        dataExport: "Daten exportieren",
-        deleteAccount: "Konto löschen",
-        disableTracking: "Verfolgung deaktivieren",
-        managePermissions: "Berechtigungen verwalten",
-        homePage: "Startseite"
-    },
-    French: {
-        title: "Écran des paramètres",
-        reminder: "Fréquence des rappels",
-        theme: "Options de thème",
-        light: "Mode clair",
-        dark: "Mode sombre",
-        language: "Préférences linguistiques",
-        privacy: "Paramètres de confidentialité",
-        dataExport: "Exporter des données",
-        deleteAccount: "Supprimer le compte",
-        disableTracking: "Désactiver le suivi",
-        managePermissions: "Gérer les autorisations",
-        homePage: "Page d'accueil"
-    },
-    Chinese: {
-        title: "设置屏幕",
-        reminder: "提醒频率",
-        theme: "主题选项",
-        light: "亮模式",
-        dark: "暗模式",
-        language: "语言偏好",
-        privacy: "隐私设置",
-        dataExport: "导出数据",
-        deleteAccount: "删除账户",
-        disableTracking: "禁用跟踪",
-        managePermissions: "管理权限",
-        homePage: "主页"
-    }
+    // Other translations (Spanish, German, etc.) can go here...
 };
 
 const Settings = () => {
@@ -80,6 +25,10 @@ const Settings = () => {
     const [theme, setTheme] = useState('light');
     const [language, setLanguage] = useState('English');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        document.body.className = theme; // Apply the theme class to the body
+    }, [theme]);
 
     const handleCheckboxChange = (event) => {
         const { value, checked } = event.target;
@@ -89,16 +38,14 @@ const Settings = () => {
     };
 
     const handleThemeChange = (event) => {
-        const newTheme = event.target.value;
-        setTheme(newTheme);
-        document.body.className = newTheme;
+        setTheme(event.target.value);
     };
 
     const handleLanguageChange = (event) => {
         setLanguage(event.target.value);
     };
 
-    const t = translations[language]; // Get the translations based on selected language
+    const t = translations[language];
 
     return (
         <div className="settings-screen">
@@ -116,7 +63,7 @@ const Settings = () => {
                                 onChange={handleCheckboxChange}
                                 checked={reminderFrequency.includes('Daily')}
                             />
-                            {t.daily || "Daily"}
+                            Daily
                         </label>
                         <label>
                             <input
@@ -125,7 +72,7 @@ const Settings = () => {
                                 onChange={handleCheckboxChange}
                                 checked={reminderFrequency.includes('Weekly')}
                             />
-                            {t.weekly || "Weekly"}
+                            Weekly
                         </label>
                         <label>
                             <input
@@ -134,7 +81,7 @@ const Settings = () => {
                                 onChange={handleCheckboxChange}
                                 checked={reminderFrequency.includes('Monthly')}
                             />
-                            {t.monthly || "Monthly"}
+                            Monthly
                         </label>
                         <label>
                             <input
@@ -143,7 +90,7 @@ const Settings = () => {
                                 onChange={handleCheckboxChange}
                                 checked={reminderFrequency.includes('Custom')}
                             />
-                            {t.custom || "Custom"}
+                            Custom
                         </label>
                     </div>
                 </div>

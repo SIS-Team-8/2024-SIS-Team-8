@@ -3,9 +3,9 @@
 .settings-screen {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Align to the top */
+    align-items: flex-start;
     height: 100vh;
-    padding-top: 30px; /* Adds space above */
+    padding-top: 30px;
 }
 
 .settings-container {
@@ -14,15 +14,12 @@
     padding: 20px;
     font-family: 'Poppins', sans-serif;
     text-align: left;
-    background-color: white; /* Adjust background color */
-    border-radius: 8px; /* Rounded edges */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .setting-group {
     margin: 20px 0;
     display: flex;
-    justify-content: flex-start; /* Move headings and options left */
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -34,21 +31,19 @@
 
 .options-group {
     display: flex;
-    gap: 4px; /* Reduced gap between checkboxes and labels */
-    flex-wrap: nowrap;
-    align-items: center;
+    flex-wrap: wrap; /* Ensures checkboxes align properly */
+    gap: 10px; /* Proper gap for Monthly and Custom to fit */
 }
 
 .options-group label {
     font-size: 16px;
     display: flex;
     align-items: center;
-    margin: 0;
 }
 
 .options-group input[type="checkbox"],
 .options-group input[type="radio"] {
-    margin-right: 2px; /* Minimized space between checkbox/radio and label */
+    margin-right: 5px; /* Adjusted spacing */
 }
 
 .options-group select {
@@ -60,7 +55,6 @@
     display: flex;
     flex-direction: column; /* Align privacy buttons vertically */
     gap: 10px;
-    margin-top: 10px;
 }
 
 .privacy-button {
@@ -70,7 +64,6 @@
     color: white;
     border: none;
     cursor: pointer;
-    margin: 5px 0; /* Smaller margin */
 }
 
 .privacy-button:hover {
@@ -78,7 +71,7 @@
 }
 
 .delete-button {
-    background-color: #ff6347; /* Red for delete */
+    background-color: #ff6347;
 }
 
 .delete-button:hover {
@@ -87,7 +80,7 @@
 
 .center-button {
     text-align: center;
-    margin-top: 50px; /* Moved home button lower */
+    margin-top: 50px;
 }
 
 .home-button {
@@ -102,4 +95,15 @@
 .home-button:hover {
     background-color: #107d93;
     border-color: #107d93;
+}
+
+/* Dark mode styling */
+body.dark {
+    background-color: #333;
+    color: white;
+}
+
+body.light {
+    background-color: white;
+    color: black;
 }
