@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './settings.css'; // Import the corresponding CSS file
 import { useNavigate } from 'react-router-dom';
 
@@ -6,6 +6,12 @@ const Settings = () => {
     const [reminderFrequency, setReminderFrequency] = useState([]);
     const [theme, setTheme] = useState('light');
     const [language, setLanguage] = useState('English');
+    const [privacySettings, setPrivacySettings] = useState({
+        dataExport: false,
+        deleteAccount: false,
+        disableTracking: false,
+        managePermissions: false
+    });
 
     const navigate = useNavigate();
 
@@ -19,12 +25,20 @@ const Settings = () => {
 
     // Handle theme change (light or dark mode)
     const handleThemeChange = (event) => {
-        setTheme(event.target.value);
+        const newTheme = event.target.value;
+        setTheme(newTheme);
+        document.body.className = newTheme; // Change theme by setting the body class
     };
 
     // Handle language change
     const handleLanguageChange = (event) => {
         setLanguage(event.target.value);
+    };
+
+    // Handle privacy settings change
+    const handlePrivacyChange = (event) => {
+        const { name, checked } = event.target;
+        setPrivacySettings((prev) => ({ ...prev, [name]: checked }));
     };
 
     return (
@@ -131,6 +145,26 @@ const Settings = () => {
                     >
                         Delete Account
                     </button>
+                </div>
+                <div className="options-group">
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="disableTracking"
+                            onChange={handlePrivacyChange}
+                            checked={privacySettings.disableTracking}
+                        />
+                        Disable Tracking
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="managePermissions"
+                            onChange={handlePrivacyChange}
+                            checked={privacySettings.managePermissions}
+                        />
+                        Manage Permissions
+                    </label>
                 </div>
             </div>
 

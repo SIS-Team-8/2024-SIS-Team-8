@@ -20,6 +20,7 @@
     justify-content: center;
     gap: 20px; /* Space between the options */
     flex-wrap: wrap; /* Allow options to wrap if screen is small */
+    align-items: center;
 }
 
 .options-group label {
@@ -66,4 +67,15 @@
 
 .home-button:hover {
     background-color: #107d93;
+}
+
+/* Dark mode styling */
+body.dark {
+    background-color: #333;
+    color: white;
+}
+
+body.light {
+    background-color: white;
+    color: black;
 }
