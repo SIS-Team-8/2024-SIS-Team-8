@@ -2,6 +2,79 @@ import React, { useState, useEffect } from 'react';
 import './settings.css'; // Import the corresponding CSS file
 import { useNavigate } from 'react-router-dom';
 
+const translations = {
+    English: {
+        title: "Settings Screen",
+        reminder: "Frequency of Reminders",
+        theme: "Theme Options",
+        light: "Light Mode",
+        dark: "Dark Mode",
+        language: "Language Preferences",
+        privacy: "Privacy Settings",
+        dataExport: "Data Export",
+        deleteAccount: "Delete Account",
+        disableTracking: "Disable Tracking",
+        managePermissions: "Manage Permissions",
+        homePage: "Home Page"
+    },
+    Spanish: {
+        title: "Pantalla de Configuración",
+        reminder: "Frecuencia de Recordatorios",
+        theme: "Opciones de Tema",
+        light: "Modo Claro",
+        dark: "Modo Oscuro",
+        language: "Preferencias de Idioma",
+        privacy: "Configuración de Privacidad",
+        dataExport: "Exportar Datos",
+        deleteAccount: "Eliminar Cuenta",
+        disableTracking: "Deshabilitar Seguimiento",
+        managePermissions: "Gestionar Permisos",
+        homePage: "Página Principal"
+    },
+    German: {
+        title: "Einstellungen Bildschirm",
+        reminder: "Erinnerungshäufigkeit",
+        theme: "Themenoptionen",
+        light: "Heller Modus",
+        dark: "Dunkler Modus",
+        language: "Spracheinstellungen",
+        privacy: "Datenschutzeinstellungen",
+        dataExport: "Daten exportieren",
+        deleteAccount: "Konto löschen",
+        disableTracking: "Verfolgung deaktivieren",
+        managePermissions: "Berechtigungen verwalten",
+        homePage: "Startseite"
+    },
+    French: {
+        title: "Écran des paramètres",
+        reminder: "Fréquence des rappels",
+        theme: "Options de thème",
+        light: "Mode clair",
+        dark: "Mode sombre",
+        language: "Préférences linguistiques",
+        privacy: "Paramètres de confidentialité",
+        dataExport: "Exporter des données",
+        deleteAccount: "Supprimer le compte",
+        disableTracking: "Désactiver le suivi",
+        managePermissions: "Gérer les autorisations",
+        homePage: "Page d'accueil"
+    },
+    Chinese: {
+        title: "设置屏幕",
+        reminder: "提醒频率",
+        theme: "主题选项",
+        light: "亮模式",
+        dark: "暗模式",
+        language: "语言偏好",
+        privacy: "隐私设置",
+        dataExport: "导出数据",
+        deleteAccount: "删除账户",
+        disableTracking: "禁用跟踪",
+        managePermissions: "管理权限",
+        homePage: "主页"
+    }
+};
+
 const Settings = () => {
     const [reminderFrequency, setReminderFrequency] = useState([]);
     const [theme, setTheme] = useState('light');
@@ -12,10 +85,8 @@ const Settings = () => {
         disableTracking: false,
         managePermissions: false
     });
-
     const navigate = useNavigate();
 
-    // Handle checkbox change for reminder frequency
     const handleCheckboxChange = (event) => {
         const { value, checked } = event.target;
         setReminderFrequency((prev) =>
@@ -23,31 +94,25 @@ const Settings = () => {
         );
     };
 
-    // Handle theme change (light or dark mode)
     const handleThemeChange = (event) => {
         const newTheme = event.target.value;
         setTheme(newTheme);
-        document.body.className = newTheme; // Change theme by setting the body class
+        document.body.className = newTheme;
     };
 
-    // Handle language change
     const handleLanguageChange = (event) => {
         setLanguage(event.target.value);
     };
 
-    // Handle privacy settings change
-    const handlePrivacyChange = (event) => {
-        const { name, checked } = event.target;
-        setPrivacySettings((prev) => ({ ...prev, [name]: checked }));
-    };
+    const t = translations[language]; // Get the translations based on selected language
 
     return (
         <div className="settings-screen">
-            <h1>Settings Screen</h1>
+            <h1>{t.title}</h1>
 
             {/* Reminder Frequency */}
             <div className="setting-group">
-                <h2>Frequency of Reminders</h2>
+                <h2>{t.reminder}</h2>
                 <div className="options-group">
                     <label>
                         <input
@@ -56,7 +121,7 @@ const Settings = () => {
                             onChange={handleCheckboxChange}
                             checked={reminderFrequency.includes('Daily')}
                         />
-                        Daily
+                        {t.daily || "Daily"}
                     </label>
                     <label>
                         <input
@@ -65,7 +130,7 @@ const Settings = () => {
                             onChange={handleCheckboxChange}
                             checked={reminderFrequency.includes('Weekly')}
                         />
-                        Weekly
+                        {t.weekly || "Weekly"}
                     </label>
                     <label>
                         <input
@@ -74,7 +139,7 @@ const Settings = () => {
                             onChange={handleCheckboxChange}
                             checked={reminderFrequency.includes('Monthly')}
                         />
-                        Monthly
+                        {t.monthly || "Monthly"}
                     </label>
                     <label>
                         <input
@@ -83,14 +148,14 @@ const Settings = () => {
                             onChange={handleCheckboxChange}
                             checked={reminderFrequency.includes('Custom')}
                         />
-                        Custom
+                        {t.custom || "Custom"}
                     </label>
                 </div>
             </div>
 
             {/* Theme Options */}
             <div className="setting-group">
-                <h2>Theme Options</h2>
+                <h2>{t.theme}</h2>
                 <div className="options-group">
                     <label>
                         <input
@@ -100,7 +165,7 @@ const Settings = () => {
                             onChange={handleThemeChange}
                             checked={theme === 'light'}
                         />
-                        Light Mode
+                        {t.light}
                     </label>
                     <label>
                         <input
@@ -110,68 +175,50 @@ const Settings = () => {
                             onChange={handleThemeChange}
                             checked={theme === 'dark'}
                         />
-                        Dark Mode
+                        {t.dark}
                     </label>
                 </div>
             </div>
 
             {/* Language Preferences */}
             <div className="setting-group">
-                <h2>Language Preferences</h2>
+                <h2>{t.language}</h2>
                 <div className="options-group">
                     <select value={language} onChange={handleLanguageChange}>
                         <option value="English">English</option>
                         <option value="Spanish">Spanish</option>
-                        <option value="French">French</option>
                         <option value="German">German</option>
-                        {/* Add more languages as needed */}
+                        <option value="French">French</option>
+                        <option value="Chinese">Chinese</option>
                     </select>
                 </div>
             </div>
 
             {/* Privacy Settings */}
             <div className="setting-group">
-                <h2>Privacy Settings</h2>
-                <div className="options-group">
-                    <button
-                        className="privacy-button"
-                        onClick={() => alert('Exporting data...')}
-                    >
-                        Data Export
+                <h2>{t.privacy}</h2>
+                <div className="privacy-buttons-group">
+                    <button className="privacy-button" onClick={() => alert(t.dataExport)}>
+                        {t.dataExport}
                     </button>
-                    <button
-                        className="privacy-button delete-button"
-                        onClick={() => alert('Deleting account...')}
-                    >
-                        Delete Account
+                    <button className="privacy-button delete-button" onClick={() => alert(t.deleteAccount)}>
+                        {t.deleteAccount}
                     </button>
-                </div>
-                <div className="options-group">
-                    <label>
-                        <input
-                            type="checkbox"
-                            name="disableTracking"
-                            onChange={handlePrivacyChange}
-                            checked={privacySettings.disableTracking}
-                        />
-                        Disable Tracking
-                    </label>
-                    <label>
-                        <input
-                            type="checkbox"
-                            name="managePermissions"
-                            onChange={handlePrivacyChange}
-                            checked={privacySettings.managePermissions}
-                        />
-                        Manage Permissions
-                    </label>
+                    <button className="privacy-button" onClick={() => alert(t.disableTracking)}>
+                        {t.disableTracking}
+                    </button>
+                    <button className="privacy-button" onClick={() => alert(t.managePermissions)}>
+                        {t.managePermissions}
+                    </button>
                 </div>
             </div>
 
             {/* Home Page Button */}
-            <button className="home-button" onClick={() => navigate('/')}>
-                Home Page
-            </button>
+            <div className="center-button">
+                <button className="home-button" onClick={() => navigate('/')}>
+                    {t.homePage}
+                </button>
+            </div>
         </div>
     );
 };

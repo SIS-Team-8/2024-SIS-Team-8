@@ -3,29 +3,28 @@
 .settings-screen {
     padding: 20px;
     font-family: 'Poppins', sans-serif;
-    text-align: left; /* Align content to the left */
-    max-width: 600px; /* Set a max-width for better layout */
-    margin: 0 auto; /* Center the content on the page */
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .setting-group {
     margin: 20px 0;
-    display: flex; /* Use flexbox to align heading and options on one line */
-    justify-content: space-between; /* Space out the heading and the options */
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
 .setting-group h2 {
     margin: 0;
     font-size: 18px;
-    width: 200px; /* Adjust this to align headings */
-    text-align: left; /* Ensure headings are aligned to the left */
+    width: 200px; /* Adjust this width to make the heading align properly */
 }
 
 .options-group {
     display: flex;
-    gap: 8px; /* Smaller space between the options */
-    flex-wrap: nowrap; /* Ensure the options stay on the same line */
+    gap: 8px;
+    flex-wrap: nowrap;
     align-items: center;
 }
 
@@ -48,8 +47,9 @@
 
 .privacy-buttons-group {
     display: flex;
-    gap: 10px; /* Space between privacy buttons */
-    margin-bottom: 10px; /* Space between buttons and checkboxes */
+    flex-direction: column; /* Align privacy buttons vertically */
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .privacy-button {
@@ -59,7 +59,7 @@
     color: white;
     border: none;
     cursor: pointer;
-    margin: 5px; /* Smaller margin */
+    margin: 5px 0; /* Smaller margin */
 }
 
 .privacy-button:hover {
@@ -74,8 +74,12 @@
     background-color: #d9534f;
 }
 
-.home-button {
+.center-button {
+    text-align: center;
     margin-top: 30px;
+}
+
+.home-button {
     padding: 10px 20px;
     background-color: #189ab4;
     color: white;
