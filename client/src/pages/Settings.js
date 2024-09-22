@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './settings.css';
+import './settings.css'; // Import the corresponding CSS file
 import { useNavigate } from 'react-router-dom';
 
 const translations = {
@@ -17,7 +17,20 @@ const translations = {
         managePermissions: "Manage Permissions",
         homePage: "Home Page"
     },
-    // Other translations (Spanish, German, etc.) can go here...
+    Spanish: {
+        title: "Pantalla de Configuración",
+        reminder: "Frecuencia de Recordatorios",
+        theme: "Opciones de Tema",
+        light: "Modo Claro",
+        dark: "Modo Oscuro",
+        language: "Preferencias de Idioma",
+        privacy: "Configuración de Privacidad",
+        dataExport: "Exportar Datos",
+        deleteAccount: "Eliminar Cuenta",
+        disableTracking: "Deshabilitar Seguimiento",
+        managePermissions: "Gestionar Permisos",
+        homePage: "Página Principal"
+    }
 };
 
 const Settings = () => {
@@ -45,12 +58,12 @@ const Settings = () => {
         setLanguage(event.target.value);
     };
 
-    const t = translations[language];
+    const t = translations[language]; // Fetch translation for the selected language
 
     return (
         <div className="settings-screen">
             <div className="settings-container">
-                <h1>{t.title}</h1>
+                <h1 className="settings-header">{t.title}</h1>
 
                 {/* Reminder Frequency */}
                 <div className="setting-group">
@@ -129,9 +142,6 @@ const Settings = () => {
                         <select value={language} onChange={handleLanguageChange}>
                             <option value="English">English</option>
                             <option value="Spanish">Spanish</option>
-                            <option value="German">German</option>
-                            <option value="French">French</option>
-                            <option value="Chinese">Chinese</option>
                         </select>
                     </div>
                 </div>

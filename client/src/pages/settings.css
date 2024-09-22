@@ -6,6 +6,7 @@
     align-items: flex-start;
     height: 100vh;
     padding-top: 30px;
+    text-align: center; /* Center align for the header */
 }
 
 .settings-container {
@@ -14,6 +15,10 @@
     padding: 20px;
     font-family: 'Poppins', sans-serif;
     text-align: left;
+}
+
+.settings-header {
+    text-align: center; /* Center the Settings Screen header */
 }
 
 .setting-group {
@@ -53,8 +58,9 @@
 
 .privacy-buttons-group {
     display: flex;
-    flex-direction: column; /* Align privacy buttons vertically */
     gap: 10px;
+    justify-content: center; /* Align privacy buttons horizontally */
+    flex-wrap: wrap; /* Allow buttons to wrap if screen is small */
 }
 
 .privacy-button {
