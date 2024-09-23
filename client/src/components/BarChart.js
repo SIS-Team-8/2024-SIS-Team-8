@@ -1,5 +1,5 @@
-
 import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis, Tooltip, Label, Cell } from 'recharts';
+import './BarChart.css';
 
 const emoteData = [
     //data goes here
@@ -25,7 +25,7 @@ const emoteData = [
     },
 ];
 
-const colours = ['red', 'blue', 'yellow', 'grey', 'purple'];
+const colours = ['#ff746c', '#b3ebf2', '#ffee8c', 'grey', '#6c3baa'];
 
 const BarChartComponent = () => {
     return ( 
@@ -37,7 +37,7 @@ const BarChartComponent = () => {
                 <XAxis dataKey="name" stroke="white">
                     <Label value="Emotion" offset={0} position="bottom" fill="white"/>
                 </XAxis>
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />}/>
                 <Bar dataKey="emoteFreq">
                     {
                         emoteData.map((entry, index) => (
@@ -50,16 +50,20 @@ const BarChartComponent = () => {
     )
 };
 
-/*
+
 const CustomTooltip = ({ active, payload, label}) => {
     if (active && payload && payload.length) {
         return (
-            <div id="tooltip"> 
-
+            <div id="custom-tooltip"> 
+                <p>{label}</p>
+                <p>
+                    Frequency:
+                    <span> {payload[0].value}</span>
+                </p>
             </div>
-        )
+        );
     }
 };
-*/
+
 
 export default BarChartComponent;

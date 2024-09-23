@@ -9,3 +9,27 @@
     text-align: left;
     flex-direction: column;
 }
+
+.month-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 80%;
+}
+
+.month-navigation h2 {
+    font-size: 24px;
+}
+
+.month-navigation button {
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    padding: 7px;
+    font-size: large;
+    width: 308px;
+    background-color: white;
+    color: #189ab4;
+    border: none;
+}
