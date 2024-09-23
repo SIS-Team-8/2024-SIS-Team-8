@@ -9,21 +9,21 @@ const CheckboxRow = ({ title, checkboxes }) => {
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginTop: '20px' }}>
-      <h1 style={{ margin: '0', fontSize: '16px', marginRight: '20px', textAlign: 'left' }}>{title}</h1>
-      {checkboxes.map((checkbox) => (
-        <div key={checkbox.id} style={{ marginLeft: '10px' }}>
-          <label>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '20px' }}>
+      <h2 style={{ margin: '0', fontSize: '18px', marginRight: '20px' }}>{title}</h2>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        {checkboxes.map((checkbox) => (
+          <div key={checkbox.id} style={{ marginLeft: '15px', display: 'flex', alignItems: 'center' }}>
             <input
               type="checkbox"
               id={checkbox.id}
               checked={checkedItems[checkbox.id] || false}
               onChange={handleCheckboxChange}
             />
-            {checkbox.label}
-          </label>
-        </div>
-      ))}
+            <label style={{ marginLeft: '5px' }}>{checkbox.label}</label>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -44,16 +44,16 @@ const App = () => {
   const languages = ['English', 'Spanish', 'French', 'German'];
 
   return (
-    <div style={{ padding: '20px', textAlign: 'left' }}>
-      <h1 style={{ fontSize: '24px', marginBottom: '20px', textAlign: 'center' }}>Settings Screen</h1>
+    <div style={{ padding: '20px', textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>
+      <h1 style={{ fontSize: '24px', marginBottom: '20px' }}>Settings Screen</h1>
 
-      <div style={{ margin: '0 auto', maxWidth: '400px' }}>
+      <div style={{ margin: '0 auto', maxWidth: '400px', textAlign: 'left' }}>
         <CheckboxRow title="Frequency of Reminders" checkboxes={firstCheckboxes} />
         <CheckboxRow title="Notification Preferences" checkboxes={secondCheckboxes} />
 
-        <div style={{ display: 'flex', alignItems: 'center', marginTop: '20px', justifyContent: 'flex-start' }}>
-          <h1 style={{ margin: '0', fontSize: '16px', marginRight: '20px', marginLeft: '10px' }}>Language Preferences</h1>
-          <select style={{ padding: '5px', fontSize: '16px', marginLeft: '20px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', marginTop: '20px', justifyContent: 'space-between' }}>
+          <h2 style={{ margin: '0', fontSize: '18px', marginRight: '10px' }}>Language Preferences</h2>
+          <select style={{ padding: '5px', fontSize: '16px' }}>
             {languages.map((language, index) => (
               <option key={index} value={language}>
                 {language}
@@ -62,18 +62,17 @@ const App = () => {
           </select>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'flex-start', marginTop: '20px', justifyContent: 'flex-start' }}>
-          <h1 style={{ margin: '0', fontSize: '16px', marginRight: '10px', marginLeft: '10px' }}>Privacy Settings</h1>
-          <div style={{ textAlign: 'left', marginLeft: '20px' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', marginTop: '20px', justifyContent: 'space-between' }}>
+          <h2 style={{ margin: '0', fontSize: '18px', marginRight: '10px' }}>Privacy Settings</h2>
+          <div style={{ textAlign: 'left' }}>
             <p style={{ margin: '0', fontSize: '14px' }}>First Line of Text</p>
             <p style={{ margin: '0', fontSize: '14px' }}>Second Line of Text</p>
             <p style={{ margin: '0', fontSize: '14px' }}>Third Line of Text</p>
           </div>
         </div>
 
-        {/* Button Added Here */}
         <div style={{ marginTop: '30px', textAlign: 'center' }}>
-          <button style={{ padding: '10px 20px', fontSize: '16px' }}>Home Page</button>
+          <button style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}>Home Page</button>
         </div>
       </div>
     </div>
