@@ -16,15 +16,15 @@
     max-width: 600px;
     padding: 20px;
     font-family: 'Poppins', sans-serif;
-    background-color: white;
+    background-color: #189ab4;
     border-radius: 8px;
-    color: #333;
+    color: white;
     text-align: left;
 }
 
 .settings-header {
     text-align: center;
-    color: #189ab4;
+    color: white;
     margin-bottom: 20px;
 }
 
@@ -62,6 +62,7 @@
     padding: 5px;
     font-size: 16px;
     width: 100%;
+    cursor: pointer;
 }
 
 /* Toggle button styles for reminder frequency */
@@ -74,17 +75,17 @@
 .toggle-button {
     padding: 10px 20px;
     font-size: medium;
-    border: 2px solid #189ab4;
+    border: none;
     color: #189ab4;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
     width: 150px;
 }
 
 .toggle-button.selected {
-    background-color: #189ab4;
+    background-color: #0f7b8e;
     color: white;
 }
 
@@ -107,10 +108,15 @@
     min-width: 150px;
     background-color: white;
     color: #189ab4;
-    border: 2px solid #189ab4;
+    border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+
+.privacy-button:hover {
+    background-color: #0f7b8e;
+    color: white;
 }
 
 #delete-button {
@@ -118,12 +124,17 @@
     font-size: medium;
     flex: 1;
     min-width: 150px;
-    background-color: #DB1F48;
-    color: white;
+    background-color: white;
+    color: #DB1F48;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+
+#delete-button:hover {
+    background-color: #E7625F;
+    color: white;
 }
 
 .center-button {
@@ -132,15 +143,21 @@
 }
 
 .home-button {
-    padding: 10px;
+    padding: 7px;
     font-size: large;
     width: 100%;
     font-family: 'Poppins';
-    background-color: #189ab4;
-    color: white;
-    border: 2px solid white;
+    background-color: white;
+    color: #189ab4;
+    border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.home-button:hover {
+    background-color: #0f7b8e;
+    color: white;
 }
 
 /* Dark mode styling */
@@ -194,7 +211,7 @@ body.light {
 }
 
 input:checked + .slider {
-    background-color: #189ab4;
+    background-color: #0f7b8e;
 }
 
 input:checked + .slider:before {
