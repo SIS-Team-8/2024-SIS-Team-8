@@ -1,0 +1,11 @@
+#history-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #189ab4;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    text-align: left;
+    flex-direction: column;
+}
