@@ -7,15 +7,15 @@
     max-width: 1200px;
     margin: 0 auto;
     font-family: 'Poppins', sans-serif;
-    background-color: #f0f8ff;
+    background-color: #f0f8ff; /* Background for the profile page */
     color: #333;
-    height: 100vh;
+    height: 100vh; /* Full height */
 }
 
 /* Center the heading at the top */
 .profile-header {
     text-align: center;
-    width: 100%; /* Ensures the header spans across the top */
+    width: 100%;
     margin-bottom: 20px;
 }
 
@@ -28,25 +28,36 @@
 /* Container for the content (left menu and profile details) */
 .content-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; /* Ensures content aligns to the left */
     width: 100%;
-    max-width: 1000px;
+    max-width: 1200px; /* Ensure it takes up to 1200px max width */
     margin-top: 20px;
     position: relative;
 }
 
-/* Left-side menu for buttons */
+/* Left-side white vertical line */
+.left-line {
+    width: 2px;
+    height: 150px; /* Adjust the height to decide where the line ends */
+    background-color: #ffffff;
+    position: absolute;
+    left: 20px; /* Adjust distance from the left */
+    top: 50px; /* Position it below the heading */
+}
+
+/* Container for the buttons */
 .left-menu {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 15px;
     width: 200px;
-    padding: 30px;
+    padding: 20px;
     position: absolute;
-    left: 0; /* Aligns the menu to the left */
-    top: 100px; /* Adjust the top position if needed */
+    left: 20px; /* Align the buttons with the line */
+    top: 220px; /* Position the buttons below the white line */
 }
 
+/* Menu buttons styling */
 .menu-button {
     padding: 10px;
     font-size: 16px;
@@ -69,12 +80,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 40px;
-    margin-left: 250px; /* Adds space between the left menu and profile info */
+    margin-left: 250px; /* Space between the left line and profile info */
 }
 
 /* Profile avatar styling */
