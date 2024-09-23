@@ -3,22 +3,23 @@
 .settings-screen {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     height: 100vh;
-    padding-top: 30px;
-    text-align: center; /* Center align for the header */
+    background-color: #189ab4;
+    color: white;
+    text-align: center;
 }
 
 .settings-container {
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     padding: 20px;
     font-family: 'Poppins', sans-serif;
-    text-align: left;
+    text-align: center;
 }
 
 .settings-header {
-    text-align: center; /* Center the Settings Screen header */
+    text-align: center;
 }
 
 .setting-group {
@@ -31,13 +32,13 @@
 .setting-group h2 {
     margin: 0;
     font-size: 18px;
-    width: 150px; /* Adjust this width for alignment */
+    width: 150px;
 }
 
 .options-group {
     display: flex;
-    flex-wrap: wrap; /* Ensures checkboxes align properly */
-    gap: 10px; /* Proper gap for Monthly and Custom to fit */
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .options-group label {
@@ -48,7 +49,7 @@
 
 .options-group input[type="checkbox"],
 .options-group input[type="radio"] {
-    margin-right: 5px; /* Adjusted spacing */
+    margin-right: 5px;
 }
 
 .options-group select {
@@ -58,50 +59,42 @@
 
 .privacy-buttons-group {
     display: flex;
-    justify-content: center; /* Center align the buttons */
-    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
-    gap: 10px; /* Add consistent spacing between buttons */
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .privacy-button {
-    padding: 10px 20px; /* Adjusted button size to match the Home Page button */
-    font-size: 14px;
-    background-color: #189ab4;
-    color: white;
+    padding: 7px;
+    font-size: medium;
+    width: 150px;
+    background-color: white;
+    color: #189ab4;
     border: none;
-    cursor: pointer;
-    text-align: center;
-}
-
-.privacy-button:hover {
-    background-color: #107d93;
 }
 
 .delete-button {
-    background-color: #ff6347;
-}
-
-.delete-button:hover {
-    background-color: #d9534f;
+    padding: 7px;
+    font-size: medium;
+    width: 150px;
+    background-color: #DB1F48;
+    color: white;
+    border: none;
 }
 
 .center-button {
     text-align: center;
-    margin-top: 30px; /* Adjusted margin to align with privacy buttons */
+    margin-top: 30px;
 }
 
 .home-button {
-    padding: 10px 20px;
-    background-color: #189ab4;
-    color: white;
-    border: 2px solid #189ab4;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.home-button:hover {
-    background-color: #107d93;
-    border-color: #107d93;
+    padding: 7px;
+    font-size: large;
+    width: 308px;
+    font-family: 'Poppins';
+    background-color: white;
+    color: #189ab4;
+    border: none;
 }
 
 /* Dark mode styling */

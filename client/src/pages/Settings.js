@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './settings.css'; // Import the corresponding CSS file
+import './Settings.css'; // Import the corresponding CSS file
 import { useNavigate } from 'react-router-dom';
 
 const translations = {
@@ -66,42 +66,19 @@ const Settings = () => {
                 {/* Reminder Frequency */}
                 <div className="setting-group">
                     <h2>{t.reminder}</h2>
+
                     <div className="options-group">
                         <label>
-                            <input
-                                type="checkbox"
-                                value="Daily"
-                                onChange={handleCheckboxChange}
-                                checked={reminderFrequency.includes('Daily')}
-                            />
-                            Daily
+                            <input type="checkbox" value="Daily" onChange={handleCheckboxChange} checked={reminderFrequency.includes('Daily')}/>Daily
                         </label>
                         <label>
-                            <input
-                                type="checkbox"
-                                value="Weekly"
-                                onChange={handleCheckboxChange}
-                                checked={reminderFrequency.includes('Weekly')}
-                            />
-                            Weekly
+                            <input type="checkbox" value="Weekly" onChange={handleCheckboxChange} checked={reminderFrequency.includes('Weekly')}/>Weekly
                         </label>
                         <label>
-                            <input
-                                type="checkbox"
-                                value="Monthly"
-                                onChange={handleCheckboxChange}
-                                checked={reminderFrequency.includes('Monthly')}
-                            />
-                            Monthly
+                            <input type="checkbox" value="Monthly" onChange={handleCheckboxChange} checked={reminderFrequency.includes('Monthly')}/>Monthly
                         </label>
                         <label>
-                            <input
-                                type="checkbox"
-                                value="Custom"
-                                onChange={handleCheckboxChange}
-                                checked={reminderFrequency.includes('Custom')}
-                            />
-                            Custom
+                            <input type="checkbox" value="Custom" onChange={handleCheckboxChange} checked={reminderFrequency.includes('Custom')}/>Custom
                         </label>
                     </div>
                 </div>
@@ -109,26 +86,13 @@ const Settings = () => {
                 {/* Theme Options */}
                 <div className="setting-group">
                     <h2>{t.theme}</h2>
+
                     <div className="options-group">
                         <label>
-                            <input
-                                type="radio"
-                                value="light"
-                                name="theme"
-                                onChange={handleThemeChange}
-                                checked={theme === 'light'}
-                            />
-                            {t.light}
+                            <input type="radio" value="light" name="theme" onChange={handleThemeChange} checked={theme === 'light'}/>{t.light}
                         </label>
                         <label>
-                            <input
-                                type="radio"
-                                value="dark"
-                                name="theme"
-                                onChange={handleThemeChange}
-                                checked={theme === 'dark'}
-                            />
-                            {t.dark}
+                            <input type="radio" value="dark" name="theme" onChange={handleThemeChange} checked={theme === 'dark'}/>{t.dark}
                         </label>
                     </div>
                 </div>
@@ -136,6 +100,7 @@ const Settings = () => {
                 {/* Language Preferences */}
                 <div className="setting-group">
                     <h2>{t.language}</h2>
+
                     <div className="options-group">
                         <select value={language} onChange={handleLanguageChange}>
                             <option value="English">English</option>
@@ -147,24 +112,17 @@ const Settings = () => {
                 {/* Privacy Settings */}
                 <div className="setting-group">
                     <h2>{t.privacy}</h2>
+
                     <div className="privacy-buttons-group">
-                        <button className="privacy-button" onClick={() => alert(t.dataExport)}>
-                            {t.dataExport}
-                        </button>
-                        <button className="privacy-button delete-button" onClick={() => alert(t.deleteAccount)}>
-                            {t.deleteAccount}
-                        </button>
-                        <button className="privacy-button" onClick={() => alert(t.disableTracking)}>
-                            {t.disableTracking}
-                        </button>
+                        <button className="privacy-button" onClick={() => alert(t.dataExport)}>{t.dataExport}</button>
+                        <button className="privacy-button delete-button" onClick={() => alert(t.deleteAccount)}>{t.deleteAccount}</button>
+                        <button className="privacy-button" onClick={() => alert(t.disableTracking)}>{t.disableTracking}</button>
                     </div>
                 </div>
 
                 {/* Home Page Button */}
                 <div className="center-button">
-                    <button className="home-button" onClick={() => navigate('/')}>
-                        {t.homePage}
-                    </button>
+                    <button className="home-button" onClick={() => navigate('/')}>{t.homePage}</button>
                 </div>
             </div>
         </div>
