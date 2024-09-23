@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import './Settings.css'; // Import the corresponding CSS file
+import './Settings.css';
 import { useNavigate } from 'react-router-dom';
 
 const translations = {
     English: {
-        title: "Settings Screen",
+        title: "Settings",
         reminder: "Frequency of Reminders",
         theme: "Theme Options",
         light: "Light Mode",
@@ -17,7 +17,7 @@ const translations = {
         homePage: "Home Page"
     },
     Spanish: {
-        title: "Pantalla de Configuración",
+        title: "Configuración",
         reminder: "Frecuencia de Recordatorios",
         theme: "Opciones de Tema",
         light: "Modo Claro",
@@ -41,15 +41,8 @@ const Settings = () => {
         document.body.className = theme; // Apply the theme class to the body
     }, [theme]);
 
-    const handleCheckboxChange = (event) => {
-        const { value, checked } = event.target;
-        setReminderFrequency((prev) =>
-            checked ? [...prev, value] : prev.filter((freq) => freq !== value)
-        );
-    };
-
-    const handleThemeChange = (event) => {
-        setTheme(event.target.value);
+    const handleToggleButtonClick = (frequency) => {
+        setReminderFrequency((prev) => prev.includes(frequency) ? prev.filter((freq) => freq !== frequency) : [...prev, frequency]);
     };
 
     const handleLanguageChange = (event) => {
@@ -67,19 +60,10 @@ const Settings = () => {
                 <div className="setting-group">
                     <h2>{t.reminder}</h2>
 
-                    <div className="options-group">
-                        <label>
-                            <input type="checkbox" value="Daily" onChange={handleCheckboxChange} checked={reminderFrequency.includes('Daily')}/>Daily
-                        </label>
-                        <label>
-                            <input type="checkbox" value="Weekly" onChange={handleCheckboxChange} checked={reminderFrequency.includes('Weekly')}/>Weekly
-                        </label>
-                        <label>
-                            <input type="checkbox" value="Monthly" onChange={handleCheckboxChange} checked={reminderFrequency.includes('Monthly')}/>Monthly
-                        </label>
-                        <label>
-                            <input type="checkbox" value="Custom" onChange={handleCheckboxChange} checked={reminderFrequency.includes('Custom')}/>Custom
-                        </label>
+                    <div className="toggle-buttons-group">
+                        {['Daily', 'Weekly', 'Monthly', 'Custom'].map((frequency) => (
+                            <button key={frequency} className={`toggle-button ${ reminderFrequency.includes(frequency) ? 'selected' : '' }`} onClick={() => handleToggleButtonClick(frequency)}>{frequency}</button>
+                        ))}
                     </div>
                 </div>
 
@@ -89,9 +73,10 @@ const Settings = () => {
 
                     <div className="options-group">
                         <label className="switch">
-                            <input type="checkbox" onChange={() => setTheme(theme === 'light' ? 'dark' : 'light')} checked={theme === 'dark'}/>{t.dark}
+                            <input type="checkbox" onChange={() => setTheme(theme === 'light' ? 'dark' : 'light')} checked={theme === 'dark'} />
                             <span className="slider round"></span>
                         </label>
+                        <span>{theme === 'light' ? t.light : t.dark}</span>
                     </div>
                 </div>
 
