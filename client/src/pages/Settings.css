@@ -113,10 +113,17 @@
     transition: background-color 0.3s;
 }
 
-.delete-button {
+#delete-button {
+    padding: 10px;
+    font-size: medium;
+    flex: 1;
+    min-width: 150px;
     background-color: #DB1F48;
     color: white;
     border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .center-button {

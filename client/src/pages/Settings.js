@@ -98,7 +98,7 @@ const Settings = () => {
 
                     <div className="privacy-buttons-group">
                         <button className="privacy-button" onClick={() => alert(t.dataExport)}>{t.dataExport}</button>
-                        <button className="privacy-button delete-button" onClick={() => alert(t.deleteAccount)}>{t.deleteAccount}</button>
+                        <button className="privacy-button" id="delete-button" onClick={() => alert(t.deleteAccount)}>{t.deleteAccount}</button>
                         <button className="privacy-button" onClick={() => alert(t.disableTracking)}>{t.disableTracking}</button>
                     </div>
                 </div>
