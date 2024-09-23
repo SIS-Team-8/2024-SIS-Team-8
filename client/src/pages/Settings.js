@@ -88,11 +88,9 @@ const Settings = () => {
                     <h2>{t.theme}</h2>
 
                     <div className="options-group">
-                        <label>
-                            <input type="radio" value="light" name="theme" onChange={handleThemeChange} checked={theme === 'light'}/>{t.light}
-                        </label>
-                        <label>
-                            <input type="radio" value="dark" name="theme" onChange={handleThemeChange} checked={theme === 'dark'}/>{t.dark}
+                        <label className="switch">
+                            <input type="checkbox" onChange={() => setTheme(theme === 'light' ? 'dark' : 'light')} checked={theme === 'dark'}/>{t.dark}
+                            <span className="slider round"></span>
                         </label>
                     </div>
                 </div>
