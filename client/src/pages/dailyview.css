@@ -1,0 +1,58 @@
+/* DailyView.css */
+.daily-view-screen {
+    padding: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.back-button {
+    background-color: #189ab4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.back-button:hover {
+    background-color: #107d93;
+}
+
+.daily-view-content h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.emoji {
+    font-size: 100px;
+    margin: 20px 0;
+}
+
+.notes {
+    font-size: 18px;
+    color: #333;
+    margin-top: 20px;
+}
+
+.intensity {
+    font-size: 18px;
+    color: #555;
+    margin-top: 10px;
+}
+
+.edit-button, .delete-button {
+    background-color: #189ab4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.edit-button:hover, .delete-button:hover {
+    background-color: #107d93;
+}
