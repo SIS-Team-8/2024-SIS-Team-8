@@ -14,7 +14,11 @@ const translations = {
         dataExport: "Data Export",
         deleteAccount: "Delete Account",
         disableTracking: "Disable Tracking",
-        homePage: "Home Page"
+        homePage: "Go Home",
+        daily: "Daily",
+        weekly: "Weekly",
+        monthly: "Monthly",
+        custom: "Custom"
     },
     Spanish: {
         title: "Configuración",
@@ -27,7 +31,11 @@ const translations = {
         dataExport: "Exportar Datos",
         deleteAccount: "Eliminar Cuenta",
         disableTracking: "Deshabilitar Seguimiento",
-        homePage: "Página Principal"
+        homePage: "Ir a Inicio",
+        daily: "Diario",
+        weekly: "Semanal",
+        monthly: "Mensual",
+        custom: "Personalizado"
     }
 };
 
@@ -61,9 +69,10 @@ const Settings = () => {
                     <h2>{t.reminder}</h2>
 
                     <div className="toggle-buttons-group">
-                        {['Daily', 'Weekly', 'Monthly', 'Custom'].map((frequency) => (
-                            <button key={frequency} className={`toggle-button ${ reminderFrequency === frequency ? 'selected' : '' }`} onClick={() => handleToggleButtonClick(frequency)}>{frequency}</button>
-                        ))}
+                        <button className={`toggle-button ${reminderFrequency === 'Daily' ? 'selected' : ''}`} onClick={() => handleToggleButtonClick('Daily')}>{t.daily}</button>
+                        <button className={`toggle-button ${reminderFrequency === 'Weekly' ? 'selected' : ''}`} onClick={() => handleToggleButtonClick('Weekly')}>{t.weekly}</button>
+                        <button className={`toggle-button ${reminderFrequency === 'Monthly' ? 'selected' : ''}`} onClick={() => handleToggleButtonClick('Monthly')}>{t.monthly}</button>
+                        <button className={`toggle-button ${reminderFrequency === 'Custom' ? 'selected' : ''}`} onClick={() => handleToggleButtonClick('Custom')}>{t.custom}</button>
                     </div>
                 </div>
 
