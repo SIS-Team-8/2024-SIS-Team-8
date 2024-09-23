@@ -66,7 +66,10 @@
 ```text
 MONGODB_URI=mongodb://dev:Endless2-Drift-Turf@localhost:28018
 MONGODB_DB=SIS-Team-8-dev
+TOKEN_KEY=secret
 ```
+
+* return to the root directory with cd.
 
 #### Startup Procedure
 
@@ -77,6 +80,7 @@ MONGODB_DB=SIS-Team-8-dev
 #### Testing
 
 * go to [application](http://localhost:3000) in your browser.
+* if using full stack, app will need to restart every time changes in client side code are made to see changes.
 * go to [mongo express](http://localhost:8081) in your browser.
 
 #### Shutdown procedure
@@ -87,3 +91,57 @@ MONGODB_DB=SIS-Team-8-dev
 ## TODO
 
 * create config file setup function in server.js
+
+## Backend implementation
+
+### Login API
+
+```javascript
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+
+const [cookies, removeCookie] = useCookies([]);
+const [username, setUsername] = useState("");
+
+const verifyCookie = async () => {
+      if (!cookies.token) {
+        navigate("/login");
+      }
+      const { data } = await axios.post(
+        "http://localhost:3000/api/auth",
+        {},
+        { withCredentials: true }
+      );
+      const { status, user } = data;
+      setUsername(user);
+      return status;
+    };
+verifyCookie();
+// implement removeCookie("token") during the logout process
+```
+
+* the url to verify if the user is logged in is `http://localhost:3000/api/auth`
+  * this request does not require any data to be sent
+* the url to send a POST request to login is `http://localhost:3000/api/login`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+      "email": "email@email.com",
+      "password": "test"
+    }
+    ```
+
+* the url to send a POST request to signup is `http://localhost:3000/api/signup`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+        "email": "email@email.com",
+        "password": "test",
+        "first_name": "John",
+        "last_name": "doe"
+    }
+    ```

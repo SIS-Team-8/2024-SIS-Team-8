@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo from './assets/logo.png';
 import dizzy from './assets/face-with-spiral-eyes.svg';
 import './App.css';
@@ -12,21 +12,39 @@ import Help from "./pages/Help";
 import History from "./pages/History";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
+import MoodSelection from "./pages/MoodSelection";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 import { Route, Routes } from "react-router-dom";
 
 function App() {
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
-        // Simulate a loading process (e.g., data fetching) for 3 seconds.
         const timer = setTimeout(() => {
             setIsLoaded(true);
+
+            if (!isAuthenticated && location.pathname !== "/sign-up") {
+                navigate("/login");
+            }
         }, 3000);
 
-        // Clean up timer.
         return () => clearTimeout(timer);
-    }, []);
+    }, [isAuthenticated, navigate, location]);
+
+    const handleLogin = () => {
+        setIsAuthenticated(true);
+        navigate("/");
+    };
+
+    const handleLogout = () => {
+        setIsAuthenticated(false);
+        navigate("/login");
+    };
 
     if (!isLoaded) {
         return <SplashScreen />;
@@ -34,16 +52,19 @@ function App() {
 
     return (
         <div className="App">
-            <Navbar />
+            {isAuthenticated && <Navbar onLogout={handleLogout} />}
 
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/daily-view/:date" element={<DailyView/>} />
-                <Route path="/calendar" element={<Calendar />} />
-                <Route path="/help" element={<Help />} />
-                <Route path="/history" element={<History />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/settings" element={<Settings />} />
+                <Route path="/" element={isAuthenticated ? <Home /> : <Login onLogin={handleLogin} />} />
+                <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView /> : <Login onLogin={handleLogin} />} />
+                <Route path="/calendar" element={isAuthenticated ? <Calendar /> : <Login onLogin={handleLogin} />} />
+                <Route path="/help" element={isAuthenticated ? <Help /> : <Login onLogin={handleLogin} />} />
+                <Route path="/history" element={isAuthenticated ? <History /> : <Login onLogin={handleLogin} />} />
+                <Route path="/profile" element={isAuthenticated ? <Profile /> : <Login onLogin={handleLogin} />} />
+                <Route path="/settings" element={isAuthenticated ? <Settings /> : <Login onLogin={handleLogin} />} />
+                <Route path="/mood-selection" element={isAuthenticated ? <MoodSelection /> : <Login onLogin={handleLogin} />} />
+                <Route path="/login" element={<Login onLogin={handleLogin} />} />
+                <Route path="/sign-up" element={<SignUp />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </div>
@@ -71,8 +92,8 @@ function App() {
                     <img src={dizzy} className="App-logo" alt="dizzy" />
                     <h2 class="noselect">404: Page Not Found</h2>
 
-                    <Link to="/">
-                        <button id="error-button" class="noselect">Go Home</button>
+                    <Link to="/login">
+                        <button id="error-button" class="noselect">Go to Login</button>
                     </Link>
                 </header>
             </div>
