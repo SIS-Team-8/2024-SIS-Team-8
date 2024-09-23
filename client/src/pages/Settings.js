@@ -9,7 +9,7 @@ const CheckboxRow = ({ title, checkboxes }) => {
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '20px' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '20px', font: 'Poppins'}}>
       <h2 style={{ margin: '0', fontSize: '18px', marginRight: '20px' }}>{title}</h2>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         {checkboxes.map((checkbox) => (
