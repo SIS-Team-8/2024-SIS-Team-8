@@ -32,7 +32,7 @@ const translations = {
 };
 
 const Settings = () => {
-    const [reminderFrequency, setReminderFrequency] = useState([]);
+    const [reminderFrequency, setReminderFrequency] = useState('');
     const [theme, setTheme] = useState('light');
     const [language, setLanguage] = useState('English');
     const navigate = useNavigate();
@@ -42,7 +42,7 @@ const Settings = () => {
     }, [theme]);
 
     const handleToggleButtonClick = (frequency) => {
-        setReminderFrequency((prev) => prev.includes(frequency) ? prev.filter((freq) => freq !== frequency) : [...prev, frequency]);
+        setReminderFrequency((prev) => (prev === frequency ? '' : frequency));
     };
 
     const handleLanguageChange = (event) => {
@@ -62,7 +62,7 @@ const Settings = () => {
 
                     <div className="toggle-buttons-group">
                         {['Daily', 'Weekly', 'Monthly', 'Custom'].map((frequency) => (
-                            <button key={frequency} className={`toggle-button ${ reminderFrequency.includes(frequency) ? 'selected' : '' }`} onClick={() => handleToggleButtonClick(frequency)}>{frequency}</button>
+                            <button key={frequency} className={`toggle-button ${ reminderFrequency === frequency ? 'selected' : '' }`} onClick={() => handleToggleButtonClick(frequency)}>{frequency}</button>
                         ))}
                     </div>
                 </div>
