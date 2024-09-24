@@ -18,9 +18,13 @@
     margin-bottom: 20px;
 }
 
+.calendar-table thead {
+    background-color: #BDC3CB;
+}
+
 .calendar-table th,
 .calendar-table td {
-    border: 2px solid #ddd;
+    border: 2.5px solid #dddd;
     padding: 20px;
     text-align: center;
     cursor: pointer;
