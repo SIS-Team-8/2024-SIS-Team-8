@@ -4,10 +4,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: auto; /* Adjusted for flexibility */
     background-color: #189ab4;
     color: white;
     flex-direction: column;
+    padding: 20px;
+    height: 100vh;
 }
 
 /* Center the heading at the top */
@@ -27,9 +29,9 @@
     width: 100%;
 }
 
-#navigation-button {
-    margin-top: 50px;
-    padding: 7px;
+#navigation-button, .edit-profile-button, .menu-button {
+    margin: 10px 0; /* Add margin between buttons */
+    padding: 10px;
     width: 150px;
     border-radius: 4px;
     background-color: white;
@@ -38,23 +40,7 @@
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.navigation-button:hover {
-    background-color: #0f7b8e;
-    color: white;
-}
-
-.menu-button {
-    margin-top: 50px;
-    padding: 7px;
-    width: 308px;
-    border-radius: 4px;
-    background-color: white;
-    color: #189ab4;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.menu-button:hover {
+.navigation-button:hover, .edit-profile-button:hover, .menu-button:hover {
     background-color: #0f7b8e;
     color: white;
 }
@@ -83,15 +69,17 @@
 /* Profile details section */
 .profile-details {
     width: 100%;
+    max-width: 500px;
     text-align: left;
     font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start;
     background-color: #189ab4;
     color: white;
     flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 /* Profile fields with label and input */
@@ -99,13 +87,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     font-size: 16px;
 }
 
 .profile-field label {
     flex: 1;
-    margin-right: 10px;
+    margin-right: 15px;
     font-size: 18px;
     text-align: right;
 }
@@ -121,21 +109,6 @@
 
 /* Style for save changes button */
 .edit-profile-section {
-    margin-top: 30px;
+    margin-top: 20px;
     text-align: center;
-}
-
-.edit-profile-button {
-    padding: 10px 20px;
-    font-size: 18px;
-    color: #fff;
-    background-color: #189ab4;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.edit-profile-button:hover {
-    background-color: #117a8b;
 }
