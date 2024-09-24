@@ -1,0 +1,81 @@
+/* CalendarScreen.css */
+.calendar-screen {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #189ab4;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    flex-direction: column;
+}
+
+.calendar-table {
+    width: 90%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.calendar-table thead {
+    background-color: #BDC3CB;
+}
+
+.calendar-table th,
+.calendar-table td {
+    border: 2.5px solid #dddd;
+    padding: 12.5px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.month-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    width: 90%;
+}
+
+.month-navigation h2 {
+    font-size: 24px;
+    color: white;
+    margin: 0;
+    line-height: 1;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.month-navigation button {
+    padding: 10px 20px;
+    font-size: medium;
+    border: none;
+    color: #189ab4;
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 150px;
+}
+
+.month-navigation button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
+.summary-statistics {
+    margin-top: 20px;
+}
+
+.summary-statistics h3 {
+    font-size: 20px;
+    color: white;
+}
+
+.summary-statistics p {
+    font-size: 16px;
+    margin: 5px 0;
+    color: white;
+}
