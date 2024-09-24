@@ -1,8 +1,15 @@
 /* CalendarScreen.css */
 .calendar-screen {
-    padding: 20px;
-    text-align: center;
     font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #189ab4;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    flex-direction: column;
 }
 
 .calendar-table {
@@ -33,15 +40,24 @@
 
 .month-navigation h2 {
     font-size: 24px;
+    color: white;
 }
 
 .month-navigation button {
-    background-color: #189ab4;
-    color: white;
-    border: none;
     padding: 10px 20px;
+    font-size: medium;
+    border: none;
+    color: #189ab4;
+    background-color: white;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 150px;
+}
+
+.month-navigation button:hover {
+    background-color: #0f7b8e;
+    color: white;
 }
 
 .summary-statistics {
@@ -50,14 +66,16 @@
 
 .summary-statistics h3 {
     font-size: 20px;
+    color: white;
 }
 
 .summary-statistics p {
     font-size: 16px;
     margin: 5px 0;
+    color: white;
 }
 
 .calendar-table td {
     text-align: center;
-    font-size: 24px; /* Adjust the font size for the emoji */
+    font-size: 24px;
 }
