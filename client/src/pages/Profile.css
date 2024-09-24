@@ -86,6 +86,10 @@
     width: 100%;
 }
 
+.profile-field input::placeholder {
+    color: #D3D3D3;
+}
+
 /* Style for save changes button */
 .edit-profile-section {
     margin-top: 20px;

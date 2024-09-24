@@ -5,10 +5,10 @@ import './Profile.css';
 export default function Profile() {
     // State to manage profile data
     const [profile, setProfile] = useState({
-        name: 'Johnny Appleseed',
-        email: 'johnny@apple.com',
-        phone: '+888 555 5512',
-        address: '11 Infinite Loop Cupertino, CA 95014',
+        name: '',
+        email: '',
+        phone: '',
+        address: '',
     });
 
     const handleEditProfile = () => {
@@ -26,25 +26,25 @@ export default function Profile() {
                 {/* Name Field */}
                 <div className="profile-field">
                     <label htmlFor="name">Name:</label>
-                    <input id="name" name="name" value={profile.name} onChange={(e) => setProfile({ ...profile, name: e.target.value })} />
+                    <input id="name" name="name" value={profile.name} onChange={(e) => setProfile({ ...profile, name: e.target.value })} placeholder="Johnny Appleseed" />
                 </div>
 
                 {/* Email Field */}
                 <div className="profile-field">
                     <label htmlFor="email">Email:</label>
-                    <input id="email" name="email" value={profile.email} onChange={(e) => setProfile({ ...profile, email: e.target.value })} />
+                    <input id="email" name="email" value={profile.email} onChange={(e) => setProfile({ ...profile, email: e.target.value })} placeholder="johnny@apple.com" />
                 </div>
 
                 {/* Phone Field */}
                 <div className="profile-field">
                     <label htmlFor="phone">Phone:</label>
-                    <input id="phone" name="phone" value={profile.phone} onChange={(e) => setProfile({ ...profile, phone: e.target.value })} />
+                    <input id="phone" name="phone" value={profile.phone} onChange={(e) => setProfile({ ...profile, phone: e.target.value })} placeholder="+888 555 5512" />
                 </div>
 
                 {/* Address Field */}
                 <div className="profile-field">
                     <label htmlFor="address">Address:</label>
-                    <input id="address" name="address" value={profile.address} onChange={(e) => setProfile({ ...profile, address: e.target.value })} />
+                    <input id="address" name="address" value={profile.address} onChange={(e) => setProfile({ ...profile, address: e.target.value })} placeholder="11 Infinite Loop Cupertino, CA 95014" />
                 </div>
 
                 <div className="edit-profile-section">
