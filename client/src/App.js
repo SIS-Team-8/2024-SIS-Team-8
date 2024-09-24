@@ -56,7 +56,7 @@ function App() {
 
             <Routes>
                 <Route path="/" element={isAuthenticated ? <Home /> : <Login onLogin={handleLogin} />} />
-                <Route path="/daily-view" element={isAuthenticated ? <DailyView /> : <Login onLogin={handleLogin} />} />
+                <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView /> : <Login onLogin={handleLogin} />} />
                 <Route path="/calendar" element={isAuthenticated ? <Calendar /> : <Login onLogin={handleLogin} />} />
                 <Route path="/help" element={isAuthenticated ? <Help /> : <Login onLogin={handleLogin} />} />
                 <Route path="/history" element={isAuthenticated ? <History /> : <Login onLogin={handleLogin} />} />
