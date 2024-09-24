@@ -49,7 +49,7 @@ const DailyView = () => {
             </button>
 
             <div className="daily-view-content">
-                <h1>On {date}, you were feeling</h1>
+                <h1>On {date}, you were feeling:</h1>
                 <div className="emoji">{getMoodEmoji(moodEntry.mood)}</div>
                 <p className="intensity">Mood Intensity: {moodEntry.intensity}/5</p>
                 <p className="notes">Notes: {moodEntry.notes}</p>
