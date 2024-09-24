@@ -1,0 +1,115 @@
+html {
+    background-color: #189ab4;
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100%;
+}
+
+textarea {
+    background: transparent;
+    border-color: white;
+    color: white;
+    resize: none;
+    width: 100%;
+}
+
+textarea::placeholder {
+    color: #D3D3D3;
+}
+
+#container {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+#row, #subRow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#subRow {
+    height: 125px;
+}
+
+.column {
+    padding: 5px;
+    flex: 1;
+    max-width: 150px;
+    height: auto;
+}
+
+.subColumn {
+    padding: 5px;
+    flex: 1;
+    max-width: 125px;
+    height: auto;
+}
+
+#flexContainer {
+    display: flex;
+    justify-content: center;
+    font-family: 'Poppins';
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#log {
+    width: 90%;
+    max-width: 775px;
+    min-height: 150px;
+    background-image: url(../assets/camera-icon.png);
+    background-repeat: no-repeat;
+    background-size: 32px, 32px;
+    background-position: calc(100% - 20px) center;
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#submit {
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    #row, #subRow {
+        flex-direction: column;
+    }
+
+    .column, .subColumn {
+        width: 60%;
+    }
+
+    #log {
+        width: 100%;
+        background-position: right 10px center;
+    }
+}
