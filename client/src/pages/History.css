@@ -4,8 +4,6 @@ button {
     font-family: 'Poppins', sans-serif;
     padding: 7px;
     font-size: large;
-    background-color: white;
-    color: #189ab4;
     border: none;
 }
 
@@ -26,7 +24,7 @@ button:hover {
     flex-direction: column;
 }
 
-.month-navigation {
+#month-navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -34,17 +32,21 @@ button:hover {
     width: 50%;
 }
 
-.month-navigation h2 {
+#month-navigation h2 {
     font-size: 24px;
 }
 
-.month-navigation button {
+#month-navigation button {
     width: 150px;
     border-radius: 4px;
+    background-color: white;
+    color: #189ab4;
 }
 
 #home-button {
     width: 308px;
     border-radius: 4px;
+    background-color: white;
+    color: #189ab4;
 }
 

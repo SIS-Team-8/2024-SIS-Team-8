@@ -14,7 +14,7 @@ export default function History() {
     return (
         <div id="history-container">
             <h1>History</h1>
-            <div className="month-navigation">
+            <div id="month-navigation">
                 <button onClick={() => changeMonth(-1)}>Previous</button>
                 <h2>{currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
                 <button onClick={() => changeMonth(1)}>Next</button>
