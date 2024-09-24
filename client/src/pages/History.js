@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import BarChart from '../components/BarChart';
+import { Link } from "react-router-dom";
 import './History.css';
 
 export default function History() {
@@ -19,6 +20,11 @@ export default function History() {
                 <button onClick={() => changeMonth(1)}>Next</button>
             </div>
             <BarChart/>
+            <div style={{ marginTop: '15px', textAlign: 'center' }}>
+                <Link to="/">
+                    <button className="button">Go Home</button>
+                </Link>
+            </div>
         </div>
     );
 }
