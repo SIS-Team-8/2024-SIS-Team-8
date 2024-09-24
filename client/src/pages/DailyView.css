@@ -8,6 +8,8 @@
     color: white;
     text-align: center;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .back-button {
@@ -26,6 +28,11 @@
 .back-button:hover {
     background-color: #0f7b8e;
     color: white;
+}
+
+.daily-view-content {
+    width: 100%;
+    max-width: 600px;
 }
 
 .daily-view-content h1 {
@@ -50,30 +57,26 @@
     margin-top: 10px;
 }
 
-.edit-button {
+.edit-button,
+.delete-button {
     margin-top: 10px;
+    margin-right: 10px;
     padding: 10px;
     font-size: medium;
     min-width: 150px;
     background-color: white;
-    color: #189ab4;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
+.edit-button {
+    color: #189ab4;
+}
+
 .delete-button {
-    margin-top: 10px;
-    padding: 10px;
-    font-size: medium;
-    min-width: 150px;
-    background-color: white;
     color: #DB1F48;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
 }
 
 .edit-button:hover {
