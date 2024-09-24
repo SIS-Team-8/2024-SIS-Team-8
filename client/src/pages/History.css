@@ -5,11 +5,7 @@ button {
     padding: 7px;
     font-size: large;
     border: none;
-}
-
-button:hover {
-    background-color: #0f7b8e;
-    color: white;
+    transition: background-color 0.3s;
 }
 
 #history-container {
@@ -48,5 +44,15 @@ button:hover {
     border-radius: 4px;
     background-color: white;
     color: #189ab4;
+}
+
+#month-navigation button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
+#home-button:hover {
+    background-color: #0f7b8e;
+    color: white;
 }
 
