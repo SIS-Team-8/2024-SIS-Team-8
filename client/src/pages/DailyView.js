@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import './dailyview.css';
+import './DailyView.css';
 
 // Dummy mood data for the detailed view
 const moodData = {

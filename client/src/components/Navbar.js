@@ -14,7 +14,6 @@ export default function CustomNavbar() {
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                         <Nav className="justify-content-end flex-grow-1 pe-3">
-                            <CustomLink to="/daily-view">Daily View</CustomLink>
                             <CustomLink to="/calendar">Calendar</CustomLink>
                             <CustomLink to="/help">Help</CustomLink>
                             <CustomLink to="/history">History</CustomLink>

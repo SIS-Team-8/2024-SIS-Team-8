@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './calender.css'; // Import your CSS for styling
+import './Calendar.css'; // Import your CSS for styling
 
 // Dummy mood data for the calendar for September
 const moodData = {
