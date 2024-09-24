@@ -13,7 +13,7 @@
 }
 
 .calendar-table {
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
@@ -29,10 +29,10 @@
 
 .month-navigation {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 40px;
     margin-bottom: 40px;
+    width: 90%;
 }
 
 .month-navigation h2 {
@@ -40,6 +40,8 @@
     color: white;
     margin: 0;
     line-height: 1;
+    flex-grow: 1;
+    text-align: center;
 }
 
 .month-navigation button {
