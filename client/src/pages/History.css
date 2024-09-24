@@ -1,3 +1,19 @@
+button {
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    padding: 7px;
+    font-size: large;
+    background-color: white;
+    color: #189ab4;
+    border: none;
+}
+
+button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
 #history-container {
     display: flex;
     justify-content: center;
@@ -15,7 +31,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    width: 80%;
+    width: 50%;
 }
 
 .month-navigation h2 {
@@ -23,13 +39,12 @@
 }
 
 .month-navigation button {
-    cursor: pointer;
-    font-size: 16px;
-    font-family: 'Poppins', sans-serif;
-    padding: 7px;
-    font-size: large;
-    width: 308px;
-    background-color: white;
-    color: #189ab4;
-    border: none;
+    width: 150px;
+    border-radius: 4px;
 }
+
+#home-button {
+    width: 308px;
+    border-radius: 4px;
+}
+

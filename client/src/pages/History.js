@@ -22,7 +22,7 @@ export default function History() {
             <BarChart/>
             <div style={{ marginTop: '15px', textAlign: 'center' }}>
                 <Link to="/">
-                    <button className="button">Go Home</button>
+                    <button id="home-button">Go Home</button>
                 </Link>
             </div>
         </div>

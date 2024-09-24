@@ -30,7 +30,7 @@ const colours = ['#ff746c', '#b3ebf2', '#ffee8c', 'grey', '#6c3baa'];
 const BarChartComponent = () => {
     return ( 
         <ResponsiveContainer width="50%" height="50%">
-            <BarChart width={500} height={400} data={emoteData} margin={{bottom: 15}}>
+            <BarChart data={emoteData} margin={{bottom: 15}}>
                 <YAxis stroke="white">    
                     <Label value="Frequency" angle="-90" position="Left" fill="white"/>
                 </YAxis>
@@ -38,10 +38,10 @@ const BarChartComponent = () => {
                     <Label value="Emotion" offset={0} position="bottom" fill="white"/>
                 </XAxis>
                 <Tooltip content={<CustomTooltip />}/>
-                <Bar dataKey="emoteFreq">
+                <Bar id="bar" dataKey="emoteFreq">
                     {
                         emoteData.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={colours[index]}/>
+                            <Cell key={`cell-${index}`} stroke={colours[index]}/>
                         ))
                     }
                 </Bar>
