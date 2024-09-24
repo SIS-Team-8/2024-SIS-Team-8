@@ -20,6 +20,10 @@ button {
     flex-direction: column;
 }
 
+#history-container h1 {
+    margin-bottom: 20px;
+}
+
 #month-navigation {
     display: flex;
     justify-content: space-between;

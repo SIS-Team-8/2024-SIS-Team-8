@@ -32,10 +32,10 @@ const BarChartComponent = () => {
         <ResponsiveContainer width="50%" height="50%">
             <BarChart id="bar-chart" data={emoteData} margin={{bottom: 30}}>
                 <YAxis stroke="white">    
-                    <Label value="Frequency" angle="-90" position="Left" fill="white" dx={-10}/>
+                    <Label value="Frequency" angle="-90" position="Left" fill="#dddd" dx={-10}/>
                 </YAxis>
                 <XAxis dataKey="name" stroke="white">
-                    <Label value="Emotion" offset={0} position="bottom" fill="white" dy={10}/>
+                    <Label value="Emotion" offset={0} position="bottom" fill="#dddd" dy={10}/>
                 </XAxis>
                 <Tooltip cursor={false} content={<CustomTooltip />}/>
                 <Bar dataKey="emoteFreq">
