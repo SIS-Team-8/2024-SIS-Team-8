@@ -150,7 +150,7 @@ const CalendarScreen = () => {
                                         {moodEntry ? (
                                             <>
                                                 <div style={{ position: 'absolute', top: '2px', right: '5px', fontSize: '12px' }}>{day}</div>
-                                                <div style={{ fontSize: '24px', textAlign: 'center' }}>{getMoodEmoji(moodEntry.mood)}</div>
+                                                <div style={{ fontSize: '15px', textAlign: 'center' }}>{getMoodEmoji(moodEntry.mood)}</div>
                                             </>
                                         ) : (
                                             <div style={{ textAlign: 'center', fontSize: '16px' }}>{day || ''}</div>
