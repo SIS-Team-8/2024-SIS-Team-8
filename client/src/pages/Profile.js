@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import './profile.css';
+import './Profile.css';
 
 export default function Profile() {
     // State to manage profile data
@@ -13,24 +13,18 @@ export default function Profile() {
 
     const handleEditProfile = () => {
         // Logic for editing the profile
-        alert("Edit Profile Clicked");
+        alert("Changes saved.");
     };
 
     return (
         <div className="profile-container">
-            <div className="profile-header">
-                <h1>Profile Screen</h1>
-            </div>
-
-            {/* Left Menu Section */}
-            <div className="left-menu">
-                <button className="menu-button">Settings</button>
-                <button className="menu-button">Notification Settings</button>
+            <div className="navigation-button">
                 <button className="menu-button">Reset Password</button>
                 <button className="menu-button">Log Out</button>
-                <Link to="/">
-                    <button className="menu-button">Home Page</button>
-                </Link>
+            </div>
+
+            <div className="profile-header">
+                <h1>Profile Screen</h1>
             </div>
 
             {/* Profile Information Section */}
@@ -88,6 +82,11 @@ export default function Profile() {
                     </div>
                 </div>
             </div>
+
+            {/* Home Button */}
+            <Link to="/">
+                <button className="menu-button">Go Home</button>
+            </Link>
         </div>
     );
 }
