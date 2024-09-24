@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import './dailyview.css';
+import './DailyView.css';
 
 // Dummy mood data for the detailed view
 const moodData = {
@@ -49,7 +49,7 @@ const DailyView = () => {
             </button>
 
             <div className="daily-view-content">
-                <h1>On {date}, you were feeling</h1>
+                <h1>On {date}, you were feeling:</h1>
                 <div className="emoji">{getMoodEmoji(moodEntry.mood)}</div>
                 <p className="intensity">Mood Intensity: {moodEntry.intensity}/5</p>
                 <p className="notes">Notes: {moodEntry.notes}</p>
