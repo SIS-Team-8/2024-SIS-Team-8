@@ -33,10 +33,6 @@ function Help() {
             { question: "How do I log today's mood?", answer: "Click 'Log Daily Emotion' on the home screen." },
             { question: "How do I view past moods?", answer: "Go to 'History' or 'Daily View' from the home screen." },
         ],
-        "Logout": [
-            { question: "How do I confirm logout?", answer: "Click 'Confirm Logout' to exit the session." },
-            { question: "Can I cancel logout?", answer: "Yes, select 'Cancel' to return to the home screen." },
-        ],
     };
 
     // Toggle expanded category
