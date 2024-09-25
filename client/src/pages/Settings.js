@@ -39,7 +39,7 @@ const translations = {
     }
 };
 
-const Settings = ({ theme, toggleTheme }) => { // Use theme and toggleTheme as props
+const Settings = ({ theme, toggleTheme }) => {
     const [reminderFrequency, setReminderFrequency] = useState('');
     const [language, setLanguage] = useState('English');
     const navigate = useNavigate();

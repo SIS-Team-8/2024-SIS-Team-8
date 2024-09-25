@@ -21,14 +21,16 @@ import { Route, Routes } from "react-router-dom";
 function App() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light'); 
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
-        document.body.className = theme;
-        localStorage.setItem('theme', theme);
-        
+        document.body.className = theme; // Apply the theme to the body globally
+        localStorage.setItem('theme', theme); // Save theme to localStorage for persistence
+    }, [theme]);
+
+    useEffect(() => {
         const timer = setTimeout(() => {
             setIsLoaded(true);
 
@@ -60,17 +62,17 @@ function App() {
 
     return (
         <div className="App">
-            {isAuthenticated && <Navbar onLogout={handleLogout} />}
+            {isAuthenticated && <Navbar onLogout={handleLogout} theme={theme} toggleTheme={toggleTheme} />}
 
             <Routes>
                 <Route path="/" element={isAuthenticated ? <Home /> : <Login onLogin={handleLogin} />} />
-                <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView /> : <Login onLogin={handleLogin} />} />
-                <Route path="/calendar" element={isAuthenticated ? <Calendar /> : <Login onLogin={handleLogin} />} />
-                <Route path="/help" element={isAuthenticated ? <Help /> : <Login onLogin={handleLogin} />} />
-                <Route path="/history" element={isAuthenticated ? <History /> : <Login onLogin={handleLogin} />} />
-                <Route path="/profile" element={isAuthenticated ? <Profile /> : <Login onLogin={handleLogin} />} />
+                <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView theme={theme} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/help" element={isAuthenticated ? <Help theme={theme} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/history" element={isAuthenticated ? <History theme={theme} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/profile" element={isAuthenticated ? <Profile theme={theme} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/settings" element={isAuthenticated ? <Settings theme={theme} toggleTheme={toggleTheme} /> : <Login onLogin={handleLogin} />} />
-                <Route path="/mood-selection" element={isAuthenticated ? <MoodSelection /> : <Login onLogin={handleLogin} />} />
+                <Route path="/mood-selection" element={isAuthenticated ? <MoodSelection theme={theme} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/login" element={<Login onLogin={handleLogin} />} />
                 <Route path="/sign-up" element={<SignUp />} />
                 <Route path="*" element={<NotFound />} />
