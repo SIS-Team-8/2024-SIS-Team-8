@@ -1,5 +1,6 @@
-import React from 'react';
-import './Settings.css'; // Import your styles
+import React, { useState } from 'react';
+import './Settings.css';
+import { useNavigate } from 'react-router-dom';
 
 const translations = {
     English: {
@@ -38,9 +39,10 @@ const translations = {
     }
 };
 
-const Settings = ({ theme, setTheme }) => {
+const Settings = ({ theme, toggleTheme }) => { // Accept theme and toggleTheme as props
     const [reminderFrequency, setReminderFrequency] = useState('');
     const [language, setLanguage] = useState('English');
+    const navigate = useNavigate();
 
     const handleToggleButtonClick = (frequency) => {
         setReminderFrequency((prev) => (prev === frequency ? '' : frequency));
@@ -75,11 +77,7 @@ const Settings = ({ theme, setTheme }) => {
 
                     <div className="options-group">
                         <label className="switch">
-                            <input
-                                type="checkbox"
-                                onChange={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-                                checked={theme === 'dark'}
-                            />
+                            <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} /> {/* Use toggleTheme */}
                             <span className="slider round"></span>
                         </label>
                         <span>{theme === 'light' ? t.light : t.dark}</span>
@@ -104,7 +102,7 @@ const Settings = ({ theme, setTheme }) => {
 
                     <div className="privacy-buttons-group">
                         <button className="privacy-button" onClick={() => alert(t.dataExport)}>{t.dataExport}</button>
-                        <button className="privacy-button delete-button" onClick={() => alert(t.deleteAccount)}>{t.deleteAccount}</button>
+                        <button className="privacy-button" id="delete-button" onClick={() => alert(t.deleteAccount)}>{t.deleteAccount}</button>
                         <button className="privacy-button" onClick={() => alert(t.disableTracking)}>{t.disableTracking}</button>
                     </div>
                 </div>
