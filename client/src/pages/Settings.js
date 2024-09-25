@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './pages.module.css';
 
 const CheckboxRow = ({ title, checkboxes }) => {
   const [checkedItems, setCheckedItems] = useState({});
@@ -9,11 +10,11 @@ const CheckboxRow = ({ title, checkboxes }) => {
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '20px', font: 'Poppins'}}>
+    <div  className={styles.body} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '20px', font: 'Poppins'}}>
       <h2 style={{ margin: '0', fontSize: '18px', marginRight: '20px' }}>{title}</h2>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         {checkboxes.map((checkbox) => (
-          <div key={checkbox.id} style={{ marginLeft: '15px', display: 'flex', alignItems: 'center' }}>
+          <div key={checkbox.id} style={{ marginLeft: '0px', display: 'flex', alignItems: 'left' }}>
             <input
               type="checkbox"
               id={checkbox.id}
