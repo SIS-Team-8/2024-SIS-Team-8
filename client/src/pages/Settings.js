@@ -39,7 +39,7 @@ const translations = {
     }
 };
 
-const Settings = ({ theme, toggleTheme }) => { // Accept theme and toggleTheme as props
+const Settings = ({ theme, toggleTheme }) => { // Use theme and toggleTheme as props
     const [reminderFrequency, setReminderFrequency] = useState('');
     const [language, setLanguage] = useState('English');
     const navigate = useNavigate();
@@ -77,7 +77,7 @@ const Settings = ({ theme, toggleTheme }) => { // Accept theme and toggleTheme a
 
                     <div className="options-group">
                         <label className="switch">
-                            <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} /> {/* Use toggleTheme */}
+                            <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} /> {/* Use toggleTheme from props */}
                             <span className="slider round"></span>
                         </label>
                         <span>{theme === 'light' ? t.light : t.dark}</span>
