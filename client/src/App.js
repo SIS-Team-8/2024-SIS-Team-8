@@ -21,10 +21,14 @@ import { Route, Routes } from "react-router-dom";
 function App() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
+        document.body.className = theme;
+        localStorage.setItem('theme', theme);
+        
         const timer = setTimeout(() => {
             setIsLoaded(true);
 
@@ -34,7 +38,7 @@ function App() {
         }, 3000);
 
         return () => clearTimeout(timer);
-    }, [isAuthenticated, navigate, location]);
+    }, [isAuthenticated, navigate, location, theme]);
 
     const handleLogin = () => {
         setIsAuthenticated(true);
@@ -44,6 +48,10 @@ function App() {
     const handleLogout = () => {
         setIsAuthenticated(false);
         navigate("/login");
+    };
+
+    const toggleTheme = () => {
+        setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
     };
 
     if (!isLoaded) {
