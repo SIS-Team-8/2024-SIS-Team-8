@@ -29,12 +29,6 @@ export default function Profile() {
                     <input id="name" name="name" value={profile.name} onChange={(e) => setProfile({ ...profile, name: e.target.value })} placeholder="Johnny Appleseed" />
                 </div>
 
-                {/* Email Field */}
-                <div className="profile-field">
-                    <label htmlFor="email">Email:</label>
-                    <input id="email" name="email" value={profile.email} onChange={(e) => setProfile({ ...profile, email: e.target.value })} placeholder="johnny@apple.com" />
-                </div>
-
                 {/* Phone Field */}
                 <div className="profile-field">
                     <label htmlFor="phone">Phone:</label>

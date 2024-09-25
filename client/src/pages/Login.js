@@ -23,7 +23,6 @@ export default function Login({ onLogin }) {
 
                 <p id="bottomText">
                     <Link to="/sign-up" id="link">Sign Up</Link>
-                    <Link id="forgotPassword">Forgot password?</Link>
                 </p>
             </div>
         </div>
