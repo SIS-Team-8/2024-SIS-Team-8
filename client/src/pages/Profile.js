@@ -27,7 +27,7 @@ export default function Profile({theme, language}) {
     const t = translations[language];
 
     return (
-        <div className="profile-container">
+        <div className="profile-container ${theme}">
             {/* Profile Information Section */}
             <div className="profile-avatar">
                 <img src="https://via.placeholder.com/100" alt="Profile Avatar" />

@@ -21,7 +21,7 @@ export default function History({theme, language}) {
     };
 
     return (
-        <div id="history-container">
+        <div id="history-container ${theme}">
             <h1>History</h1>
             <div id="month-navigation">
                 <button onClick={() => changeMonth(-1)}>Previous</button>

@@ -129,7 +129,7 @@ const CalendarScreen = ({theme, language }) => {
     const summary = getSummaryStatistics(monthData);
 
     return (
-        <div className="calendar-screen">
+        <div className="calendar-screen ${theme}">
             <div className="month-navigation">
                 <button onClick={() => changeMonth(-1)}>Previous</button>
                 <h2>{currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>

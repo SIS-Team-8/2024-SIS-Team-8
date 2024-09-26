@@ -27,8 +27,9 @@ function App() {
     const location = useLocation();
 
     useEffect(() => {
-        document.body.className = theme; // Apply the theme to the body globally
-        localStorage.setItem('theme', theme); // Save theme to localStorage for persistence
+        document.body.classList.remove('light', 'dark'); // Remove any existing theme class
+        document.body.classList.add(theme);  // Add the new theme class
+        localStorage.setItem('theme', theme);  // Persist the theme in localStorage
     }, [theme]);
 
     useEffect(() => {

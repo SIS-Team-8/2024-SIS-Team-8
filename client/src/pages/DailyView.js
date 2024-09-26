@@ -53,7 +53,7 @@ const DailyView = ({theme, language}) => {
     };
 
     return (
-        <div className="daily-view-screen">
+        <div className="daily-view-screen ${theme}">
             <button className="back-button" onClick={() => navigate('/calendar')}>
                 ⬅ Back to Calendar
             </button>

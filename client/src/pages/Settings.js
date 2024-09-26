@@ -100,7 +100,7 @@ const Settings = ({ theme, toggleTheme, language, setLanguage }) => { // Pass la
     };
 
     return (
-        <div className="settings-screen">
+        <div className="settings-screen ${theme}">
             <div className="settings-container">
                 <h1 className="settings-header">{t.title}</h1>
 
