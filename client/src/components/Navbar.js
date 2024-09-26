@@ -10,17 +10,17 @@ const translations = {
     Chinese: { calendar: "日历", help: "帮助", history: "历史", profile: "个人资料", settings: "设置", menu: "菜单", brand: "EmoteLog" }
 };
 
-export default function CustomNavbar({ language = "English" }) {
+export default function CustomNavbar({ language = "English", theme = "light" }) {
     const t = translations[language];
 
     return (
-        <Navbar expand={false} className="custom-navbar">
+        <Navbar expand={false} className={`custom-navbar ${theme}`}>
             <Container fluid>
                 <Navbar.Brand as={Link} to="/" className="navbar-brand">{t.brand}</Navbar.Brand>
                 <Navbar.Toggle className="hamburger-button" aria-controls="offcanvasNavbar" />
                 <Navbar.Offcanvas id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" placement="end">
                     <Offcanvas.Header closeButton>
-                        <Offcanvas.Title className="navbar-label" id="offcanvasNavbarLabel">{t.brand}</Offcanvas.Title>
+                        <Offcanvas.Title className="navbar-label" id="offcanvasNavbarLabel">{t.menu}</Offcanvas.Title>
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                         <Nav className="justify-content-end flex-grow-1 pe-3">

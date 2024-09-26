@@ -85,3 +85,36 @@
 .justify-content-end {
     font-family: 'Poppins', sans-serif;
 }
+
+.custom-navbar.light {
+    background-color: #f8f9fa; /* Light background */
+    color: #000; /* Black text */
+}
+
+.custom-navbar.dark {
+    background-color: #333 !important; /* Dark background */
+    color: #fff !important; /* White text */
+}
+
+.custom-navbar.dark .navbar-label,
+.custom-navbar.dark .custom-link {
+    color: #fff;
+}
+
+.custom-navbar.dark .navbar-label,
+.custom-navbar.dark .custom-link {
+    color: #fff;
+}
+
+.custom-navbar.dark .hamburger-button {
+    background-color: #555; /* Darker button */
+}
+
+.custom-navbar.light .navbar-brand {
+    color: #000;
+}
+
+.custom-navbar.light .navbar-label,
+.custom-navbar.light .custom-link {
+    color: #000;
+}

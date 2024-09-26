@@ -270,7 +270,7 @@ function Help({ theme, language }) {
                                                 <span>{expandedFaq === `${category}-${index}` ? '▼' : '►'}</span>
                                             </div>
                                             {expandedFaq === `${category}-${index}` && (
-                                                <div style={{ marginTop: '5px', paddingLeft: '20px', color: '#ddd' }}>{t.faq.answer}</div>
+                                                <div style={{ marginTop: '5px', paddingLeft: '20px', color: '#ddd' }}>{faq.answer}</div>
                                             )}
                                         </li>
                                     ))}
