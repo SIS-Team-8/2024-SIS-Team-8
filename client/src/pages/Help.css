@@ -77,3 +77,15 @@ body.dark {
     background-color: #333;
     color: white;
 }
+
+/* Light Mode */
+.help-container.light {
+    background-color: #189ab4;
+    color: white;
+}
+
+/* Dark Mode */
+.help-container.dark {
+    background-color: #333;
+    color: white;
+}
