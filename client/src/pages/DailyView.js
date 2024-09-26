@@ -52,8 +52,6 @@ const DailyView = ({theme, language}) => {
         }
     };
 
-    const formattedHeading = t.replace('{date}', date);
-
     return (
         <div className={ `daily-view-screen ${theme} `}>
             <button className="back-button" onClick={() => navigate('/calendar')}>
@@ -61,7 +59,7 @@ const DailyView = ({theme, language}) => {
             </button>
 
             <div className="daily-view-content">
-                <h1>{formattedHeading}</h1>
+                <h1>On {date}, you were feeling:</h1>
                 <div className="emoji">{getMoodEmoji(moodEntry.mood)}</div>
                 <p className="intensity">{t.backToCalendar} {moodEntry.intensity}/5</p>
                 <p className="notes">{t.notes} {moodEntry.notes}</p>
