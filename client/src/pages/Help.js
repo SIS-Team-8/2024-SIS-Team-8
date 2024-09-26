@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import './Help.css'; // Ensure this CSS file exists for styling
 
@@ -51,6 +51,10 @@ function Help({theme, language}) {
             { question: "Can I cancel logout?", answer: "Yes, select 'Cancel' to return to the home screen." },
         ],
     };
+
+    useEffect(() => {
+        document.body.className = theme; // Update the body class to match the theme
+    }, [theme]);
 
     // Toggle expanded category
     const toggleCategory = (category) => {
