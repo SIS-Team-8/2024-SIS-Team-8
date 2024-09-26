@@ -10,7 +10,7 @@ const translations = {
     Chinese: { faq: "常见问题 (FAQ)", contactSupport: "联系支持", email: "电子邮件:", supportHours: "支持时间:", goHome: "回到主页" }
 };
 
-function Help() {
+function Help({theme, language}) {
     // State to manage which category and FAQ is expanded
     const [expandedCategory, setExpandedCategory] = useState(null);
     const [expandedFaq, setExpandedFaq] = useState(null);
@@ -64,7 +64,7 @@ function Help() {
         setExpandedFaq(expandedFaq === key ? null : key);
     };
 
-    const t = translations[language];
+    const t = translations[language] || translations.English;
 
     return (
         <div className="help-container">

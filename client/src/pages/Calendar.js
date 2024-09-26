@@ -74,7 +74,7 @@ const translations = {
     Chinese: { summary: "总结统计", avgIntensity: "平均心情强度:", mostCommonMood: "最常见的心情:", previous: "前一个", next: "下一个" }
 };
 
-const CalendarScreen = () => {
+const CalendarScreen = ({theme, language }) => {
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 8)); // Initialize to September 2024
 

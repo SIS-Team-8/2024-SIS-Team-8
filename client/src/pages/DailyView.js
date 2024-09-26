@@ -37,7 +37,7 @@ const translations = {
     Chinese: { backToCalendar: "返回日历", editEntry: "编辑条目", deleteEntry: "删除条目", intensity: "情绪强度:", notes: "笔记:" }
 };
 
-const DailyView = () => {
+const DailyView = ({theme, language }) => {
     const { date } = useParams(); // Retrieves the date from the URL parameter
     const navigate = useNavigate();
 

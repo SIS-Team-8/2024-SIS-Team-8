@@ -61,6 +61,11 @@ function App() {
         setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
     };
 
+    const handleLanguageChange = (newLanguage) => {
+        setLanguage(newLanguage);
+        localStorage.setItem('language', newLanguage); // Save language to localStorage for persistence
+    };
+
     if (!isLoaded) {
         return <SplashScreen />;
     }
@@ -120,7 +125,7 @@ function App() {
         };
         
         const t = translations[language];
-        
+
         return (
             <div>
                 <header className="App-header">

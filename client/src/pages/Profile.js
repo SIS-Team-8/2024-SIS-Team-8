@@ -10,7 +10,7 @@ const translations = {
     Chinese: { resetPassword: "重设密码", logOut: "登出", saveChanges: "保存更改", goHome: "回到主页" }
 };
 
-export default function Profile() {
+export default function Profile({theme, language}) {
     // State to manage profile data
     const [profile, setProfile] = useState({
         name: '',
