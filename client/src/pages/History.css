@@ -70,3 +70,14 @@ body.dark {
     background-color: #333;
     color: white;
 }
+
+.history-container.light {
+    background-color: #189ab4 !important; /* This will remain blue for light mode */
+    color: white !important;
+}
+
+/* Dark Mode */
+.history-container.dark {
+    background-color: #333 !important; /* Override the blue background with dark mode */
+    color: white !important;
+}
