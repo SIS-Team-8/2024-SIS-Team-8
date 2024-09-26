@@ -15,6 +15,8 @@ function Help({ theme, language }) {
     const [expandedCategory, setExpandedCategory] = useState(null);
     const [expandedFaq, setExpandedFaq] = useState(null);
 
+    const t = translations[language] || translations.English;
+
     // Using the exact provided questions and answers
     const categories = {
         "Login Issues": [
@@ -67,8 +69,6 @@ function Help({ theme, language }) {
         const key = `${category}-${index}`;
         setExpandedFaq(expandedFaq === key ? null : key);
     };
-
-    const t = translations[language] || translations.English;
 
     return (
         <div className= { `help-container ${theme}` }>
