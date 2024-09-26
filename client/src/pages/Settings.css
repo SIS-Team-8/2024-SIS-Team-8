@@ -1,14 +1,23 @@
-/* Styles for Settings Screen */
-
+/* General Styles */
 .settings-screen {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #189ab4;
-    color: white;
     text-align: center;
     padding: 0 20px;
+}
+
+/* Light Theme */
+.settings-screen.light {
+    background-color: white;
+    color: black;
+}
+
+/* Dark Theme */
+.settings-screen.dark {
+    background-color: #333;
+    color: white;
 }
 
 .settings-container {
@@ -16,15 +25,23 @@
     max-width: 600px;
     padding: 20px;
     font-family: 'Poppins', sans-serif;
-    background-color: #189ab4;
     border-radius: 8px;
+}
+
+/* Light Theme for Container */
+.settings-container.light {
+    background-color: white;
+    color: black;
+}
+
+/* Dark Theme for Container */
+.settings-container.dark {
+    background-color: #444;
     color: white;
-    text-align: left;
 }
 
 .settings-header {
     text-align: center;
-    color: white;
     margin-bottom: 20px;
 }
 
@@ -34,141 +51,11 @@
     flex-direction: column;
 }
 
-.setting-group h2 {
-    margin: 0 0 10px;
-    font-size: 18px;
-}
-
 .options-group {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: space-between;
-}
-
-.options-group label {
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.options-group input[type="checkbox"],
-.options-group input[type="radio"] {
-    margin-right: 5px;
-}
-
-.options-group select {
-    padding: 5px;
-    font-size: 16px;
-    width: 100%;
-    cursor: pointer;
-}
-
-/* Toggle button styles for reminder frequency */
-.toggle-buttons-group {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-.toggle-button {
-    padding: 10px 20px;
-    font-size: medium;
-    border: none;
-    color: #189ab4;
-    background-color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 150px;
-}
-
-.toggle-button.selected {
-    background-color: #0f7b8e;
-    color: white;
-}
-
-.toggle-button:hover {
-    background-color: #0f7b8e;
-    color: white;
-}
-
-.privacy-buttons-group {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.privacy-button {
-    padding: 10px;
-    font-size: medium;
-    flex: 1;
-    min-width: 150px;
-    background-color: white;
-    color: #189ab4;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.privacy-button:hover {
-    background-color: #0f7b8e;
-    color: white;
-}
-
-#delete-button {
-    padding: 10px;
-    font-size: medium;
-    flex: 1;
-    min-width: 150px;
-    background-color: white;
-    color: #DB1F48;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#delete-button:hover {
-    background-color: #E7625F;
-    color: white;
-}
-
-.center-button {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.home-button {
-    padding: 7px;
-    font-size: large;
-    width: 100%;
-    font-family: 'Poppins';
-    background-color: white;
-    color: #189ab4;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.home-button:hover {
-    background-color: #0f7b8e;
-    color: white;
-}
-
-/* Dark mode styling */
-body.dark {
-    background-color: #333;
-    color: white;
-}
-
-body.light {
-    background-color: white;
-    color: black;
 }
 
 /* Toggle Switch */
@@ -218,11 +105,38 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-/* Rounded switch */
-.slider.round {
-    border-radius: 34px;
+/* Button and privacy group styles */
+.toggle-buttons-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
 }
 
-.slider.round:before {
-    border-radius: 50%;
+.privacy-buttons-group {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.center-button {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.home-button {
+    padding: 7px;
+    font-size: large;
+    width: 100%;
+    font-family: 'Poppins';
+    background-color: white;
+    color: #189ab4;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.home-button:hover {
+    background-color: #0f7b8e;
+    color: white;
 }

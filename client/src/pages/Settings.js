@@ -90,7 +90,7 @@ const translations = {
     }
 };
 
-const Settings = ({ theme, toggleTheme, language, setLanguage }) => { // Pass language and setLanguage from App.js
+const Settings = ({ theme, toggleTheme, language, setLanguage }) => { 
     const t = translations[language] || translations.English;
     const navigate = useNavigate();
 
@@ -100,7 +100,7 @@ const Settings = ({ theme, toggleTheme, language, setLanguage }) => { // Pass la
     };
 
     return (
-        <div className="settings-screen ${theme}">
+        <div className={`settings-screen ${theme}`}> {/* Dynamically apply theme class */}
             <div className="settings-container">
                 <h1 className="settings-header">{t.title}</h1>
 
@@ -122,7 +122,11 @@ const Settings = ({ theme, toggleTheme, language, setLanguage }) => { // Pass la
 
                     <div className="options-group">
                         <label className="switch">
-                            <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} />
+                            <input 
+                                type="checkbox" 
+                                onChange={toggleTheme} 
+                                checked={theme === 'dark'} 
+                            />
                             <span className="slider round"></span>
                         </label>
                         <span>{theme === 'light' ? t.light : t.dark}</span>
