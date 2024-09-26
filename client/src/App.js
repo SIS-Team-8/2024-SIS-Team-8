@@ -63,7 +63,6 @@ function App() {
 
     const handleLanguageChange = (newLanguage) => {
         setLanguage(newLanguage);
-        localStorage.setItem('language', newLanguage); // Save language to localStorage
     };
 
     if (!isLoaded) {
@@ -75,10 +74,15 @@ function App() {
             {isAuthenticated && <Navbar onLogout={handleLogout} theme={theme} toggleTheme={toggleTheme} language={language} onLanguageChange={handleLanguageChange} />}
 
             <Routes>
-                <Route path="/" element={isAuthenticated ? <Home /> : <Login onLogin={handleLogin} theme={theme} 
+            <Route path="/" element={isAuthenticated ? <Home /> : <Login onLogin={handleLogin} />} /> 
+            <Route path="/settings" element={
+                    <Settings 
+                        theme={theme} 
                         toggleTheme={toggleTheme} 
                         language={language} 
-                        setLanguage={handleLanguageChange} />} />
+                        setLanguage={handleLanguageChange} 
+                    />
+            } />
                 <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/help" element={isAuthenticated ? <Help theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />

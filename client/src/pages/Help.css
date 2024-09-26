@@ -66,3 +66,14 @@
 .help-container ul li {
     color: white;
 }
+
+body.light {
+    background-color: white;
+    color: black;
+}
+
+/* Global styles for dark mode */
+body.dark {
+    background-color: #333;
+    color: white;
+}
