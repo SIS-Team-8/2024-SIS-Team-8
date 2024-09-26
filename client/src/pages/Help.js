@@ -71,7 +71,7 @@ function Help({ theme, language }) {
     const t = translations[language] || translations.English;
 
     return (
-        <div className= {'help-container ${theme}'}>
+        <div className= { `help-container ${theme}` }>
             <h1 style={{ marginBottom: '20px', textAlign: 'center' }}>Help</h1>
 
             <div style={{ margin: '0 auto', maxWidth: '800px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
