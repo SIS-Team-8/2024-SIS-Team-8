@@ -52,7 +52,7 @@ const DailyView = ({theme, language}) => {
         }
     };
 
-    const formattedHeading = t.feelingOnDate.replace('{date}', date);
+    const formattedHeading = t.replace('{date}', date);
 
     return (
         <div className={ `daily-view-screen ${theme} `}>
