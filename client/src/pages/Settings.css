@@ -10,7 +10,7 @@
 
 /* Light Theme */
 .settings-screen.light {
-    background-color: white;
+    background-color: #189ab4; /* Blue background for light mode */
     color: black;
 }
 
@@ -32,8 +32,8 @@
 
 /* Light Theme for Container */
 .settings-container.light {
-    background-color: white;
-    color: black;
+    background-color: #189ab4; /* Same as light screen background */
+    color: white;
 }
 
 /* Dark Theme for Container */
@@ -45,7 +45,7 @@
 .settings-header {
     text-align: center;
     margin-bottom: 20px;
-    color: inherit; /* Will inherit color based on the theme */
+    color: inherit;
 }
 
 .setting-group {
@@ -57,7 +57,7 @@
 .setting-group h2 {
     margin: 0 0 10px;
     font-size: 18px;
-    color: inherit; /* Inherit the color based on the theme */
+    color: inherit;
 }
 
 .options-group {
@@ -72,12 +72,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: inherit; /* Inherit color */
-}
-
-.options-group input[type="checkbox"],
-.options-group input[type="radio"] {
-    margin-right: 5px;
+    color: inherit;
 }
 
 .options-group select {
@@ -191,7 +186,7 @@ body.dark {
 }
 
 body.light {
-    background-color: white;
+    background-color: #189ab4;
     color: black;
 }
 

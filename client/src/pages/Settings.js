@@ -90,7 +90,7 @@ const translations = {
     }
 };
 
-const Settings = ({ theme, toggleTheme, language, setLanguage }) => { 
+const Settings = ({ theme, toggleTheme, language, setLanguage }) => {
     const t = translations[language] || translations.English;
     const navigate = useNavigate();
 
@@ -100,14 +100,13 @@ const Settings = ({ theme, toggleTheme, language, setLanguage }) => {
     };
 
     return (
-        <div className={`settings-screen ${theme}`}> {/* Applying the theme dynamically */}
-            <div className="settings-container">
+        <div className={`settings-screen ${theme}`}>
+            <div className={`settings-container ${theme}`}>
                 <h1 className="settings-header">{t.title}</h1>
 
                 {/* Reminder Frequency */}
                 <div className="setting-group">
                     <h2>{t.reminder}</h2>
-
                     <div className="toggle-buttons-group">
                         <button className="toggle-button">{t.daily}</button>
                         <button className="toggle-button">{t.weekly}</button>
@@ -119,14 +118,9 @@ const Settings = ({ theme, toggleTheme, language, setLanguage }) => {
                 {/* Theme Options */}
                 <div className="setting-group">
                     <h2>{t.theme}</h2>
-
                     <div className="options-group">
                         <label className="switch">
-                            <input 
-                                type="checkbox" 
-                                onChange={toggleTheme} 
-                                checked={theme === 'dark'} 
-                            />
+                            <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} />
                             <span className="slider round"></span>
                         </label>
                         <span>{theme === 'light' ? t.light : t.dark}</span>
@@ -136,7 +130,6 @@ const Settings = ({ theme, toggleTheme, language, setLanguage }) => {
                 {/* Language Preferences */}
                 <div className="setting-group">
                     <h2>{t.language}</h2>
-
                     <div className="options-group">
                         <select value={language} onChange={handleLanguageChange}>
                             <option value="English">English</option>
@@ -151,7 +144,6 @@ const Settings = ({ theme, toggleTheme, language, setLanguage }) => {
                 {/* Privacy Settings */}
                 <div className="setting-group">
                     <h2>{t.privacy}</h2>
-
                     <div className="privacy-buttons-group">
                         <button className="privacy-button">{t.dataExport}</button>
                         <button className="privacy-button">{t.deleteAccount}</button>
