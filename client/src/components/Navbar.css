@@ -86,11 +86,6 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.custom-navbar.light {
-    background-color: #f8f9fa; /* Light background */
-    color: #000; /* Black text */
-}
-
 .custom-navbar.dark {
     background-color: #333 !important; /* Dark background */
     color: #fff !important; /* White text */
