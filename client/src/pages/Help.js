@@ -247,12 +247,12 @@ function Help({ theme, language }) {
 
     return (
         <div className= { `help-container ${theme}` }>
-            <h1 style={{ marginBottom: '20px', textAlign: 'center' }}>{t.help}</h1>
+            <h1 style={{ marginBottom: '20px', textAlign: 'center' }}>Help</h1>
 
             <div style={{ margin: '0 auto', maxWidth: '800px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 {/* FAQ Section */}
                 <div style={{ flex: '1', marginRight: '20px' }}>
-                    <h2 className="custom-header">Frequently Asked Questions (FAQ)</h2>
+                    <h2 className="custom-header">{t.faq}</h2>
 
                     {Object.keys(categories).map((category, catIndex) => (
                         <div key={catIndex} style={{ marginBottom: '20px' }}>
