@@ -12,6 +12,16 @@
     flex-direction: column;
 }
 
+.calendar-screen.light {
+    background-color: #189ab4; /* Light mode background */
+    color: black;
+}
+
+.calendar-screen.dark {
+    background-color: #333 !important; /* Dark mode background */
+    color: white !important;
+}
+
 .calendar-table {
     width: 90%;
     border-collapse: collapse;
@@ -30,6 +40,10 @@
     cursor: pointer;
     font-size: 18px;
     color: inherit;
+}
+
+.calendar-table th {
+    color: black; /* Header text color for light mode */
 }
 
 .calendar-table th {
@@ -61,6 +75,10 @@
     line-height: 1;
     flex-grow: 1;
     text-align: center;
+}
+
+.month-navigation.light h2 {
+    color: white;
 }
 
 .month-navigation.dark h2 {
