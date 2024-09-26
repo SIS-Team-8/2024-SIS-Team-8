@@ -2,6 +2,14 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import './Profile.css';
 
+const translations = {
+    English: { resetPassword: "Reset Password", logOut: "Log Out", saveChanges: "Save Changes", goHome: "Go Home" },
+    Spanish: { resetPassword: "Restablecer Contraseña", logOut: "Cerrar Sesión", saveChanges: "Guardar Cambios", goHome: "Volver al Inicio" },
+    German: { resetPassword: "Passwort zurücksetzen", logOut: "Ausloggen", saveChanges: "Änderungen speichern", goHome: "Zur Startseite" },
+    French: { resetPassword: "Réinitialiser le mot de passe", logOut: "Se déconnecter", saveChanges: "Enregistrer les modifications", goHome: "Retour à l'accueil" },
+    Chinese: { resetPassword: "重设密码", logOut: "登出", saveChanges: "保存更改", goHome: "回到主页" }
+};
+
 export default function Profile() {
     // State to manage profile data
     const [profile, setProfile] = useState({
@@ -15,6 +23,8 @@ export default function Profile() {
         // Logic for editing the profile
         alert("Changes saved.");
     };
+
+    const t = translations[language];
 
     return (
         <div className="profile-container">

@@ -2,6 +2,14 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import './Help.css'; // Ensure this CSS file exists for styling
 
+const translations = {
+    English: { faq: "Frequently Asked Questions (FAQ)", contactSupport: "Contact Support", email: "Email:", supportHours: "Support Hours:", goHome: "Go Home" },
+    Spanish: { faq: "Preguntas Frecuentes (FAQ)", contactSupport: "Contacto de Soporte", email: "Correo Electrónico:", supportHours: "Horario de Atención:", goHome: "Volver al Inicio" },
+    German: { faq: "Häufig gestellte Fragen (FAQ)", contactSupport: "Kontaktieren Sie den Support", email: "Email:", supportHours: "Supportzeiten:", goHome: "Zur Startseite" },
+    French: { faq: "Questions Fréquemment Posées (FAQ)", contactSupport: "Contacter le Support", email: "Email:", supportHours: "Heures d'assistance:", goHome: "Retour à l'accueil" },
+    Chinese: { faq: "常见问题 (FAQ)", contactSupport: "联系支持", email: "电子邮件:", supportHours: "支持时间:", goHome: "回到主页" }
+};
+
 function Help() {
     // State to manage which category and FAQ is expanded
     const [expandedCategory, setExpandedCategory] = useState(null);
@@ -55,6 +63,8 @@ function Help() {
         const key = `${category}-${index}`;
         setExpandedFaq(expandedFaq === key ? null : key);
     };
+
+    const t = translations[language];
 
     return (
         <div className="help-container">

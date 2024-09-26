@@ -36,17 +36,62 @@ const translations = {
         weekly: "Semanal",
         monthly: "Mensual",
         custom: "Personalizado"
+    },
+    German: {
+        title: "Einstellungen",
+        reminder: "Erinnerungshäufigkeit",
+        theme: "Themenoptionen",
+        light: "Heller Modus",
+        dark: "Dunkler Modus",
+        language: "Spracheinstellungen",
+        privacy: "Datenschutzeinstellungen",
+        dataExport: "Daten exportieren",
+        deleteAccount: "Konto löschen",
+        disableTracking: "Tracking deaktivieren",
+        homePage: "Zur Startseite",
+        daily: "Täglich",
+        weekly: "Wöchentlich",
+        monthly: "Monatlich",
+        custom: "Benutzerdefiniert"
+    },
+    French: {
+        title: "Paramètres",
+        reminder: "Fréquence des rappels",
+        theme: "Options de thème",
+        light: "Mode clair",
+        dark: "Mode sombre",
+        language: "Préférences linguistiques",
+        privacy: "Paramètres de confidentialité",
+        dataExport: "Exporter les données",
+        deleteAccount: "Supprimer le compte",
+        disableTracking: "Désactiver le suivi",
+        homePage: "Aller à l'accueil",
+        daily: "Quotidien",
+        weekly: "Hebdomadaire",
+        monthly: "Mensuel",
+        custom: "Personnalisé"
+    },
+    Chinese: {
+        title: "设置",
+        reminder: "提醒频率",
+        theme: "主题选项",
+        light: "亮模式",
+        dark: "暗模式",
+        language: "语言偏好",
+        privacy: "隐私设置",
+        dataExport: "导出数据",
+        deleteAccount: "删除账户",
+        disableTracking: "禁用跟踪",
+        homePage: "回到主页",
+        daily: "每日",
+        weekly: "每周",
+        monthly: "每月",
+        custom: "自定义"
     }
 };
 
-const Settings = ({ theme, toggleTheme }) => {
-    const [reminderFrequency, setReminderFrequency] = useState('');
-    const [language, setLanguage] = useState('English');
+const Settings = ({ theme, toggleTheme, language, setLanguage }) => { // Pass language and setLanguage from App.js
     const navigate = useNavigate();
-
-    const handleToggleButtonClick = (frequency) => {
-        setReminderFrequency((prev) => (prev === frequency ? '' : frequency));
-    };
 
     const handleLanguageChange = (event) => {
         setLanguage(event.target.value);
@@ -64,10 +109,10 @@ const Settings = ({ theme, toggleTheme }) => {
                     <h2>{t.reminder}</h2>
 
                     <div className="toggle-buttons-group">
-                        <button className={`toggle-button ${reminderFrequency === 'Daily' ? 'selected' : ''}`} onClick={() => handleToggleButtonClick('Daily')}>{t.daily}</button>
-                        <button className={`toggle-button ${reminderFrequency === 'Weekly' ? 'selected' : ''}`} onClick={() => handleToggleButtonClick('Weekly')}>{t.weekly}</button>
-                        <button className={`toggle-button ${reminderFrequency === 'Monthly' ? 'selected' : ''}`} onClick={() => handleToggleButtonClick('Monthly')}>{t.monthly}</button>
-                        <button className={`toggle-button ${reminderFrequency === 'Custom' ? 'selected' : ''}`} onClick={() => handleToggleButtonClick('Custom')}>{t.custom}</button>
+                        <button className="toggle-button">{t.daily}</button>
+                        <button className="toggle-button">{t.weekly}</button>
+                        <button className="toggle-button">{t.monthly}</button>
+                        <button className="toggle-button">{t.custom}</button>
                     </div>
                 </div>
 
@@ -77,7 +122,7 @@ const Settings = ({ theme, toggleTheme }) => {
 
                     <div className="options-group">
                         <label className="switch">
-                            <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} /> {/* Use toggleTheme from props */}
+                            <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} />
                             <span className="slider round"></span>
                         </label>
                         <span>{theme === 'light' ? t.light : t.dark}</span>
@@ -92,6 +137,9 @@ const Settings = ({ theme, toggleTheme }) => {
                         <select value={language} onChange={handleLanguageChange}>
                             <option value="English">English</option>
                             <option value="Spanish">Spanish</option>
+                            <option value="German">German</option>
+                            <option value="French">French</option>
+                            <option value="Chinese">Chinese</option>
                         </select>
                     </div>
                 </div>
@@ -101,9 +149,9 @@ const Settings = ({ theme, toggleTheme }) => {
                     <h2>{t.privacy}</h2>
 
                     <div className="privacy-buttons-group">
-                        <button className="privacy-button" onClick={() => alert(t.dataExport)}>{t.dataExport}</button>
-                        <button className="privacy-button" id="delete-button" onClick={() => alert(t.deleteAccount)}>{t.deleteAccount}</button>
-                        <button className="privacy-button" onClick={() => alert(t.disableTracking)}>{t.disableTracking}</button>
+                        <button className="privacy-button">{t.dataExport}</button>
+                        <button className="privacy-button">{t.deleteAccount}</button>
+                        <button className="privacy-button">{t.disableTracking}</button>
                     </div>
                 </div>
 

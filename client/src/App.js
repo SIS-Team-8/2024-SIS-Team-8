@@ -22,6 +22,7 @@ function App() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light'); 
+    const [language, setLanguage] = useState(localStorage.getItem('language') || 'English');
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -29,6 +30,10 @@ function App() {
         document.body.className = theme; // Apply the theme to the body globally
         localStorage.setItem('theme', theme); // Save theme to localStorage for persistence
     }, [theme]);
+
+    useEffect(() => {
+        localStorage.setItem('language', language); // Save language to localStorage for persistence
+    }, [language]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -62,16 +67,16 @@ function App() {
 
     return (
         <div className="App">
-            {isAuthenticated && <Navbar onLogout={handleLogout} theme={theme} toggleTheme={toggleTheme} />}
+            {isAuthenticated && <Navbar onLogout={handleLogout} theme={theme} toggleTheme={toggleTheme} language={language} onLanguageChange={handleLanguageChange} />}
 
             <Routes>
                 <Route path="/" element={isAuthenticated ? <Home /> : <Login onLogin={handleLogin} />} />
-                <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView theme={theme} /> : <Login onLogin={handleLogin} />} />
-                <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} /> : <Login onLogin={handleLogin} />} />
-                <Route path="/help" element={isAuthenticated ? <Help theme={theme} /> : <Login onLogin={handleLogin} />} />
-                <Route path="/history" element={isAuthenticated ? <History theme={theme} /> : <Login onLogin={handleLogin} />} />
-                <Route path="/profile" element={isAuthenticated ? <Profile theme={theme} /> : <Login onLogin={handleLogin} />} />
-                <Route path="/settings" element={isAuthenticated ? <Settings theme={theme} toggleTheme={toggleTheme} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/help" element={isAuthenticated ? <Help theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/history" element={isAuthenticated ? <History theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/profile" element={isAuthenticated ? <Profile theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/settings" element={isAuthenticated ? <Settings theme={theme} toggleTheme={toggleTheme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/mood-selection" element={isAuthenticated ? <MoodSelection theme={theme} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/login" element={<Login onLogin={handleLogin} />} />
                 <Route path="/sign-up" element={<SignUp />} />
@@ -81,6 +86,16 @@ function App() {
     );
 
     function Home() {
+        const translations = {
+            English: { welcome: "Welcome!" },
+            Spanish: { welcome: "¡Bienvenido!" },
+            German: { welcome: "Willkommen!" },
+            French: { welcome: "Bienvenue!" },
+            Chinese: { welcome: "欢迎！" }
+        };
+        
+        const t = translations[language];
+
         return (
             <div>
                 <header className="App-header">
@@ -96,6 +111,16 @@ function App() {
     }
 
     function NotFound() {
+        const translations = {
+            English: { notFound: "404: Page Not Found", goHome: "Go to Login" },
+            Spanish: { notFound: "404: Página no encontrada", goHome: "Ir al inicio de sesión" },
+            German: { notFound: "404: Seite nicht gefunden", goHome: "Zur Anmeldung" },
+            French: { notFound: "404: Page non trouvée", goHome: "Aller à la connexion" },
+            Chinese: { notFound: "404：页面未找到", goHome: "转到登录" }
+        };
+        
+        const t = translations[language];
+        
         return (
             <div>
                 <header className="App-header">

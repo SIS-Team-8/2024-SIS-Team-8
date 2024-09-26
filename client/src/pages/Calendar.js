@@ -66,9 +66,19 @@ const getSummaryStatistics = (monthData) => {
     return { averageIntensity, mostCommonMood };
 };
 
+const translations = {
+    English: { summary: "Summary Statistics for", avgIntensity: "Average Mood Intensity:", mostCommonMood: "Most Common Mood:", previous: "Previous", next: "Next" },
+    Spanish: { summary: "Estadísticas Resumidas para", avgIntensity: "Intensidad Media del Estado de Ánimo:", mostCommonMood: "Estado de Ánimo Más Común:", previous: "Anterior", next: "Siguiente" },
+    German: { summary: "Zusammenfassende Statistiken für", avgIntensity: "Durchschnittliche Stimmung Intensität:", mostCommonMood: "Häufigste Stimmung:", previous: "Vorherige", next: "Nächste" },
+    French: { summary: "Statistiques Résumées pour", avgIntensity: "Intensité Moyenne de l'Humeur:", mostCommonMood: "Humeur la Plus Commune:", previous: "Précédente", next: "Suivante" },
+    Chinese: { summary: "总结统计", avgIntensity: "平均心情强度:", mostCommonMood: "最常见的心情:", previous: "前一个", next: "下一个" }
+};
+
 const CalendarScreen = () => {
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 8)); // Initialize to September 2024
+
+    const t = translations[language];
 
     // Get the number of days in the current month
     const getDaysInMonth = (month, year) => {
