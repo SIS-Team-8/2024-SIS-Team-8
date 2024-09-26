@@ -99,3 +99,13 @@ body.dark {
     background-color: #333;
     color: white;
 }
+
+.daily-view-screen.light {
+    background-color: #189ab4;
+    color: black;
+}
+
+.daily-view-screen.dark {
+    background-color: #333 !important;
+    color: white !important;
+}
