@@ -91,13 +91,13 @@ const translations = {
 };
 
 const Settings = ({ theme, toggleTheme, language, setLanguage }) => { // Pass language and setLanguage from App.js
+    const t = translations[language] || translations.English;
     const navigate = useNavigate();
 
-    const handleLanguageChange = (event) => {
-        setLanguage(event.target.value);
+    const handleLanguageChange = (e) => {
+        const selectedLanguage = e.target.value;
+        setLanguage(selectedLanguage);
     };
-
-    const t = translations[language]; // Fetch translation for the selected language
 
     return (
         <div className="settings-screen">

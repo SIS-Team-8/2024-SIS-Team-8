@@ -21,7 +21,7 @@ import { Route, Routes } from "react-router-dom";
 function App() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light'); 
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
     const [language, setLanguage] = useState(localStorage.getItem('language') || 'English');
     const navigate = useNavigate();
     const location = useLocation();
@@ -45,7 +45,7 @@ function App() {
         }, 3000);
 
         return () => clearTimeout(timer);
-    }, [isAuthenticated, navigate, location, theme]);
+    }, [isAuthenticated, navigate, location]);
 
     const handleLogin = () => {
         setIsAuthenticated(true);
@@ -63,7 +63,7 @@ function App() {
 
     const handleLanguageChange = (newLanguage) => {
         setLanguage(newLanguage);
-        localStorage.setItem('language', newLanguage); // Save language to localStorage for persistence
+        localStorage.setItem('language', newLanguage); // Save language to localStorage
     };
 
     if (!isLoaded) {
@@ -75,7 +75,10 @@ function App() {
             {isAuthenticated && <Navbar onLogout={handleLogout} theme={theme} toggleTheme={toggleTheme} language={language} onLanguageChange={handleLanguageChange} />}
 
             <Routes>
-                <Route path="/" element={isAuthenticated ? <Home /> : <Login onLogin={handleLogin} />} />
+                <Route path="/" element={isAuthenticated ? <Home /> : <Login onLogin={handleLogin} theme={theme} 
+                        toggleTheme={toggleTheme} 
+                        language={language} 
+                        setLanguage={handleLanguageChange} />} />
                 <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/help" element={isAuthenticated ? <Help theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
