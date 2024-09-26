@@ -74,6 +74,8 @@ function App() {
     return (
         <div className="App">
             {isAuthenticated && <Navbar onLogout={handleLogout} theme={theme} toggleTheme={toggleTheme} language={language} onLanguageChange={handleLanguageChange} />}
+            <Navbar theme={theme} language="English" />
+            <button onClick={toggleTheme}>Toggle Theme</button>
 
             <Routes>
             <Route path="/" element={isAuthenticated ? <Home /> : <Login onLogin={handleLogin} />} /> 
