@@ -110,11 +110,3 @@
     background-color: #555; /* Darker button */
 }
 
-.custom-navbar.light .navbar-brand {
-    color: #000;
-}
-
-.custom-navbar.light .navbar-label,
-.custom-navbar.light .custom-link {
-    color: #000;
-}
