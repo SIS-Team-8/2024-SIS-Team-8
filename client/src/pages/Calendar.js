@@ -131,9 +131,9 @@ const CalendarScreen = ({theme, language }) => {
     return (
         <div className={ `calendar-screen ${theme}` }>
             <div className="month-navigation">
-                <button onClick={() => changeMonth(-1)}>Previous</button>
+                <button onClick={() => changeMonth(-1)}>{t.previous}</button>
                 <h2>{currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
-                <button onClick={() => changeMonth(1)}>Next</button>
+                <button onClick={() => changeMonth(1)}>{t.next}</button>
             </div>
 
             <table className="calendar-table">
@@ -174,9 +174,9 @@ const CalendarScreen = ({theme, language }) => {
             </table>
 
             <div className="summary-statistics">
-                <h3>Summary Statistics for {currentMonth.toLocaleString('default', { month: 'long' })}</h3>
-                <p>Average Mood Intensity: {summary.averageIntensity}</p>
-                <p>Most Common Mood: {getMoodEmoji(summary.mostCommonMood)}</p>
+                <h3>{t.summary} {currentMonth.toLocaleString('default', { month: 'long' })}</h3>
+                <p>{t.avgIntensity} {summary.averageIntensity}</p>
+                <p>{t.mostCommonMood}: {getMoodEmoji(summary.mostCommonMood)}</p>
             </div>
         </div>
     );
