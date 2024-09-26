@@ -247,7 +247,7 @@ function Help({ theme, language }) {
 
     return (
         <div className= { `help-container ${theme}` }>
-            <h1 style={{ marginBottom: '20px', textAlign: 'center' }}>{t.Help}</h1>
+            <h1 style={{ marginBottom: '20px', textAlign: 'center' }}>{t.help}</h1>
 
             <div style={{ margin: '0 auto', maxWidth: '800px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 {/* FAQ Section */}
@@ -282,7 +282,7 @@ function Help({ theme, language }) {
 
                 {/* Contact Support Section */}
                 <div style={{ flex: '1', marginLeft: '20px' }}>
-                    <h2 className="custom-header">Contact Support</h2>
+                    <h2 className="custom-header">{t.contactSupport}</h2>
                     <p style={{ margin: '10px 0', fontSize: '15px' }}><u>{t.email}</u> support@emotelog.com</p>
                     <p style={{ margin: '10px 0', fontSize: '15px' }}><u>{t.supportHours}</u> Available from 9am-5pm.</p>
                 </div>
