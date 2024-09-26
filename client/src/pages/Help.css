@@ -68,14 +68,14 @@
 }
 
 body.light {
-    background-color: white;
-    color: black;
+    background-color: white !important;
+    color: black !important;
 }
 
 /* Global styles for dark mode */
 body.dark {
-    background-color: #333;
-    color: white;
+    background-color: #333 !important;
+    color: white !important;
 }
 
 /* Light Mode */
