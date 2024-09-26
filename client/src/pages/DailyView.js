@@ -55,21 +55,21 @@ const DailyView = ({theme, language}) => {
     return (
         <div className={ `daily-view-screen ${theme} `}>
             <button className="back-button" onClick={() => navigate('/calendar')}>
-                ⬅ Back to Calendar
+                ⬅ {t.backToCalendar}
             </button>
 
             <div className="daily-view-content">
                 <h1>On {date}, you were feeling:</h1>
                 <div className="emoji">{getMoodEmoji(moodEntry.mood)}</div>
-                <p className="intensity">Mood Intensity: {moodEntry.intensity}/5</p>
-                <p className="notes">Notes: {moodEntry.notes}</p>
+                <p className="intensity">{t.backToCalendar} {moodEntry.intensity}/5</p>
+                <p className="notes">{t.notes} {moodEntry.notes}</p>
 
                 {/* Edit and Delete Buttons */}
                 <button className="edit-button" onClick={() => alert("Edit functionality coming soon!")}>
-                    ✏ Edit Entry
+                    ✏ {t.editEntry}
                 </button>
                 <button className="delete-button" onClick={handleDelete}>
-                    🗑 Delete Entry
+                    🗑 {t.deleteEntry}
                 </button>
             </div>
         </div>
