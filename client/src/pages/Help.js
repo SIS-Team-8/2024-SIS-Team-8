@@ -10,7 +10,7 @@ const translations = {
     Chinese: { faq: "常见问题 (FAQ)", contactSupport: "联系支持", email: "电子邮件:", supportHours: "支持时间:", goHome: "回到主页" }
 };
 
-function Help({theme, language}) {
+function Help({ theme, language }) {
     // State to manage which category and FAQ is expanded
     const [expandedCategory, setExpandedCategory] = useState(null);
     const [expandedFaq, setExpandedFaq] = useState(null);
@@ -71,7 +71,7 @@ function Help({theme, language}) {
     const t = translations[language] || translations.English;
 
     return (
-        <div className="help-container ${theme}">
+        <div className= {'help-container ${theme}'}>
             <h1 style={{ marginBottom: '20px', textAlign: 'center' }}>{t.faq}</h1>
 
             <div style={{ margin: '0 auto', maxWidth: '800px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
