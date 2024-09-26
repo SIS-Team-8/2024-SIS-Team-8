@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Settings.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -100,7 +100,7 @@ const Settings = ({ theme, toggleTheme, language, setLanguage }) => {
     };
 
     return (
-        <div className={`settings-screen ${theme}`}> {/* Dynamically apply theme class */}
+        <div className={`settings-screen ${theme}`}> {/* Applying the theme dynamically */}
             <div className="settings-container">
                 <h1 className="settings-header">{t.title}</h1>
 
