@@ -64,6 +64,7 @@ function App() {
 
     const handleLanguageChange = (newLanguage) => {
         setLanguage(newLanguage);
+        localStorage.setItem('language', newLanguage); // Persist language setting in localStorage
     };
 
     if (!isLoaded) {
