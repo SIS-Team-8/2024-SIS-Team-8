@@ -29,6 +29,7 @@
     text-align: center;
     cursor: pointer;
     font-size: 18px;
+    color: inherit;
 }
 
 .month-navigation {
@@ -89,4 +90,14 @@ body.light {
 body.dark {
     background-color: #333;
     color: white;
+}
+
+.calendar-screen.light {
+    background-color: #189ab4;
+    color: black;
+}
+
+.calendar-screen.dark {
+    background-color: #333 !important;
+    color: white !important;
 }
