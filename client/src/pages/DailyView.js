@@ -30,11 +30,11 @@ const getMoodEmoji = (mood) => {
 };
 
 const translations = {
-    English: { backToCalendar: "Back to Calendar", editEntry: "Edit Entry", deleteEntry: "Delete Entry", intensity: "Mood Intensity:", notes: "Notes:" },
-    Spanish: { backToCalendar: "Volver al Calendario", editEntry: "Editar Entrada", deleteEntry: "Eliminar Entrada", intensity: "Intensidad del Estado de Ánimo:", notes: "Notas:" },
-    German: { backToCalendar: "Zurück zum Kalender", editEntry: "Eintrag bearbeiten", deleteEntry: "Eintrag löschen", intensity: "Stimmungsintensität:", notes: "Notizen:" },
-    French: { backToCalendar: "Retour au Calendrier", editEntry: "Modifier l'entrée", deleteEntry: "Supprimer l'entrée", intensity: "Intensité de l'humeur:", notes: "Remarques:" },
-    Chinese: { backToCalendar: "返回日历", editEntry: "编辑条目", deleteEntry: "删除条目", intensity: "情绪强度:", notes: "笔记:" }
+    English: { backToCalendar: "Back to Calendar", editEntry: "Edit Entry", deleteEntry: "Delete Entry", intensity: "Mood Intensity:", notes: "Notes:", noEntry: "No entry for this day." },
+    Spanish: { backToCalendar: "Volver al Calendario", editEntry: "Editar Entrada", deleteEntry: "Eliminar Entrada", intensity: "Intensidad del Estado de Ánimo:", notes: "Notas:", noEntry: "No hay entrada para este día." },
+    German: { backToCalendar: "Zurück zum Kalender", editEntry: "Eintrag bearbeiten", deleteEntry: "Eintrag löschen", intensity: "Stimmungsintensität:", notes: "Notizen:", noEntry: "Keine Eintragung für diesen Tag." },
+    French: { backToCalendar: "Retour au Calendrier", editEntry: "Modifier l'entrée", deleteEntry: "Supprimer l'entrée", intensity: "Intensité de l'humeur:", notes: "Remarques:", noEntry: "Aucune entrée pour ce jour." },
+    Chinese: { backToCalendar: "返回日历", editEntry: "编辑条目", deleteEntry: "删除条目", intensity: "情绪强度:", notes: "笔记:", noEntry: "当天没有条目。" }
 };
 
 const DailyView = ({theme, language}) => {
@@ -52,6 +52,8 @@ const DailyView = ({theme, language}) => {
         }
     };
 
+    const formattedHeading = t.feelingOnDate.replace('{date}', date);
+
     return (
         <div className={ `daily-view-screen ${theme} `}>
             <button className="back-button" onClick={() => navigate('/calendar')}>
@@ -59,7 +61,7 @@ const DailyView = ({theme, language}) => {
             </button>
 
             <div className="daily-view-content">
-                <h1>On {date}, you were feeling:</h1>
+                <h1>{formattedHeading}</h1>
                 <div className="emoji">{getMoodEmoji(moodEntry.mood)}</div>
                 <p className="intensity">{t.backToCalendar} {moodEntry.intensity}/5</p>
                 <p className="notes">{t.notes} {moodEntry.notes}</p>
