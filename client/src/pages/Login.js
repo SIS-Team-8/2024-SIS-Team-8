@@ -11,7 +11,7 @@ const translations = {
     Chinese: { username: "用户名", password: "密码", login: "登录", signUp: "注册", forgotPassword: "忘记密码？" }
 };
 
-export default function Login({ onLogin, language = "English" }) {
+export default function Login({ onLogin, language, setLanguage }) {
 
     const t = translations[language];
 
