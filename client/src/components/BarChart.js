@@ -37,7 +37,7 @@ const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColor
                 <XAxis dataKey="name" stroke="white">
                     <Label value="Emotion" offset={0} position="bottom" fill="#dddd" dy={10}/>
                 </XAxis>
-                <Tooltip cursor={false} content={<CustomTooltip />}/>
+                <Tooltip cursor={false} content={<CustomTooltip tooltipText={tooltipText} />}/>
                 <Bar dataKey="emoteFreq">
                     {
                         emoteData.map((entry, index) => (
@@ -51,14 +51,14 @@ const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColor
 };
 
 
-const CustomTooltip = ({ active, payload, label}) => {
+const CustomTooltip = ({ active, payload, label, tooltipText}) => {
     if (active && payload && payload.length) {
         return (
             <div id="custom-tooltip"> 
                 <p>{label}</p>
                 <p>
                     Frequency:
-                    <span> {payload[0].value}</span>
+                    {tooltipText}: <span> {payload[0].value}</span>
                 </p>
             </div>
         );
