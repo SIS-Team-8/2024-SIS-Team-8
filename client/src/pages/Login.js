@@ -11,28 +11,28 @@ const translations = {
     Chinese: { username: "用户名", password: "密码", login: "登录", signUp: "注册", forgotPassword: "忘记密码？" }
 };
 
-export default function Login({ onLogin, language}) {
+export default function Login({ onLogin, language, theme}) {
 
-    const t = translations[language];
+    const t = translations[language] || translations.English;
 
     const handleLoginClick = () => {
         onLogin();
     };
 
     return (
-        <div id="login-container">
+        <div id="login-container" className={theme}>
             <img src={logo} alt="App Logo" id="logo"/>
 
-            <div id="inputBox">
+            <div id="inputBox" className={theme}>
                 <form>
-                    <input id="userBox" placeholder={t.username}></input>
+                    <input id="userBox" className={theme} placeholder={t.username}></input>
                     <p></p>
-                    <input id="passBox" placeholder={t.password} type="password"></input>
+                    <input id="passBox" className={theme} placeholder={t.password} type="password"></input>
                 </form>
 
-                <button id="button" onClick={handleLoginClick}>{t.login}</button>
+                <button id="button" className={theme} onClick={handleLoginClick}>{t.login}</button>
 
-                <p id="bottomText">
+                <p id="bottomText" className={theme}>
                     <Link to="/sign-up" id="link">{t.signUp}</Link>
                     <Link id="forgotPassword">{t.forgotPassword}</Link>
                 </p>
