@@ -30,11 +30,11 @@ const getMoodEmoji = (mood) => {
 };
 
 const translations = {
-    English: { backToCalendar: "Back to Calendar", editEntry: "Edit Entry", deleteEntry: "Delete Entry", intensity: "Mood Intensity:", notes: "Notes:", noEntry: "No entry for this day." , youWereFeeling: "you were feeling" },
-    Spanish: { backToCalendar: "Volver al Calendario", editEntry: "Editar Entrada", deleteEntry: "Eliminar Entrada", intensity: "Intensidad del Estado de Ánimo:", notes: "Notas:", noEntry: "No hay entrada para este día." , youWereFeeling: "te sentías" },
-    German: { backToCalendar: "Zurück zum Kalender", editEntry: "Eintrag bearbeiten", deleteEntry: "Eintrag löschen", intensity: "Stimmungsintensität:", notes: "Notizen:", noEntry: "Keine Eintragung für diesen Tag." , youWereFeeling: "du hast dich gefühlt" },
-    French: { backToCalendar: "Retour au Calendrier", editEntry: "Modifier l'entrée", deleteEntry: "Supprimer l'entrée", intensity: "Intensité de l'humeur:", notes: "Remarques:", noEntry: "Aucune entrée pour ce jour." , youWereFeeling: "vous vous sentiez" },
-    Chinese: { backToCalendar: "返回日历", editEntry: "编辑条目", deleteEntry: "删除条目", intensity: "情绪强度:", notes: "笔记:", noEntry: "当天没有条目。" , youWereFeeling: "你当时的感觉是" }
+    English: { backToCalendar: "Back to Calendar", editEntry: "Edit Entry", deleteEntry: "Delete Entry", intensity: "Mood Intensity:", notes: "Notes:", noEntry: "No entry for this day." , youWereFeeling: "you were feeling", datePrefix: "On" },
+    Spanish: { backToCalendar: "Volver al Calendario", editEntry: "Editar Entrada", deleteEntry: "Eliminar Entrada", intensity: "Intensidad del Estado de Ánimo:", notes: "Notas:", noEntry: "No hay entrada para este día." , youWereFeeling: "te sentías", datePrefix: "En" },
+    German: { backToCalendar: "Zurück zum Kalender", editEntry: "Eintrag bearbeiten", deleteEntry: "Eintrag löschen", intensity: "Stimmungsintensität:", notes: "Notizen:", noEntry: "Keine Eintragung für diesen Tag." , youWereFeeling: "du hast dich gefühlt", datePrefix: "Am" },
+    French: { backToCalendar: "Retour au Calendrier", editEntry: "Modifier l'entrée", deleteEntry: "Supprimer l'entrée", intensity: "Intensité de l'humeur:", notes: "Remarques:", noEntry: "Aucune entrée pour ce jour." , youWereFeeling: "vous vous sentiez", datePrefix: "Le" },
+    Chinese: { backToCalendar: "返回日历", editEntry: "编辑条目", deleteEntry: "删除条目", intensity: "情绪强度:", notes: "笔记:", noEntry: "当天没有条目。" , youWereFeeling: "你当时的感觉是", datePrefix: "在" }
 };
 
 const DailyView = ({theme, language}) => {
@@ -45,7 +45,7 @@ const DailyView = ({theme, language}) => {
 
     const moodEntry = moodData[date] || { mood: "neutral", intensity: 3, notes: "No entry for this day." }; // Default mood if no entry
 
-    const translatedHeader = `On ${date}, ${t.youWereFeeling}:`;
+    const translatedHeader = `${t.datePrefix} ${date}, ${t.youWereFeeling}:`;
 
     const handleDelete = () => {
         if (window.confirm("Are you sure you want to delete this entry?")) {
