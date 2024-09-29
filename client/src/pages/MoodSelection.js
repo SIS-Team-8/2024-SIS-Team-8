@@ -28,12 +28,22 @@ import overwhelmed from '../assets/emoji/overwhelmed.png'
 import terrified from '../assets/emoji/terrified.png'
 import submit from '../assets/submit-icon.png'
 
-export default function MoodSelection() {
+const translations = {
+    English: { addNote: "Add Note..." },
+    Spanish: { addNote: "Añadir nota..." },
+    German: { addNote: "Notiz hinzufügen..." },
+    French: { addNote: "Ajouter une note..." },
+    Chinese: { addNote: "添加备注..." }
+};
+
+export default function MoodSelection({ language = "English", theme = "light" }) {
     const [firstImageSrc, setFirstImageSrc] = useState();
     const [secondImageSrc, setSecondImageSrc] = useState();
     const [thirdImageSrc, setThirdImageSrc] = useState();
     const [forthImageSrc, setForthImageSrc] = useState();
     const [fifthImageSrc, setFifthImageSrc] = useState();
+
+    const t = translations[language];
 
     const angryImageSrc = () => {
         setFirstImageSrc(annoyed);
@@ -77,7 +87,7 @@ export default function MoodSelection() {
 
     return (
         <html>
-            <div id='container'>
+            <div id='container' className={theme}>
                 <div id='row'>
                     <img id="angry" className="column" onClick={angryImageSrc} alt="angry" src={veryAngry}/>
                     <img id="sad" className="column" onClick={sadImageSrc} alt="sad" src={sad}/>
@@ -95,7 +105,7 @@ export default function MoodSelection() {
                 </div>
 
                 <div id="flexContainer">
-                    <textarea id="log" placeholder='Add Note...'/>
+                    <textarea id="log" placeholder={t.addNote} className={theme}/>
 
                     <Link to="/">
                         <img id="submit" alt="submit" src={submit}/>
