@@ -9,16 +9,31 @@ const translations = {
         xAxisLabel: "Emotions",
         yAxisLabel: "Frequency",
         tooltipText: "Frequency"
-    } },
+    }},
     Spanish: { history: "Historial", previous: "Anterior", next: "Siguiente", goHome: "Volver al Inicio", months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"], chart: {
         xLabels: ["Enfadado", "Triste", "Feliz", "Aburrido", "Asustado"],
         xAxisLabel: "Emociones",
         yAxisLabel: "Frecuencia",
         tooltipText: "Frecuencia"
+    }},
+    German: { history: "Verlauf", previous: "Vorherige", next: "Nächste", goHome: "Zur Startseite", months: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"], chart: {
+        xLabels: ["Wütend", "Traurig", "Glücklich", "Langweilig", "Erschrocken"],
+        xAxisLabel: "Emotionen",
+        yAxisLabel: "Häufigkeit",
+        tooltipText: "Häufigkeit"
     } },
-    German: { history: "Verlauf", previous: "Vorherige", next: "Nächste", goHome: "Zur Startseite", months: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"] },
-    French: { history: "Historique", previous: "Précédente", next: "Suivante", goHome: "Retour à l'accueil", months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"] },
-    Chinese: { history: "历史", previous: "前一个", next: "下一个", goHome: "回到主页", months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"] }
+    French: { history: "Historique", previous: "Précédente", next: "Suivante", goHome: "Retour à l'accueil", months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"], chart: {
+        xLabels: ["En colère", "Triste", "Heureux", "Ennuyé", "Effrayé"],
+        xAxisLabel: "Émotions",
+        yAxisLabel: "Fréquence",
+        tooltipText: "Fréquence"
+    } },
+    Chinese: { history: "历史", previous: "前一个", next: "下一个", goHome: "回到主页", months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], chart: {
+        xLabels: ["生气", "悲伤", "快乐", "无聊", "害怕"],
+        xAxisLabel: "情绪",
+        yAxisLabel: "频率",
+        tooltipText: "频率"
+    } }
 };
 
 export default function History({theme, language}) {
