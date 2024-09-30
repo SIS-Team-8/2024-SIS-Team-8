@@ -111,13 +111,13 @@ function App() {
         const t = translations[language];
 
         return (
-            <div>
-                <header className="App-header">
+            <div className={`home-screen ${theme}`}>
+                <header className={`App-header ${theme}`}>
                     <img src={logo} className="App-logo" alt="logo" />
                     <h1 class="noselect">{t.welcome}</h1>
 
                     <Link to="/mood-selection">
-                        <button id="mood-selection" class="noselect">{t.log}</button>
+                        <button id="mood-selection" className={`noselect ${theme}`}>{t.log}</button>
                     </Link>
                 </header>
             </div>
