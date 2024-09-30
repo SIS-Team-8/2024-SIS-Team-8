@@ -92,7 +92,7 @@ function App() {
                 <Route path="/profile" element={isAuthenticated ? <Profile theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/settings" element={isAuthenticated ? <Settings theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/mood-selection" element={isAuthenticated ? <MoodSelection theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} /> : <Login onLogin={handleLogin} />} />
-                <Route path="/login" element={<Login theme={theme} language={language} onLogin={handleLogin} />} />
+                <Route path="/login" element={<Login onLogin={handleLogin} />} />
                 <Route path="/sign-up" element={<SignUp theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
