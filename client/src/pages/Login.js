@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import './Login.css';
@@ -13,11 +13,15 @@ const translations = {
 
 export default function Login({ onLogin, language, theme}) {
 
-    const t = translations[language] || translations.English;
+    const [t, setT] = useState(translations[language] || translations.English);
 
     const handleLoginClick = () => {
         onLogin();
     };
+
+    useEffect(() => {
+        setT(translations[language] || translations.English);
+    }, [language]);
 
     return (
         <div id="login-container" className={theme}>
