@@ -6,20 +6,10 @@ html {
     padding: 0;
 }
 
-html.light,
-body.light {
-    background-color: #f0f0f0;
-}
-
 html.dark,
 body.dark {
     background-color: #222 !important;
     color: #ddd !important;
-}
-
-#container.light {
-    background-color: #e0f7fa; /* Light background color */
-    color: #000;
 }
 
 #container.dark {
@@ -27,21 +17,10 @@ body.dark {
     color: #ddd !important;
 }
 
-textarea.light {
-    background-color: #ffffff;
-    color: #000;
-    border: 1px solid #ccc;
-}
-
 textarea.dark {
     background-color: #555 !important;
     color: #fff !important;
     border: 1px solid #777 !important;
-}
-
-/* Button and Element Styles */
-#submit.light {
-    filter: invert(0); /* Regular Color for Light Theme */
 }
 
 *,
