@@ -41,10 +41,10 @@ const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColor
     const translatedData = defaultEmoteData.map((item) => ({
         ...item,
         name: t['Angry'] || item.Angry, // Replace the `name` property with the translated label if it exists, else keep the original
-        Sad: t['Sad'] || item.Sad,
-        Happy: t['Happy'] || item.Happy,
-        Bored: t['Bored'] || item.Bored,
-        Scared: t['Scared'] || item.Scared
+        name: t['Sad'] || item.Sad,
+        name: t['Happy'] || item.Happy,
+        name: t['Bored'] || item.Bored,
+        name: t['Scared'] || item.Scared
     }));
 
     return ( 
