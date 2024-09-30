@@ -4,6 +4,7 @@ import './Help.css'; // Ensure this CSS file exists for styling
 
 const translations = {
     English: {
+        help: "Help",
         faq: "Frequently Asked Questions (FAQ)",
         contactSupport: "Contact Support",
         email: "Email:",
@@ -27,20 +28,16 @@ const translations = {
             ],
             "Profile Settings": [
                 { question: "How can I update my profile information?", answer: "Click on 'Edit Profile' in the Profile page." },
-                { question: "How can I change my email address?", answer: "Go to 'Profile' > 'Edit Profile'." },
                 { question: "How do I reset my password?", answer: "Visit 'Profile' and then select 'Reset Password'." },
             ],
             "Daily View": [
                 { question: "How do I log today's mood?", answer: "Click 'Log Daily Emotion' on the home screen." },
                 { question: "How do I view past moods?", answer: "Go to 'History' or 'Daily View' from the home screen." },
             ],
-            "Logout": [
-                { question: "How do I confirm logout?", answer: "Click 'Confirm Logout' to exit the session." },
-                { question: "Can I cancel logout?", answer: "Yes, select 'Cancel' to return to the home screen." },
-            ],
         }
     },
     Spanish: {
+        help: "Ayuda",
         faq: "Preguntas Frecuentes (FAQ)",
         contactSupport: "Contacto de Soporte",
         email: "Correo Electrónico:",
@@ -64,20 +61,16 @@ const translations = {
             ],
             "Configuración de Perfil": [
                 { question: "¿Cómo puedo actualizar la información de mi perfil?", answer: "Haga clic en 'Editar Perfil' en la página de Perfil." },
-                { question: "¿Cómo puedo cambiar mi dirección de correo electrónico?", answer: "Vaya a 'Perfil' > 'Editar Perfil'." },
                 { question: "¿Cómo puedo restablecer mi contraseña?", answer: "Visite 'Perfil' y seleccione 'Restablecer Contraseña'." },
             ],
             "Vista Diaria": [
                 { question: "¿Cómo registro mi estado de ánimo de hoy?", answer: "Haga clic en 'Registrar Estado de Ánimo Diario' en la pantalla de inicio." },
                 { question: "¿Cómo veo los estados de ánimo pasados?", answer: "Vaya a 'Historial' o 'Vista Diaria' desde la pantalla de inicio." },
             ],
-            "Cerrar Sesión": [
-                { question: "¿Cómo confirmo el cierre de sesión?", answer: "Haga clic en 'Confirmar Cierre de Sesión' para salir de la sesión." },
-                { question: "¿Puedo cancelar el cierre de sesión?", answer: "Sí, seleccione 'Cancelar' para volver a la pantalla de inicio." },
-            ],
         }
     },
     German: {
+        help: "Helfen",
         faq: "Häufig gestellte Fragen (FAQ)",
         contactSupport: "Kontaktieren Sie den Support",
         email: "Email:",
@@ -101,20 +94,16 @@ const translations = {
             ],
             "Profileinstellungen": [
                 { question: "Wie kann ich meine Profilinformationen aktualisieren?", answer: "Klicken Sie auf 'Profil bearbeiten' auf der Profilseite." },
-                { question: "Wie kann ich meine E-Mail-Adresse ändern?", answer: "Gehen Sie zu 'Profil' > 'Profil bearbeiten'." },
                 { question: "Wie kann ich mein Passwort zurücksetzen?", answer: "Besuchen Sie 'Profil' und wählen Sie 'Passwort zurücksetzen'." },
             ],
             "Tägliche Ansicht": [
                 { question: "Wie protokolliere ich die heutige Stimmung?", answer: "Klicken Sie auf 'Tägliche Stimmung aufzeichnen' auf dem Startbildschirm." },
                 { question: "Wie kann ich vergangene Stimmungen anzeigen?", answer: "Gehen Sie zu 'Verlauf' oder 'Tägliche Ansicht' vom Startbildschirm aus." },
             ],
-            "Abmeldung": [
-                { question: "Wie bestätige ich die Abmeldung?", answer: "Klicken Sie auf 'Abmeldung bestätigen', um die Sitzung zu beenden." },
-                { question: "Kann ich die Abmeldung abbrechen?", answer: "Ja, wählen Sie 'Abbrechen', um zum Startbildschirm zurückzukehren." },
-            ],
         }
     },
     French: {
+        help: "Aide",
         faq: "Questions Fréquemment Posées (FAQ)",
         contactSupport: "Contacter le Support",
         email: "Email:",
@@ -138,20 +127,16 @@ const translations = {
             ],
             "Paramètres du Profil": [
                 { question: "Comment puis-je mettre à jour les informations de mon profil ?", answer: "Cliquez sur 'Modifier le profil' dans la page de profil." },
-                { question: "Comment puis-je changer mon adresse e-mail ?", answer: "Allez dans 'Profil' > 'Modifier le profil'." },
                 { question: "Comment puis-je réinitialiser mon mot de passe ?", answer: "Visitez 'Profil' puis sélectionnez 'Réinitialiser le mot de passe'." },
             ],
             "Vue Quotidienne": [
                 { question: "Comment enregistrer mon humeur du jour ?", answer: "Cliquez sur 'Enregistrer l'émotion quotidienne' sur l'écran d'accueil." },
                 { question: "Comment consulter les humeurs passées ?", answer: "Allez dans 'Historique' ou 'Vue Quotidienne' depuis l'écran d'accueil." },
             ],
-            "Déconnexion": [
-                { question: "Comment confirmer la déconnexion ?", answer: "Cliquez sur 'Confirmer la déconnexion' pour quitter la session." },
-                { question: "Puis-je annuler la déconnexion ?", answer: "Oui, sélectionnez 'Annuler' pour revenir à l'écran d'accueil." },
-            ],
         }
     },
     Chinese: {
+        help: "帮助",
         faq: "常见问题 (FAQ)",
         contactSupport: "联系支持",
         email: "电子邮件:",
@@ -175,16 +160,11 @@ const translations = {
             ],
             "个人资料设置": [
                 { question: "如何更新我的个人信息？", answer: "点击 '编辑个人资料' 在个人资料页面。" },
-                { question: "如何更改我的电子邮件地址？", answer: "转到 '个人资料' > '编辑个人资料'。" },
                 { question: "如何重置我的密码？", answer: "访问 '个人资料' 并选择 '重置密码'。" },
             ],
             "每日视图": [
                 { question: "如何记录今天的心情？", answer: "点击主页上的 '记录每日情绪'。" },
                 { question: "如何查看过去的心情？", answer: "从主页进入 '历史记录' 或 '每日视图'。" },
-            ],
-            "登出": [
-                { question: "如何确认登出？", answer: "点击 '确认登出' 退出会话。" },
-                { question: "我可以取消登出吗？", answer: "是的，选择 '取消' 返回主页。" },
             ],
         }
     },
@@ -216,16 +196,11 @@ function Help({ theme, language }) {
         ],
         "Profile Settings": [
             { question: "How can I update my profile information?", answer: "Click on 'Edit Profile' in the Profile page." },
-            { question: "How can I change my email address?", answer: "Go to 'Profile' > 'Edit Profile'." },
             { question: "How do I reset my password?", answer: "Visit 'Profile' and then select 'Reset Password'." },
         ],
         "Daily View": [
             { question: "How do I log today's mood?", answer: "Click 'Log Daily Emotion' on the home screen." },
             { question: "How do I view past moods?", answer: "Go to 'History' or 'Daily View' from the home screen." },
-        ],
-        "Logout": [
-            { question: "How do I confirm logout?", answer: "Click 'Confirm Logout' to exit the session." },
-            { question: "Can I cancel logout?", answer: "Yes, select 'Cancel' to return to the home screen." },
         ],
     };
 
@@ -247,14 +222,14 @@ function Help({ theme, language }) {
 
     return (
         <div className= { `help-container ${theme}` }>
-            <h1 style={{ marginBottom: '20px', textAlign: 'center' }}>Help</h1>
+            <h1 style={{ marginBottom: '20px', textAlign: 'center' }}>{t.help}</h1>
 
             <div style={{ margin: '0 auto', maxWidth: '800px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 {/* FAQ Section */}
                 <div style={{ flex: '1', marginRight: '20px' }}>
                     <h2 className="custom-header">{t.faq}</h2>
 
-                    {Object.keys(categories).map((category, catIndex) => (
+                    {Object.keys(t.categories).map((category, catIndex) => (
                         <div key={catIndex} style={{ marginBottom: '20px' }}>
                             <h3 style={{ marginBottom: '10px', cursor: 'pointer' }} onClick={() => toggleCategory(category)}>
                                 {category}
@@ -263,7 +238,7 @@ function Help({ theme, language }) {
 
                             {expandedCategory === category && (
                                 <ul style={{ listStyle: 'none', padding: '0', fontSize: '15px' }}>
-                                    {categories[category].map((faq, index) => (
+                                    {t.categories[category].map((faq, index) => (
                                         <li key={index} style={{ marginBottom: '10px', cursor: 'pointer', borderBottom: '1px dashed #fff', paddingBottom: '5px' }} onClick={() => toggleFaq(category, index)}>
                                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                                 {faq.question}
