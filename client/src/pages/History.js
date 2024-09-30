@@ -67,6 +67,7 @@ export default function History({theme, language}) {
                 yAxisLabel={t.chart.yAxisLabel}
                 tooltipText={t.chart.tooltipText}
                 barColors={["#ff746c", "#b3ebf2", "#ffee8c", "grey", "#6c3baa"]}
+                language={language}
             />
             <div style={{ marginTop: '15px', textAlign: 'center' }}>
                 <Link to="/">

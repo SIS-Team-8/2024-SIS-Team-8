@@ -2,11 +2,11 @@ import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis, Tooltip, Label, Cell 
 import './BarChart.css';
 
 const translations = {
-    English: {frequency: "Frequency", emotion: "Emotion"},
-    Spanish: {frequency: "Frecuencia", emotion: "Emoción"},
-    German: {frequency: "Häufigkeit", emotion: "Emotion"},
-    French: {frequency: "Fréquence", emotion: "Émotion"},
-    Chinese: {frequency: "频率", emotion: "情绪"}
+    English: { frequency: "Frequency", emotion: "Emotion", tooltipText: "Frequency" },
+    Spanish: { frequency: "Frecuencia", emotion: "Emoción", tooltipText: "Frecuencia" },
+    German: { frequency: "Häufigkeit", emotion: "Emotion", tooltipText: "Häufigkeit" },
+    French: { frequency: "Fréquence", emotion: "Émotion", tooltipText: "Fréquence" },
+    Chinese: { frequency: "频率", emotion: "情绪", tooltipText: "频率" }
 };
 
 const emoteData = [
@@ -46,7 +46,7 @@ const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColor
                 <XAxis dataKey="name" stroke="white">
                     <Label value={t.emotion} offset={0} position="bottom" fill="#dddd" dy={10}/>
                 </XAxis>
-                <Tooltip cursor={false} content={<CustomTooltip tooltipText={tooltipText} />}/>
+                <Tooltip cursor={false} content={<CustomTooltip tooltipText={t.tooltipText} />}/>
                 <Bar dataKey="emoteFreq">
                     {
                         emoteData.map((entry, index) => (
