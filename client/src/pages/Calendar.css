@@ -82,7 +82,7 @@
 }
 
 .month-navigation.dark h2 {
-    color: white !important; /* Ensure text color is white in dark mode */
+    color: black !important; /* Ensure text color is white in dark mode */
 }
 
 .month-navigation button {
@@ -144,7 +144,7 @@ body.dark {
 }
 
 .calendar-table.dark td {
-    color: white; /* White text for dark mode */
+    color: black; /* White text for dark mode */
 }
 
 .calendar-table.light th {
@@ -152,5 +152,5 @@ body.dark {
 }
 
 .calendar-table.dark th {
-    color: white; /* White header text for dark mode */
+    color: black; /* White header text for dark mode */
 }
