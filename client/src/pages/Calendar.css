@@ -57,7 +57,7 @@
 
 .calendar-table.dark td {
     background-color: #555 !important; /* Dark mode background for table cells */
-    color: white !important; /* Dark mode text color */
+    color: black !important; /* Dark mode text color */
 }
 
 .month-navigation {
