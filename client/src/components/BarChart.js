@@ -39,6 +39,7 @@ const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColor
     const t = translations[language] || translations.English;
 
     const translatedData = defaultEmoteData.map((item) => ({
+        ...item,
         name: t["Angry"] || item.name, 
         name: t["Sad"] || item.name,
         name: t["Happy"] || item.name,
@@ -75,7 +76,6 @@ const CustomTooltip = ({ active, payload, label, tooltipText}) => {
             <div id="custom-tooltip"> 
                 <p>{label}</p>
                 <p>
-                    Frequency:
                     {tooltipText}: <span> {payload[0].value}</span>
                 </p>
             </div>
