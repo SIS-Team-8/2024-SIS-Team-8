@@ -180,7 +180,6 @@ function Help({ theme, language }) {
     // Using the exact provided questions and answers
     const categories = {
         "Login Issues": [
-            { question: "Why can't I log in?", answer: "Please check your credentials or/and your internet connection." },
             { question: "What happens if I forget my password?", answer: "You can use the 'Reset Password' option." },
         ],
         "Settings": [
@@ -191,7 +190,6 @@ function Help({ theme, language }) {
         ],
         "Support and Help": [
             { question: "How can I contact customer support?", answer: "Contact the support team, using the contact details listed in the Help page." },
-            { question: "What to do if my account is hacked?", answer: "Contact the support team as soon as possible." },
             { question: "How can I view the help guide?", answer: "Visit the 'Help' section for detailed guides." },
         ],
         "Profile Settings": [
@@ -199,7 +197,6 @@ function Help({ theme, language }) {
             { question: "How do I reset my password?", answer: "Visit 'Profile' and then select 'Reset Password'." },
         ],
         "Daily View": [
-            { question: "How do I log today's mood?", answer: "Click 'Log Daily Emotion' on the home screen." },
             { question: "How do I view past moods?", answer: "Go to 'History' or 'Daily View' from the home screen." },
         ],
     };
