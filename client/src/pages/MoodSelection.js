@@ -108,7 +108,7 @@ export default function MoodSelection({ language = "English", theme = "light" })
                     <textarea id="log" placeholder={t.addNote} className={theme}/>
 
                     <Link to="/">
-                        <img id="submit" alt="submit" src={submit}/>
+                        <img id="submit" className={theme} alt="submit" src={submit}/>
                     </Link>
                 </div>
             </div>
