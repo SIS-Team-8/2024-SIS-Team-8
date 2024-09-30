@@ -85,17 +85,6 @@ input {
     text-decoration: none;
 }
 
-/* Light Mode */
-#login-container.light {
-    background-color: #f0f0f0;
-    color: #333;
-}
-
-#inputBox.light {
-    background-color: #fff;
-    color: #333;
-}
-
 /* Dark Mode */
 #login-container.dark {
     background-color: #333;
@@ -105,13 +94,6 @@ input {
 #inputBox.dark {
     background-color: #444;
     color: white;
-}
-
-/* Light Theme for Input Fields */
-#userBox.light, #passBox.light {
-    background-color: #f9f9f9;
-    color: #333;
-    border: 1px solid #ccc;
 }
 
 /* Dark Theme for Input Fields */
