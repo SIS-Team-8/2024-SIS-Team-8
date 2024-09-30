@@ -11,13 +11,9 @@ const translations = {
     Chinese: { username: "用户名", password: "密码", login: "登录", signUp: "注册", forgotPassword: "忘记密码？" }
 };
 
-export default function Login({ onLogin, language, setLanguage, theme}) {
+export default function Login({ onLogin, language, theme}) {
 
     const t = translations[language] || translations.English;
-
-    const handleLanguageChange = (e) => {
-        setLanguage(e.target.value);
-    };
 
     const handleLoginClick = () => {
         onLogin();
