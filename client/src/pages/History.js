@@ -40,7 +40,7 @@ export default function History({theme, language}) {
 
     return (
         <div id="history-container" className={theme}>
-            <h1>History</h1>
+            <h1>{t.history}</h1>
             <div id="month-navigation">
                 <button onClick={() => changeMonth(-1)}>{t.previous}</button>
                 <h2>{`${t.months[currentMonth.getMonth()]} ${currentMonth.getFullYear()}`}</h2>
