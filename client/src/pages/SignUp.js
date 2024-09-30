@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import './SignUp.css';
 
-export default function SignUp({language, theme }) {
+export default function SignUp( {language, theme }) {
     const navigate = useNavigate();
 
     const handleSignUpClick = () => {

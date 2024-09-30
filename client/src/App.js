@@ -132,8 +132,6 @@ function App() {
             French: { notFound: "404: Page non trouvée", goHome: "Aller à la connexion" },
             Chinese: { notFound: "404：页面未找到", goHome: "转到登录" }
         };
-        
-        const t = translations[language];
 
         return (
             <div>
