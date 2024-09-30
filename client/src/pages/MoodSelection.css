@@ -44,10 +44,6 @@ textarea.dark {
     filter: invert(0); /* Regular Color for Light Theme */
 }
 
-#submit.dark {
-    filter: invert(1) !important; /* Invert the colors for Dark Theme */
-}
-
 *,
 *:before,
 *:after {
