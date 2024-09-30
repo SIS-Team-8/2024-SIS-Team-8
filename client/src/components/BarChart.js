@@ -39,8 +39,7 @@ const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColor
     const t = translations[language] || translations.English;
 
     const translatedData = defaultEmoteData.map((item) => ({
-        ...item,
-        name: t["Angry"] || item.name, // Replace the `name` property with the translated label if it exists, else keep the original
+        name: t["Angry"] || item.name, 
         name: t["Sad"] || item.name,
         name: t["Happy"] || item.name,
         name: t["Bored"] || item.name,
