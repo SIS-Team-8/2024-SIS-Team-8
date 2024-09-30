@@ -85,40 +85,42 @@ input {
     text-decoration: none;
 }
 
-/* Dark Mode */
+/* Light Theme Links */
+#link.light, #forgotPassword.light {
+    color: #189ab4;
+}
+
+/* Light Theme Links */
+#link.light, #forgotPassword.light {
+    color: #189ab4;
+}
+
+/* Dark Mode Styles for Login */
 #login-container.dark {
-    background-color: #333;
-    color: white;
+    background-color: #333; /* Dark background color */
+    color: #ddd; /* Light text color */
 }
 
 #inputBox.dark {
-    background-color: #444;
-    color: white;
+    background-color: #444; /* Darker background for the input container */
+    color: #ddd; /* Light text for input container */
 }
 
-/* Dark Theme for Input Fields */
 #userBox.dark, #passBox.dark {
-    background-color: #666;
-    color: white;
-    border: 1px solid #444;
+    background-color: #555; /* Dark input fields */
+    border: 1px solid #777; /* Lighter border */
+    color: #ddd; /* Light text color */
 }
 
-/* Light Theme Links */
-#link.light, #forgotPassword.light {
-    color: #189ab4;
+#button.dark {
+    background-color: #555; /* Dark background for button */
+    color: #ddd; /* Light text for button */
 }
 
-/* Dark Theme Links */
+#bottomText.dark {
+    color: #ddd; /* Light text color for bottom text */
+}
+
 #link.dark, #forgotPassword.dark {
-    color: #a4defb;
-}
-
-/* Light Theme Links */
-#link.light, #forgotPassword.light {
-    color: #189ab4;
-}
-
-/* Dark Theme Links */
-#link.dark, #forgotPassword.dark {
-    color: #a4defb;
+    color: #a4defb; /* Light blue for links */
 }
