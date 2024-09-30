@@ -76,7 +76,7 @@ function App() {
             {isAuthenticated && <Navbar onLogout={handleLogout} theme={theme} toggleTheme={toggleTheme} language={language} onLanguageChange={handleLanguageChange} />}
 
             <Routes>
-            <Route path="/" element={isAuthenticated ? <Home /> : <Login onLogin={handleLogin} language={language} theme={theme} />} /> 
+            <Route path="/" element={isAuthenticated ? <Home /> : <Login language={language} theme={theme} onLogin={handleLogin} />} /> 
             <Route path="/settings" element={
                     <Settings 
                         theme={theme} 
