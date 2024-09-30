@@ -137,3 +137,20 @@ body.dark {
     background-color: #333 !important;
     color: white !important;
 }
+
+/* Table cell and date colors for light and dark modes */
+.calendar-table.light td {
+    color: black; /* Black text for light mode */
+}
+
+.calendar-table.dark td {
+    color: white; /* White text for dark mode */
+}
+
+.calendar-table.light th {
+    color: black; /* Black header text for light mode */
+}
+
+.calendar-table.dark th {
+    color: white; /* White header text for dark mode */
+}
