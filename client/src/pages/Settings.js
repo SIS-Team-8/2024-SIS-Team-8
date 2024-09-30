@@ -18,7 +18,14 @@ const translations = {
         daily: "Daily",
         weekly: "Weekly",
         monthly: "Monthly",
-        custom: "Custom"
+        custom: "Custom",
+        languages: {
+            English: "English",
+            Spanish: "Spanish",
+            German: "German",
+            French: "French",
+            Chinese: "Chinese"
+        }
     },
     Spanish: {
         title: "Configuración",
@@ -35,7 +42,14 @@ const translations = {
         daily: "Diario",
         weekly: "Semanal",
         monthly: "Mensual",
-        custom: "Personalizado"
+        custom: "Personalizado",
+        languages: {
+            English: "Inglés",
+            Spanish: "Español",
+            German: "Alemán",
+            French: "Francés",
+            Chinese: "Chino"
+        }
     },
     German: {
         title: "Einstellungen",
@@ -52,7 +66,14 @@ const translations = {
         daily: "Täglich",
         weekly: "Wöchentlich",
         monthly: "Monatlich",
-        custom: "Benutzerdefiniert"
+        custom: "Benutzerdefiniert",
+        languages: {
+            English: "Englisch",
+            Spanish: "Spanisch",
+            German: "Deutsch",
+            French: "Französisch",
+            Chinese: "Chinesisch"
+        }
     },
     French: {
         title: "Paramètres",
@@ -69,7 +90,14 @@ const translations = {
         daily: "Quotidien",
         weekly: "Hebdomadaire",
         monthly: "Mensuel",
-        custom: "Personnalisé"
+        custom: "Personnalisé",
+        languages: {
+            English: "Anglais",
+            Spanish: "Espagnol",
+            German: "Allemand",
+            French: "Français",
+            Chinese: "Chinois"
+        }
     },
     Chinese: {
         title: "设置",
@@ -86,7 +114,14 @@ const translations = {
         daily: "每日",
         weekly: "每周",
         monthly: "每月",
-        custom: "自定义"
+        custom: "自定义",
+        languages: {
+            English: "英语",
+            Spanish: "西班牙语",
+            German: "德语",
+            French: "法语",
+            Chinese: "中文"
+        }
     }
 };
 
@@ -132,11 +167,11 @@ const Settings = ({ theme, toggleTheme, language, setLanguage }) => {
                     <h2>{t.language}</h2>
                     <div className="options-group">
                         <select value={language} onChange={handleLanguageChange}>
-                            <option value="English">English</option>
-                            <option value="Spanish">Spanish</option>
-                            <option value="German">German</option>
-                            <option value="French">French</option>
-                            <option value="Chinese">Chinese</option>
+                        {Object.keys(translations).map((langKey) => (
+                                <option key={langKey} value={langKey}>
+                                    {t.languages[langKey]} {/* Use the translated language names */}
+                                </option>
+                            ))}
                         </select>
                     </div>
                 </div>
