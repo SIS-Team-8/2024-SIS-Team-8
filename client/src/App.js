@@ -101,11 +101,11 @@ function App() {
 
     function Home() {
         const translations = {
-            English: { welcome: "Welcome!" },
-            Spanish: { welcome: "¡Bienvenido!" },
-            German: { welcome: "Willkommen!" },
-            French: { welcome: "Bienvenue!" },
-            Chinese: { welcome: "欢迎！" }
+            English: { welcome: "Welcome!", log: "Log Daily Emotion" },
+            Spanish: { welcome: "¡Bienvenido!", log: "Registrar emoción diaria" },
+            German: { welcome: "Willkommen!", log: "Tägliche Emotion aufzeichnen" },
+            French: { welcome: "Bienvenue!", log: "Enregistrer l'émotion quotidienne" },
+            Chinese: { welcome: "欢迎！", log: "记录每日情绪" }
         };
         
         const t = translations[language];
@@ -114,10 +114,10 @@ function App() {
             <div>
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
-                    <h1 class="noselect">Welcome!</h1>
+                    <h1 class="noselect">{t.welcome}</h1>
 
                     <Link to="/mood-selection">
-                        <button id="mood-selection" class="noselect">Log Daily Emotion</button>
+                        <button id="mood-selection" class="noselect">{t.log}</button>
                     </Link>
                 </header>
             </div>
