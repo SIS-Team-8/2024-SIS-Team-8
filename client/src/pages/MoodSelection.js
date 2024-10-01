@@ -34,6 +34,16 @@ export default function MoodSelection() {
     const [thirdImageSrc, setThirdImageSrc] = useState();
     const [forthImageSrc, setForthImageSrc] = useState();
     const [fifthImageSrc, setFifthImageSrc] = useState();
+    const [firstOpacity, setFirstOpacity] = useState();
+    const [secondOpacity, setSecondOpacity] = useState();
+    const [thirdOpacity, setThirdOpacity] = useState();
+    const [forthOpacity, setForthOpacity] = useState();
+    const [fifthOpacity, setFifthOpacity] = useState();
+    const [sixthOpacity, setSixthOpacity] = useState();
+    const [seventhOpacity, setSeventhOpacity] = useState();
+    const [eigthOpacity, setEigthOpacity] = useState();
+    const [ninthOpacity, setNinthOpacity] = useState();
+    const [tenthOpacity, setTenthOpacity] = useState();
 
     const angryImageSrc = () => {
         setFirstImageSrc(annoyed);
@@ -41,6 +51,16 @@ export default function MoodSelection() {
         setThirdImageSrc(angry);
         setForthImageSrc(veryAngry);
         setFifthImageSrc(extremelyAngry);
+        setFirstOpacity(1);
+        setSecondOpacity(0.5);
+        setThirdOpacity(0.5);
+        setForthOpacity(0.5);
+        setFifthOpacity(0.5);
+        setSixthOpacity(1);
+        setSeventhOpacity(1);
+        setEigthOpacity(1);
+        setNinthOpacity(1);
+        setTenthOpacity(1);
     }
 
     const sadImageSrc = () => {
@@ -49,6 +69,16 @@ export default function MoodSelection() {
         setThirdImageSrc(deflated);
         setForthImageSrc(distressed);
         setFifthImageSrc(miserable);
+        setFirstOpacity(0.5);
+        setSecondOpacity(1);
+        setThirdOpacity(0.5);
+        setForthOpacity(0.5);
+        setFifthOpacity(0.5);
+        setSixthOpacity(1);
+        setSeventhOpacity(1);
+        setEigthOpacity(1);
+        setNinthOpacity(1);
+        setTenthOpacity(1);
     }
 
     const happyImageSrc = () => {
@@ -57,6 +87,16 @@ export default function MoodSelection() {
         setThirdImageSrc(extremelyHappy);
         setForthImageSrc(amazinglyHappy);
         setFifthImageSrc(ecstatic);
+        setFirstOpacity(0.5);
+        setSecondOpacity(0.5);
+        setThirdOpacity(1);
+        setForthOpacity(0.5);
+        setFifthOpacity(0.5);
+        setSixthOpacity(1);
+        setSeventhOpacity(1);
+        setEigthOpacity(1);
+        setNinthOpacity(1);
+        setTenthOpacity(1);
     }
 
     const boredImageSrc = () => {
@@ -65,6 +105,16 @@ export default function MoodSelection() {
         setThirdImageSrc(sarcastic);
         setForthImageSrc(tired);
         setFifthImageSrc(exhausted);
+        setFirstOpacity(0.5);
+        setSecondOpacity(0.5);
+        setThirdOpacity(0.5);
+        setForthOpacity(1);
+        setFifthOpacity(0.5);
+        setSixthOpacity(1);
+        setSeventhOpacity(1);
+        setEigthOpacity(1);
+        setNinthOpacity(1);
+        setTenthOpacity(1);
     }
 
     const scaredImageSrc = () => {
@@ -73,25 +123,75 @@ export default function MoodSelection() {
         setThirdImageSrc(overwhelmed);
         setForthImageSrc(scared);
         setFifthImageSrc(terrified);
+        setFirstOpacity(0.5);
+        setSecondOpacity(0.5);
+        setThirdOpacity(0.5);
+        setForthOpacity(0.5);
+        setFifthOpacity(1);
+        setSixthOpacity(1);
+        setSeventhOpacity(1);
+        setEigthOpacity(1);
+        setNinthOpacity(1);
+        setTenthOpacity(1);
+    }
+
+    const sixthImageClick = () => {
+        setSixthOpacity(1);
+        setSeventhOpacity(0.5);
+        setEigthOpacity(0.5);
+        setNinthOpacity(0.5);
+        setTenthOpacity(0.5);
+    }
+
+    const seventhImageClick = () => {
+        setSixthOpacity(0.5);
+        setSeventhOpacity(1);
+        setEigthOpacity(0.5);
+        setNinthOpacity(0.5);
+        setTenthOpacity(0.5);
+    }
+
+    const eigthImageClick = () => {
+        setSixthOpacity(0.5);
+        setSeventhOpacity(0.5);
+        setEigthOpacity(1);
+        setNinthOpacity(0.5);
+        setTenthOpacity(0.5);
+    }
+
+    const ninthImageClick = () => {
+        setSixthOpacity(0.5);
+        setSeventhOpacity(0.5);
+        setEigthOpacity(0.5);
+        setNinthOpacity(1);
+        setTenthOpacity(0.5);
+    }
+
+    const tenthImageClick = () => {
+        setSixthOpacity(0.5);
+        setSeventhOpacity(0.5);
+        setEigthOpacity(0.5);
+        setNinthOpacity(0.5);
+        setTenthOpacity(1);
     }
 
     return (
         <html>
             <div id='container'>
                 <div id='row'>
-                    <img id="angry" className="column" onClick={angryImageSrc} alt="angry" src={veryAngry}/>
-                    <img id="sad" className="column" onClick={sadImageSrc} alt="sad" src={sad}/>
-                    <img id="happy" className="column" onClick={happyImageSrc} alt="happy" src={happy}/>
-                    <img id="bored" className="column" onClick={boredImageSrc} alt="bored" src={bored}/>
-                    <img id="scared" className="column" onClick={scaredImageSrc} alt="scared" src={scared}/>
+                    <img id="angry" className="column" onClick={angryImageSrc} alt="angry" src={veryAngry} style={{opacity: firstOpacity}}/>
+                    <img id="sad" className="column" onClick={sadImageSrc} alt="sad" src={sad} style={{opacity: secondOpacity}}/>
+                    <img id="happy" className="column" onClick={happyImageSrc} alt="happy" src={happy} style={{opacity: thirdOpacity}}/>
+                    <img id="bored" className="column" onClick={boredImageSrc} alt="bored" src={bored} style={{opacity: forthOpacity}}/>
+                    <img id="scared" className="column" onClick={scaredImageSrc} alt="scared" src={scared} style={{opacity: fifthOpacity}}/>
                 </div>
 
                 <div id="subRow">
-                    <img id="first" className="subColumn" alt="" src={firstImageSrc}/>
-                    <img id="second" className="subColumn" alt="" src={secondImageSrc}/>
-                    <img id="third" className="subColumn" alt="" src={thirdImageSrc}/>
-                    <img id="forth" className="subColumn" alt="" src={forthImageSrc}/>
-                    <img id="fifth" className="subColumn" alt="" src={fifthImageSrc}/>
+                    <img id="first" className="subColumn" onClick={sixthImageClick} alt="" src={firstImageSrc} style={{opacity: sixthOpacity}}/>
+                    <img id="second" className="subColumn" onClick={seventhImageClick} alt="" src={secondImageSrc} style={{opacity: seventhOpacity}}/>
+                    <img id="third" className="subColumn" onClick={eigthImageClick} alt="" src={thirdImageSrc} style={{opacity: eigthOpacity}}/>
+                    <img id="forth" className="subColumn" onClick={ninthImageClick} alt="" src={forthImageSrc} style={{opacity: ninthOpacity}}/>
+                    <img id="fifth" className="subColumn" onClick={tenthImageClick} alt="" src={fifthImageSrc} style={{opacity: tenthOpacity}}/>
                 </div>
 
                 <div id="flexContainer">
