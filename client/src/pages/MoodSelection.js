@@ -56,11 +56,7 @@ export default function MoodSelection() {
         setThirdOpacity(0.5);
         setForthOpacity(0.5);
         setFifthOpacity(0.5);
-        setSixthOpacity(1);
-        setSeventhOpacity(1);
-        setEigthOpacity(1);
-        setNinthOpacity(1);
-        setTenthOpacity(1);
+        bottomRowReset();
     }
 
     const sadImageSrc = () => {
@@ -74,11 +70,7 @@ export default function MoodSelection() {
         setThirdOpacity(0.5);
         setForthOpacity(0.5);
         setFifthOpacity(0.5);
-        setSixthOpacity(1);
-        setSeventhOpacity(1);
-        setEigthOpacity(1);
-        setNinthOpacity(1);
-        setTenthOpacity(1);
+        bottomRowReset();
     }
 
     const happyImageSrc = () => {
@@ -92,11 +84,7 @@ export default function MoodSelection() {
         setThirdOpacity(1);
         setForthOpacity(0.5);
         setFifthOpacity(0.5);
-        setSixthOpacity(1);
-        setSeventhOpacity(1);
-        setEigthOpacity(1);
-        setNinthOpacity(1);
-        setTenthOpacity(1);
+        bottomRowReset();
     }
 
     const boredImageSrc = () => {
@@ -110,11 +98,7 @@ export default function MoodSelection() {
         setThirdOpacity(0.5);
         setForthOpacity(1);
         setFifthOpacity(0.5);
-        setSixthOpacity(1);
-        setSeventhOpacity(1);
-        setEigthOpacity(1);
-        setNinthOpacity(1);
-        setTenthOpacity(1);
+        bottomRowReset();
     }
 
     const scaredImageSrc = () => {
@@ -128,11 +112,7 @@ export default function MoodSelection() {
         setThirdOpacity(0.5);
         setForthOpacity(0.5);
         setFifthOpacity(1);
-        setSixthOpacity(1);
-        setSeventhOpacity(1);
-        setEigthOpacity(1);
-        setNinthOpacity(1);
-        setTenthOpacity(1);
+        bottomRowReset();
     }
 
     const sixthImageClick = () => {
@@ -172,6 +152,14 @@ export default function MoodSelection() {
         setSeventhOpacity(0.5);
         setEigthOpacity(0.5);
         setNinthOpacity(0.5);
+        setTenthOpacity(1);
+    }
+    
+    const bottomRowReset = () => {
+        setSixthOpacity(1);
+        setSeventhOpacity(1);
+        setEigthOpacity(1);
+        setNinthOpacity(1);
         setTenthOpacity(1);
     }
 
