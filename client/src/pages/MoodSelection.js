@@ -29,164 +29,67 @@ import terrified from '../assets/emoji/terrified.png'
 import submit from '../assets/submit-icon.png'
 
 export default function MoodSelection() {
-    const [firstImageSrc, setFirstImageSrc] = useState();
-    const [secondImageSrc, setSecondImageSrc] = useState();
-    const [thirdImageSrc, setThirdImageSrc] = useState();
-    const [forthImageSrc, setForthImageSrc] = useState();
-    const [fifthImageSrc, setFifthImageSrc] = useState();
-    const [firstOpacity, setFirstOpacity] = useState();
-    const [secondOpacity, setSecondOpacity] = useState();
-    const [thirdOpacity, setThirdOpacity] = useState();
-    const [forthOpacity, setForthOpacity] = useState();
-    const [fifthOpacity, setFifthOpacity] = useState();
-    const [sixthOpacity, setSixthOpacity] = useState();
-    const [seventhOpacity, setSeventhOpacity] = useState();
-    const [eigthOpacity, setEigthOpacity] = useState();
-    const [ninthOpacity, setNinthOpacity] = useState();
-    const [tenthOpacity, setTenthOpacity] = useState();
+    const [imageSrc, setImageSrc] = useState(Array(5));
+    const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
+    const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
 
-    const angryImageSrc = () => {
-        setFirstImageSrc(annoyed);
-        setSecondImageSrc(frustrated);
-        setThirdImageSrc(angry);
-        setForthImageSrc(veryAngry);
-        setFifthImageSrc(extremelyAngry);
-        setFirstOpacity(1);
-        setSecondOpacity(0.5);
-        setThirdOpacity(0.5);
-        setForthOpacity(0.5);
-        setFifthOpacity(0.5);
-        bottomRowReset();
-    }
+    const setMoodImages = (images, activeIndex) => {
+        setImageSrc(images);
+        setRowOpacity(prev => prev.map((_, i) => (i === activeIndex ? 1 : 0.5)));  // Change opacity of row images on click
+        resetSubRowOpacity();
+    };
 
-    const sadImageSrc = () => {
-        setFirstImageSrc(upset);
-        setSecondImageSrc(sad);
-        setThirdImageSrc(deflated);
-        setForthImageSrc(distressed);
-        setFifthImageSrc(miserable);
-        setFirstOpacity(0.5);
-        setSecondOpacity(1);
-        setThirdOpacity(0.5);
-        setForthOpacity(0.5);
-        setFifthOpacity(0.5);
-        bottomRowReset();
-    }
+    const resetSubRowOpacity = () => {
+        setSubRowOpacity(Array(5).fill(1));  // Reset sub-row images' opacity to 1
+    };
 
-    const happyImageSrc = () => {
-        setFirstImageSrc(happy);
-        setSecondImageSrc(veryHappy);
-        setThirdImageSrc(extremelyHappy);
-        setForthImageSrc(amazinglyHappy);
-        setFifthImageSrc(ecstatic);
-        setFirstOpacity(0.5);
-        setSecondOpacity(0.5);
-        setThirdOpacity(1);
-        setForthOpacity(0.5);
-        setFifthOpacity(0.5);
-        bottomRowReset();
-    }
+    const moods = {
+        angry: { rowImg: veryAngry, subImages: [annoyed, frustrated, angry, veryAngry, extremelyAngry] },
+        sad: { rowImg: sad, subImages: [upset, sad, deflated, distressed, miserable] },
+        happy: { rowImg: happy, subImages: [happy, veryHappy, extremelyHappy, amazinglyHappy, ecstatic] },
+        bored: { rowImg: bored, subImages: [bored, exasperated, sarcastic, tired, exhausted] },
+        scared: { rowImg: scared, subImages: [surprised, nervous, overwhelmed, scared, terrified] },
+    };
 
-    const boredImageSrc = () => {
-        setFirstImageSrc(bored);
-        setSecondImageSrc(exasperated);
-        setThirdImageSrc(sarcastic);
-        setForthImageSrc(tired);
-        setFifthImageSrc(exhausted);
-        setFirstOpacity(0.5);
-        setSecondOpacity(0.5);
-        setThirdOpacity(0.5);
-        setForthOpacity(1);
-        setFifthOpacity(0.5);
-        bottomRowReset();
-    }
-
-    const scaredImageSrc = () => {
-        setFirstImageSrc(surprised);
-        setSecondImageSrc(nervous);
-        setThirdImageSrc(overwhelmed);
-        setForthImageSrc(scared);
-        setFifthImageSrc(terrified);
-        setFirstOpacity(0.5);
-        setSecondOpacity(0.5);
-        setThirdOpacity(0.5);
-        setForthOpacity(0.5);
-        setFifthOpacity(1);
-        bottomRowReset();
-    }
-
-    const sixthImageClick = () => {
-        setSixthOpacity(1);
-        setSeventhOpacity(0.5);
-        setEigthOpacity(0.5);
-        setNinthOpacity(0.5);
-        setTenthOpacity(0.5);
-    }
-
-    const seventhImageClick = () => {
-        setSixthOpacity(0.5);
-        setSeventhOpacity(1);
-        setEigthOpacity(0.5);
-        setNinthOpacity(0.5);
-        setTenthOpacity(0.5);
-    }
-
-    const eigthImageClick = () => {
-        setSixthOpacity(0.5);
-        setSeventhOpacity(0.5);
-        setEigthOpacity(1);
-        setNinthOpacity(0.5);
-        setTenthOpacity(0.5);
-    }
-
-    const ninthImageClick = () => {
-        setSixthOpacity(0.5);
-        setSeventhOpacity(0.5);
-        setEigthOpacity(0.5);
-        setNinthOpacity(1);
-        setTenthOpacity(0.5);
-    }
-
-    const tenthImageClick = () => {
-        setSixthOpacity(0.5);
-        setSeventhOpacity(0.5);
-        setEigthOpacity(0.5);
-        setNinthOpacity(0.5);
-        setTenthOpacity(1);
-    }
-    
-    const bottomRowReset = () => {
-        setSixthOpacity(1);
-        setSeventhOpacity(1);
-        setEigthOpacity(1);
-        setNinthOpacity(1);
-        setTenthOpacity(1);
-    }
+    const handleSubRowClick = (index) => {
+        setSubRowOpacity(prev => prev.map((_, i) => (i === index ? 1 : 0.5)));  // Update only sub-row images' opacity
+    };
 
     return (
         <html>
             <div id='container'>
                 <div id='row'>
-                    <img id="angry" className="column" onClick={angryImageSrc} alt="angry" src={veryAngry} style={{opacity: firstOpacity}}/>
-                    <img id="sad" className="column" onClick={sadImageSrc} alt="sad" src={sad} style={{opacity: secondOpacity}}/>
-                    <img id="happy" className="column" onClick={happyImageSrc} alt="happy" src={happy} style={{opacity: thirdOpacity}}/>
-                    <img id="bored" className="column" onClick={boredImageSrc} alt="bored" src={bored} style={{opacity: forthOpacity}}/>
-                    <img id="scared" className="column" onClick={scaredImageSrc} alt="scared" src={scared} style={{opacity: fifthOpacity}}/>
+                    {Object.keys(moods).map((mood, index) => (
+                        <img
+                            key={mood}
+                            id={mood}
+                            className="column"
+                            onClick={() => setMoodImages(moods[mood].subImages, index)}  // Pass the index for opacity update
+                            alt={mood}
+                            src={moods[mood].rowImg}
+                            style={{ opacity: rowOpacity[index] }}  // Row opacity updates on click
+                        />
+                    ))}
                 </div>
 
                 <div id="subRow">
-                    <img id="first" className="subColumn" onClick={sixthImageClick} alt="" src={firstImageSrc} style={{opacity: sixthOpacity}}/>
-                    <img id="second" className="subColumn" onClick={seventhImageClick} alt="" src={secondImageSrc} style={{opacity: seventhOpacity}}/>
-                    <img id="third" className="subColumn" onClick={eigthImageClick} alt="" src={thirdImageSrc} style={{opacity: eigthOpacity}}/>
-                    <img id="forth" className="subColumn" onClick={ninthImageClick} alt="" src={forthImageSrc} style={{opacity: ninthOpacity}}/>
-                    <img id="fifth" className="subColumn" onClick={tenthImageClick} alt="" src={fifthImageSrc} style={{opacity: tenthOpacity}}/>
+                    {imageSrc.map((src, index) => (
+                        <img
+                            key={index}
+                            id={`sub${index}`}
+                            className="subColumn"
+                            onClick={() => handleSubRowClick(index)}
+                            alt=""
+                            src={src}
+                            style={{ opacity: subRowOpacity[index] }}  // Only update sub-row opacity
+                        />
+                    ))}
                 </div>
 
                 <div id="flexContainer">
-                    <textarea id="log" placeholder='Add Note...'/>
-
+                    <textarea id="log" placeholder='Add Note...' />
                     <Link to="/">
-                        <img id="submit" alt="submit" src={submit}/>
+                        <img id="submit" alt="submit" src={submit} />
                     </Link>
                 </div>
             </div>
