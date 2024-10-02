@@ -1,0 +1,68 @@
+.help-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #189ab4;
+    flex-direction: column;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    text-align: left;
+}
+
+.help-container .button {
+    padding: 7px;
+    font-size: large;
+    width: 308px;
+    font-family: 'Poppins';
+    background-color: white;
+    color: #189ab4;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.help-container .button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
+.help-container .custom-button:hover {
+    background-color: #189ab4;
+    color: white;
+}
+
+.help-container h1 {
+    font-size: 42px;
+    padding-bottom: 30px;
+}
+
+.help-container h2 {
+    font-size: 22px;
+}
+
+.help-container h3 {
+    font-size: 18px;
+}
+
+/* Underlines for the headers */
+.help-container .custom-header {
+    margin-bottom: 15px;
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+    color: white;
+}
+
+.help-container .custom-header:hover {
+    border-bottom-color: white;
+}
+
+/* Text inside the FAQ section */
+.help-container h2, .help-container h3, .help-container p {
+    color: white;
+}
+
+/* FAQ items */
+.help-container ul li {
+    color: white;
+}

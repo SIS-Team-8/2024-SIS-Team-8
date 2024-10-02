@@ -34,17 +34,29 @@
 * Leave comments for each function in regards to their purpose, and possibly an explanation of the process.
 * Don't be afraid to leave small notes and comments whilst developing.
 
-### Getting Started
+### Getting Started - Client Only
 
 * clone repository.
 * Open in vscode.
 * run `npm install` in root directory.
 * cd into the client directory and run `npm install`.
 * return to the root directory with cd.
-* To run only the client run `npm run start-client`.
-* Server side is till in development so stay tuned for updates.
 
-### Getting Started - Full Stack (DO NOT ATTEMP UNLESS YOU KNOW WHAT YOU ARE DOING)
+#### Startup Procedure
+
+* To run only the client run `npm run start-client`.
+
+#### Testing
+
+* go to [application](http://localhost:3000) in your browser.
+
+#### Shutdown procedure
+
+* To stop the client run `ctrl/cmd + c` in the terminal.
+
+### Getting Started - Full Stack
+
+#### Setup
 
 * clone repository.
 * Open in vscode.
@@ -52,8 +64,84 @@
 * create a `.env` file in the server directory and add the following:
 
 ```text
-PORT=
-MONGO_URI=
+MONGODB_URI=mongodb://dev:Endless2-Drift-Turf@localhost:28018
+MONGODB_DB=SIS-Team-8-dev
+TOKEN_KEY=secret
 ```
 
+* return to the root directory with cd.
+
+#### Startup Procedure
+
+* make sure docker is installed and the daemon is running.
+* Start the development database by running `docker compose -f docker-compose.dev.yaml up -d` in the root directory.
 * To run the full stack application run `npm run start`.
+
+#### Testing
+
+* go to [application](http://localhost:3000) in your browser.
+* if using full stack, app will need to restart every time changes in client side code are made to see changes.
+* go to [mongo express](http://localhost:8081) in your browser.
+
+#### Shutdown procedure
+
+* To stop the full stack application run `ctrl/cmd + c` in the terminal.
+* shut down the database with `docker compose -f docker-compose.dev.yaml down`
+
+## TODO
+
+* create config file setup function in server.js
+
+## Backend implementation
+
+### Login API
+
+```javascript
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+
+const [cookies, removeCookie] = useCookies([]);
+const [username, setUsername] = useState("");
+
+const verifyCookie = async () => {
+      if (!cookies.token) {
+        navigate("/login");
+      }
+      const { data } = await axios.post(
+        "http://localhost:3000/api/auth",
+        {},
+        { withCredentials: true }
+      );
+      const { status, user } = data;
+      setUsername(user);
+      return status;
+    };
+verifyCookie();
+// implement removeCookie("token") during the logout process
+```
+
+* the url to verify if the user is logged in is `http://localhost:3000/api/auth`
+  * this request does not require any data to be sent
+* the url to send a POST request to login is `http://localhost:3000/api/login`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+      "email": "email@email.com",
+      "password": "test"
+    }
+    ```
+
+* the url to send a POST request to signup is `http://localhost:3000/api/signup`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+        "email": "email@email.com",
+        "password": "test",
+        "first_name": "John",
+        "last_name": "doe"
+    }
+    ```
