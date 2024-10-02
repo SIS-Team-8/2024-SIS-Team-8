@@ -6,7 +6,6 @@ export default function Profile() {
     // State to manage profile data
     const [profile, setProfile] = useState({
         name: '',
-        email: '',
         phone: '',
         address: '',
     });
@@ -27,12 +26,6 @@ export default function Profile() {
                 <div className="profile-field">
                     <label htmlFor="name">Name:</label>
                     <input id="name" name="name" value={profile.name} onChange={(e) => setProfile({ ...profile, name: e.target.value })} placeholder="Johnny Appleseed" />
-                </div>
-
-                {/* Email Field */}
-                <div className="profile-field">
-                    <label htmlFor="email">Email:</label>
-                    <input id="email" name="email" value={profile.email} onChange={(e) => setProfile({ ...profile, email: e.target.value })} placeholder="johnny@apple.com" />
                 </div>
 
                 {/* Phone Field */}
