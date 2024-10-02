@@ -31,16 +31,12 @@ input {
     font-family: 'Poppins';
 }
 
-#emailBox, #userBox, #passBox {
+#userBox, #passBox {
     background-repeat: no-repeat;
     background-size: 25px, 25px;
     background-position: 8px 2px;
     padding-left: 40px;
     font-family: 'Poppins';
-}
-
-#emailBox {
-    background-image: url(../assets/email-icon.png);
 }
 
 #userBox {
@@ -80,11 +76,4 @@ input {
 ::placeholder {
     color: white;
     font-family: 'Poppins';
-}
-
-#forgotPassword {
-    float: right;
-    font-family: 'Poppins';
-    color: white;
-    text-decoration: none;
 }

@@ -16,8 +16,6 @@ export default function SignUp() {
 
             <div id="inputBox">
                 <form>
-                    <input id="emailBox" placeholder="Email" type="email"></input>
-                    <p></p>
                     <input id="userBox" placeholder="Username"></input>
                     <p></p>
                     <input id="passBox" placeholder="Password" type="password"></input>
