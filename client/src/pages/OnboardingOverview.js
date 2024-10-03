@@ -36,7 +36,7 @@ export default function OnboardingOverview() {
                 <button id="swap-button" onClick={next}>Next</button>
             </div>
             <Link to="/">
-                <button id="onboarding-button">Go to login page</button>
+                <button id="onboarding-button">Go to home page</button>
             </Link>
         </div>
     );
