@@ -30,7 +30,7 @@ function App() {
         const timer = setTimeout(() => {
             setIsLoaded(true);
 
-            if (!isAuthenticated && location.pathname !== "/sign-up" && location.pathname !== "/onboarding" && location.pathname !== "/onboarding-overview") {
+            if (!isAuthenticated && location.pathname !== "/sign-up") {
                 navigate("/login");
             }
         }, 3000);
@@ -40,12 +40,22 @@ function App() {
 
     const handleLogin = () => {
         setIsAuthenticated(true);
-        navigate("/onboarding");
+        const hasCompletedOnboarding = localStorage.getItem("hasCompletedOnboarding");
+        if (!hasCompletedOnboarding) {
+            navigate("/onboarding");
+        } else {
+            navigate("/");
+        }
     };
 
     const handleLogout = () => {
         setIsAuthenticated(false);
         navigate("/login");
+    };
+
+    const handleOnboardingComplete = () => {
+        // Mark onboarding as completed
+        localStorage.setItem("hasCompletedOnboarding", true);
     };
 
     if (!isLoaded) {
@@ -58,8 +68,8 @@ function App() {
 
             <Routes>
                 <Route path="/" element={isAuthenticated ? <Home /> : <Login onLogin={handleLogin} />} />
-                <Route path="/onboarding" element={isAuthenticated ? <Onboarding /> : <Login onLogin={handleLogin} />} />
-                <Route path="/onboarding-overview" element={isAuthenticated ? <OnboardingOverview /> : <Login onLogin={handleLogin} />} />
+                <Route path="/onboarding" element={isAuthenticated ? <Onboarding onComplete={handleOnboardingComplete}/> : <Login onLogin={handleLogin} />} />
+                <Route path="/onboarding-overview" element={isAuthenticated ? <OnboardingOverview/> : <Login onLogin={handleLogin} />} />
                 <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView /> : <Login onLogin={handleLogin} />} />
                 <Route path="/calendar" element={isAuthenticated ? <Calendar /> : <Login onLogin={handleLogin} />} />
                 <Route path="/help" element={isAuthenticated ? <Help /> : <Login onLogin={handleLogin} />} />
