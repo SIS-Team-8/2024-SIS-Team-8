@@ -87,7 +87,7 @@
 }
 
 .custom-navbar.dark {
-    background-color: #333 !important; /* Dark background */
+    background-color: #0F3D4B !important; /* Dark background */
     color: #fff !important; /* White text */
 }
 
@@ -102,6 +102,5 @@
 }
 
 .custom-navbar.dark .hamburger-button {
-    background-color: #555; /* Darker button */
+    background-color: #0F3D4B;
 }
-
