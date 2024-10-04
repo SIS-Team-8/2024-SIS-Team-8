@@ -69,9 +69,9 @@ const CalendarScreen = () => {
         setViewMode(viewMode === 'month' ? 'year' : 'month');
     };
 
-    // Navigate to the mood selection page when a day is clicked
-    const navigateToMoodSelection = (date) => {
-        navigate(`/mood-selection/${date}`); // Assuming you have a route for mood selection
+    // Navigate to the mood selection page when a day is clicked and pass the mood details
+    const navigateToMoodSelection = (date, moodEntry) => {
+        navigate(`/mood-selection/${date}`, { state: { moodEntry } });
     };
 
     // Function to generate the calendar table
@@ -109,7 +109,7 @@ const CalendarScreen = () => {
                                         {day && (
                                             <div 
                                                 style={{ position: 'relative', textAlign: 'center', cursor: 'pointer' }}
-                                                onClick={() => navigateToMoodSelection(dateKey)}
+                                                onClick={() => navigateToMoodSelection(dateKey, moodEntry)} // Pass mood details
                                             >
                                                 {day}
                                                 {moodEntry && getMoodEmoji(moodEntry.mood) && (
