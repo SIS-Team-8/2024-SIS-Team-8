@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Calendar.css'; // Import your CSS for styling
 
-// Dummy mood data for the calendar for demonstration
 const moodData = {
     "2024-09-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
     "2024-09-02": { mood: "happy", intensity: 4, notes: "Good day." },
@@ -17,45 +16,61 @@ const CalendarScreen = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 8)); // Initialize to September 2024
     const [viewMode, setViewMode] = useState('month'); 
 
-    // Change the current month (previous or next)
     const changeMonth = (direction) => {
         const newMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
         setCurrentMonth(newMonth);
     };
 
-    // Toggle between month and year view
     const toggleViewMode = () => {
         setViewMode(viewMode === 'month' ? 'year' : 'month');
     };
 
-    // Handle navigation to History view
     const navigateToHistory = () => {
         navigate('/history', { state: { month: currentMonth } });
     };
 
-    if (viewMode === 'year') {
-        const year = currentMonth.getFullYear();
-        const monthsArray = Array.from({ length: 12 }, (_, monthIndex) => monthIndex);
+    // Month and Year Grid Rendering
+    const renderCalendarTable = () => {
+        const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
+        const startDayOfWeek = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).getDay();
+        const daysArray = Array.from({ length: startDayOfWeek }).fill(null).concat(Array.from({ length: daysInMonth }, (_, i) => i + 1));
+
+        const weeksArray = [];
+        for (let i = 0; i < daysArray.length; i += 7) {
+            weeksArray.push(daysArray.slice(i, i + 7));
+        }
 
         return (
-            <div className="calendar-screen">
-                <div className="month-navigation">
-                    <button onClick={() => setCurrentMonth(new Date(year - 1, 0))}>Previous Year</button>
-                    <h2>{year}</h2>
-                    <button onClick={() => setCurrentMonth(new Date(year + 1, 0))}>Next Year</button>
-                </div>
-                <button className="toggle-button" onClick={toggleViewMode}>Switch to Monthly View</button>
-
-                <div className="year-grid">
-                    {monthsArray.map(month => (
-                        <div key={month} className="year-grid-item">
-                            <h3>{new Date(year, month).toLocaleString('default', { month: 'long' })}</h3>
-                        </div>
+            <table className="calendar-table">
+                <thead>
+                    <tr>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                        <th>Sun</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {weeksArray.map((week, weekIndex) => (
+                        <tr key={weekIndex}>
+                            {week.map((day, dayIndex) => {
+                                const dateKey = day ? `${currentMonth.getFullYear()}-${(currentMonth.getMonth() + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}` : null;
+                                const moodEntry = day ? moodData[dateKey] : null;
+                                return (
+                                    <td key={dayIndex} style={{ backgroundColor: moodEntry ? '#ffa726' : '#FFFFFF' }}>
+                                        {day}
+                                    </td>
+                                );
+                            })}
+                        </tr>
                     ))}
-                </div>
-            </div>
+                </tbody>
+            </table>
         );
-    }
+    };
 
     return (
         <div className="calendar-screen">
@@ -71,22 +86,8 @@ const CalendarScreen = () => {
             {/* Button to View History */}
             <button className="history-button" onClick={navigateToHistory}>View History</button>
 
-            <table className="calendar-table">
-                <thead>
-                    <tr>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                        <th>Sun</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* Render calendar table */}
-                </tbody>
-            </table>
+            {/* Render the calendar table */}
+            {renderCalendarTable()}
         </div>
     );
 };
