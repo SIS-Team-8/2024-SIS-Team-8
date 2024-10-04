@@ -18,7 +18,7 @@ export default function CustomNavbar({ language = "English", theme = "light" }) 
             <Container fluid>
                 <Navbar.Brand as={Link} to="/" className="navbar-brand">{t.brand}</Navbar.Brand>
                 <Navbar.Toggle className="hamburger-button" aria-controls="offcanvasNavbar" />
-                <Navbar.Offcanvas id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" placement="end">
+                <Navbar.Offcanvas id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" placement="end" data-bs-theme={theme}>
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title className="navbar-label" id="offcanvasNavbarLabel">{t.menu}</Offcanvas.Title>
                     </Offcanvas.Header>
