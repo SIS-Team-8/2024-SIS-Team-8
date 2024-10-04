@@ -181,7 +181,7 @@ const Settings = ({ theme, toggleTheme, language, setLanguage }) => {
                     <h2>{t.privacy}</h2>
                     <div className="privacy-buttons-group">
                         <button className="privacy-button">{t.dataExport}</button>
-                        <button className="privacy-button">{t.deleteAccount}</button>
+                        <button id="delete-button" className="privacy-button">{t.deleteAccount}</button>
                         <button className="privacy-button">{t.disableTracking}</button>
                     </div>
                 </div>
