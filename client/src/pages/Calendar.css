@@ -33,6 +33,29 @@
     background-color: #e0e0e0;
 }
 
+/* Container to align buttons horizontally */
+.button-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Toggle button and View History button styles */
+.toggle-button {
+    padding: 10px 20px;
+    background-color: #ffb74d; /* Contrasting color (orange shade) */
+    color: black;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+    background-color: #ffa726; /* Slightly darker orange on hover */
+}
+
 /* Calendar table styles */
 .calendar-table {
     width: 100%;
@@ -59,38 +82,4 @@
 .calendar-table td {
     position: relative;
     height: 60px;
-}
-
-/* Toggle button for switching views */
-.toggle-button {
-    margin: 20px 0;
-    padding: 10px 20px;
-    background-color: #ffb74d; /* Contrasting color (orange shade) */
-    color: black;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.toggle-button:hover {
-    background-color: #ffa726; /* Slightly darker orange on hover */
-}
-
-/* Button for viewing history */
-.history-button {
-    margin: 20px 0;
-    padding: 10px 20px;
-    background-color: #ffa726; /* Orange color for contrast */
-    color: black;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.history-button:hover {
-    background-color: #ff9800; /* Slightly darker orange */
 }

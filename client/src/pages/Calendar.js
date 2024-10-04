@@ -53,7 +53,6 @@ const CalendarScreen = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 8)); // Initialize to September 2024
     const [viewMode, setViewMode] = useState('month'); 
 
-    // Change the current month (previous or next)
     const changeMonth = (direction) => {
         const newMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
         setCurrentMonth(newMonth);
@@ -121,11 +120,14 @@ const CalendarScreen = () => {
                 <button onClick={() => changeMonth(1)}>Next</button>
             </div>
 
-            {/* Toggle between Month/Year views */}
-            <button className="toggle-button" onClick={toggleViewMode}>Switch to Yearly View</button>
+            {/* Button Container to Align Toggle and View History Buttons */}
+            <div className="button-container">
+                {/* Toggle between Month/Year views */}
+                <button className="toggle-button" onClick={toggleViewMode}>Switch to Yearly View</button>
 
-            {/* Button to View History */}
-            <button className="history-button" onClick={navigateToHistory}>View History</button>
+                {/* Button to View History */}
+                <button className="toggle-button" onClick={navigateToHistory}>View History</button>
+            </div>
 
             {/* Render the calendar table */}
             {renderCalendarTable()}
