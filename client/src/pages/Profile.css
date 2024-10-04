@@ -98,3 +98,67 @@
     align-items: center;
     width: 750px;
 }
+
+/* Calendar table styles */
+.calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.calendar-table th,
+.calendar-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.calendar-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+.calendar-table td {
+    position: relative;
+    height: 60px;
+}
+
+.calendar-table td div {
+    position: relative;
+}
+
+/* Month navigation */
+.month-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Summary statistics */
+.summary-statistics {
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* Yearly grid styles */
+.year-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.year-grid-item {
+    background-color: #F0F0F0;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.year-grid-item h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #189ab4;
+}
