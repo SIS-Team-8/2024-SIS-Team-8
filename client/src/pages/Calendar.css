@@ -1,33 +1,36 @@
-/* General container for the profile screen */
-.profile-container {
+/* General container for the calendar screen */
+.calendar-screen {
     font-family: 'Poppins', sans-serif;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    height: 100vh;
-    background-color: #189ab4;
+    align-items: center;
+    background-color: #189ab4; /* The original shade of blue */
     color: white;
-    text-align: center;
-    width: 100%;
+    min-height: 100vh;
     padding: 20px;
 }
 
-#navigation-button {
-    font-size: medium;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    color: #189ab4;
-    background-color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    width: 150px;
+/* Month navigation styles */
+.month-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
-#navigation-button:hover {
-    background-color: #0f7b8e;
-    color: white;
+.month-navigation button {
+    background-color: #f0f0f0;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.month-navigation button:hover {
+    background-color: #e0e0e0;
 }
 
 /* Calendar table styles */
@@ -35,6 +38,9 @@
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .calendar-table th,
@@ -46,6 +52,7 @@
 
 .calendar-table th {
     background-color: #f0f0f0;
+    color: black;
     font-weight: bold;
 }
 
@@ -54,18 +61,11 @@
     height: 60px;
 }
 
-/* Month navigation */
-.month-navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
 /* Summary statistics */
 .summary-statistics {
     margin-top: 20px;
     text-align: left;
+    color: white;
 }
 
 /* Yearly grid styles */
@@ -77,11 +77,12 @@
 }
 
 .year-grid-item {
-    background-color: #F0F0F0;
+    background-color: #f0f0f0;
     border-radius: 8px;
     padding: 20px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: black;
 }
 
 .year-grid-item h3 {
@@ -94,8 +95,8 @@
 .toggle-button {
     margin: 20px 0;
     padding: 10px 20px;
-    background-color: #189ab4;
-    color: white;
+    background-color: #ffb74d; /* Contrasting color (orange shade) */
+    color: black;
     border: none;
     border-radius: 4px;
     font-size: 16px;
@@ -104,5 +105,16 @@
 }
 
 .toggle-button:hover {
-    background-color: #0f7b8e;
+    background-color: #ffa726; /* Slightly darker orange on hover */
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    .calendar-table td {
+        height: 40px;
+    }
+
+    .year-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
