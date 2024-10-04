@@ -21,6 +21,12 @@ const MoodSelection = () => {
             ) : (
                 <p>No mood data available for this day.</p>
             )}
+
+            {/* Add form elements for editing the mood if required */}
+            <div id="flexContainer">
+                <textarea id="log" placeholder='Edit Note...'>{moodEntry?.notes}</textarea>
+                <img id="submit" alt="submit" src="/path-to-submit-icon.png" />
+            </div>
         </div>
     );
 }
