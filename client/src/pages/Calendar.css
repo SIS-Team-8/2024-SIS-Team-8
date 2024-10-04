@@ -6,19 +6,24 @@
     align-items: center;
     padding: 20px;
     color: #333;
-    background-color: #189ab4; /* Background color restored */
+    background-color: #189ab4; /* Background color */
     min-height: 100vh;
 }
 
 .month-navigation {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    width: 300px;
+    width: 100%; /* Full width for alignment */
+    max-width: 1000px;
     margin-bottom: 20px;
+    align-items: center;
 }
 
-.month-navigation button {
+.month-navigation h2 {
+    margin: 0;
+}
+
+.prev-button, .next-button {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -28,7 +33,7 @@
     transition: background-color 0.3s;
 }
 
-.month-navigation button:hover {
+.prev-button:hover, .next-button:hover {
     background-color: #189ab4;
     color: #fff;
 }
@@ -56,8 +61,8 @@
 }
 
 .calendar-table {
-    width: 100%;
-    max-width: 600px;
+    width: 100%; /* Make the table full width */
+    max-width: 1000px; /* Adjust this to expand across the screen */
     border-collapse: collapse;
     background-color: #fff; /* White background for the table */
 }

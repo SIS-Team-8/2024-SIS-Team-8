@@ -128,17 +128,14 @@ const CalendarScreen = () => {
     return (
         <div className="calendar-screen">
             <div className="month-navigation">
-                <button onClick={() => changeMonth(-1)}>Previous</button>
+                <button className="prev-button" onClick={() => changeMonth(-1)}>Previous</button>
                 <h2>{currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
-                <button onClick={() => changeMonth(1)}>Next</button>
+                <button className="next-button" onClick={() => changeMonth(1)}>Next</button>
             </div>
 
             {/* Button Container to Align Toggle and View History Buttons */}
             <div className="button-container">
-                {/* Toggle between Month/Year views */}
                 <button className="toggle-button" onClick={toggleViewMode}>Switch to Yearly View</button>
-
-                {/* Button to View History */}
                 <button className="toggle-button" onClick={() => navigate('/history')}>View History</button>
             </div>
 
