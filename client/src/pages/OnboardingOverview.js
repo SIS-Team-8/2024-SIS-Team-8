@@ -4,14 +4,18 @@ import './Onboarding.css';
 import logDailyEmotion from '../assets/log-daily-emotion.png';
 import moodLogging from '../assets/mood-logging.png';
 import menu from '../assets/menu.png';
+import history from '../assets/history.png';
 
 export default function OnboardingOverview() {
     // Array of images and paragraphs to cycle through
-    const images = [logDailyEmotion, moodLogging, menu];
+    const images = [logDailyEmotion, moodLogging, menu, , ,history];
     const paragraphs = [
         "To begin your journaling select Log Daily Emotion",
         "Select how you are feeling and submit the entry. If you choose you can add a custom note and upload an image. Entries can be edited at any time",
-        "Other features such as the calendar or history page can be accessed through the menu on the top right corner"
+        "Other features such as the calendar or history page can be accessed through the menu on the top right corner",
+        "The calendar allows you to view your past entries through each month",
+        "Selecting an entry from the calendar brings you to the daily view which allows you to view any notes or images inputed into the entry",
+        "History allows you to view the frequency of your emotions in a particular week, month or year"
     ];
 
     // State variable to manage the current index for image and paragraph
@@ -36,7 +40,7 @@ export default function OnboardingOverview() {
                 <button id="swap-button" onClick={next}>Next</button>
             </div>
             <Link to="/">
-                <button id="onboarding-button">Go to home page</button>
+                <button id="onboarding-button">Go Home</button>
             </Link>
         </div>
     );
