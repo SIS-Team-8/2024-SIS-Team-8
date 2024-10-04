@@ -6,11 +6,14 @@
     align-items: center;
     padding: 20px;
     color: #333;
+    background-color: #189ab4; /* Background color restored */
+    min-height: 100vh;
 }
 
 .month-navigation {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 300px;
     margin-bottom: 20px;
 }
@@ -56,6 +59,7 @@
     width: 100%;
     max-width: 600px;
     border-collapse: collapse;
+    background-color: #fff; /* White background for the table */
 }
 
 .calendar-table th,
@@ -67,11 +71,13 @@
 
 .calendar-table th {
     background-color: #f4f4f4;
+    font-weight: bold;
 }
 
 .calendar-table td {
     height: 60px;
     cursor: pointer;
+    background-color: #fff;
 }
 
 .calendar-table td img {

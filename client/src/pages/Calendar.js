@@ -10,7 +10,7 @@ import miserable from '../assets/emoji/miserable.png';
 const moodData = {
     "2024-09-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
     "2024-09-02": { mood: "happy", intensity: 4, notes: "Good day." },
-    "2024-09-03": { mood: "neutral", intensity: 3, notes: "An average day." }, // September 3rd
+    "2024-09-03": { mood: "neutral", intensity: 3, notes: "An average day." },
     "2024-09-04": { mood: "sad", intensity: 2, notes: "Feeling a bit down." },
     "2024-09-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." },
 };
