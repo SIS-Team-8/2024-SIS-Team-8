@@ -77,7 +77,7 @@
 }
 
 .year-grid-item {
-    background-color: #f0f0f0;
+    background-color: #F0F0F0;
     border-radius: 8px;
     padding: 20px;
     text-align: center;
@@ -108,13 +108,19 @@
     background-color: #ffa726; /* Slightly darker orange on hover */
 }
 
-/* Mobile responsive styles */
-@media (max-width: 768px) {
-    .calendar-table td {
-        height: 40px;
-    }
+.history-button {
+    margin: 20px 0;
+    padding: 10px 20px;
+    background-color: #ffa726;
+    color: black;
+    border: 2px solid red; /* Temporary border for visibility */
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-    .year-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+
+.history-button:hover {
+    background-color: #ff9800; /* Slightly darker orange */
 }
