@@ -16,7 +16,7 @@
 
 /* Dark Theme */
 .settings-screen.dark {
-    background-color: #333;
+    background-color: #0F3D4B;
     color: white;
 }
 
@@ -38,7 +38,7 @@
 
 /* Dark Theme for Container */
 .settings-container.dark {
-    background-color: #444;
+    background-color: #0F3D4B;
     color: white;
 }
 
@@ -181,7 +181,7 @@
 
 /* Dark mode styling */
 body.dark {
-    background-color: #333;
+    background-color: #0F3D4B;
     color: white;
 }
 
