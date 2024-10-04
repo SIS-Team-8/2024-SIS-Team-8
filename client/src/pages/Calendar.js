@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Calendar.css'; // Import your CSS for styling
+import veryAngry from '../assets/emoji/very-angry.png';
+import sad from '../assets/emoji/sad.png';
+import happy from '../assets/emoji/happy.png';
+import veryHappy from '../assets/emoji/very-happy.png';
+import extremelyHappy from '../assets/emoji/extremely-happy.png';
+import upset from '../assets/emoji/upset.png';
+import miserable from '../assets/emoji/miserable.png';
+import ecstatic from '../assets/emoji/ecstatic.png';
 
 // Dummy mood data for the calendar for demonstration
 const moodData = {
@@ -9,24 +17,23 @@ const moodData = {
     "2024-09-03": { mood: "neutral", intensity: 3, notes: "An average day." },
     "2024-09-04": { mood: "sad", intensity: 2, notes: "Feeling a bit down." },
     "2024-09-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." },
-    // Add more dates for the year...
 };
 
-// Helper function to get the emoji based on mood type
+// Helper function to get the emoji based on mood type (using the images from MoodSelection)
 const getMoodEmoji = (mood) => {
     switch (mood) {
         case "very happy":
-            return "😄"; // Very happy emoji
+            return veryHappy; // Image path for very happy
         case "happy":
-            return "😊"; // Happy emoji
+            return happy;     // Image path for happy
         case "neutral":
-            return "😐"; // Neutral emoji
+            return null;      // No emoji for neutral mood
         case "sad":
-            return "😢"; // Sad emoji
+            return sad;       // Image path for sad
         case "very sad":
-            return "😭"; // Very sad emoji
+            return miserable; // Image path for very sad
         default:
-            return "😶"; // Default emoji for no mood data
+            return null;      // Default: no emoji
     }
 };
 
@@ -100,7 +107,11 @@ const CalendarScreen = () => {
                                     <td key={dayIndex} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF" }}>
                                         <div style={{ position: 'relative', textAlign: 'center' }}>
                                             {day}
-                                            {moodEntry && <div style={{ fontSize: '20px', marginTop: '5px' }}>{getMoodEmoji(moodEntry.mood)}</div>}
+                                            {moodEntry && getMoodEmoji(moodEntry.mood) && (
+                                                <div style={{ marginTop: '5px' }}>
+                                                    <img src={getMoodEmoji(moodEntry.mood)} alt={moodEntry.mood} style={{ width: '20px', height: '20px' }} />
+                                                </div>
+                                            )}
                                         </div>
                                     </td>
                                 );
