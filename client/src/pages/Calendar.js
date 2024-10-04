@@ -69,8 +69,9 @@ const CalendarScreen = () => {
         setViewMode(viewMode === 'month' ? 'year' : 'month');
     };
 
-    const navigateToHistory = () => {
-        navigate('/history', { state: { month: currentMonth } });
+    // Navigate to the mood selection page when a day is clicked
+    const navigateToMoodSelection = (date) => {
+        navigate(`/mood-selection/${date}`); // Assuming you have a route for mood selection
     };
 
     // Function to generate the calendar table
@@ -105,14 +106,19 @@ const CalendarScreen = () => {
                                 const moodEntry = day ? moodData[dateKey] : null;
                                 return (
                                     <td key={dayIndex} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF" }}>
-                                        <div style={{ position: 'relative', textAlign: 'center' }}>
-                                            {day}
-                                            {moodEntry && getMoodEmoji(moodEntry.mood) && (
-                                                <div style={{ marginTop: '5px' }}>
-                                                    <img src={getMoodEmoji(moodEntry.mood)} alt={moodEntry.mood} style={{ width: '20px', height: '20px' }} />
-                                                </div>
-                                            )}
-                                        </div>
+                                        {day && (
+                                            <div 
+                                                style={{ position: 'relative', textAlign: 'center', cursor: 'pointer' }}
+                                                onClick={() => navigateToMoodSelection(dateKey)}
+                                            >
+                                                {day}
+                                                {moodEntry && getMoodEmoji(moodEntry.mood) && (
+                                                    <div style={{ marginTop: '5px' }}>
+                                                        <img src={getMoodEmoji(moodEntry.mood)} alt={moodEntry.mood} style={{ width: '20px', height: '20px' }} />
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
                                     </td>
                                 );
                             })}
@@ -137,7 +143,7 @@ const CalendarScreen = () => {
                 <button className="toggle-button" onClick={toggleViewMode}>Switch to Yearly View</button>
 
                 {/* Button to View History */}
-                <button className="toggle-button" onClick={navigateToHistory}>View History</button>
+                <button className="toggle-button" onClick={() => navigate('/history')}>View History</button>
             </div>
 
             {/* Render the calendar table */}
