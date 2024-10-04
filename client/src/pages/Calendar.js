@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Calendar.css'; // Import your CSS for styling
-import veryAngry from '../assets/emoji/very-angry.png';
 import sad from '../assets/emoji/sad.png';
 import happy from '../assets/emoji/happy.png';
 import veryHappy from '../assets/emoji/very-happy.png';
-import extremelyHappy from '../assets/emoji/extremely-happy.png';
-import upset from '../assets/emoji/upset.png';
 import miserable from '../assets/emoji/miserable.png';
-import ecstatic from '../assets/emoji/ecstatic.png';
 
 // Dummy mood data for the calendar for demonstration
 const moodData = {
@@ -19,7 +15,7 @@ const moodData = {
     "2024-09-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." },
 };
 
-// Helper function to get the emoji based on mood type (using the images from MoodSelection)
+// Helper function to get the emoji based on mood type
 const getMoodEmoji = (mood) => {
     switch (mood) {
         case "very happy":
@@ -27,7 +23,7 @@ const getMoodEmoji = (mood) => {
         case "happy":
             return happy;     // Image path for happy
         case "neutral":
-            return "😐";      // Neutral face emoji for neutral mood
+            return null;      // No image for neutral
         case "sad":
             return sad;       // Image path for sad
         case "very sad":
