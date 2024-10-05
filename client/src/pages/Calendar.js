@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Calendar.css'; 
+import './Calendar.css'; // Import your CSS for styling
 import sad from '../assets/emoji/sad.png';
 import happy from '../assets/emoji/happy.png';
 import veryHappy from '../assets/emoji/very-happy.png';
@@ -19,17 +19,17 @@ const moodData = {
 const getMoodEmoji = (mood) => {
     switch (mood) {
         case "very happy":
-            return veryHappy; // Image path for very happy
+            return veryHappy;
         case "happy":
-            return happy;     // Image path for happy
+            return happy;
         case "neutral":
-            return null;      // No image for neutral
+            return null;
         case "sad":
-            return sad;       // Image path for sad
+            return sad;
         case "very sad":
-            return miserable; // Image path for very sad
+            return miserable;
         default:
-            return null;      // Default: no emoji
+            return null;
     }
 };
 
@@ -37,65 +37,42 @@ const getMoodEmoji = (mood) => {
 const getMoodColor = (mood) => {
     switch (mood) {
         case "very happy":
-            return "#00FF00"; // Bright green for very happy
+            return "#00FF00";
         case "happy":
-            return "#A8E6CF"; // Light green for happy
+            return "#A8E6CF";
         case "neutral":
-            return "#FFD700"; // Yellow for neutral
+            return "#FFD700";
         case "sad":
-            return "#FFB6C1"; // Light red for sad
+            return "#FFB6C1";
         case "very sad":
-            return "#FF6347"; // Red for very sad
+            return "#FF6347";
         default:
-            return "#FFFFFF"; // Default color for no mood data
+            return "#FFFFFF";
     }
 };
 
 const CalendarScreen = () => {
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 8)); // Initialize to September 2024
-    const [viewMode, setViewMode] = useState('month'); 
-    const [averageMoodIntensity, setAverageMoodIntensity] = useState(0);
-    const [mostCommonMood, setMostCommonMood] = useState('');
+    const [viewMode, setViewMode] = useState('month'); // Default view mode is 'month'
 
-    useEffect(() => {
-        calculateStatistics();
-    }, []);
-
-    const calculateStatistics = () => {
-        const moods = Object.values(moodData);
-        if (moods.length === 0) return;
-
-        // Calculate average mood intensity
-        const totalIntensity = moods.reduce((sum, mood) => sum + mood.intensity, 0);
-        const averageIntensity = (totalIntensity / moods.length).toFixed(2);
-        setAverageMoodIntensity(averageIntensity);
-
-        // Calculate most common mood
-        const moodCounts = moods.reduce((counts, mood) => {
-            counts[mood.mood] = (counts[mood.mood] || 0) + 1;
-            return counts;
-        }, {});
-
-        const mostCommon = Object.keys(moodCounts).reduce((a, b) => moodCounts[a] > moodCounts[b] ? a : b);
-        setMostCommonMood(mostCommon);
-    };
-
+    // Change month function
     const changeMonth = (direction) => {
         const newMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
         setCurrentMonth(newMonth);
     };
 
+    // Toggle between monthly and yearly view
     const toggleViewMode = () => {
         setViewMode(viewMode === 'month' ? 'year' : 'month');
     };
 
-    // Navigate to the mood selection page when a day is clicked and pass the mood details
+    // Navigate to mood selection for the selected date
     const navigateToMoodSelection = (date, moodEntry) => {
         navigate(`/mood-selection/${date}`, { state: { moodEntry } });
     };
 
-    // Function to generate the calendar table
+    // Render calendar table for monthly view
     const renderCalendarTable = () => {
         const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
         const startDayOfWeek = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).getDay();
@@ -150,23 +127,43 @@ const CalendarScreen = () => {
         );
     };
 
+    // Render yearly view table (example implementation)
+    const renderYearlyView = () => {
+        const monthsArray = Array.from({ length: 12 }, (_, i) => new Date(currentMonth.getFullYear(), i));
+
+        return (
+            <div className="yearly-view">
+                {monthsArray.map((month, index) => (
+                    <div key={index} className="yearly-month">
+                        <h3>{month.toLocaleString('default', { month: 'long' })}</h3>
+                        <div>
+                            {Array.from({ length: 31 }, (_, day) => (
+                                <span key={day} className="day-box">{day + 1}</span>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        );
+    };
+
     return (
         <div className="calendar-screen">
             <div className="month-navigation">
                 <button className="prev-button" onClick={() => changeMonth(-1)}>Previous</button>
-                <h2>{currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
+                <h2>{viewMode === 'month' ? currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' }) : `Year ${currentMonth.getFullYear()}`}</h2>
                 <button className="next-button" onClick={() => changeMonth(1)}>Next</button>
             </div>
-    
+
             {/* Button Container to Align Toggle and View History Buttons */}
             <div className="button-container">
-                <button className="toggle-button" onClick={toggleViewMode}>Switch to Yearly View</button>
+                <button className="toggle-button" onClick={toggleViewMode}>Switch to {viewMode === 'month' ? 'Yearly' : 'Monthly'} View</button>
                 <button className="toggle-button" onClick={() => navigate('/history')}>View History</button>
             </div>
-    
-            {/* Render the calendar table */}
-            {renderCalendarTable()}
-    
+
+            {/* Render the calendar or yearly view */}
+            {viewMode === 'month' ? renderCalendarTable() : renderYearlyView()}
+
             {/* Summary Statistics */}
             <div className="summary-statistics">
                 <p>Summary Statistics for {currentMonth.toLocaleString('default', { month: 'long' })}</p>
@@ -175,7 +172,6 @@ const CalendarScreen = () => {
             </div>
         </div>
     );
-    
 };
 
 export default CalendarScreen;
