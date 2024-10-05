@@ -27,6 +27,10 @@ const translations = {
             "Daily View": [
                 { question: "How do I view past moods?", answer: "Go to 'History' or 'Daily View' from the home screen." },
             ],
+            "Onboarding": [
+                { question: "What happens during onboarding?", answer: "You'll be guided through each of the app's core features." },
+                { question: "Can I revisit the onboarding later?", answer: <>Yes, via the <Link id="help-link" to="/onboarding">link</Link> here.</> },
+            ],
         }
     },
     Spanish: {
@@ -52,6 +56,10 @@ const translations = {
             ],
             "Vista Diaria": [
                 { question: "¿Cómo veo los estados de ánimo pasados?", answer: "Vaya a 'Historial' o 'Vista Diaria' desde la pantalla de inicio." },
+            ],
+            "Incorporación": [
+                { question: "¿Qué sucede durante la incorporación?", answer: "Se te guiará por cada una de las funciones principales de la aplicación." },
+                { question: "¿Puedo volver a hacer la incorporación más tarde?", answer: <>Sí, a través del <Link id="help-link" to="/onboarding">enlace</Link> aquí.</> },
             ],
         }
     },
@@ -79,6 +87,10 @@ const translations = {
             "Tägliche Ansicht": [
                 { question: "Wie kann ich vergangene Stimmungen anzeigen?", answer: "Gehen Sie zu 'Verlauf' oder 'Tägliche Ansicht' vom Startbildschirm aus." },
             ],
+            "Einführung": [
+                { question: "Was passiert während der Einführung?", answer: "Du wirst durch die wichtigsten Funktionen der App geführt." },
+                { question: "Kann ich die Einführung später erneut durchlaufen?", answer: <>Ja, über den <Link id="help-link" to="/onboarding">link</Link> hier.</> },
+            ],
         }
     },
     French: {
@@ -105,6 +117,10 @@ const translations = {
             "Vue Quotidienne": [
                 { question: "Comment consulter les humeurs passées ?", answer: "Allez dans 'Historique' ou 'Vue Quotidienne' depuis l'écran d'accueil." },
             ],
+            "Intégration": [
+                { question: "Que se passe-t-il lors de l'intégration?", answer: "Vous serez guidé à travers chacune des fonctionnalités principales de l'application." },
+                { question: "Puis-je revenir à l'intégration plus tard?", answer: <>Oui, via le <Link id="help-link" to="/onboarding">lien</Link> ici.</> },
+            ],
         }
     },
     Chinese: {
@@ -130,6 +146,10 @@ const translations = {
             ],
             "每日视图": [
                 { question: "如何查看过去的心情？", answer: "从主页进入 '历史记录' 或 '每日视图'。" },
+            ],
+            "入职/引导": [
+                { question: "在入职期间会发生什么？", answer: "你将会被引导了解该应用程序的每个核心功能。" },
+                { question: "我可以稍后重新查看入职过程吗？", answer: <>是的，通过此处的 <Link id="help-link" to="/onboarding">链接</Link> 。</> },
             ],
         }
     },
@@ -159,6 +179,10 @@ function Help({ theme, language }) {
         ],
         "Daily View": [
             { question: "How do I view past moods?", answer: "Go to 'History' or 'Daily View' from the home screen." },
+        ],
+        "Onboarding": [
+            { question: "What happens during onboarding?", answer: "You'll be guided through each of the app's core features." },
+            { question: "Can I revisit the onboarding later?", answer: <>Yes, via the <Link id="help-link" to="/onboarding">link</Link> here.</> },
         ],
     };
 

@@ -78,3 +78,7 @@
     background-color: #0F3D4B !important; /* Override the blue background with dark mode */
     color: white !important;
 }
+
+#help-link {
+    color: white;
+}
