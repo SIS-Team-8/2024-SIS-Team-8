@@ -1,106 +1,92 @@
-/* Calendar Page Styles */
+/* CalendarScreen.css */
 .calendar-screen {
     font-family: 'Poppins', sans-serif;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    height: 100vh;
+    background-color: #189ab4;
+    text-align: center;
     padding: 20px;
-    color: #333;
-    background-color: #189ab4; /* Background color */
-    min-height: 100vh;
+    width: 100%;
+    flex-direction: column;
+}
+
+.calendar-screen.light {
+    background-color: #189ab4;
+    color: black;
+}
+
+.calendar-screen.dark {
+    background-color: #0F3D4B !important;
+    color: black !important;
+}
+
+.calendar-table {
+    width: 90%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.calendar-table thead {
+    background-color: #BDC3CB;
+}
+
+.calendar-table th,
+.calendar-table td {
+    border: 2.5px solid #dddd;
+    padding: 12.5px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: inherit;
 }
 
 .month-navigation {
     display: flex;
     justify-content: space-between;
-    width: 100%; /* Full width for alignment */
-    max-width: 1000px;
-    margin-bottom: 20px;
     align-items: center;
+    margin-bottom: 40px;
+    width: 90%;
 }
 
 .month-navigation h2 {
-    margin: 0;
-}
-
-.prev-button, .next-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #fff;
-    color: #189ab4;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.prev-button:hover, .next-button:hover {
-    background-color: #189ab4;
-    color: #fff;
-}
-
-.button-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.toggle-button {
-    margin: 0 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #fff;
-    color: #189ab4;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.toggle-button:hover {
-    background-color: #189ab4;
-    color: #fff;
-}
-
-.calendar-table {
-    width: 100%; /* Make the table full width */
-    max-width: 1000px; /* Adjust this to expand across the screen */
-    border-collapse: collapse;
-    background-color: #fff; /* White background for the table */
-}
-
-.calendar-table th,
-.calendar-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-}
-
-.calendar-table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
-}
-
-.calendar-table td {
-    height: 60px;
-    cursor: pointer;
-    background-color: #fff;
-}
-
-.calendar-table td img {
-    margin-top: 5px;
-    width: 20px;
-    height: 20px;
-}
-
-/* Statistics Section */
-.summary-statistics {
-    background-color: transparent; /* Match background with the page */
+    font-size: 24px;
     color: white;
+    margin: 0;
+    line-height: 1;
+    flex-grow: 1;
     text-align: center;
+}
+
+.month-navigation button {
+    padding: 10px 20px;
+    font-size: medium;
+    border: none;
+    color: #189ab4;
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 150px;
+}
+
+.month-navigation button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
+.summary-statistics {
     margin-top: 20px;
 }
 
-.summary-statistics h3, .summary-statistics p {
+.summary-statistics h3 {
+    font-size: 20px;
+    color: white;
+}
+
+.summary-statistics p {
+    font-size: 16px;
     margin: 5px 0;
-    font-size: 18px;
-    font-weight: bold;
+    color: white;
 }
