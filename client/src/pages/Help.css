@@ -67,17 +67,6 @@
     color: white;
 }
 
-body.light {
-    background-color: white !important;
-    color: black !important;
-}
-
-/* Global styles for dark mode */
-body.dark {
-    background-color: #333 !important;
-    color: white !important;
-}
-
 /* Light Mode */
 .help-container.light {
     background-color: #189ab4 !important; /* This will remain blue for light mode */
@@ -86,6 +75,6 @@ body.dark {
 
 /* Dark Mode */
 .help-container.dark {
-    background-color: #333 !important; /* Override the blue background with dark mode */
+    background-color: #0F3D4B !important; /* Override the blue background with dark mode */
     color: white !important;
 }
