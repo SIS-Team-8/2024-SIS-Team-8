@@ -129,8 +129,8 @@ function App() {
         const t = translations[language];
 
         return (
-            <div>
-                <header className="App-header">
+            <div className={`home-screen ${theme}`}>
+                <header className={`App-header ${theme}`}>
                     <img src={dizzy} className="App-logo" alt="dizzy" />
                     <h2 class="noselect">{t.notFound}</h2>
 
