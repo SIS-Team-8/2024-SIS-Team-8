@@ -19,17 +19,17 @@ const moodData = {
 const getMoodEmoji = (mood) => {
     switch (mood) {
         case "very happy":
-            return veryHappy;
+            return veryHappy; // Image path for very happy
         case "happy":
-            return happy;
+            return happy;     // Image path for happy
         case "neutral":
-            return null;
+            return null;      // No image for neutral
         case "sad":
-            return sad;
+            return sad;       // Image path for sad
         case "very sad":
-            return miserable;
+            return miserable; // Image path for very sad
         default:
-            return null;
+            return null;      // Default: no emoji
     }
 };
 
@@ -37,42 +37,40 @@ const getMoodEmoji = (mood) => {
 const getMoodColor = (mood) => {
     switch (mood) {
         case "very happy":
-            return "#00FF00";
+            return "#00FF00"; // Bright green for very happy
         case "happy":
-            return "#A8E6CF";
+            return "#A8E6CF"; // Light green for happy
         case "neutral":
-            return "#FFD700";
+            return "#FFD700"; // Yellow for neutral
         case "sad":
-            return "#FFB6C1";
+            return "#FFB6C1"; // Light red for sad
         case "very sad":
-            return "#FF6347";
+            return "#FF6347"; // Red for very sad
         default:
-            return "#FFFFFF";
+            return "#FFFFFF"; // Default color for no mood data
     }
 };
 
 const CalendarScreen = () => {
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 8)); // Initialize to September 2024
-    const [viewMode, setViewMode] = useState('month'); // Default view mode is 'month'
-
-    // Change month function
+    const [viewMode, setViewMode] = useState('month'); // View mode: 'month' or 'year'
+    
     const changeMonth = (direction) => {
         const newMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
         setCurrentMonth(newMonth);
     };
 
-    // Toggle between monthly and yearly view
     const toggleViewMode = () => {
         setViewMode(viewMode === 'month' ? 'year' : 'month');
     };
 
-    // Navigate to mood selection for the selected date
+    // Navigate to the mood selection page when a day is clicked and pass the mood details
     const navigateToMoodSelection = (date, moodEntry) => {
         navigate(`/mood-selection/${date}`, { state: { moodEntry } });
     };
 
-    // Render calendar table for monthly view
+    // Function to generate the calendar table
     const renderCalendarTable = () => {
         const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
         const startDayOfWeek = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).getDay();
@@ -127,22 +125,18 @@ const CalendarScreen = () => {
         );
     };
 
-    // Render yearly view table (example implementation)
-    const renderYearlyView = () => {
-        const monthsArray = Array.from({ length: 12 }, (_, i) => new Date(currentMonth.getFullYear(), i));
+    // Render summary statistics for the current month
+    const renderSummaryStatistics = () => {
+        // Calculate statistics based on moodData
+        const monthMoods = Object.values(moodData).map(entry => entry.intensity);
+        const avgIntensity = (monthMoods.reduce((a, b) => a + b, 0) / monthMoods.length).toFixed(2);
+        const mostCommonMood = "😊"; // Placeholder for most common mood
 
         return (
-            <div className="yearly-view">
-                {monthsArray.map((month, index) => (
-                    <div key={index} className="yearly-month">
-                        <h3>{month.toLocaleString('default', { month: 'long' })}</h3>
-                        <div>
-                            {Array.from({ length: 31 }, (_, day) => (
-                                <span key={day} className="day-box">{day + 1}</span>
-                            ))}
-                        </div>
-                    </div>
-                ))}
+            <div className="summary-statistics">
+                <h3>Summary Statistics for {currentMonth.toLocaleString('default', { month: 'long' })}</h3>
+                <p>Average Mood Intensity: {avgIntensity}</p>
+                <p>Most Common Mood: {mostCommonMood}</p>
             </div>
         );
     };
@@ -151,25 +145,20 @@ const CalendarScreen = () => {
         <div className="calendar-screen">
             <div className="month-navigation">
                 <button className="prev-button" onClick={() => changeMonth(-1)}>Previous</button>
-                <h2>{viewMode === 'month' ? currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' }) : `Year ${currentMonth.getFullYear()}`}</h2>
+                <h2>{currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
                 <button className="next-button" onClick={() => changeMonth(1)}>Next</button>
             </div>
 
             {/* Button Container to Align Toggle and View History Buttons */}
             <div className="button-container">
-                <button className="toggle-button" onClick={toggleViewMode}>Switch to {viewMode === 'month' ? 'Yearly' : 'Monthly'} View</button>
+                <button className="toggle-button" onClick={toggleViewMode}>
+                    {viewMode === 'month' ? 'Switch to Yearly View' : 'Switch to Monthly View'}
+                </button>
                 <button className="toggle-button" onClick={() => navigate('/history')}>View History</button>
             </div>
 
-            {/* Render the calendar or yearly view */}
-            {viewMode === 'month' ? renderCalendarTable() : renderYearlyView()}
-
-            {/* Summary Statistics */}
-            <div className="summary-statistics">
-                <p>Summary Statistics for {currentMonth.toLocaleString('default', { month: 'long' })}</p>
-                <p>Average Mood Intensity: 3.00</p>
-                <p>Most Common Mood: 😢</p>
-            </div>
+            {/* Render the calendar or summary statistics based on viewMode */}
+            {viewMode === 'month' ? renderCalendarTable() : renderSummaryStatistics()}
         </div>
     );
 };

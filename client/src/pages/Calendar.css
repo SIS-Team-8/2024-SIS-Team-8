@@ -91,40 +91,16 @@
     height: 20px;
 }
 
-/* Summary Statistics Section */
+/* Statistics Section */
 .summary-statistics {
+    background-color: transparent; /* Match background with the page */
+    color: white;
+    text-align: center;
     margin-top: 20px;
-    color: white; /* Match text color to the overall theme */
-    text-align: center;
+}
+
+.summary-statistics h3, .summary-statistics p {
+    margin: 5px 0;
     font-size: 18px;
-}
-/* Yearly view layout */
-.yearly-view {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 100%;
-}
-
-.yearly-month {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px;
-    width: 200px;
-}
-
-.day-box {
-    display: inline-block;
-    margin: 2px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    width: 30px;
-    text-align: center;
-    background-color: #f9f9f9;
-    cursor: pointer;
-}
-
-.day-box:hover {
-    background-color: #ddd;
+    font-weight: bold;
 }
