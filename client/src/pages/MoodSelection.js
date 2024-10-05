@@ -28,7 +28,15 @@ import overwhelmed from '../assets/emoji/overwhelmed.png'
 import terrified from '../assets/emoji/terrified.png'
 import submit from '../assets/submit-icon.png'
 
-export default function MoodSelection() {
+const translations = {
+    English: { addNote: "Add Note..." },
+    Spanish: { addNote: "Añadir nota..." },
+    German: { addNote: "Notiz hinzufügen..." },
+    French: { addNote: "Ajouter une note..." },
+    Chinese: { addNote: "添加备注..." }
+};
+
+export default function MoodSelection({ language = "English", theme = "light" }) {
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
@@ -45,36 +53,20 @@ export default function MoodSelection() {
         setSubRowOpacity(Array(5).fill(1));  // Reset sub-row images' opacity to 1
     };
 
+    const t = translations[language];
+
     const moods = {
-        angry: { 
-            rowImg: veryAngry, 
-            subImages: [annoyed, frustrated, angry, veryAngry, extremelyAngry]
-        },
-        sad: { 
-            rowImg: sad, 
-            subImages: [upset, sad, deflated, distressed, miserable] 
-        },
-        happy: { 
-            rowImg: happy, 
-            subImages: [happy, veryHappy, extremelyHappy, amazinglyHappy, ecstatic] 
-        },
-        bored: { 
-            rowImg: bored, 
-            subImages: [bored, exasperated, sarcastic, tired, exhausted] 
-        },
-        scared: { 
-            rowImg: scared, 
-            subImages: [surprised, nervous, overwhelmed, scared, terrified] 
-        }
+        angry: { rowImg: veryAngry, subImages: [annoyed, frustrated, angry, veryAngry, extremelyAngry] },
+        sad: { rowImg: sad, subImages: [upset, sad, deflated, distressed, miserable] },
+        happy: { rowImg: happy, subImages: [happy, veryHappy, extremelyHappy, amazinglyHappy, ecstatic] },
+        bored: { rowImg: bored, subImages: [bored, exasperated, sarcastic, tired, exhausted] },
+        scared: { rowImg: scared, subImages: [surprised, nervous, overwhelmed, scared, terrified] }
     };
 
     // Function to capitalize every word in the image name
     const extractMoodNameFromImage = (image) => {
         const imageName = image.toString().split('/').pop().split('.')[0];  // Extracts name from path or variable
-        return imageName
-            .split('-') // Splits name by each word
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))  // Capitalize every word
-            .join(' ');  // Join words back together with spaces
+        return imageName.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     };
 
     const handleSubRowClick = (index) => {
