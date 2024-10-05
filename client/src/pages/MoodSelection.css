@@ -6,14 +6,8 @@ html {
     padding: 0;
 }
 
-html.dark,
-body.dark {
-    background-color: #222 !important;
-    color: #ddd !important;
-}
-
 #container.dark {
-    background-color: #333 !important; /* Dark background color */
+    background-color: #0F3D4B !important; /* Dark background color */
     color: #ddd !important;
 }
 
