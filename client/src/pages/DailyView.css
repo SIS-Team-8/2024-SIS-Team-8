@@ -89,23 +89,12 @@
     color: white;
 }
 
-body.light {
-    background-color: white;
-    color: black;
-}
-
-/* Global styles for dark mode */
-body.dark {
-    background-color: #333;
-    color: white;
-}
-
 .daily-view-screen.light {
     background-color: #189ab4;
     color: black;
 }
 
 .daily-view-screen.dark {
-    background-color: #333 !important;
+    background-color: #0F3D4B !important;
     color: white !important;
 }

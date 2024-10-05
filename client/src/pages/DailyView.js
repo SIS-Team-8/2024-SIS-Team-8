@@ -63,7 +63,7 @@ const DailyView = ({theme, language}) => {
             <div className="daily-view-content">
             <h1 style={{ color: 'white' }}>{translatedHeader}</h1>
                 <div className="emoji">{getMoodEmoji(moodEntry.mood)}</div>
-                <p className="intensity">{t.backToCalendar} {moodEntry.intensity}/5</p>
+                <p className="intensity">{t.intensity} {moodEntry.intensity}/5</p>
                 <p className="notes">{t.notes} {moodEntry.notes}</p>
 
                 {/* Edit and Delete Buttons */}
