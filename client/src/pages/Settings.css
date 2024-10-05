@@ -179,17 +179,6 @@
     color: white;
 }
 
-/* Dark mode styling */
-body.dark {
-    background-color: #0F3D4B;
-    color: white;
-}
-
-body.light {
-    background-color: #189ab4;
-    color: black;
-}
-
 /* Toggle Switch */
 .switch {
     position: relative;
