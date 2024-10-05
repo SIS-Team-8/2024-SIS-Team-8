@@ -126,14 +126,16 @@ function App() {
             Chinese: { notFound: "404：页面未找到", goHome: "转到登录" }
         };
 
+        const t = translations[language];
+
         return (
             <div>
                 <header className="App-header">
                     <img src={dizzy} className="App-logo" alt="dizzy" />
-                    <h2 class="noselect">404: Page Not Found</h2>
+                    <h2 class="noselect">{t.notFound}</h2>
 
                     <Link to="/login">
-                        <button id="error-button" class="noselect">Go to Login</button>
+                        <button id="error-button" class="noselect">{t.goHome}</button>
                     </Link>
                 </header>
             </div>
