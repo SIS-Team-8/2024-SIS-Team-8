@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Calendar.css'; // Import your CSS for styling
+import './Calendar.css'; 
 import sad from '../assets/emoji/sad.png';
 import happy from '../assets/emoji/happy.png';
 import veryHappy from '../assets/emoji/very-happy.png';
@@ -55,6 +55,31 @@ const CalendarScreen = () => {
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 8)); // Initialize to September 2024
     const [viewMode, setViewMode] = useState('month'); 
+    const [averageMoodIntensity, setAverageMoodIntensity] = useState(0);
+    const [mostCommonMood, setMostCommonMood] = useState('');
+
+    useEffect(() => {
+        calculateStatistics();
+    }, []);
+
+    const calculateStatistics = () => {
+        const moods = Object.values(moodData);
+        if (moods.length === 0) return;
+
+        // Calculate average mood intensity
+        const totalIntensity = moods.reduce((sum, mood) => sum + mood.intensity, 0);
+        const averageIntensity = (totalIntensity / moods.length).toFixed(2);
+        setAverageMoodIntensity(averageIntensity);
+
+        // Calculate most common mood
+        const moodCounts = moods.reduce((counts, mood) => {
+            counts[mood.mood] = (counts[mood.mood] || 0) + 1;
+            return counts;
+        }, {});
+
+        const mostCommon = Object.keys(moodCounts).reduce((a, b) => moodCounts[a] > moodCounts[b] ? a : b);
+        setMostCommonMood(mostCommon);
+    };
 
     const changeMonth = (direction) => {
         const newMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
@@ -141,6 +166,13 @@ const CalendarScreen = () => {
 
             {/* Render the calendar table */}
             {renderCalendarTable()}
+
+            {/* Summary statistics */}
+            <div className="summary-statistics">
+                <h3>Summary Statistics for {currentMonth.toLocaleString('default', { month: 'long' })}</h3>
+                <p>Average Mood Intensity: {averageMoodIntensity}</p>
+                <p>Most Common Mood: {getMoodEmoji(mostCommonMood)}</p>
+            </div>
         </div>
     );
 };

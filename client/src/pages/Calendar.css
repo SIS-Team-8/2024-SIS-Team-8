@@ -90,3 +90,19 @@
     width: 20px;
     height: 20px;
 }
+
+/* Summary Statistics Section */
+.summary-statistics {
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.summary-statistics p {
+    font-size: 18px;
+    margin: 5px 0;
+}
