@@ -32,7 +32,7 @@ function Help() {
         "Onboarding": [
             { question: "How do I skip the introduction?", answer: "Select the 'Skip Introduction' button at the bottom of the screen." },
             { question: "What happens during onboarding?", answer: "You'll be guided through each of the app's core features." },
-            { question: "Can I revisit the onboarding later?", answer: <>Yes, via the <Link to="/onboarding">link</Link> here.</> },
+            { question: "Can I revisit the onboarding later?", answer: <>Yes, via the <Link id="help-link" to="/onboarding">link</Link> here.</> },
         ],
         "Daily View": [
             { question: "How do I log today's mood?", answer: "Click 'Log Daily Emotion' on the home screen." },
