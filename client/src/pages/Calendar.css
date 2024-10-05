@@ -13,13 +13,13 @@
 }
 
 .calendar-screen.light {
-    background-color: #189ab4; /* Light mode background */
+    background-color: #189ab4;
     color: black;
 }
 
 .calendar-screen.dark {
-    background-color: #333 !important; /* Dark mode background */
-    color: white !important;
+    background-color: #0F3D4B !important;
+    color: black !important;
 }
 
 .calendar-table {
@@ -42,24 +42,6 @@
     color: inherit;
 }
 
-.calendar-table th {
-    color: black; /* Header text color for light mode */
-}
-
-.calendar-table th {
-    color: black; /* Header text color for light mode */
-}
-
-.calendar-table.dark th {
-    color: white !important; /* Header text color for dark mode */
-    background-color: #444 !important; /* Dark mode header background */
-}
-
-.calendar-table.dark td {
-    background-color: #555 !important; /* Dark mode background for table cells */
-    color: black !important; /* Dark mode text color */
-}
-
 .month-navigation {
     display: flex;
     justify-content: space-between;
@@ -75,14 +57,6 @@
     line-height: 1;
     flex-grow: 1;
     text-align: center;
-}
-
-.month-navigation.light h2 {
-    color: white;
-}
-
-.month-navigation.dark h2 {
-    color: black !important; /* Ensure text color is white in dark mode */
 }
 
 .month-navigation button {
@@ -115,42 +89,4 @@
     font-size: 16px;
     margin: 5px 0;
     color: white;
-}
-
-body.light {
-    background-color: white;
-    color: black;
-}
-
-/* Global styles for dark mode */
-body.dark {
-    background-color: #333;
-    color: white;
-}
-
-.calendar-screen.light {
-    background-color: #189ab4;
-    color: black;
-}
-
-.calendar-screen.dark {
-    background-color: #333 !important;
-    color: white !important;
-}
-
-/* Table cell and date colors for light and dark modes */
-.calendar-table.light td {
-    color: black; /* Black text for light mode */
-}
-
-.calendar-table.dark td {
-    color: black; /* White text for dark mode */
-}
-
-.calendar-table.light th {
-    color: black; /* Black header text for light mode */
-}
-
-.calendar-table.dark th {
-    color: black; /* White header text for dark mode */
 }
