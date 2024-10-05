@@ -223,7 +223,7 @@ function Help({ theme, language }) {
                 <div style={{ flex: '1', marginLeft: '20px' }}>
                     <h2 className="custom-header">{t.contactSupport}</h2>
                     <p style={{ margin: '10px 0', fontSize: '15px' }}><u>{t.email}</u> support@emotelog.com</p>
-                    <p style={{ margin: '10px 0', fontSize: '15px' }}><u>{t.supportHours}</u> Available from 9am-5pm.</p>
+                    <p style={{ margin: '10px 0', fontSize: '15px' }}><u>{t.supportHours}</u> 09:00-17:00.</p>
                 </div>
             </div>
 
