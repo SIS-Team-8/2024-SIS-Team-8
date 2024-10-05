@@ -11,12 +11,6 @@ html {
     color: #ddd !important;
 }
 
-textarea.dark {
-    background-color: #555 !important;
-    color: #fff !important;
-    border: 1px solid #777 !important;
-}
-
 *,
 *:before,
 *:after {
