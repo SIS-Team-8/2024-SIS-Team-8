@@ -11,16 +11,13 @@ const translations = {
         supportHours: "Support Hours:",
         goHome: "Go Home",
         categories: {
-            "Login Issues": [
-                { question: "What happens if I forget my password?", answer: "You can use the 'Reset Password' option." },
-            ],
             "Settings": [
                 { question: "How can I change my notification preferences?", answer: "Change the notification preferences via the Settings menu." },
                 { question: "How do I switch to dark mode?", answer: "Switch to Dark Mode via the Settings menu." },
                 { question: "How do I update my language preferences?", answer: "Go to 'Settings' > 'Language Preferences'." },
                 { question: "How can I modify privacy settings?", answer: "You can adjust your privacy settings via the Settings menu." },
             ],
-            "Profile Settings": [
+            "Profile": [
                 { question: "How can I update my profile information?", answer: "Click on 'Edit Profile' in the Profile page." },
                 { question: "How do I reset my password?", answer: "Visit 'Profile' and then select 'Reset Password'." },
             ],
@@ -41,16 +38,13 @@ const translations = {
         supportHours: "Horario de Atención:",
         goHome: "Volver al Inicio",
         categories: {
-            "Problemas de Inicio de Sesión": [
-                { question: "¿Qué pasa si olvido mi contraseña?", answer: "Puede usar la opción 'Restablecer contraseña'." },
-            ],
             "Configuración": [
                 { question: "¿Cómo puedo cambiar mis preferencias de notificaciones?", answer: "Cambie las preferencias de notificaciones en el menú Configuración." },
                 { question: "¿Cómo cambio al modo oscuro?", answer: "Cambie al modo oscuro en el menú Configuración." },
                 { question: "¿Cómo actualizo mis preferencias de idioma?", answer: "Vaya a 'Configuración' > 'Preferencias de Idioma'." },
                 { question: "¿Cómo puedo modificar la configuración de privacidad?", answer: "Puede ajustar la configuración de privacidad en el menú Configuración." },
             ],
-            "Configuración de Perfil": [
+            "Perfil": [
                 { question: "¿Cómo puedo actualizar la información de mi perfil?", answer: "Haga clic en 'Editar Perfil' en la página de Perfil." },
                 { question: "¿Cómo puedo restablecer mi contraseña?", answer: "Visite 'Perfil' y seleccione 'Restablecer Contraseña'." },
             ],
@@ -71,9 +65,6 @@ const translations = {
         supportHours: "Supportzeiten:",
         goHome: "Zur Startseite",
         categories: {
-            "Anmeldeprobleme": [
-                { question: "Was passiert, wenn ich mein Passwort vergesse?", answer: "Sie können die Option 'Passwort zurücksetzen' verwenden." },
-            ],
             "Einstellungen": [
                 { question: "Wie kann ich meine Benachrichtigungseinstellungen ändern?", answer: "Ändern Sie die Benachrichtigungseinstellungen im Einstellungsmenü." },
                 { question: "Wie wechsle ich in den Dunkelmodus?", answer: "Wechseln Sie über das Einstellungsmenü in den Dunkelmodus." },
@@ -101,16 +92,13 @@ const translations = {
         supportHours: "Heures d'assistance:",
         goHome: "Retour à l'accueil",
         categories: {
-            "Problèmes de Connexion": [
-                { question: "Que se passe-t-il si j'oublie mon mot de passe ?", answer: "Vous pouvez utiliser l'option 'Réinitialiser le mot de passe'." },
-            ],
             "Paramètres": [
                 { question: "Comment puis-je modifier mes préférences de notification ?", answer: "Modifiez les préférences de notification via le menu Paramètres." },
                 { question: "Comment passer en mode sombre ?", answer: "Passez en mode sombre via le menu Paramètres." },
                 { question: "Comment mettre à jour mes préférences linguistiques ?", answer: "Allez dans 'Paramètres' > 'Préférences linguistiques'." },
                 { question: "Comment puis-je modifier les paramètres de confidentialité ?", answer: "Vous pouvez ajuster vos paramètres de confidentialité via le menu Paramètres." },
             ],
-            "Paramètres du Profil": [
+            "Profil": [
                 { question: "Comment puis-je mettre à jour les informations de mon profil ?", answer: "Cliquez sur 'Modifier le profil' dans la page de profil." },
                 { question: "Comment puis-je réinitialiser mon mot de passe ?", answer: "Visitez 'Profil' puis sélectionnez 'Réinitialiser le mot de passe'." },
             ],
@@ -131,9 +119,6 @@ const translations = {
         supportHours: "支持时间:",
         goHome: "回到主页",
         categories: {
-            "登录问题": [
-                { question: "如果我忘记密码会怎样？", answer: "您可以使用 '重置密码' 选项。" },
-            ],
             "设置": [
                 { question: "我如何更改通知首选项？", answer: "通过设置菜单更改通知首选项。" },
                 { question: "我如何切换到黑暗模式？", answer: "通过设置菜单切换到黑暗模式。" },
@@ -164,16 +149,13 @@ function Help({ theme, language }) {
 
     // Using the exact provided questions and answers
     const categories = {
-        "Login Issues": [
-            { question: "What happens if I forget my password?", answer: "You can use the 'Reset Password' option." },
-        ],
         "Settings": [
             { question: "How can I change my notification preferences?", answer: "Change the notification preferences via the Settings menu." },
             { question: "How do I switch to dark mode?", answer: "Switch to Dark Mode via the Settings menu." },
             { question: "How do I update my language preferences?", answer: "Go to 'Settings' > 'Language Preferences'." },
             { question: "How can I modify privacy settings?", answer: "You can adjust your privacy settings via the Settings menu." },
         ],
-        "Profile Settings": [
+        "Profile": [
             { question: "How can I update my profile information?", answer: "Click on 'Edit Profile' in the Profile page." },
             { question: "How do I reset my password?", answer: "Visit 'Profile' and then select 'Reset Password'." },
         ],
