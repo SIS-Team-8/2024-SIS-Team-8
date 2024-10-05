@@ -1,3 +1,4 @@
+/* DailyView.css */
 .daily-view-screen {
     font-family: 'Poppins', sans-serif;
     justify-content: center;
@@ -10,7 +11,7 @@
     display: flex;
     flex-direction: column;
 }
-
+ 
 .back-button {
     padding: 10px;
     font-size: medium;
@@ -23,48 +24,43 @@
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
+ 
 .back-button:hover {
     background-color: #0f7b8e;
     color: white;
 }
-
+ 
 .daily-view-content {
     width: 100%;
     max-width: 600px;
 }
-
+ 
 .daily-view-content h1 {
     font-size: 24px;
     margin-bottom: 20px;
 }
-
+ 
 .emoji {
     font-size: 100px;
     margin: 20px 0;
 }
-
+ 
 .notes {
     font-size: 18px;
     color: white;
     margin-top: 20px;
 }
-
+ 
 .intensity {
     font-size: 18px;
     color: #ddd;
     margin-top: 10px;
 }
-
-.actions {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-}
-
+ 
 .edit-button,
 .delete-button {
+    margin-top: 10px;
+    margin-right: 10px;
     padding: 10px;
     font-size: medium;
     min-width: 150px;
@@ -74,21 +70,42 @@
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
+ 
 .edit-button {
     color: #189ab4;
 }
-
+ 
 .delete-button {
     color: #DB1F48;
 }
-
+ 
 .edit-button:hover {
     background-color: #0f7b8e;
     color: white;
 }
-
+ 
 .delete-button:hover {
     background-color: #E7625F;
     color: white;
+}
+ 
+body.light {
+    background-color: white;
+    color: black;
+}
+ 
+/* Global styles for dark mode */
+body.dark {
+    background-color: #333;
+    color: white;
+}
+ 
+.daily-view-screen.light {
+    background-color: #189ab4;
+    color: black;
+}
+ 
+.daily-view-screen.dark {
+    background-color: #333 !important;
+    color: white !important;
 }

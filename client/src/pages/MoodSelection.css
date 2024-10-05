@@ -5,20 +5,37 @@ html {
     margin: 0;
     padding: 0;
 }
-
+ 
+html.dark,
+body.dark {
+    background-color: #222 !important;
+    color: #ddd !important;
+}
+ 
+#container.dark {
+    background-color: #333 !important; /* Dark background color */
+    color: #ddd !important;
+}
+ 
+textarea.dark {
+    background-color: #555 !important;
+    color: #fff !important;
+    border: 1px solid #777 !important;
+}
+ 
 *,
 *:before,
 *:after {
     box-sizing: inherit;
 }
-
+ 
 body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
     height: 100%;
 }
-
+ 
 textarea {
     background: transparent;
     border-color: white;
@@ -26,11 +43,11 @@ textarea {
     resize: none;
     width: 100%;
 }
-
+ 
 textarea::placeholder {
     color: #D3D3D3;
 }
-
+ 
 #container {
     padding: 30px;
     display: flex;
@@ -42,7 +59,7 @@ textarea::placeholder {
     box-sizing: border-box;
     cursor: pointer;
 }
-
+ 
 #row, #subRow {
     display: flex;
     flex-wrap: wrap;
@@ -50,25 +67,25 @@ textarea::placeholder {
     justify-content: center;
     width: 100%;
 }
-
+ 
 #subRow {
     height: 125px;
 }
-
+ 
 .column {
     padding: 5px;
     flex: 1;
     max-width: 150px;
     height: auto;
 }
-
+ 
 .subColumn {
     padding: 5px;
     flex: 1;
     max-width: 125px;
     height: auto;
 }
-
+ 
 #flexContainer {
     display: flex;
     justify-content: center;
@@ -77,7 +94,7 @@ textarea::placeholder {
     width: 100%;
     margin-top: 20px;
 }
-
+ 
 #log {
     width: 90%;
     max-width: 775px;
@@ -91,23 +108,23 @@ textarea::placeholder {
     border-radius: 8px;
     cursor: pointer;
 }
-
+ 
 #submit {
     width: 50px;
     height: 50px;
     margin-top: 10px;
     cursor: pointer;
 }
-
+ 
 @media only screen and (max-width: 768px) {
     #row, #subRow {
         flex-direction: column;
     }
-
+ 
     .column, .subColumn {
         width: 60%;
     }
-
+ 
     #log {
         width: 100%;
         background-position: right 10px center;
