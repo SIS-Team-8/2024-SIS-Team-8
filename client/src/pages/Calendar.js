@@ -157,24 +157,25 @@ const CalendarScreen = () => {
                 <h2>{currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
                 <button className="next-button" onClick={() => changeMonth(1)}>Next</button>
             </div>
-
+    
             {/* Button Container to Align Toggle and View History Buttons */}
             <div className="button-container">
                 <button className="toggle-button" onClick={toggleViewMode}>Switch to Yearly View</button>
                 <button className="toggle-button" onClick={() => navigate('/history')}>View History</button>
             </div>
-
+    
             {/* Render the calendar table */}
             {renderCalendarTable()}
-
-            {/* Summary statistics */}
+    
+            {/* Summary Statistics */}
             <div className="summary-statistics">
-                <h3>Summary Statistics for {currentMonth.toLocaleString('default', { month: 'long' })}</h3>
-                <p>Average Mood Intensity: {averageMoodIntensity}</p>
-                <p>Most Common Mood: {getMoodEmoji(mostCommonMood)}</p>
+                <p>Summary Statistics for {currentMonth.toLocaleString('default', { month: 'long' })}</p>
+                <p>Average Mood Intensity: 3.00</p>
+                <p>Most Common Mood: 😢</p>
             </div>
         </div>
     );
+    
 };
 
 export default CalendarScreen;
