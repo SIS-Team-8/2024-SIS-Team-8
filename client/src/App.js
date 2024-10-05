@@ -76,15 +76,8 @@ function App() {
             {isAuthenticated && <Navbar onLogout={handleLogout} theme={theme} toggleTheme={toggleTheme} language={language} onLanguageChange={handleLanguageChange} />}
 
             <Routes>
-            <Route path="/" element={isAuthenticated ? <Home /> : <Login language={language} theme={theme} onLogin={handleLogin} />} /> 
-            <Route path="/settings" element={
-                    <Settings 
-                        theme={theme} 
-                        toggleTheme={toggleTheme} 
-                        language={language} 
-                        setLanguage={handleLanguageChange} 
-                    />
-            } />
+            <Route path="/" element={isAuthenticated ? <Home /> : <Login language={language} theme={theme} onLogin={handleLogin} />} />
+            <Route path="/settings" element={<Settings theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} />} />
                 <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/help" element={isAuthenticated ? <Help theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
@@ -107,7 +100,7 @@ function App() {
             French: { welcome: "Bienvenue!", log: "Enregistrer l'émotion quotidienne" },
             Chinese: { welcome: "欢迎！", log: "记录每日情绪" }
         };
-        
+
         const t = translations[language];
 
         return (

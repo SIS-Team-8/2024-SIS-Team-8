@@ -69,33 +69,15 @@ body {
     width: 192px;
 }
 
-body.light {
-    background-color: white;
-    color: black;
-}
-
-/* Dark mode */
-body.dark {
-    background-color: #333;
-    color: white;
-}
-
-.home-screen.dark {
-    background-color: #333;
-    color: #ddd;
-}
-
 .App-header.dark {
-    background-color: #222;
+    background-color: #0F3D4B;
 }
 
 #home-button.dark, #mood-selection.dark {
-    background-color: #555;
-    color: #ddd;
-    border: 1px solid #777;
+    color: #0F3D4B;
 }
 
 #home-button.dark:hover, #mood-selection.dark:hover {
-    background-color: #666;
-    color: #fff;
+    background-color: #0f7b8e;
+    color: white;
 }
