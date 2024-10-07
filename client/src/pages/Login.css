@@ -68,7 +68,7 @@ input {
 }
 
 #link {
-    color: white;
+    color: white !important;
     font-family: 'Poppins';
     text-decoration: none;
 }
@@ -78,42 +78,21 @@ input {
     font-family: 'Poppins';
 }
 
-/* Light Theme Links */
-#link.light {
-    color: #189ab4;
-}
-
-/* Light Theme Links */
-#link.light {
-    color: #189ab4;
-}
-
 /* Dark Mode Styles for Login */
 #login-container.dark {
-    background-color: #333; /* Dark background color */
-    color: #ddd; /* Light text color */
+    background-color: #0F3D4B;
+    color: #ddd;
 }
 
-#inputBox.dark {
-    background-color: #444; /* Darker background for the input container */
-    color: #ddd; /* Light text for input container */
-}
-
-#userBox.dark, #passBox.dark {
-    background-color: #555; /* Dark input fields */
-    border: 1px solid #777; /* Lighter border */
-    color: #ddd; /* Light text color */
+.dark #userBox, .dark #passBox {
+    background-repeat: no-repeat;
+    background-size: 25px, 25px;
+    background-position: 8px 2px !important;
+    padding-left: 40px;
+    background-color: transparent !important;
 }
 
 #button.dark {
-    background-color: #555; /* Dark background for button */
-    color: #ddd; /* Light text for button */
-}
-
-#bottomText.dark {
-    color: #ddd; /* Light text color for bottom text */
-}
-
-#link.dark {
-    color: #a4defb; /* Light blue for links */
+    background-color: white;
+    color: #0F3D4B;
 }
