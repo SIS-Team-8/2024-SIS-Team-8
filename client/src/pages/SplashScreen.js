@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import logo from '../assets/logo.png';
 
-const SplashScreen = () => {
+const SplashScreen = ({ theme }) => {
     const [showSplash, setShowSplash] = useState(true);
     const [fadeOut, setFadeOut] = useState(false);
 
@@ -28,23 +28,23 @@ const SplashScreen = () => {
         return null;
     }
 
+    const splashStyle = {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        flexDirection: 'column',
+        backgroundColor: theme === 'dark' ? '#0F3D4B' : '#189AB4', // Dark background for dark mode
+        color: 'white',
+        fontFamily: 'Poppins',
+    };
+
     return (
         <div style={splashStyle} className={fadeOut ? 'fadeOut' : ''}>
-            <h1 class="noselect">EmoteLog</h1>
+            <h1 className="noselect">EmoteLog</h1>
             <img src={logo} alt="App Logo" style={logoStyle} />
         </div>
     );
-};
-
-const splashStyle = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    flexDirection: 'column',
-    backgroundColor: '#189AB4',
-    color: 'white',
-    fontFamily: 'Poppins',
 };
 
 const logoStyle = {

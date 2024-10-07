@@ -68,7 +68,7 @@ function App() {
     };
 
     if (!isLoaded) {
-        return <SplashScreen />;
+        return <SplashScreen theme={theme} />;
     }
 
     return (
