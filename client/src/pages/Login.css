@@ -78,20 +78,13 @@ input {
     font-family: 'Poppins';
 }
 
-#forgotPassword {
-    float: right;
-    font-family: 'Poppins';
-    color: white;
-    text-decoration: none;
-}
-
 /* Light Theme Links */
-#link.light, #forgotPassword.light {
+#link.light {
     color: #189ab4;
 }
 
 /* Light Theme Links */
-#link.light, #forgotPassword.light {
+#link.light {
     color: #189ab4;
 }
 
@@ -121,6 +114,6 @@ input {
     color: #ddd; /* Light text color for bottom text */
 }
 
-#link.dark, #forgotPassword.dark {
+#link.dark {
     color: #a4defb; /* Light blue for links */
 }

@@ -3,33 +3,17 @@ import { Link } from "react-router-dom";
 import './Profile.css';
 
 const translations = {
-    English: { resetPassword: "Reset Password", logOut: "Log Out", saveChanges: "Save Changes", goHome: "Go Home", name: "Name", 
-        email: "Email", 
-        phone: "Phone", 
-        address: "Address" },
-    Spanish: { resetPassword: "Restablecer Contraseña", logOut: "Cerrar Sesión", saveChanges: "Guardar Cambios", goHome: "Volver al Inicio", name: "Nombre", 
-        email: "Correo Electrónico", 
-        phone: "Teléfono", 
-        address: "Dirección" },
-    German: { resetPassword: "Passwort zurücksetzen", logOut: "Ausloggen", saveChanges: "Änderungen speichern", goHome: "Zur Startseite", name: "Name", 
-        email: "E-Mail", 
-        phone: "Telefon", 
-        address: "Adresse" },
-    French: { resetPassword: "Réinitialiser le mot de passe", logOut: "Se déconnecter", saveChanges: "Enregistrer les modifications", goHome: "Retour à l'accueil", name: "Nom", 
-        email: "E-mail", 
-        phone: "Téléphone", 
-        address: "Adresse" },
-    Chinese: { resetPassword: "重设密码", logOut: "登出", saveChanges: "保存更改", goHome: "回到主页", name: "姓名", 
-        email: "电子邮件", 
-        phone: "电话", 
-        address: "地址" }
+    English: { resetPassword: "Reset Password", logOut: "Log Out", saveChanges: "Save Changes", goHome: "Go Home", name: "Name", phone: "Phone", address: "Address" },
+    Spanish: { resetPassword: "Restablecer Contraseña", logOut: "Cerrar Sesión", saveChanges: "Guardar Cambios", goHome: "Volver al Inicio", name: "Nombre", phone: "Teléfono", address: "Dirección" },
+    German: { resetPassword: "Passwort zurücksetzen", logOut: "Ausloggen", saveChanges: "Änderungen speichern", goHome: "Zur Startseite", name: "Name", phone: "Telefon", address: "Adresse" },
+    French: { resetPassword: "Réinitialiser le mot de passe", logOut: "Se déconnecter", saveChanges: "Enregistrer les modifications", goHome: "Retour à l'accueil", name: "Nom", phone: "Téléphone", address: "Adresse" },
+    Chinese: { resetPassword: "重设密码", logOut: "登出", saveChanges: "保存更改", goHome: "回到主页", name: "姓名", phone: "电话", address: "地址" }
 };
 
 export default function Profile({theme, language}) {
     // State to manage profile data
     const [profile, setProfile] = useState({
         name: '',
-        email: '',
         phone: '',
         address: '',
     });
@@ -52,12 +36,6 @@ export default function Profile({theme, language}) {
                 <div className="profile-field">
                     <label htmlFor="name">{t.name}</label>
                     <input id="name" name="name" value={profile.name} onChange={(e) => setProfile({ ...profile, name: e.target.value })} placeholder="Johnny Appleseed" />
-                </div>
-
-                {/* Email Field */}
-                <div className="profile-field">
-                    <label htmlFor="email">{t.email}</label>
-                    <input id="email" name="email" value={profile.email} onChange={(e) => setProfile({ ...profile, email: e.target.value })} placeholder="johnny@apple.com" />
                 </div>
 
                 {/* Phone Field */}

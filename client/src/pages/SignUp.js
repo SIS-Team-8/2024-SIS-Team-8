@@ -4,11 +4,11 @@ import logo from "../assets/logo.png";
 import './SignUp.css';
 
 const translations = {
-    English: { email: "Email", username: "Username", password: "Password", confirmPassword: "Confirm Password", createAccount: "Create Account", login: "Login" },
-    Spanish: { email: "Correo Electrónico", username: "Nombre de usuario", password: "Contraseña", confirmPassword: "Confirmar Contraseña", createAccount: "Crear cuenta", login: "Iniciar sesión" },
-    German: { email: "E-Mail", username: "Benutzername", password: "Passwort", confirmPassword: "Passwort bestätigen", createAccount: "Konto erstellen", login: "Anmelden" },
-    French: { email: "E-mail", username: "Nom d'utilisateur", password: "Mot de passe", confirmPassword: "Confirmer le mot de passe", createAccount: "Créer un compte", login: "Connexion" },
-    Chinese: { email: "电子邮件", username: "用户名", password: "密码", confirmPassword: "确认密码", createAccount: "创建账户", login: "登录" }
+    English: { username: "Username", password: "Password", confirmPassword: "Confirm Password", createAccount: "Create Account", login: "Login" },
+    Spanish: { username: "Nombre de usuario", password: "Contraseña", confirmPassword: "Confirmar Contraseña", createAccount: "Crear cuenta", login: "Iniciar sesión" },
+    German: { username: "Benutzername", password: "Passwort", confirmPassword: "Passwort bestätigen", createAccount: "Konto erstellen", login: "Anmelden" },
+    French: { username: "Nom d'utilisateur", password: "Mot de passe", confirmPassword: "Confirmer le mot de passe", createAccount: "Créer un compte", login: "Connexion" },
+    Chinese: { username: "用户名", password: "密码", confirmPassword: "确认密码", createAccount: "创建账户", login: "登录" }
 };
 
 export default function SignUp( {language, theme }) {
@@ -26,8 +26,6 @@ export default function SignUp( {language, theme }) {
 
             <div id="inputBox">
                 <form>
-                    <input id="emailBox" placeholder={t.email} type="email" className={theme}></input>
-                    <p></p>
                     <input id="userBox" placeholder={t.username} className={theme}></input>
                     <p></p>
                     <input id="passBox" placeholder={t.password} type="password" className={theme}></input>

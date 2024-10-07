@@ -31,16 +31,12 @@ input {
     font-family: 'Poppins';
 }
 
-#emailBox, #userBox, #passBox {
+#userBox, #passBox {
     background-repeat: no-repeat;
     background-size: 25px, 25px;
     background-position: 8px 2px;
     padding-left: 40px;
     font-family: 'Poppins';
-}
-
-#emailBox {
-    background-image: url(../assets/email-icon.png);
 }
 
 #userBox {
@@ -82,13 +78,6 @@ input {
     font-family: 'Poppins';
 }
 
-#forgotPassword {
-    float: right;
-    font-family: 'Poppins';
-    color: white;
-    text-decoration: none;
-}
-
 .dark #signup-container {
     background-color: #2e2e2e !important; /* Dark background for the container */
 }
@@ -102,7 +91,7 @@ input {
     color: #e0e0e0 !important; /* Input text color */
 }
 
-.dark #emailBox, .dark #userBox, .dark #passBox {
+.dark #userBox, .dark #passBox {
     background-color: transparent !important; /* Transparent background */
     background-image: none !important; /* Remove background icons for dark mode */
     padding-left: 10px !important; /* Adjust padding without icons */
