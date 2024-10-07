@@ -79,34 +79,31 @@ input {
 }
 
 .dark #signup-container {
-    background-color: #2e2e2e !important; /* Dark background for the container */
-}
-
-.dark #inputBox {
-    color: #e0e0e0 !important; /* Lighter text color for input container */
+    background-color: #0F3D4B !important;
 }
 
 .dark input {
-    border-color: #e0e0e0 !important; /* Light border color for inputs */
-    color: #e0e0e0 !important; /* Input text color */
+    border-color: white !important;
+    color: white !important;
 }
 
 .dark #userBox, .dark #passBox {
-    background-color: transparent !important; /* Transparent background */
-    background-image: none !important; /* Remove background icons for dark mode */
-    padding-left: 10px !important; /* Adjust padding without icons */
+    background-repeat: no-repeat;
+    background-size: 25px, 25px;
+    background-position: 8px 3px;
+    padding-left: 40px;
+    background-color: transparent !important;
 }
 
 .dark #button {
-    background-color: #444 !important; /* Dark button background */
-    color: #e0e0e0 !important; /* Button text color */
-    border: none !important;
+    background-color: white;
+    color: #0F3D4B;
 }
 
 .dark #bottomText, .dark #link {
-    color: #e0e0e0 !important; /* Light color for text and links */
+    color: white !important;
 }
 
 .dark ::placeholder {
-    color: #d3d3d3 !important; /* Lighter placeholder color */
+    color: #d3d3d3 !important;
 }
