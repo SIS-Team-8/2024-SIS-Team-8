@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Calendar.css'; // Import your CSS for styling
+import './Calendar.css';
 
-// Dummy mood data for the calendar for September
 const moodData = {
     "2024-09-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
     "2024-09-02": { mood: "happy", intensity: 4, notes: "Good day." },
@@ -12,43 +11,28 @@ const moodData = {
     // Add more dates for September...
 };
 
-// Helper function to get the emoji based on mood type
 const getMoodEmoji = (mood) => {
     switch (mood) {
-        case "very happy":
-            return "😄"; // Very happy emoji
-        case "happy":
-            return "😊"; // Happy emoji
-        case "neutral":
-            return "😐"; // Neutral emoji
-        case "sad":
-            return "😢"; // Sad emoji
-        case "very sad":
-            return "😭"; // Very sad emoji
-        default:
-            return "😶"; // Default emoji for no mood data
+        case "very happy": return "😄";
+        case "happy": return "😊";
+        case "neutral": return "😐";
+        case "sad": return "😢";
+        case "very sad": return "😭";
+        default: return "😶";
     }
 };
 
-// Helper function to get the color based on mood type
 const getMoodColor = (mood) => {
     switch (mood) {
-        case "very happy":
-            return "#00FF00"; // Bright green for very happy
-        case "happy":
-            return "#A8E6CF"; // Light green for happy
-        case "neutral":
-            return "#FFD700"; // Yellow for neutral
-        case "sad":
-            return "#FFB6C1"; // Light red for sad
-        case "very sad":
-            return "#FF6347"; // Red for very sad
-        default:
-            return "#FFFFFF"; // Default color for no mood data
+        case "very happy": return "#00FF00";
+        case "happy": return "#A8E6CF";
+        case "neutral": return "#FFD700";
+        case "sad": return "#FFB6C1";
+        case "very sad": return "#FF6347";
+        default: return "#FFFFFF";
     }
 };
 
-// Function to calculate the summary statistics for the selected month
 const getSummaryStatistics = (monthData) => {
     const moods = Object.values(monthData);
     if (moods.length === 0) return { averageIntensity: 0, mostCommonMood: "N/A" };
@@ -66,68 +50,56 @@ const getSummaryStatistics = (monthData) => {
     return { averageIntensity, mostCommonMood };
 };
 
-const translations = {
-    English: { onDate: "On", summary: "Summary Statistics for", avgIntensity: "Average Mood Intensity:", mostCommonMood: "Most Common Mood:", previous: "Previous", next: "Next",
-        months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    },
-    Spanish: { onDate: "El", summary: "Estadísticas Resumidas para", avgIntensity: "Intensidad Media del Estado de Ánimo:", mostCommonMood: "Estado de Ánimo Más Común:", previous: "Anterior", next: "Siguiente",
-        months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-    },
-    German: { onDate: "Am", summary: "Zusammenfassende Statistiken für", avgIntensity: "Durchschnittliche Stimmung Intensität:", mostCommonMood: "Häufigste Stimmung:", previous: "Vorherige", next: "Nächste",
-        months: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]
-    },
-    French: { onDate: "Le", summary: "Statistiques Résumées pour", avgIntensity: "Intensité Moyenne de l'Humeur:", mostCommonMood: "Humeur la Plus Commune:", previous: "Précédente", next: "Suivante",
-        months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
-    },
-    Chinese: { onDate: "在", summary: "总结统计", avgIntensity: "平均心情强度:", mostCommonMood: "最常见的心情:", previous: "前一个", next: "下一个",
-        months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
-    }
+// New function to get average monthly intensity for yearly view
+const getYearlyAverageIntensity = () => {
+    const months = Array(12).fill(0).map((_, i) => i + 1);
+    const monthlyData = {};
+
+    months.forEach((month) => {
+        const days = Object.keys(moodData).filter(date => parseInt(date.split('-')[1], 10) === month);
+        if (days.length === 0) {
+            monthlyData[month] = 0;
+            return;
+        }
+
+        const totalIntensity = days.reduce((sum, day) => sum + moodData[day].intensity, 0);
+        monthlyData[month] = (totalIntensity / days.length).toFixed(2);
+    });
+
+    return monthlyData;
 };
 
-const CalendarScreen = ({theme, language }) => {
+const CalendarScreen = ({ theme, language }) => {
     const navigate = useNavigate();
-    const [currentMonth, setCurrentMonth] = useState(new Date(2024, 8)); // Initialize to September 2024
+    const [currentMonth, setCurrentMonth] = useState(new Date(2024, 8));
+    const [isYearlyView, setIsYearlyView] = useState(false);
 
-    const t = translations[language];
-
-    // Get the number of days in the current month
-    const getDaysInMonth = (month, year) => {
-        return new Date(year, month + 1, 0).getDate();
-    };
-
-    // Get the day of the week the month starts on
-    const getStartDayOfWeek = (month, year) => {
-        return new Date(year, month, 1).getDay(); // 0 = Sunday, 1 = Monday, etc.
-    };
-
-    // Change the current month (previous or next)
     const changeMonth = (direction) => {
         const newMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
         setCurrentMonth(newMonth);
     };
 
-    // Get the total number of days in the current month
-    const daysInMonth = getDaysInMonth(currentMonth.getMonth(), currentMonth.getFullYear());
-    const startDayOfWeek = getStartDayOfWeek(currentMonth.getMonth(), currentMonth.getFullYear());
+    const toggleView = () => {
+        setIsYearlyView(!isYearlyView);
+    };
 
-    // Helper function to generate a date key in YYYY-MM-DD format
+    const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
+    const startDayOfWeek = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).getDay();
+
     const generateDateKey = (day) => {
         const year = currentMonth.getFullYear();
         const month = currentMonth.getMonth() + 1;
         return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
     };
 
-    // Create an array of all days for the month, including empty days for alignment
-    const daysArray = Array.from({ length: startDayOfWeek }).fill(null) // Fill empty days before the start of the month
-        .concat(Array.from({ length: daysInMonth }, (_, i) => i + 1));  // Add days of the month
+    const daysArray = Array.from({ length: startDayOfWeek }).fill(null)
+        .concat(Array.from({ length: daysInMonth }, (_, i) => i + 1));
 
-    // Split days into weeks (7 days per row)
     const weeksArray = [];
     for (let i = 0; i < daysArray.length; i += 7) {
         weeksArray.push(daysArray.slice(i, i + 7));
     }
 
-    // Get summary statistics for the current month
     const monthData = {};
     Array.from({ length: daysInMonth }, (_, i) => i + 1).forEach(day => {
         const dateKey = generateDateKey(day);
@@ -137,57 +109,73 @@ const CalendarScreen = ({theme, language }) => {
     });
 
     const summary = getSummaryStatistics(monthData);
+    const yearlyAverage = getYearlyAverageIntensity();
 
     return (
-        <div className={ `calendar-screen ${theme}` }>
+        <div className={`calendar-screen ${theme}`}>
             <div className="month-navigation">
-                <button onClick={() => changeMonth(-1)}>{t.previous}</button>
-                <h2>{t.months[currentMonth.getMonth()]} {currentMonth.getFullYear()}</h2>
-                <button onClick={() => changeMonth(1)}>{t.next}</button>
+                <button onClick={() => changeMonth(-1)} disabled={isYearlyView}>Previous</button>
+                <h2>{isYearlyView ? `${currentMonth.getFullYear()} Yearly Overview` : `${currentMonth.toLocaleString('default', { month: 'long' })} ${currentMonth.getFullYear()}`}</h2>
+                <button onClick={() => changeMonth(1)} disabled={isYearlyView}>Next</button>
+                <button onClick={toggleView}>{isYearlyView ? "Switch to Monthly View" : "Switch to Yearly View"}</button>
             </div>
 
-            <table className="calendar-table">
-                <thead>
-                    <tr>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                        <th>Sun</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {weeksArray.map((week, weekIndex) => (
-                        <tr key={weekIndex}>
-                            {week.map((day, dayIndex) => {
-                                const dateKey = day ? generateDateKey(day) : null;
-                                const moodEntry = day ? moodData[dateKey] : null;
-                                return (
-                                    <td key={dayIndex} onClick={day ? () => navigate(`/daily-view/${dateKey}`) : null} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF", position: 'relative' }}>
-                                        {/* Display date in top right if there is an emoji, otherwise centered */}
-                                        {moodEntry ? (
-                                            <>
-                                                <div style={{ position: 'absolute', top: '2px', right: '5px', fontSize: '12px' }}>{day}</div>
-                                                <div style={{ fontSize: '15px', textAlign: 'center' }}>{getMoodEmoji(moodEntry.mood)}</div>
-                                            </>
-                                        ) : (
-                                            <div style={{ textAlign: 'center', fontSize: '16px' }}>{day || ''}</div>
-                                        )}
-                                    </td>
-                                );
-                            })}
+            {isYearlyView ? (
+                <table className="calendar-table">
+                    <thead>
+                        <tr>
+                            {Array(12).fill(null).map((_, i) => <th key={i}>{new Date(0, i).toLocaleString('default', { month: 'short' })}</th>)}
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            <div className="summary-statistics">
-                <h3>{t.summary} {currentMonth.toLocaleString('default', { month: 'long' })}</h3>
-                <p>{t.avgIntensity} {summary.averageIntensity}</p>
-                <p>{t.mostCommonMood}: {getMoodEmoji(summary.mostCommonMood)}</p>
-            </div>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {Array(12).fill(null).map((_, i) => (
+                                <td key={i} style={{ backgroundColor: '#FFD700' }}>
+                                    <p>{yearlyAverage[i + 1]}</p>
+                                </td>
+                            ))}
+                        </tr>
+                    </tbody>
+                </table>
+            ) : (
+                <table className="calendar-table">
+                    <thead>
+                        <tr>
+                            <th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {weeksArray.map((week, weekIndex) => (
+                            <tr key={weekIndex}>
+                                {week.map((day, dayIndex) => {
+                                    const dateKey = day ? generateDateKey(day) : null;
+                                    const moodEntry = day ? moodData[dateKey] : null;
+                                    return (
+                                        <td key={dayIndex} onClick={day ? () => navigate(`/daily-view/${dateKey}`) : null} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF" }}>
+                                            {moodEntry ? (
+                                                <>
+                                                    <div style={{ fontSize: '12px' }}>{day}</div>
+                                                    <div style={{ fontSize: '15px' }}>{getMoodEmoji(moodEntry.mood)}</div>
+                                                </>
+                                            ) : (
+                                                <div>{day || ''}</div>
+                                            )}
+                                        </td>
+                                    );
+                                })}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
+            
+            {!isYearlyView && (
+                <div className="summary-statistics">
+                    <h3>Summary for {currentMonth.toLocaleString('default', { month: 'long' })}</h3>
+                    <p>Average Mood Intensity: {summary.averageIntensity}</p>
+                    <p>Most Common Mood: {getMoodEmoji(summary.mostCommonMood)}</p>
+                </div>
+            )}
         </div>
     );
 };
