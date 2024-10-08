@@ -97,22 +97,23 @@ const getMoodEmojiImage = (mood) => {
     }
 };
 
-// Helper function to get the color based on mood type
-const getMoodColor = (mood) => {
-    switch (mood) {
-        case "very happy":
-            return "#00FF00"; // Bright green for very happy
-        case "happy":
-            return "#A8E6CF"; // Light green for happy
-        case "neutral":
-            return "#FFD700"; // Yellow for neutral
-        case "sad":
-            return "#FFB6C1"; // Light red for sad
-        case "very sad":
-            return "#FF6347"; // Red for very sad
-        default:
-            return "#FFFFFF"; // Default color for no mood data
-    }
+// Function to get yearly average intensity data for each month
+const getYearlyAverageIntensity = () => {
+    const months = Array(12).fill(0).map((_, i) => i + 1);
+    const monthlyData = {};
+
+    months.forEach((month) => {
+        const days = Object.keys(moodData).filter(date => parseInt(date.split('-')[1], 10) === month);
+        if (days.length === 0) {
+            monthlyData[month] = 0;
+            return;
+        }
+
+        const totalIntensity = days.reduce((sum, day) => sum + moodData[day].intensity, 0);
+        monthlyData[month] = (totalIntensity / days.length).toFixed(2);
+    });
+
+    return monthlyData;
 };
 
 const CalendarScreen = ({ theme }) => {
@@ -146,6 +147,8 @@ const CalendarScreen = ({ theme }) => {
         weeksArray.push(daysArray.slice(i, i + 7));
     }
 
+    const yearlyAverage = getYearlyAverageIntensity();
+
     return (
         <div className={`calendar-screen ${theme}`}>
             {/* Button container with two toggle buttons */}
@@ -165,9 +168,22 @@ const CalendarScreen = ({ theme }) => {
             </div>
 
             {isYearlyView ? (
-                <div className="yearly-view">
-                    {/* Yearly view content */}
-                </div>
+                <table className="calendar-table">
+                    <thead>
+                        <tr>
+                            {Array(12).fill(null).map((_, i) => <th key={i}>{new Date(0, i).toLocaleString('default', { month: 'short' })}</th>)}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {Array(12).fill(null).map((_, i) => (
+                                <td key={i} style={{ backgroundColor: '#FFD700' }}>
+                                    <p>{yearlyAverage[i + 1]}</p>
+                                </td>
+                            ))}
+                        </tr>
+                    </tbody>
+                </table>
             ) : (
                 <table className="calendar-table">
                     <thead>
