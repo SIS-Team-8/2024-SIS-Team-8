@@ -69,6 +69,8 @@ export default function History() {
     const heading = getHeading();
     const barColors = ["#ff746c", "#b3ebf2", "#ffee8c", "grey", "#6c3baa"];
 
+    console.log("Data passed to BarChartComponent:", chartData);
+    
     return (
         <div id="history-container">
             <h1>History</h1>
@@ -87,8 +89,6 @@ export default function History() {
                 {viewMode === "monthly" ? "Switch to Weekly View" : viewMode === "weekly" ? "Switch to Yearly View" : "Switch to Monthly View"}
             </button>
 
-            console.log("Data passed to BarChartComponent:", chartData);
-            
             <BarChartComponent 
                 data={chartData}         // Pass dynamically generated chart data
                 colours={barColors}      // Pass bar colors
