@@ -1,6 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Calendar.css'; // Import your CSS for styling
+import './Calendar.css';
+
+// Import emoji images
+import veryAngry from '../assets/emoji/very-angry.png';
+import sad from '../assets/emoji/sad.png';
+import happy from '../assets/emoji/happy.png';
+import bored from '../assets/emoji/bored.png';
+import scared from '../assets/emoji/scared.png';
+import annoyed from '../assets/emoji/annoyed.png';
+import frustrated from '../assets/emoji/frustrated.png';
+import angry from '../assets/emoji/angry.png';
+import extremelyAngry from '../assets/emoji/extremely-angry.png';
+import upset from '../assets/emoji/upset.png';
+import deflated from '../assets/emoji/deflated.png';
+import distressed from '../assets/emoji/distressed.png';
+import miserable from '../assets/emoji/miserable.png';
+import veryHappy from '../assets/emoji/very-happy.png';
+import extremelyHappy from '../assets/emoji/extremely-happy.png';
+import amazinglyHappy from '../assets/emoji/amazingly-happy.png';
+import ecstatic from '../assets/emoji/ecstatic.png';
+import exasperated from '../assets/emoji/exasperated.png';
+import sarcastic from '../assets/emoji/sarcastic.png';
+import tired from '../assets/emoji/tired.png';
+import exhausted from '../assets/emoji/exhausted.png';
+import surprised from '../assets/emoji/surprised.png';
+import nervous from '../assets/emoji/nervous.png';
+import overwhelmed from '../assets/emoji/overwhelmed.png';
+import terrified from '../assets/emoji/terrified.png';
 
 // Dummy mood data for the calendar for September
 const moodData = {
@@ -12,21 +39,61 @@ const moodData = {
     // Add more dates for September...
 };
 
-// Helper function to get the emoji based on mood type
-const getMoodEmoji = (mood) => {
+// Helper function to get the emoji image based on mood type
+const getMoodEmojiImage = (mood) => {
     switch (mood) {
-        case "very happy":
-            return "😄"; // Very happy emoji
-        case "happy":
-            return "😊"; // Happy emoji
-        case "neutral":
-            return "😐"; // Neutral emoji
+        case "very angry":
+            return veryAngry;
         case "sad":
-            return "😢"; // Sad emoji
-        case "very sad":
-            return "😭"; // Very sad emoji
+            return sad;
+        case "happy":
+            return happy;
+        case "bored":
+            return bored;
+        case "scared":
+            return scared;
+        case "annoyed":
+            return annoyed;
+        case "frustrated":
+            return frustrated;
+        case "angry":
+            return angry;
+        case "extremely angry":
+            return extremelyAngry;
+        case "upset":
+            return upset;
+        case "deflated":
+            return deflated;
+        case "distressed":
+            return distressed;
+        case "miserable":
+            return miserable;
+        case "very happy":
+            return veryHappy;
+        case "extremely happy":
+            return extremelyHappy;
+        case "amazingly happy":
+            return amazinglyHappy;
+        case "ecstatic":
+            return ecstatic;
+        case "exasperated":
+            return exasperated;
+        case "sarcastic":
+            return sarcastic;
+        case "tired":
+            return tired;
+        case "exhausted":
+            return exhausted;
+        case "surprised":
+            return surprised;
+        case "nervous":
+            return nervous;
+        case "overwhelmed":
+            return overwhelmed;
+        case "terrified":
+            return terrified;
         default:
-            return "😶"; // Default emoji for no mood data
+            return null; // or handle a default image if needed
     }
 };
 
@@ -48,44 +115,7 @@ const getMoodColor = (mood) => {
     }
 };
 
-// Function to calculate the summary statistics for the selected month
-const getSummaryStatistics = (monthData) => {
-    const moods = Object.values(monthData);
-    if (moods.length === 0) return { averageIntensity: 0, mostCommonMood: "N/A" };
-
-    const totalIntensity = moods.reduce((acc, mood) => acc + mood.intensity, 0);
-    const averageIntensity = (totalIntensity / moods.length).toFixed(2);
-
-    const moodCount = moods.reduce((acc, mood) => {
-        acc[mood.mood] = (acc[mood.mood] || 0) + 1;
-        return acc;
-    }, {});
-
-    const mostCommonMood = Object.keys(moodCount).reduce((a, b) => (moodCount[a] > moodCount[b] ? a : b));
-
-    return { averageIntensity, mostCommonMood };
-};
-
-// New function to get average monthly intensity for yearly view
-const getYearlyAverageIntensity = () => {
-    const months = Array(12).fill(0).map((_, i) => i + 1);
-    const monthlyData = {};
-
-    months.forEach((month) => {
-        const days = Object.keys(moodData).filter(date => parseInt(date.split('-')[1], 10) === month);
-        if (days.length === 0) {
-            monthlyData[month] = 0;
-            return;
-        }
-
-        const totalIntensity = days.reduce((sum, day) => sum + moodData[day].intensity, 0);
-        monthlyData[month] = (totalIntensity / days.length).toFixed(2);
-    });
-
-    return monthlyData;
-};
-
-const CalendarScreen = ({ theme, language }) => {
+const CalendarScreen = ({ theme }) => {
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 8)); // Initialize to September 2024
     const [isYearlyView, setIsYearlyView] = useState(false);
@@ -116,17 +146,6 @@ const CalendarScreen = ({ theme, language }) => {
         weeksArray.push(daysArray.slice(i, i + 7));
     }
 
-    const monthData = {};
-    Array.from({ length: daysInMonth }, (_, i) => i + 1).forEach(day => {
-        const dateKey = generateDateKey(day);
-        if (moodData[dateKey]) {
-            monthData[dateKey] = moodData[dateKey];
-        }
-    });
-
-    const summary = getSummaryStatistics(monthData);
-    const yearlyAverage = getYearlyAverageIntensity();
-
     return (
         <div className={`calendar-screen ${theme}`}>
             {/* Button container with two toggle buttons */}
@@ -146,22 +165,9 @@ const CalendarScreen = ({ theme, language }) => {
             </div>
 
             {isYearlyView ? (
-                <table className="calendar-table">
-                    <thead>
-                        <tr>
-                            {Array(12).fill(null).map((_, i) => <th key={i}>{new Date(0, i).toLocaleString('default', { month: 'short' })}</th>)}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            {Array(12).fill(null).map((_, i) => (
-                                <td key={i} style={{ backgroundColor: '#FFD700' }}>
-                                    <p>{yearlyAverage[i + 1]}</p>
-                                </td>
-                            ))}
-                        </tr>
-                    </tbody>
-                </table>
+                <div className="yearly-view">
+                    {/* Yearly view content */}
+                </div>
             ) : (
                 <table className="calendar-table">
                     <thead>
@@ -174,16 +180,15 @@ const CalendarScreen = ({ theme, language }) => {
                             <tr key={weekIndex}>
                                 {week.map((day, dayIndex) => {
                                     const dateKey = day ? generateDateKey(day) : null;
-                                    const moodEntry = day ? moodData[dateKey] : null;
+                                    const moodEntry = dateKey ? moodData[dateKey] : null;
+                                    const emojiSrc = moodEntry ? getMoodEmojiImage(moodEntry.mood) : null;
+
                                     return (
                                         <td key={dayIndex} onClick={day ? () => navigate(`/daily-view/${dateKey}`) : null} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF" }}>
-                                            {moodEntry ? (
-                                                <>
-                                                    <div style={{ fontSize: '12px' }}>{day}</div>
-                                                    <div style={{ fontSize: '15px' }}>{getMoodEmoji(moodEntry.mood)}</div>
-                                                </>
+                                            {emojiSrc ? (
+                                                <img src={emojiSrc} alt={moodEntry.mood} className="calendar-emoji" />
                                             ) : (
-                                                <div>{day || ''}</div>
+                                                <span>{day}</span>
                                             )}
                                         </td>
                                     );
@@ -192,14 +197,6 @@ const CalendarScreen = ({ theme, language }) => {
                         ))}
                     </tbody>
                 </table>
-            )}
-            
-            {!isYearlyView && (
-                <div className="summary-statistics">
-                    <h3>Summary for {currentMonth.toLocaleString('default', { month: 'long' })}</h3>
-                    <p>Average Mood Intensity: {summary.averageIntensity}</p>
-                    <p>Most Common Mood: {getMoodEmoji(summary.mostCommonMood)}</p>
-                </div>
             )}
         </div>
     );
