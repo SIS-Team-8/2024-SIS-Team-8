@@ -76,6 +76,10 @@
     color: white;
 }
 
+.dark .month-navigation button {
+    color: #0F3D4B;
+}
+
 .summary-statistics {
     margin-top: 20px;
 }
