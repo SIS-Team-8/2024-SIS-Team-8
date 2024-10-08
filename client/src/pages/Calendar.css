@@ -3,14 +3,15 @@
 .calendar-screen {
     font-family: 'Poppins', sans-serif;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
     background-color: #189ab4;
     text-align: center;
     padding: 20px;
     width: 100%;
-    flex-direction: column;
+    min-height: 100vh;  /* Allows content to expand beyond the viewport height */
+    overflow-y: auto;   /* Enables scrolling if content exceeds viewport */
+    box-sizing: border-box; /* Ensures padding is included in width/height calculations */
 }
 
 .calendar-screen.light {
@@ -98,7 +99,7 @@
 
 /* Toggle Button */
 .toggle-view-button {
-    margin-left: 10px;
+    margin-bottom: 10px;
     padding: 10px 20px;
     font-size: medium;
     border: none;
@@ -140,7 +141,7 @@
     color: #333;
 }
 
-/* Place the button above the month name, centered */
+/* Center the toggle button */
 .toggle-view-button {
     margin-bottom: 10px;
     padding: 10px 20px;
@@ -152,26 +153,4 @@
     cursor: pointer;
     transition: background-color 0.3s;
     width: auto;
-}
-
-/* Centering the button */
-.calendar-screen {
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #189ab4;
-    text-align: center;
-    padding: 20px;
-    width: 100%;
-    flex-direction: column;
-    min-height: 100vh;  
-    overflow-y: auto; 
-    box-sizing: border-box; 
-}
-
-.toggle-view-button:hover {
-    background-color: #0f7b8e;
-    color: white;
 }
