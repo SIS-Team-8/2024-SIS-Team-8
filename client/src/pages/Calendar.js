@@ -115,6 +115,24 @@ const getMoodColor = (mood) => {
     }
 };
 
+// Function to calculate the summary statistics for the selected month
+const getSummaryStatistics = (monthData) => {
+    const moods = Object.values(monthData);
+    if (moods.length === 0) return { averageIntensity: 0, mostCommonMood: "N/A" };
+
+    const totalIntensity = moods.reduce((acc, mood) => acc + mood.intensity, 0);
+    const averageIntensity = (totalIntensity / moods.length).toFixed(2);
+
+    const moodCount = moods.reduce((acc, mood) => {
+        acc[mood.mood] = (acc[mood.mood] || 0) + 1;
+        return acc;
+    }, {});
+
+    const mostCommonMood = Object.keys(moodCount).reduce((a, b) => (moodCount[a] > moodCount[b] ? a : b));
+
+    return { averageIntensity, mostCommonMood };
+};
+
 const CalendarScreen = ({ theme }) => {
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 8)); // Initialize to September 2024
@@ -145,6 +163,16 @@ const CalendarScreen = ({ theme }) => {
     for (let i = 0; i < daysArray.length; i += 7) {
         weeksArray.push(daysArray.slice(i, i + 7));
     }
+
+    const monthData = {};
+    Array.from({ length: daysInMonth }, (_, i) => i + 1).forEach(day => {
+        const dateKey = generateDateKey(day);
+        if (moodData[dateKey]) {
+            monthData[dateKey] = moodData[dateKey];
+        }
+    });
+
+    const summary = getSummaryStatistics(monthData);
 
     return (
         <div className={`calendar-screen ${theme}`}>
@@ -183,34 +211,42 @@ const CalendarScreen = ({ theme }) => {
                     </tbody>
                 </table>
             ) : (
-                <table className="calendar-table">
-                    <thead>
-                        <tr>
-                            <th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {weeksArray.map((week, weekIndex) => (
-                            <tr key={weekIndex}>
-                                {week.map((day, dayIndex) => {
-                                    const dateKey = day ? generateDateKey(day) : null;
-                                    const moodEntry = dateKey ? moodData[dateKey] : null;
-                                    const emojiSrc = moodEntry ? getMoodEmojiImage(moodEntry.mood) : null;
-
-                                    return (
-                                        <td key={dayIndex} onClick={day ? () => navigate(`/daily-view/${dateKey}`) : null} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF" }}>
-                                            {emojiSrc ? (
-                                                <img src={emojiSrc} alt={moodEntry.mood} className="calendar-emoji" />
-                                            ) : (
-                                                <span>{day}</span>
-                                            )}
-                                        </td>
-                                    );
-                                })}
+                <>
+                    <table className="calendar-table">
+                        <thead>
+                            <tr>
+                                <th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {weeksArray.map((week, weekIndex) => (
+                                <tr key={weekIndex}>
+                                    {week.map((day, dayIndex) => {
+                                        const dateKey = day ? generateDateKey(day) : null;
+                                        const moodEntry = dateKey ? moodData[dateKey] : null;
+                                        const emojiSrc = moodEntry ? getMoodEmojiImage(moodEntry.mood) : null;
+
+                                        return (
+                                            <td key={dayIndex} onClick={day ? () => navigate(`/daily-view/${dateKey}`) : null} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF" }}>
+                                                {emojiSrc ? (
+                                                    <img src={emojiSrc} alt={moodEntry.mood} className="calendar-emoji" />
+                                                ) : (
+                                                    <span>{day}</span>
+                                                )}
+                                            </td>
+                                        );
+                                    })}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    {/* Summary statistics at the bottom for the current month */}
+                    <div className="summary-statistics">
+                        <h3>Summary for {currentMonth.toLocaleString('default', { month: 'long' })}</h3>
+                        <p>Average Mood Intensity: {summary.averageIntensity}</p>
+                        <p>Most Common Mood: {summary.mostCommonMood !== "N/A" ? <img src={getMoodEmojiImage(summary.mostCommonMood)} alt={summary.mostCommonMood} className="calendar-emoji" /> : "N/A"}</p>
+                    </div>
+                </>
             )}
         </div>
     );
