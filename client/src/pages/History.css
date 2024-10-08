@@ -43,11 +43,19 @@ button {
     color: #189ab4;
 }
 
+.dark #month-navigation button {
+    color: #0F3D4B;
+}
+
 #home-button {
     width: 308px;
     border-radius: 4px;
     background-color: white;
     color: #189ab4;
+}
+
+.dark #home-button {
+    color: #0F3D4B;
 }
 
 #month-navigation button:hover {
