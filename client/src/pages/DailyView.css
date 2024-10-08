@@ -25,6 +25,10 @@
     transition: background-color 0.3s;
 }
 
+.dark .back-button {
+    color: #0F3D4B;
+}
+
 .back-button:hover {
     background-color: #0f7b8e;
     color: white;
@@ -75,8 +79,16 @@
     color: #189ab4;
 }
 
+.dark .edit-button {
+    color: #0F3D4B;
+}
+
 .delete-button {
     color: #DB1F48;
+}
+
+.dark .delete-button {
+    color: #C11E3A
 }
 
 .edit-button:hover {
