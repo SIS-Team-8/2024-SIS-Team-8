@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Calendar.css';
+import './Calendar.css'; // Import your CSS for styling
 
+// Dummy mood data for the calendar for September
 const moodData = {
     "2024-09-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
     "2024-09-02": { mood: "happy", intensity: 4, notes: "Good day." },
@@ -11,28 +12,43 @@ const moodData = {
     // Add more dates for September...
 };
 
+// Helper function to get the emoji based on mood type
 const getMoodEmoji = (mood) => {
     switch (mood) {
-        case "very happy": return "😄";
-        case "happy": return "😊";
-        case "neutral": return "😐";
-        case "sad": return "😢";
-        case "very sad": return "😭";
-        default: return "😶";
+        case "very happy":
+            return "😄"; // Very happy emoji
+        case "happy":
+            return "😊"; // Happy emoji
+        case "neutral":
+            return "😐"; // Neutral emoji
+        case "sad":
+            return "😢"; // Sad emoji
+        case "very sad":
+            return "😭"; // Very sad emoji
+        default:
+            return "😶"; // Default emoji for no mood data
     }
 };
 
+// Helper function to get the color based on mood type
 const getMoodColor = (mood) => {
     switch (mood) {
-        case "very happy": return "#00FF00";
-        case "happy": return "#A8E6CF";
-        case "neutral": return "#FFD700";
-        case "sad": return "#FFB6C1";
-        case "very sad": return "#FF6347";
-        default: return "#FFFFFF";
+        case "very happy":
+            return "#00FF00"; // Bright green for very happy
+        case "happy":
+            return "#A8E6CF"; // Light green for happy
+        case "neutral":
+            return "#FFD700"; // Yellow for neutral
+        case "sad":
+            return "#FFB6C1"; // Light red for sad
+        case "very sad":
+            return "#FF6347"; // Red for very sad
+        default:
+            return "#FFFFFF"; // Default color for no mood data
     }
 };
 
+// Function to calculate the summary statistics for the selected month
 const getSummaryStatistics = (monthData) => {
     const moods = Object.values(monthData);
     if (moods.length === 0) return { averageIntensity: 0, mostCommonMood: "N/A" };
@@ -71,7 +87,7 @@ const getYearlyAverageIntensity = () => {
 
 const CalendarScreen = ({ theme, language }) => {
     const navigate = useNavigate();
-    const [currentMonth, setCurrentMonth] = useState(new Date(2024, 8));
+    const [currentMonth, setCurrentMonth] = useState(new Date(2024, 8)); // Initialize to September 2024
     const [isYearlyView, setIsYearlyView] = useState(false);
 
     const changeMonth = (direction) => {
@@ -113,16 +129,22 @@ const CalendarScreen = ({ theme, language }) => {
 
     return (
         <div className={`calendar-screen ${theme}`}>
-            <button className="toggle-view-button" onClick={toggleView}>
-                {isYearlyView ? "Switch to Monthly View" : "Switch to Yearly View"}
-            </button>
-    
+            {/* Button container with two toggle buttons */}
+            <div className="button-container">
+                <button className="toggle-view-button" onClick={toggleView}>
+                    {isYearlyView ? "Switch to Monthly View" : "Switch to Yearly View"}
+                </button>
+                <button className="history-button" onClick={() => navigate('/history')}>
+                    Go to History
+                </button>
+            </div>
+
             <div className="month-navigation">
                 <button onClick={() => changeMonth(-1)} disabled={isYearlyView}>Previous</button>
                 <h2>{isYearlyView ? `${currentMonth.getFullYear()} Yearly Overview` : `${currentMonth.toLocaleString('default', { month: 'long' })} ${currentMonth.getFullYear()}`}</h2>
                 <button onClick={() => changeMonth(1)} disabled={isYearlyView}>Next</button>
             </div>
-    
+
             {isYearlyView ? (
                 <table className="calendar-table">
                     <thead>

@@ -97,9 +97,16 @@
     color: white;
 }
 
-/* Toggle Button */
-.toggle-view-button {
+/* Button Container for the Toggle Buttons */
+.button-container {
+    display: flex;
+    gap: 10px;
     margin-bottom: 10px;
+}
+
+/* Toggle View and History Buttons */
+.toggle-view-button,
+.history-button {
     padding: 10px 20px;
     font-size: medium;
     border: none;
@@ -108,9 +115,11 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: auto;
 }
 
-.toggle-view-button:hover {
+.toggle-view-button:hover,
+.history-button:hover {
     background-color: #0f7b8e;
     color: white;
 }
@@ -139,18 +148,4 @@
     margin: 0;
     font-size: 16px;
     color: #333;
-}
-
-/* Center the toggle button */
-.toggle-view-button {
-    margin-bottom: 10px;
-    padding: 10px 20px;
-    font-size: medium;
-    border: none;
-    color: #189ab4;
-    background-color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: auto;
 }
