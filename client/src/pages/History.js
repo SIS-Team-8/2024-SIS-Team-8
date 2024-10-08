@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import BarChart from '../components/BarChart';
+import BarChartComponent from '../components/BarChart';  // Import BarChart component
 import { Link, useLocation } from 'react-router-dom';
 import './History.css';
 
@@ -9,7 +9,6 @@ export default function History() {
     const [currentMonth, setCurrentMonth] = useState(initialMonth);
     const [viewMode, setViewMode] = useState("monthly"); // Initialize view mode as monthly
 
-    // Function to toggle between weekly, monthly, and yearly views
     const toggleViewMode = () => {
         const nextMode = viewMode === "monthly" ? "weekly" : viewMode === "weekly" ? "yearly" : "monthly";
         setViewMode(nextMode);
@@ -21,7 +20,6 @@ export default function History() {
     };
 
     useEffect(() => {
-        // If navigating from the Calendar, set the month from the location state
         if (location.state?.month) {
             setCurrentMonth(location.state.month);
         }
@@ -46,7 +44,6 @@ export default function History() {
                 { name: "Scared", emoteFreq: Math.floor(Math.random() * 100) }
             ];
         }
-        // Default to monthly
         return [
             { name: "Angry", emoteFreq: Math.floor(Math.random() * 30) },
             { name: "Sad", emoteFreq: Math.floor(Math.random() * 30) },
@@ -56,7 +53,6 @@ export default function History() {
         ];
     };
 
-    // Determine the heading based on the view mode
     const getHeading = () => {
         if (viewMode === "weekly") {
             const startOfWeek = new Date(currentMonth);
@@ -71,6 +67,7 @@ export default function History() {
 
     const chartData = getChartData();
     const heading = getHeading();
+    const barColors = ["#ff746c", "#b3ebf2", "#ffee8c", "grey", "#6c3baa"];
 
     return (
         <div id="history-container">
@@ -83,20 +80,16 @@ export default function History() {
                         <button onClick={() => changeMonth(1)}>Next</button>
                     </>
                 )}
-                {viewMode === "yearly" && <h2>{heading}</h2>}
-                {viewMode === "weekly" && <h2>{heading}</h2>}
+                {viewMode !== "monthly" && <h2>{heading}</h2>}
             </div>
 
             <button className="view-toggle-button" onClick={toggleViewMode}>
                 {viewMode === "monthly" ? "Switch to Weekly View" : viewMode === "weekly" ? "Switch to Yearly View" : "Switch to Monthly View"}
             </button>
 
-            <BarChart 
-                data={chartData}
-                xAxisLabel="Emotions"
-                yAxisLabel="Frequency"
-                tooltipText="Frequency"
-                barColors={["#ff746c", "#b3ebf2", "#ffee8c", "grey", "#6c3baa"]}
+            <BarChartComponent 
+                data={chartData}         // Pass dynamically generated chart data
+                colours={barColors}      // Pass bar colors
             />
 
             <div style={{ marginTop: '15px', textAlign: 'center' }}>
