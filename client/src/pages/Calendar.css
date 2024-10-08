@@ -166,6 +166,9 @@
     padding: 20px;
     width: 100%;
     flex-direction: column;
+    min-height: 100vh;  
+    overflow-y: auto; 
+    box-sizing: border-box; 
 }
 
 .toggle-view-button:hover {
