@@ -22,13 +22,12 @@
     transition: background-color 0.3s;
 }
 
-.help-container .button:hover {
-    background-color: #0f7b8e;
-    color: white;
+.dark .button {
+    color: #0F3D4B;
 }
 
-.help-container .custom-button:hover {
-    background-color: #189ab4;
+.help-container .button:hover {
+    background-color: #0f7b8e;
     color: white;
 }
 
