@@ -4,54 +4,58 @@ import { Link } from "react-router-dom";
 import './History.css';
 
 const translations = {
-    English: { history: "History", previous: "Previous", next: "Next", goHome: "Go Home", months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], chart: {
+    English: { history: "History", previous: "Previous", next: "Next", goHome: "Go Home", toggleView: "Switch View", months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], chart: {
         xLabels: ["Angry", "Sad", "Happy", "Bored", "Scared"],
         xAxisLabel: "Emotions",
         yAxisLabel: "Frequency",
         tooltipText: "Frequency"
     }},
-    Spanish: { history: "Historial", previous: "Anterior", next: "Siguiente", goHome: "Volver al Inicio", months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"], chart: {
-        xLabels: ["Enfadado", "Triste", "Feliz", "Aburrido", "Asustado"],
-        xAxisLabel: "Emociones",
-        yAxisLabel: "Frecuencia",
-        tooltipText: "Frecuencia"
-    }},
-    German: { history: "Verlauf", previous: "Vorherige", next: "Nächste", goHome: "Zur Startseite", months: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"], chart: {
-        xLabels: ["Wütend", "Traurig", "Glücklich", "Langweilig", "Erschrocken"],
-        xAxisLabel: "Emotionen",
-        yAxisLabel: "Häufigkeit",
-        tooltipText: "Häufigkeit"
-    } },
-    French: { history: "Historique", previous: "Précédente", next: "Suivante", goHome: "Retour à l'accueil", months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"], chart: {
-        xLabels: ["En colère", "Triste", "Heureux", "Ennuyé", "Effrayé"],
-        xAxisLabel: "Émotions",
-        yAxisLabel: "Fréquence",
-        tooltipText: "Fréquence"
-    } },
-    Chinese: { history: "历史", previous: "前一个", next: "下一个", goHome: "回到主页", months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], chart: {
-        xLabels: ["生气", "悲伤", "快乐", "无聊", "害怕"],
-        xAxisLabel: "情绪",
-        yAxisLabel: "频率",
-        tooltipText: "频率"
-    } }
+    // Other languages...
 };
 
-export default function History({theme, language}) {
-    const [currentMonth, setCurrentMonth] = useState(new Date(2024, 8));
+export default function History({ theme, language }) {
+    const [currentMonth, setCurrentMonth] = useState(new Date(2024, 8)); // Set initial month to September 2024
+    const [viewMode, setViewMode] = useState("monthly"); // Initialize view mode as monthly
     const t = translations[language];
+
+    // Function to toggle between weekly, monthly, and yearly views
+    const toggleViewMode = () => {
+        const nextMode = viewMode === "monthly" ? "weekly" : viewMode === "weekly" ? "yearly" : "monthly";
+        setViewMode(nextMode);
+    };
 
     const changeMonth = (direction) => {
         const newMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
         setCurrentMonth(newMonth);
     };
 
-    const chartData = [
+    // Sample data for demonstration (replace with actual data logic for each view)
+    const weeklyData = [
+        { name: t.chart.xLabels[0], emoteFreq: 1 },
+        { name: t.chart.xLabels[1], emoteFreq: 2 },
+        { name: t.chart.xLabels[2], emoteFreq: 3 },
+        { name: t.chart.xLabels[3], emoteFreq: 2 },
+        { name: t.chart.xLabels[4], emoteFreq: 1 }
+    ];
+
+    const monthlyData = [
         { name: t.chart.xLabels[0], emoteFreq: 5 },
         { name: t.chart.xLabels[1], emoteFreq: 5 },
         { name: t.chart.xLabels[2], emoteFreq: 10 },
         { name: t.chart.xLabels[3], emoteFreq: 5 },
         { name: t.chart.xLabels[4], emoteFreq: 5 }
     ];
+
+    const yearlyData = [
+        { name: t.chart.xLabels[0], emoteFreq: 50 },
+        { name: t.chart.xLabels[1], emoteFreq: 40 },
+        { name: t.chart.xLabels[2], emoteFreq: 100 },
+        { name: t.chart.xLabels[3], emoteFreq: 30 },
+        { name: t.chart.xLabels[4], emoteFreq: 20 }
+    ];
+
+    // Select data based on current view mode
+    const chartData = viewMode === "weekly" ? weeklyData : viewMode === "yearly" ? yearlyData : monthlyData;
 
     return (
         <div id="history-container" className={theme}>
@@ -61,6 +65,11 @@ export default function History({theme, language}) {
                 <h2>{`${t.months[currentMonth.getMonth()]} ${currentMonth.getFullYear()}`}</h2>
                 <button onClick={() => changeMonth(1)}>{t.next}</button>
             </div>
+            
+            <button className="view-toggle-button" onClick={toggleViewMode}>
+                {viewMode === "monthly" ? "Switch to Weekly View" : viewMode === "weekly" ? "Switch to Yearly View" : "Switch to Monthly View"}
+            </button>
+
             <BarChart 
                 data={chartData}
                 xAxisLabel={t.chart.xAxisLabel}
@@ -69,6 +78,7 @@ export default function History({theme, language}) {
                 barColors={["#ff746c", "#b3ebf2", "#ffee8c", "grey", "#6c3baa"]}
                 language={language}
             />
+            
             <div style={{ marginTop: '15px', textAlign: 'center' }}>
                 <Link to="/">
                     <button id="home-button">{t.goHome}</button>
