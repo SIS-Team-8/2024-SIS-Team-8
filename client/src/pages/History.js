@@ -87,6 +87,8 @@ export default function History() {
                 {viewMode === "monthly" ? "Switch to Weekly View" : viewMode === "weekly" ? "Switch to Yearly View" : "Switch to Monthly View"}
             </button>
 
+            console.log("Data passed to BarChartComponent:", chartData);
+            
             <BarChartComponent 
                 data={chartData}         // Pass dynamically generated chart data
                 colours={barColors}      // Pass bar colors
