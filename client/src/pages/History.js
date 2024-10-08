@@ -27,48 +27,70 @@ export default function History() {
         }
     }, [location.state?.month]);
 
-    // Sample data for each view mode (replace with actual data logic)
-    const weeklyData = [
-        { name: "Angry", emoteFreq: 2 },
-        { name: "Sad", emoteFreq: 1 },
-        { name: "Happy", emoteFreq: 4 },
-        { name: "Bored", emoteFreq: 1 },
-        { name: "Scared", emoteFreq: 1 }
-    ];
+    // Generate data based on the current view mode
+    const getChartData = () => {
+        if (viewMode === "weekly") {
+            return [
+                { name: "Angry", emoteFreq: Math.floor(Math.random() * 3) },
+                { name: "Sad", emoteFreq: Math.floor(Math.random() * 3) },
+                { name: "Happy", emoteFreq: Math.floor(Math.random() * 3) },
+                { name: "Bored", emoteFreq: Math.floor(Math.random() * 3) },
+                { name: "Scared", emoteFreq: Math.floor(Math.random() * 3) }
+            ];
+        } else if (viewMode === "yearly") {
+            return [
+                { name: "Angry", emoteFreq: Math.floor(Math.random() * 100) },
+                { name: "Sad", emoteFreq: Math.floor(Math.random() * 100) },
+                { name: "Happy", emoteFreq: Math.floor(Math.random() * 100) },
+                { name: "Bored", emoteFreq: Math.floor(Math.random() * 100) },
+                { name: "Scared", emoteFreq: Math.floor(Math.random() * 100) }
+            ];
+        }
+        // Default to monthly
+        return [
+            { name: "Angry", emoteFreq: Math.floor(Math.random() * 30) },
+            { name: "Sad", emoteFreq: Math.floor(Math.random() * 30) },
+            { name: "Happy", emoteFreq: Math.floor(Math.random() * 30) },
+            { name: "Bored", emoteFreq: Math.floor(Math.random() * 30) },
+            { name: "Scared", emoteFreq: Math.floor(Math.random() * 30) }
+        ];
+    };
 
-    const monthlyData = [
-        { name: "Angry", emoteFreq: 10 },
-        { name: "Sad", emoteFreq: 15 },
-        { name: "Happy", emoteFreq: 20 },
-        { name: "Bored", emoteFreq: 5 },
-        { name: "Scared", emoteFreq: 8 }
-    ];
+    // Determine the heading based on the view mode
+    const getHeading = () => {
+        if (viewMode === "weekly") {
+            const startOfWeek = new Date(currentMonth);
+            const endOfWeek = new Date(startOfWeek);
+            endOfWeek.setDate(startOfWeek.getDate() + 6);
+            return `${startOfWeek.toLocaleDateString()} - ${endOfWeek.toLocaleDateString()}`;
+        } else if (viewMode === "yearly") {
+            return currentMonth.getFullYear();
+        }
+        return currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' });
+    };
 
-    const yearlyData = [
-        { name: "Angry", emoteFreq: 50 },
-        { name: "Sad", emoteFreq: 40 },
-        { name: "Happy", emoteFreq: 60 },
-        { name: "Bored", emoteFreq: 30 },
-        { name: "Scared", emoteFreq: 25 }
-    ];
-
-    // Select data based on the current view mode
-    const chartData = viewMode === "weekly" ? weeklyData : viewMode === "yearly" ? yearlyData : monthlyData;
+    const chartData = getChartData();
+    const heading = getHeading();
 
     return (
         <div id="history-container">
             <h1>History</h1>
             <div id="month-navigation">
-                <button onClick={() => changeMonth(-1)}>Previous</button>
-                <h2>{currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
-                <button onClick={() => changeMonth(1)}>Next</button>
+                {viewMode === "monthly" && (
+                    <>
+                        <button onClick={() => changeMonth(-1)}>Previous</button>
+                        <h2>{heading}</h2>
+                        <button onClick={() => changeMonth(1)}>Next</button>
+                    </>
+                )}
+                {viewMode === "yearly" && <h2>{heading}</h2>}
+                {viewMode === "weekly" && <h2>{heading}</h2>}
             </div>
 
             <button className="view-toggle-button" onClick={toggleViewMode}>
                 {viewMode === "monthly" ? "Switch to Weekly View" : viewMode === "weekly" ? "Switch to Yearly View" : "Switch to Monthly View"}
             </button>
 
-            {/* Pass the selected chart data to the BarChart component */}
             <BarChart 
                 data={chartData}
                 xAxisLabel="Emotions"
