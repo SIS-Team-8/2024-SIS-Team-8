@@ -139,3 +139,36 @@
     font-size: 16px;
     color: #333;
 }
+
+/* Place the button above the month name, centered */
+.toggle-view-button {
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    font-size: medium;
+    border: none;
+    color: #189ab4;
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: auto;
+}
+
+/* Centering the button */
+.calendar-screen {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #189ab4;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    flex-direction: column;
+}
+
+.toggle-view-button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}

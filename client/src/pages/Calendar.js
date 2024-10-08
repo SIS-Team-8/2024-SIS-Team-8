@@ -113,13 +113,16 @@ const CalendarScreen = ({ theme, language }) => {
 
     return (
         <div className={`calendar-screen ${theme}`}>
+            <button className="toggle-view-button" onClick={toggleView}>
+                {isYearlyView ? "Switch to Monthly View" : "Switch to Yearly View"}
+            </button>
+    
             <div className="month-navigation">
                 <button onClick={() => changeMonth(-1)} disabled={isYearlyView}>Previous</button>
                 <h2>{isYearlyView ? `${currentMonth.getFullYear()} Yearly Overview` : `${currentMonth.toLocaleString('default', { month: 'long' })} ${currentMonth.getFullYear()}`}</h2>
                 <button onClick={() => changeMonth(1)} disabled={isYearlyView}>Next</button>
-                <button onClick={toggleView}>{isYearlyView ? "Switch to Monthly View" : "Switch to Yearly View"}</button>
             </div>
-
+    
             {isYearlyView ? (
                 <table className="calendar-table">
                     <thead>
