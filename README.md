@@ -94,7 +94,9 @@ TOKEN_KEY=secret
 
 ## Backend implementation
 
-### Login API
+### Login AP
+
+login implementation from [here](https://www.freecodecamp.org/news/how-to-secure-your-mern-stack-application/)
 
 ```javascript
 import { useEffect, useState } from "react";
@@ -122,26 +124,37 @@ verifyCookie();
 // implement removeCookie("token") during the logout process
 ```
 
-* the url to verify if the user is logged in is `http://localhost:3000/api/auth`
-  * this request does not require any data to be sent
 * the url to send a POST request to login is `http://localhost:3000/api/login`
   * this request requires a JSON object with the following structure:
 
     ```json
     {
-      "email": "email@email.com",
+      "username": "john.doe",
       "password": "test"
     }
     ```
 
-* the url to send a POST request to signup is `http://localhost:3000/api/signup`
+* the url to send a POST request to signup is `http://localhost:3000/api/sign-up`
   * this request requires a JSON object with the following structure:
 
     ```json
     {
-        "email": "email@email.com",
-        "password": "test",
-        "first_name": "John",
-        "last_name": "doe"
+        "username": "john.doe",
+        "password": "test"
     }
     ```
+
+* all of the following api calls require the token cookie to be set by logging in first
+
+* the url to send a POST request to update profile is `http://localhost:3000/api/profile`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+      "name":"Jon day",
+      "email":"jon.Day@gmail.com",
+      "phone":"9123847012934",
+      "address":"sadjhfg"
+    }
+    ```
+

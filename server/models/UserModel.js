@@ -8,8 +8,23 @@ const userSchema = new mongoose.Schema({
         unique: true,
     },
     //user_type: Number,              // 0: admin, 1: user
-    first_name: String,
-    last_name: String,
+    name: {
+        type: String,
+        default: ""
+    },
+    email: {
+        type: String,
+        default: ""
+    },
+    phone: {
+        type: String,
+        default: ""
+    },
+    address: {
+        type: String,
+        default: ""
+    },
+
     password:{
         type: String,
         required: [true, "An password is required"],
