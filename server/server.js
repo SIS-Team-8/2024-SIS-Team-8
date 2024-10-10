@@ -10,7 +10,6 @@ const app = express(); // create express app
 
 const cookieParser = require("cookie-parser");
 const authRoute = require("./routes/AuthRoute");
-//const mongoRouter = require('./routes/MongoRoute');
 
 // Connect to MongoDB server using environment variables
 const mogoURI = process.env.MONGODB_URI;
