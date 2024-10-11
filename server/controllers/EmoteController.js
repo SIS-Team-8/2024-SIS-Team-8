@@ -32,15 +32,42 @@ module.exports.logEmote = async (req, res) => {
 
         const time_code = new Date();
 
-        user.journal.push({ time_code, emoji, intensity, text, image });
+        // if there is already one journal entry for the day then update it
 
-        const updatedUser = await user.save();
+        let logEntryFound = false;
 
-        if (!updatedUser) {
-            return res.status(404).json({ message: "failed to update journal" });
+        for (let i = 0; i < user.journal.length; i++)
+        {
+            if (user.journal[i].time_code.toDateString() === time_code.toDateString())
+            {
+                user.journal[i].emoji = emoji;
+                user.journal[i].intensity = intensity;
+                user.journal[i].text = text;
+                user.journal[i].image = image;
+
+                const updatedUser = await user.save();
+
+                if (!updatedUser) {
+                    return res.status(404).json({ message: "failed to update journal" });
+                }
+                res.status(200).json({ message: "Journal updated successfully", journal: updatedUser.journal });
+
+                logEntryFound = true;
+                break;
+            }
+
         }
 
-        res.status(200).json({ message: "Journal updated successfully", journal: updatedUser.journal });
+        if (!logEntryFound)
+        {
+            user.journal.push({ time_code, emoji, intensity, text, image });
+            const updatedUser = await user.save();
+
+            if (!updatedUser) {
+                return res.status(404).json({ message: "failed to update journal" });
+            }
+            res.status(200).json({ message: "Journal updated successfully", journal: updatedUser.journal });
+        }
     } catch (error) {
         res.status(500).json({ message: "Server error", error: error.message });
     }

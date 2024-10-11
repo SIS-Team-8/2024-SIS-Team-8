@@ -4,7 +4,7 @@ module.exports.updateProfile = async (req, res) => {
     try {
         //console.log("Updating user profile");
         const username = req.authenticatedUser; // Grab the username from the authenticated user
-        const { name, email, phone, address } = req.body;
+        const { name, phone, address } = req.body;
 
         // Find the user by username
         const user = await User.findOne({ username });
@@ -15,7 +15,6 @@ module.exports.updateProfile = async (req, res) => {
         //console.log(`Updating profile for user: ${username}`);
         // Update the user's profile information
         user.name = name;
-        user.email = email;
         user.phone = phone;
         user.address = address;
 

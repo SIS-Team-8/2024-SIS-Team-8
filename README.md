@@ -154,7 +154,6 @@ all of the following api calls require the token cookie to be set by logging in 
     ```json
     {
       "name":"Jon day",
-      "email":"jon.Day@gmail.com",
       "phone":"9123847012934",
       "address":"sadjhfg"
     }
