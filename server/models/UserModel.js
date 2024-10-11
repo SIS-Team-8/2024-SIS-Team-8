@@ -2,14 +2,29 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
-    email: {
+    username: {
         type: String,
-        required: [true, "An email address is required"],
+        required: [true, "An username address is required"],
         unique: true,
     },
     //user_type: Number,              // 0: admin, 1: user
-    first_name: String,
-    last_name: String,
+    name: {
+        type: String,
+        default: ""
+    },
+    email: {
+        type: String,
+        default: ""
+    },
+    phone: {
+        type: String,
+        default: ""
+    },
+    address: {
+        type: String,
+        default: ""
+    },
+
     password:{
         type: String,
         required: [true, "An password is required"],
@@ -20,9 +35,18 @@ const userSchema = new mongoose.Schema({
     },
     journal: [
         {
-            _id: String,
-            time_code: [Date],
-            emoji: String,      // change to int     // 0: happy, 1: sad, 2: angry, 3: anxious, 4: tired, 5: excited, 6: relaxed
+            time_code: {
+                type: Date,
+                required: [true, "A journal time code is required"]
+            },
+            emoji: {
+                type: Number, // 0: happy, 1: sad, 2: angry, 3: anxious, 4: tired, 5: excited, 6: relaxed
+                required: [true, "A journal emoji is required"]
+            },     
+            intensity: {
+                type: Number,           // 0-4
+                required: [true, "A journal emoji intensity is required"]
+            },
             text: String,
             image: String
         }
