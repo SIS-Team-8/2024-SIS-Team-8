@@ -16,7 +16,7 @@ module.exports.authMiddleware = async (req, res, next) => {
       //console.log("Token verified");
       const user = await User.findById(data.id)
       if (user) {
-        console.log("User found");
+        //console.log("User found");
         req.authenticatedUser = user.username;
         //res.json({ status: true, user: user.username });
         return next();

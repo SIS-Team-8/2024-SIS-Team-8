@@ -90,11 +90,11 @@ TOKEN_KEY=secret
 
 ## TODO
 
-* create config file setup function in server.js
+* CHECK IF WE ARE ONLY AALLOWING ONE JOURNAL ENTRY PER DAY
 
 ## Backend implementation
 
-### Login AP
+### Login API
 
 login implementation from [here](https://www.freecodecamp.org/news/how-to-secure-your-mern-stack-application/)
 
@@ -144,7 +144,9 @@ verifyCookie();
     }
     ```
 
-* all of the following api calls require the token cookie to be set by logging in first
+#### Secure API Calls
+
+all of the following api calls require the token cookie to be set by logging in first
 
 * the url to send a POST request to update profile is `http://localhost:3000/api/profile`
   * this request requires a JSON object with the following structure:
@@ -158,3 +160,51 @@ verifyCookie();
     }
     ```
 
+* the url to send a POST request to log an emoji is `http://localhost:3000/api/logEmote`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+      "emoji":"4",
+      "intensity":"2",
+      "text":"dftghdsrf",
+      "image":"retytgrffd"
+    }
+    ```
+
+* the url to send a POST request for emoji numbers for use on the history page is `http://localhost:3000/api/requestHistory`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+      "startDate":"2024-10-11T09:36:28.829Z",
+      "endDate":"2024-10-12T11:36:28.829Z"
+    }
+    ```
+
+  * it returns a JSON object with the following structure:
+
+    ```json
+    {
+      "message": "Journal fetched successfully",
+      "emojiCount": [
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    }
+    ```
+
+* the url to send a POST request for full journal catalogue for use on the calendar page is `http://localhost:3000/api/requestJournal`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+      "startDate":"2024-10-11T09:36:28.829Z",
+      "endDate":"2024-10-12T11:36:28.829Z"
+    }
+    ```
