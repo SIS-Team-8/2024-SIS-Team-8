@@ -53,8 +53,8 @@ function App() {
 
     function notification() {
         addNotification({
-            title: "Reminder",
-            message: "Remember to fill out your daily journal on Emotelog",
+            title: "EmoteLog Reminder",
+            message: "Remember to fill out your daily journal",
             native: true,
         });
     }
