@@ -36,7 +36,7 @@ const moodData = {
     "2024-09-03": { mood: "neutral", intensity: 3, notes: "An average day." },
     "2024-09-04": { mood: "sad", intensity: 2, notes: "Feeling a bit down." },
     "2024-09-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." },
-    // Add more dates and moods as needed
+    // Add more dates for September...
 };
 
 // Helper function to get the emoji image based on mood type
@@ -90,10 +90,15 @@ const getMoodEmojiImage = (mood) => {
             return overwhelmed;
         case "terrified":
             return terrified;
+        case "neutral":
+            return happy; // Use an image you have for neutral, or add a specific neutral emoji
+        case "very sad":
+            return veryAngry; // Replace this with an appropriate image for "very sad"
         default:
             return null; // Handle a default image if necessary
     }
 };
+
 
 // Helper function to get the color based on mood type
 const getMoodColor = (mood) => {
