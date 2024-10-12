@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import addNotification from "react-push-notification";
 import logo from './assets/logo.png';
 import dizzy from './assets/face-with-spiral-eyes.svg';
 import './App.css';
@@ -48,6 +49,14 @@ function App() {
 
     if (!isLoaded) {
         return <SplashScreen />;
+    }
+
+    function notification() {
+        addNotification({
+            title: "Reminder",
+            message: "Remember to fill out your daily journal on Emotelog",
+            native: true,
+        });
     }
 
     return (
