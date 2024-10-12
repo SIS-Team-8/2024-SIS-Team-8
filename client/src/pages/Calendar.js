@@ -36,38 +36,32 @@ const moodData = {
     "2024-09-03": { mood: "neutral", intensity: 3, notes: "An average day." },
     "2024-09-04": { mood: "sad", intensity: 2, notes: "Feeling a bit down." },
     "2024-09-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." },
-    // Add more dates for September...
+    // Add more dates and moods as needed
 };
 
 // Helper function to get the emoji image based on mood type
 const getMoodEmojiImage = (mood) => {
     switch (mood) {
         case "very angry":
+        case "extremely angry":
             return veryAngry;
-        case "sad":
-            return sad;
-        case "happy":
-            return happy;
-        case "bored":
-            return bored;
-        case "scared":
-            return scared;
-        case "annoyed":
-            return annoyed;
-        case "frustrated":
-            return frustrated;
         case "angry":
             return angry;
-        case "extremely angry":
-            return extremelyAngry;
+        case "frustrated":
+            return frustrated;
+        case "annoyed":
+            return annoyed;
+        case "sad":
         case "upset":
-            return upset;
+            return sad;
         case "deflated":
             return deflated;
         case "distressed":
             return distressed;
         case "miserable":
             return miserable;
+        case "happy":
+            return happy;
         case "very happy":
             return veryHappy;
         case "extremely happy":
@@ -76,6 +70,8 @@ const getMoodEmojiImage = (mood) => {
             return amazinglyHappy;
         case "ecstatic":
             return ecstatic;
+        case "bored":
+            return bored;
         case "exasperated":
             return exasperated;
         case "sarcastic":
@@ -84,6 +80,8 @@ const getMoodEmojiImage = (mood) => {
             return tired;
         case "exhausted":
             return exhausted;
+        case "scared":
+            return scared;
         case "surprised":
             return surprised;
         case "nervous":
@@ -93,7 +91,7 @@ const getMoodEmojiImage = (mood) => {
         case "terrified":
             return terrified;
         default:
-            return null; // or handle a default image if needed
+            return null; // Handle a default image if necessary
     }
 };
 
