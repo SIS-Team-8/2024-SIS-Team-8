@@ -29,6 +29,7 @@ import nervous from '../assets/emoji/nervous.png';
 import overwhelmed from '../assets/emoji/overwhelmed.png';
 import terrified from '../assets/emoji/terrified.png';
 
+
 // Dummy mood data for the calendar for September
 const moodData = {
     "2024-09-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
