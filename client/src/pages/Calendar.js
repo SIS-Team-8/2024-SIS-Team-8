@@ -29,7 +29,6 @@ import nervous from '../assets/emoji/nervous.png';
 import overwhelmed from '../assets/emoji/overwhelmed.png';
 import terrified from '../assets/emoji/terrified.png';
 
-
 // Dummy mood data for the calendar for September
 const moodData = {
     "2024-09-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
@@ -92,14 +91,13 @@ const getMoodEmojiImage = (mood) => {
         case "terrified":
             return terrified;
         case "neutral":
-            return happy; // Use an image you have for neutral, or add a specific neutral emoji
+            return surprised; // Use an image you have for neutral, or add a specific neutral emoji
         case "very sad":
             return veryAngry; // Replace this with an appropriate image for "very sad"
         default:
             return null; // Handle a default image if necessary
     }
 };
-
 
 // Helper function to get the color based on mood type
 const getMoodColor = (mood) => {
@@ -143,8 +141,15 @@ const CalendarScreen = ({ theme }) => {
     const [isYearlyView, setIsYearlyView] = useState(false);
 
     const changeMonth = (direction) => {
-        const newMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
-        setCurrentMonth(newMonth);
+        if (isYearlyView) {
+            // Change the year instead of the month
+            const newYear = currentMonth.getFullYear() + direction;
+            setCurrentMonth(new Date(newYear, currentMonth.getMonth()));
+        } else {
+            // Change the month
+            const newMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
+            setCurrentMonth(newMonth);
+        }
     };
 
     const toggleView = () => {
@@ -180,7 +185,6 @@ const CalendarScreen = ({ theme }) => {
 
     return (
         <div className={`calendar-screen ${theme}`}>
-            {/* Button container with two toggle buttons */}
             <div className="button-container">
                 <button className="toggle-view-button" onClick={toggleView}>
                     {isYearlyView ? "Switch to Monthly View" : "Switch to Yearly View"}
@@ -191,9 +195,9 @@ const CalendarScreen = ({ theme }) => {
             </div>
 
             <div className="month-navigation">
-                <button onClick={() => changeMonth(-1)} disabled={isYearlyView}>Previous</button>
+                <button onClick={() => changeMonth(-1)}>Previous</button>
                 <h2>{isYearlyView ? `${currentMonth.getFullYear()} Yearly Overview` : `${currentMonth.toLocaleString('default', { month: 'long' })} ${currentMonth.getFullYear()}`}</h2>
-                <button onClick={() => changeMonth(1)} disabled={isYearlyView}>Next</button>
+                <button onClick={() => changeMonth(1)}>Next</button>
             </div>
 
             {isYearlyView ? (
@@ -244,7 +248,6 @@ const CalendarScreen = ({ theme }) => {
                             ))}
                         </tbody>
                     </table>
-                    {/* Summary statistics at the bottom for the current month */}
                     <div className="summary-statistics">
                         <h3>Summary for {currentMonth.toLocaleString('default', { month: 'long' })}</h3>
                         <p>Average Mood Intensity: {summary.averageIntensity}</p>
