@@ -27,6 +27,7 @@ import nervous from '../assets/emoji/nervous.png'
 import overwhelmed from '../assets/emoji/overwhelmed.png'
 import terrified from '../assets/emoji/terrified.png'
 import submit from '../assets/submit-icon.png'
+<<<<<<< HEAD
 
 export default function MoodSelection() {
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
@@ -81,9 +82,69 @@ export default function MoodSelection() {
         setSubRowOpacity(prev => prev.map((_, i) => (i === index ? 1 : 0.5)));  // Update only sub-row images' opacity
     };
 
+=======
+ 
+const translations = {
+    English: { addNote: "Add Note..." },
+    Spanish: { addNote: "Añadir nota..." },
+    German: { addNote: "Notiz hinzufügen..." },
+    French: { addNote: "Ajouter une note..." },
+    Chinese: { addNote: "添加备注..." }
+};
+ 
+export default function MoodSelection({ language = "English", theme = "light" }) {
+    const [firstImageSrc, setFirstImageSrc] = useState();
+    const [secondImageSrc, setSecondImageSrc] = useState();
+    const [thirdImageSrc, setThirdImageSrc] = useState();
+    const [forthImageSrc, setForthImageSrc] = useState();
+    const [fifthImageSrc, setFifthImageSrc] = useState();
+ 
+    const t = translations[language];
+ 
+    const angryImageSrc = () => {
+        setFirstImageSrc(annoyed);
+        setSecondImageSrc(frustrated);
+        setThirdImageSrc(angry);
+        setForthImageSrc(veryAngry);
+        setFifthImageSrc(extremelyAngry);
+    }
+ 
+    const sadImageSrc = () => {
+        setFirstImageSrc(upset);
+        setSecondImageSrc(sad);
+        setThirdImageSrc(deflated);
+        setForthImageSrc(distressed);
+        setFifthImageSrc(miserable);
+    }
+ 
+    const happyImageSrc = () => {
+        setFirstImageSrc(happy);
+        setSecondImageSrc(veryHappy);
+        setThirdImageSrc(extremelyHappy);
+        setForthImageSrc(amazinglyHappy);
+        setFifthImageSrc(ecstatic);
+    }
+ 
+    const boredImageSrc = () => {
+        setFirstImageSrc(bored);
+        setSecondImageSrc(exasperated);
+        setThirdImageSrc(sarcastic);
+        setForthImageSrc(tired);
+        setFifthImageSrc(exhausted);
+    }
+ 
+    const scaredImageSrc = () => {
+        setFirstImageSrc(surprised);
+        setSecondImageSrc(nervous);
+        setThirdImageSrc(overwhelmed);
+        setForthImageSrc(scared);
+        setFifthImageSrc(terrified);
+    }
+ 
+>>>>>>> ishaan/fixes
     return (
         <html>
-            <div id='container'>
+            <div id='container' className={theme}>
                 <div id='row'>
                     {Object.keys(moods).map((mood, index) => (
                         <div key={mood} style={{ position: 'relative', display: 'inline-block' }}>
@@ -105,7 +166,7 @@ export default function MoodSelection() {
                         </div>
                     ))}
                 </div>
-
+ 
                 <div id="subRow">
                     {imageSrc.map((src, index) => (
                         <div key={index} style={{ position: 'relative', display: 'inline-block' }}>
@@ -127,11 +188,18 @@ export default function MoodSelection() {
                         </div>
                     ))}
                 </div>
-
+ 
                 <div id="flexContainer">
+<<<<<<< HEAD
                     <textarea id="log" placeholder='Add Note...' />
                     <Link to="/">
                         <img id="submit" alt="submit" src={submit} />
+=======
+                    <textarea id="log" placeholder={t.addNote} className={theme}/>
+ 
+                    <Link to="/">
+                        <img id="submit" className={theme} alt="submit" src={submit}/>
+>>>>>>> ishaan/fixes
                     </Link>
                 </div>
             </div>

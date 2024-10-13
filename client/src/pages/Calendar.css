@@ -1,15 +1,27 @@
 /* CalendarScreen.css */
+
 .calendar-screen {
     font-family: 'Poppins', sans-serif;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
     background-color: #189ab4;
     text-align: center;
     padding: 20px;
     width: 100%;
-    flex-direction: column;
+    min-height: 100vh;  /* Allows content to expand beyond the viewport height */
+    overflow-y: auto;   /* Enables scrolling if content exceeds viewport */
+    box-sizing: border-box; /* Ensures padding is included in width/height calculations */
+}
+
+.calendar-screen.light {
+    background-color: #189ab4;
+    color: black;
+}
+
+.calendar-screen.dark {
+    background-color: #0F3D4B !important;
+    color: black !important;
 }
 
 .calendar-table {
@@ -29,6 +41,11 @@
     text-align: center;
     cursor: pointer;
     font-size: 18px;
+    color: inherit;
+}
+
+.calendar-table td {
+    height: 70px;
 }
 
 .month-navigation {
@@ -79,3 +96,62 @@
     margin: 5px 0;
     color: white;
 }
+
+/* Button Container for the Toggle Buttons */
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* Toggle View and History Buttons */
+.toggle-view-button,
+.history-button {
+    padding: 10px 20px;
+    font-size: medium;
+    border: none;
+    color: #189ab4;
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: auto;
+}
+
+.toggle-view-button:hover,
+.history-button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
+/* Yearly Calendar View Styling */
+.yearly-view {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 90%;
+    margin-top: 20px;
+}
+
+.yearly-view td {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    background-color: #FFD700;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.yearly-view td p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.calendar-emoji {
+    width: 30px;
+    height: 30px;
+}
+

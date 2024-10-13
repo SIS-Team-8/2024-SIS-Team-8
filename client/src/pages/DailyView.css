@@ -88,3 +88,12 @@
     background-color: #E7625F;
     color: white;
 }
+
+.daily-view-screen.light {
+    background-color: #189ab4;
+}
+
+.daily-view-screen.dark {
+    background-color: #0F3D4B !important;
+    color: white !important;
+}
