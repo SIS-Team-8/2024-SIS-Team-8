@@ -8,12 +8,13 @@ export default function History() {
     const initialMonth = location.state?.month || new Date();
     const [currentMonth, setCurrentMonth] = useState(initialMonth);
     const [viewMode, setViewMode] = useState("monthly");
-    const [currentWeek, setCurrentWeek] = useState(1); // Track the current week in weekly view
-    const [currentYear, setCurrentYear] = useState(currentMonth.getFullYear()); // Track the current year in yearly view
+    const [currentWeek, setCurrentWeek] = useState(1);
+    const [currentYear, setCurrentYear] = useState(currentMonth.getFullYear());
 
     const toggleViewMode = () => {
         const nextMode = viewMode === "monthly" ? "weekly" : viewMode === "weekly" ? "yearly" : "monthly";
         setViewMode(nextMode);
+
         if (nextMode === "yearly") {
             setCurrentYear(currentMonth.getFullYear());
         } else if (nextMode === "weekly") {
@@ -50,33 +51,6 @@ export default function History() {
         }
     }, [location.state?.month]);
 
-    const getChartData = () => {
-        if (viewMode === "weekly") {
-            return [
-                { name: "Angry", emoteFreq: Math.floor(Math.random() * 3) },
-                { name: "Sad", emoteFreq: Math.floor(Math.random() * 3) },
-                { name: "Happy", emoteFreq: Math.floor(Math.random() * 3) },
-                { name: "Bored", emoteFreq: Math.floor(Math.random() * 3) },
-                { name: "Scared", emoteFreq: Math.floor(Math.random() * 3) }
-            ];
-        } else if (viewMode === "yearly") {
-            return [
-                { name: "Angry", emoteFreq: Math.floor(Math.random() * 100) },
-                { name: "Sad", emoteFreq: Math.floor(Math.random() * 100) },
-                { name: "Happy", emoteFreq: Math.floor(Math.random() * 100) },
-                { name: "Bored", emoteFreq: Math.floor(Math.random() * 100) },
-                { name: "Scared", emoteFreq: Math.floor(Math.random() * 100) }
-            ];
-        }
-        return [
-            { name: "Angry", emoteFreq: Math.floor(Math.random() * 30) },
-            { name: "Sad", emoteFreq: Math.floor(Math.random() * 30) },
-            { name: "Happy", emoteFreq: Math.floor(Math.random() * 30) },
-            { name: "Bored", emoteFreq: Math.floor(Math.random() * 30) },
-            { name: "Scared", emoteFreq: Math.floor(Math.random() * 30) }
-        ];
-    };
-
     const getHeading = () => {
         if (viewMode === "weekly") {
             const startOfWeek = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), (currentWeek - 1) * 7 + 1);
@@ -86,12 +60,11 @@ export default function History() {
         } else if (viewMode === "yearly") {
             return `${currentYear}`;
         }
+
         return currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' });
     };
 
-    const chartData = getChartData();
     const heading = getHeading();
-    const barColors = ["#ff746c", "#b3ebf2", "#ffee8c", "grey", "#6c3baa"];
 
     return (
         <div id="history-container">
@@ -125,7 +98,7 @@ export default function History() {
                 )}
             </div>
 
-            <BarChartComponent data={chartData} colours={barColors}/>
+            <BarChartComponent/>
 
             <div style={{ marginTop: '20px', textAlign: 'center' }}>
                 <Link to="/">
