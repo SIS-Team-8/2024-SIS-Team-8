@@ -25,10 +25,18 @@
     margin-bottom: 0px;
 }
 
-.calendar-table th,
-.calendar-table td {
+.calendar-table th {
     border: 2.5px solid #dddd;
     padding: 12.5px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: inherit;
+}
+
+.calendar-table td {
+    border: 2.5px solid #dddd;
+    padding: 9px;
     text-align: center;
     cursor: pointer;
     font-size: 18px;
