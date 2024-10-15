@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Calendar.css';
 
-// Import emoji images
 import angry from '../assets/emoji/angry.png';
 import annoyed from '../assets/emoji/annoyed.png';
 import frustrated from '../assets/emoji/frustrated.png';
@@ -29,97 +28,31 @@ import nervous from '../assets/emoji/nervous.png';
 import overwhelmed from '../assets/emoji/overwhelmed.png';
 import terrified from '../assets/emoji/terrified.png';
 
-// Dummy mood data for the calendar for October
 const moodData = {
     "2024-10-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
     "2024-10-02": { mood: "happy", intensity: 4, notes: "Good day." },
     "2024-10-03": { mood: "neutral", intensity: 3, notes: "An average day." },
     "2024-10-04": { mood: "sad", intensity: 2, notes: "Feeling a bit down." },
-    "2024-10-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." },
-    // Add more dates for October...
+    "2024-10-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." }
 };
 
-// Helper function to get the emoji image based on mood type
-const getMoodEmojiImage = (mood) => {
-    switch (mood) {
-        case "angry":
-            return angry;
-        case "annoyed":
-            return annoyed;
-        case "frustrated":
-            return frustrated;
-        case "very angry":
-            return veryAngry;
-        case "extremely angry":
-            return extremelyAngry;
-        case "sad":
-            return sad;
-        case "upset":
-            return upset;
-        case "deflated":
-            return deflated;
-        case "distressed":
-            return distressed;
-        case "miserable":
-            return miserable;
-        case "happy":
-            return happy;
-        case "very happy":
-            return veryHappy;
-        case "extremely happy":
-            return extremelyHappy;
-        case "amazingly happy":
-            return amazinglyHappy;
-        case "ecstatic":
-            return ecstatic;
-        case "bored":
-            return bored;
-        case "exasperated":
-            return exasperated;
-        case "sarcastic":
-            return sarcastic;
-        case "tired":
-            return tired;
-        case "exhausted":
-            return exhausted;
-        case "scared":
-            return scared;
-        case "surprised":
-            return surprised;
-        case "nervous":
-            return nervous;
-        case "overwhelmed":
-            return overwhelmed;
-        case "terrified":
-            return terrified;
-        case "neutral":
-            return bored;
-        case "very sad":
-            return miserable;
-        default:
-            return null;
-    }
+const moodEmojiMap = {
+    "angry": angry, "annoyed": annoyed, "frustrated": frustrated, "very angry": veryAngry,
+    "extremely angry": extremelyAngry, "sad": sad, "upset": upset, "deflated": deflated,
+    "distressed": distressed, "miserable": miserable, "happy": happy, "very happy": veryHappy,
+    "extremely happy": extremelyHappy, "amazingly happy": amazinglyHappy, "ecstatic": ecstatic,
+    "bored": bored, "exasperated": exasperated, "sarcastic": sarcastic, "tired": tired,
+    "exhausted": exhausted, "scared": scared, "surprised": surprised, "nervous": nervous,
+    "overwhelmed": overwhelmed, "terrified": terrified, "neutral": bored, "very sad": miserable
 };
 
-// Helper function to get the color based on mood type
-const getMoodColor = (mood) => {
-    switch (mood) {
-        case "very happy":
-            return "#00FF00"; // Bright green for very happy
-        case "happy":
-            return "#A8E6CF"; // Light green for happy
-        case "neutral":
-            return "#FFD700"; // Yellow for neutral
-        case "sad":
-            return "#FFB6C1"; // Light red for sad
-        case "very sad":
-            return "#FF6347"; // Red for very sad
-        default:
-            return "#FFFFFF"; // Default color for no mood data
-    }
+const moodColorMap = {
+    "very happy": "#00FF00", "happy": "#A8E6CF", "neutral": "#FFD700", "sad": "#FFB6C1", "very sad": "#FF6347", "default": "#FFFFFF"
 };
 
-// Function to calculate the summary statistics for the selected month
+const getMoodEmojiImage = (mood) => moodEmojiMap[mood] || null;
+const getMoodColor = (mood) => moodColorMap[mood] || moodColorMap["default"];
+
 const getSummaryStatistics = (monthData) => {
     const moods = Object.values(monthData);
     if (moods.length === 0) return { averageIntensity: 0, mostCommonMood: "N/A" };
@@ -132,7 +65,7 @@ const getSummaryStatistics = (monthData) => {
         return acc;
     }, {});
 
-    const mostCommonMood = Object.keys(moodCount).reduce((a, b) => (moodCount[a] > moodCount[b] ? a : b));
+    const mostCommonMood = Object.keys(moodCount).reduce((a, b) => moodCount[a] > moodCount[b] ? a : b);
 
     return { averageIntensity, mostCommonMood };
 };
@@ -143,23 +76,11 @@ const CalendarScreen = ({ theme }) => {
     const [isYearlyView, setIsYearlyView] = useState(false);
 
     const changeMonth = (direction) => {
-        if (isYearlyView) {
-            // Change the year instead of the month
-            const newYear = currentMonth.getFullYear() + direction;
-            setCurrentMonth(new Date(newYear, currentMonth.getMonth()));
-        } else {
-            // Change the month
-            const newMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
-            setCurrentMonth(newMonth);
-        }
+        const newDate = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
+        setCurrentMonth(newDate);
     };
 
-    const toggleView = () => {
-        setIsYearlyView(!isYearlyView);
-    };
-
-    const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
-    const startDayOfWeek = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).getDay();
+    const toggleView = () => setIsYearlyView(!isYearlyView);
 
     const generateDateKey = (day) => {
         const year = currentMonth.getFullYear();
@@ -167,6 +88,8 @@ const CalendarScreen = ({ theme }) => {
         return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
     };
 
+    const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
+    const startDayOfWeek = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).getDay();
     const daysArray = Array.from({ length: startDayOfWeek }).fill(null)
         .concat(Array.from({ length: daysInMonth }, (_, i) => i + 1));
 
@@ -178,9 +101,7 @@ const CalendarScreen = ({ theme }) => {
     const monthData = {};
     Array.from({ length: daysInMonth }, (_, i) => i + 1).forEach(day => {
         const dateKey = generateDateKey(day);
-        if (moodData[dateKey]) {
-            monthData[dateKey] = moodData[dateKey];
-        }
+        if (moodData[dateKey]) monthData[dateKey] = moodData[dateKey];
     });
 
     const summary = getSummaryStatistics(monthData);
@@ -213,8 +134,7 @@ const CalendarScreen = ({ theme }) => {
                         <tr>
                             {Array(12).fill(null).map((_, i) => (
                                 <td key={i} style={{ backgroundColor: 'white' }}>
-                                    {/* Render yearly average data here if available */}
-                                    <p>{/* Yearly data for each month, e.g., intensity */}</p>
+                                    <p>{/* Yearly data placeholder */}</p>
                                 </td>
                             ))}
                         </tr>
