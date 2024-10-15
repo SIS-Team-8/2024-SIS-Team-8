@@ -55,10 +55,7 @@ const getMoodColor = (mood) => moodColorMap[mood] || moodColorMap["default"];
 
 const getSummaryStatistics = (monthData) => {
     const moods = Object.values(monthData);
-    if (moods.length === 0) return { averageIntensity: 0, mostCommonMood: "N/A" };
-
-    const totalIntensity = moods.reduce((acc, mood) => acc + mood.intensity, 0);
-    const averageIntensity = (totalIntensity / moods.length).toFixed(2);
+    if (moods.length === 0) return { mostCommonMood: "N/A" };
 
     const moodCount = moods.reduce((acc, mood) => {
         acc[mood.mood] = (acc[mood.mood] || 0) + 1;
@@ -67,7 +64,7 @@ const getSummaryStatistics = (monthData) => {
 
     const mostCommonMood = Object.keys(moodCount).reduce((a, b) => moodCount[a] > moodCount[b] ? a : b);
 
-    return { averageIntensity, mostCommonMood };
+    return { mostCommonMood };
 };
 
 const CalendarScreen = ({ theme }) => {
@@ -177,7 +174,6 @@ const CalendarScreen = ({ theme }) => {
                     </table>
                     <div className="summary-statistics">
                         <h3>Summary for {currentMonth.toLocaleString('default', { month: 'long' })}</h3>
-                        <p>Average Mood Intensity: {summary.averageIntensity}</p>
                         <p>Most Common Mood: {summary.mostCommonMood !== "N/A" ? <img src={getMoodEmojiImage(summary.mostCommonMood)} alt={summary.mostCommonMood} className="calendar-emoji" /> : "N/A"}</p>
                     </div>
                 </>
