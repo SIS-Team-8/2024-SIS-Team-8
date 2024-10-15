@@ -29,76 +29,109 @@ import terrified from '../assets/emoji/terrified.png'
 import submit from '../assets/submit-icon.png'
 
 export default function MoodSelection() {
-    const [firstImageSrc, setFirstImageSrc] = useState();
-    const [secondImageSrc, setSecondImageSrc] = useState();
-    const [thirdImageSrc, setThirdImageSrc] = useState();
-    const [forthImageSrc, setForthImageSrc] = useState();
-    const [fifthImageSrc, setFifthImageSrc] = useState();
+    const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
+    const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
+    const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
+    const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
+    const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
 
-    const angryImageSrc = () => {
-        setFirstImageSrc(annoyed);
-        setSecondImageSrc(frustrated);
-        setThirdImageSrc(angry);
-        setForthImageSrc(veryAngry);
-        setFifthImageSrc(extremelyAngry);
-    }
+    const setMoodImages = (images, activeIndex) => {
+        setImageSrc(images);  // Set sub-row images
+        setRowOpacity(prev => prev.map((_, i) => (i === activeIndex ? 1 : 0.5)));  // Change opacity of row images on click
+        resetSubRowOpacity();
+    };
 
-    const sadImageSrc = () => {
-        setFirstImageSrc(upset);
-        setSecondImageSrc(sad);
-        setThirdImageSrc(deflated);
-        setForthImageSrc(distressed);
-        setFifthImageSrc(miserable);
-    }
+    const resetSubRowOpacity = () => {
+        setSubRowOpacity(Array(5).fill(1));  // Reset sub-row images' opacity to 1
+    };
 
-    const happyImageSrc = () => {
-        setFirstImageSrc(happy);
-        setSecondImageSrc(veryHappy);
-        setThirdImageSrc(extremelyHappy);
-        setForthImageSrc(amazinglyHappy);
-        setFifthImageSrc(ecstatic);
-    }
+    const moods = {
+        angry: { 
+            rowImg: veryAngry, 
+            subImages: [annoyed, frustrated, angry, veryAngry, extremelyAngry]
+        },
+        sad: { 
+            rowImg: sad, 
+            subImages: [upset, sad, deflated, distressed, miserable] 
+        },
+        happy: { 
+            rowImg: happy, 
+            subImages: [happy, veryHappy, extremelyHappy, amazinglyHappy, ecstatic] 
+        },
+        bored: { 
+            rowImg: bored, 
+            subImages: [bored, exasperated, sarcastic, tired, exhausted] 
+        },
+        scared: { 
+            rowImg: scared, 
+            subImages: [surprised, nervous, overwhelmed, scared, terrified] 
+        }
+    };
 
-    const boredImageSrc = () => {
-        setFirstImageSrc(bored);
-        setSecondImageSrc(exasperated);
-        setThirdImageSrc(sarcastic);
-        setForthImageSrc(tired);
-        setFifthImageSrc(exhausted);
-    }
+    // Function to capitalize every word in the image name
+    const extractMoodNameFromImage = (image) => {
+        const imageName = image.toString().split('/').pop().split('.')[0];  // Extracts name from path or variable
+        return imageName
+            .split('-') // Splits name by each word
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))  // Capitalize every word
+            .join(' ');  // Join words back together with spaces
+    };
 
-    const scaredImageSrc = () => {
-        setFirstImageSrc(surprised);
-        setSecondImageSrc(nervous);
-        setThirdImageSrc(overwhelmed);
-        setForthImageSrc(scared);
-        setFifthImageSrc(terrified);
-    }
+    const handleSubRowClick = (index) => {
+        setSubRowOpacity(prev => prev.map((_, i) => (i === index ? 1 : 0.5)));  // Update only sub-row images' opacity
+    };
 
     return (
         <html>
             <div id='container'>
                 <div id='row'>
-                    <img id="angry" className="column" onClick={angryImageSrc} alt="angry" src={veryAngry}/>
-                    <img id="sad" className="column" onClick={sadImageSrc} alt="sad" src={sad}/>
-                    <img id="happy" className="column" onClick={happyImageSrc} alt="happy" src={happy}/>
-                    <img id="bored" className="column" onClick={boredImageSrc} alt="bored" src={bored}/>
-                    <img id="scared" className="column" onClick={scaredImageSrc} alt="scared" src={scared}/>
+                    {Object.keys(moods).map((mood, index) => (
+                        <div key={mood} style={{ position: 'relative', display: 'inline-block' }}>
+                            <img
+                                id={mood}
+                                className="column"
+                                onClick={() => setMoodImages(moods[mood].subImages, index)}  // Pass the sub-images
+                                onMouseEnter={() => setHoveredMood(mood)}  // Set hovered mood on mouse enter
+                                onMouseLeave={() => setHoveredMood('')}  // Clear hovered mood on mouse leave
+                                alt={mood}
+                                src={moods[mood].rowImg}
+                                style={{ opacity: rowOpacity[index] }}  // Row opacity updates on click
+                            />
+                            {hoveredMood === mood && (
+                                <span id="emojiLabel">
+                                    {mood.charAt(0).toUpperCase() + mood.slice(1)}
+                                </span>
+                            )}
+                        </div>
+                    ))}
                 </div>
 
                 <div id="subRow">
-                    <img id="first" className="subColumn" alt="" src={firstImageSrc}/>
-                    <img id="second" className="subColumn" alt="" src={secondImageSrc}/>
-                    <img id="third" className="subColumn" alt="" src={thirdImageSrc}/>
-                    <img id="forth" className="subColumn" alt="" src={forthImageSrc}/>
-                    <img id="fifth" className="subColumn" alt="" src={fifthImageSrc}/>
+                    {imageSrc.map((src, index) => (
+                        <div key={index} style={{ position: 'relative', display: 'inline-block' }}>
+                            <img
+                                id={`sub${index}`}
+                                className="subColumn"
+                                onClick={() => handleSubRowClick(index)}
+                                onMouseEnter={() => setHoveredSubMood(extractMoodNameFromImage(src))}  // Extract name from sub-image
+                                onMouseLeave={() => setHoveredSubMood('')}  // Clear hovered sub-row mood on mouse leave
+                                alt=""
+                                src={src}
+                                style={{ opacity: subRowOpacity[index] }}  // Only update sub-row opacity
+                            />
+                            {hoveredSubMood === extractMoodNameFromImage(src) && (
+                                <span id='emojiLabel'>
+                                    {hoveredSubMood}
+                                </span>
+                            )}
+                        </div>
+                    ))}
                 </div>
 
                 <div id="flexContainer">
-                    <textarea id="log" placeholder='Add Note...'/>
-
+                    <textarea id="log" placeholder='Add Note...' />
                     <Link to="/">
-                        <img id="submit" alt="submit" src={submit}/>
+                        <img id="submit" alt="submit" src={submit} />
                     </Link>
                 </div>
             </div>

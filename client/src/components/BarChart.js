@@ -29,7 +29,7 @@ const colours = ['#ff746c', '#b3ebf2', '#ffee8c', 'grey', '#6c3baa'];
 
 const BarChartComponent = () => {
     return ( 
-        <ResponsiveContainer width="50%" height="50%">
+        <ResponsiveContainer width="50%" height="40%">
             <BarChart id="bar-chart" data={emoteData} margin={{bottom: 30}}>
                 <YAxis stroke="white">    
                     <Label value="Frequency" angle="-90" position="Left" fill="#dddd" dx={-10}/>
