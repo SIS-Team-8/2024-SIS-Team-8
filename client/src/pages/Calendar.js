@@ -67,6 +67,19 @@ const getSummaryStatistics = (monthData) => {
     return { mostCommonMood };
 };
 
+const getYearlyMoodStatistics = (year) => {
+    const yearMoodData = Object.entries(moodData).filter(([date]) => date.startsWith(`${year}-`)).map(([_, data]) => data.mood);
+
+    if (yearMoodData.length === 0) return "N/A";
+
+    const moodCount = yearMoodData.reduce((acc, mood) => {
+        acc[mood] = (acc[mood] || 0) + 1;
+        return acc;
+    }, {});
+
+    return Object.keys(moodCount).reduce((a, b) => moodCount[a] > moodCount[b] ? a : b);
+};
+
 const CalendarScreen = ({ theme }) => {
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 9));
@@ -107,6 +120,7 @@ const CalendarScreen = ({ theme }) => {
     });
 
     const summary = getSummaryStatistics(monthData);
+    const yearlyMostCommonMood = getYearlyMoodStatistics(currentMonth.getFullYear());
 
     return (
         <div className={`calendar-screen ${theme}`}>
@@ -136,7 +150,7 @@ const CalendarScreen = ({ theme }) => {
                         <tr>
                             {Array(12).fill(null).map((_, i) => (
                                 <td key={i} style={{ backgroundColor: 'white' }}>
-                                    <p>{/* Yearly data placeholder */}</p>
+                                    <p>Most Common Mood: {yearlyMostCommonMood !== "N/A" ? <img src={getMoodEmojiImage(yearlyMostCommonMood)} alt={yearlyMostCommonMood} className="calendar-emoji" /> : "N/A"}</p>
                                 </td>
                             ))}
                         </tr>

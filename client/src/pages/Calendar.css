@@ -21,6 +21,10 @@
     background-color: #BDC3CB;
 }
 
+.calendar-table tbody td p {
+    margin-bottom: 0px;
+}
+
 .calendar-table th,
 .calendar-table td {
     border: 2.5px solid #dddd;
