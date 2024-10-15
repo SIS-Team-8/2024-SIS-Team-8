@@ -1,0 +1,72 @@
+#onboarding-container {
+    padding: 30px;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #189ab4;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+#onboarding-button {
+    padding: 7px;
+    font-size: large;
+    font-family: 'Poppins';
+    background-color: white;
+    color: #189ab4;
+    border: none;
+    border-radius: 4px;
+    margin-top: 20px;
+    width: 308px;
+    transition: background-color 0.3s;
+}
+
+#onboarding-button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
+#swap-button {
+    padding: 7px;
+    font-size: large;
+    font-family: 'Poppins';
+    background-color: white;
+    color: #189ab4;
+    border: none;
+    border-radius: 4px;
+    margin-top: 20px;
+    width: 100px;
+    transition: background-color 0.3s;
+}
+
+#swap-button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
+#onboarding-image {
+    max-width: 700px; /* Ensure image stays within reasonable size */
+    height: 300px;
+    display: block;
+    margin: 0 auto;
+}
+
+#image-button-container {
+    display: flex;
+    justify-content: space-between; /* Space between buttons */
+    align-items: center;
+    width: 900px; /* Set a fixed width */
+    margin: 0 auto; /* Center the container horizontally */
+    margin-top: 20px;
+    position: relative; /* Keep layout stable */
+}
+
+#app-logo {
+    height: 40vmin;
+    pointer-events: none;
+}

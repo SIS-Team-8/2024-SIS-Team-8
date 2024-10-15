@@ -4,7 +4,7 @@ import logo from './assets/logo.png';
 import dizzy from './assets/face-with-spiral-eyes.svg';
 import './App.css';
 
-import SplashScreen from './pages/SplashScreen';
+import SplashScreen from "./pages/SplashScreen";
 import Navbar from "./components/Navbar";
 import DailyView from "./pages/DailyView";
 import Calendar from "./pages/Calendar";
@@ -15,6 +15,8 @@ import Settings from "./pages/Settings";
 import MoodSelection from "./pages/MoodSelection";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import Onboarding from "./pages/Onboarding";
+import OnboardingOverview from './pages/OnboardingOverview';
 
 import { Route, Routes } from "react-router-dom";
 
@@ -38,12 +40,22 @@ function App() {
 
     const handleLogin = () => {
         setIsAuthenticated(true);
-        navigate("/");
+        const hasCompletedOnboarding = localStorage.getItem("hasCompletedOnboarding");
+        if (!hasCompletedOnboarding) {
+            navigate("/onboarding");
+        } else {
+            navigate("/");
+        }
     };
 
     const handleLogout = () => {
         setIsAuthenticated(false);
         navigate("/login");
+    };
+
+    const handleOnboardingComplete = () => {
+        // Mark onboarding as completed
+        localStorage.setItem("hasCompletedOnboarding", true);
     };
 
     if (!isLoaded) {
@@ -56,6 +68,8 @@ function App() {
 
             <Routes>
                 <Route path="/" element={isAuthenticated ? <Home /> : <Login onLogin={handleLogin} />} />
+                <Route path="/onboarding" element={isAuthenticated ? <Onboarding onComplete={handleOnboardingComplete}/> : <Login onLogin={handleLogin} />} />
+                <Route path="/onboarding-overview" element={isAuthenticated ? <OnboardingOverview/> : <Login onLogin={handleLogin} />} />
                 <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView /> : <Login onLogin={handleLogin} />} />
                 <Route path="/calendar" element={isAuthenticated ? <Calendar /> : <Login onLogin={handleLogin} />} />
                 <Route path="/help" element={isAuthenticated ? <Help /> : <Login onLogin={handleLogin} />} />
