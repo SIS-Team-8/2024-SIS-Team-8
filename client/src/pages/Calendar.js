@@ -76,8 +76,13 @@ const CalendarScreen = ({ theme }) => {
     const [isYearlyView, setIsYearlyView] = useState(false);
 
     const changeMonth = (direction) => {
-        const newDate = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
-        setCurrentMonth(newDate);
+        if (isYearlyView) {
+            const newYear = currentMonth.getFullYear() + direction;
+            setCurrentMonth(new Date(newYear, currentMonth.getMonth()));
+        } else {
+            const newDate = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
+            setCurrentMonth(newDate);
+        }
     };
 
     const toggleView = () => setIsYearlyView(!isYearlyView);
