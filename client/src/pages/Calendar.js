@@ -3,27 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import './Calendar.css';
 
 // Import emoji images
-import veryAngry from '../assets/emoji/very-angry.png';
-import sad from '../assets/emoji/sad.png';
-import happy from '../assets/emoji/happy.png';
-import bored from '../assets/emoji/bored.png';
-import scared from '../assets/emoji/scared.png';
+import angry from '../assets/emoji/angry.png';
 import annoyed from '../assets/emoji/annoyed.png';
 import frustrated from '../assets/emoji/frustrated.png';
-import angry from '../assets/emoji/angry.png';
+import veryAngry from '../assets/emoji/very-angry.png';
 import extremelyAngry from '../assets/emoji/extremely-angry.png';
+import sad from '../assets/emoji/sad.png';
 import upset from '../assets/emoji/upset.png';
 import deflated from '../assets/emoji/deflated.png';
 import distressed from '../assets/emoji/distressed.png';
 import miserable from '../assets/emoji/miserable.png';
+import happy from '../assets/emoji/happy.png';
 import veryHappy from '../assets/emoji/very-happy.png';
 import extremelyHappy from '../assets/emoji/extremely-happy.png';
 import amazinglyHappy from '../assets/emoji/amazingly-happy.png';
 import ecstatic from '../assets/emoji/ecstatic.png';
+import bored from '../assets/emoji/bored.png';
 import exasperated from '../assets/emoji/exasperated.png';
 import sarcastic from '../assets/emoji/sarcastic.png';
 import tired from '../assets/emoji/tired.png';
 import exhausted from '../assets/emoji/exhausted.png';
+import scared from '../assets/emoji/scared.png';
 import surprised from '../assets/emoji/surprised.png';
 import nervous from '../assets/emoji/nervous.png';
 import overwhelmed from '../assets/emoji/overwhelmed.png';
@@ -42,18 +42,20 @@ const moodData = {
 // Helper function to get the emoji image based on mood type
 const getMoodEmojiImage = (mood) => {
     switch (mood) {
-        case "very angry":
-        case "extremely angry":
-            return veryAngry;
         case "angry":
             return angry;
-        case "frustrated":
-            return frustrated;
         case "annoyed":
             return annoyed;
+        case "frustrated":
+            return frustrated;
+        case "very angry":
+            return veryAngry;
+        case "extremely angry":
+            return extremelyAngry;
         case "sad":
-        case "upset":
             return sad;
+        case "upset":
+            return upset;
         case "deflated":
             return deflated;
         case "distressed":
@@ -91,11 +93,11 @@ const getMoodEmojiImage = (mood) => {
         case "terrified":
             return terrified;
         case "neutral":
-            return surprised; // Use an image you have for neutral, or add a specific neutral emoji
+            return bored;
         case "very sad":
-            return veryAngry; // Replace this with an appropriate image for "very sad"
+            return miserable;
         default:
-            return null; // Handle a default image if necessary
+            return null;
     }
 };
 
