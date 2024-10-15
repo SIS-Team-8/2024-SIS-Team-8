@@ -24,7 +24,7 @@ button {
     margin-bottom: 20px;
 }
 
-#month-navigation {
+#interval-navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -32,15 +32,34 @@ button {
     width: 50%;
 }
 
-#month-navigation h2 {
+#interval-navigation h2 {
     font-size: 24px;
 }
 
-#month-navigation button {
+#interval-navigation button {
     width: 150px;
     border-radius: 4px;
     background-color: white;
     color: #189ab4;
+}
+
+/* Fix problem of hover not working. */
+#interval-navigation button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
+.view-toggle-button {
+    width: 200px;
+    border-radius: 4px;
+    background-color: white;
+    color: #189ab4;
+    margin-bottom: 50px;
+}
+
+.view-toggle-button:hover {
+    background-color: #0f7b8e;
+    color: white;
 }
 
 #home-button {
@@ -48,11 +67,6 @@ button {
     border-radius: 4px;
     background-color: white;
     color: #189ab4;
-}
-
-#month-navigation button:hover {
-    background-color: #0f7b8e;
-    color: white;
 }
 
 #home-button:hover {

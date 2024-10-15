@@ -36,9 +36,9 @@ export default function History() {
         const nextWeek = currentWeek + direction;
 
         if (nextWeek < 1) {
-            setCurrentWeek(weeksInMonth); // Cycle to last week if going backward from first
+            setCurrentWeek(weeksInMonth);
         } else if (nextWeek > weeksInMonth) {
-            setCurrentWeek(1); // Cycle to first week if going forward from last
+            setCurrentWeek(1);
         } else {
             setCurrentWeek(nextWeek);
         }
@@ -95,8 +95,13 @@ export default function History() {
 
     return (
         <div id="history-container">
-            <h1>History</h1>
-            <div id="month-navigation">
+            <div style={{ marginTop: '15px', textAlign: 'center' }}>
+                <button className="view-toggle-button" onClick={toggleViewMode}>
+                    {viewMode === "monthly" ? "Switch to Weekly View" : viewMode === "weekly" ? "Switch to Yearly View" : "Switch to Monthly View"}
+                </button>
+            </div>
+
+            <div id="interval-navigation">
                 {viewMode === "monthly" && (
                     <>
                         <button onClick={() => changeMonth(-1)}>Previous</button>
@@ -120,16 +125,9 @@ export default function History() {
                 )}
             </div>
 
-            <button className="view-toggle-button" onClick={toggleViewMode}>
-                {viewMode === "monthly" ? "Switch to Weekly View" : viewMode === "weekly" ? "Switch to Yearly View" : "Switch to Monthly View"}
-            </button>
+            <BarChartComponent data={chartData} colours={barColors}/>
 
-            <BarChartComponent 
-                data={chartData}         
-                colours={barColors}      
-            />
-
-            <div style={{ marginTop: '15px', textAlign: 'center' }}>
+            <div style={{ marginTop: '20px', textAlign: 'center' }}>
                 <Link to="/">
                     <button id="home-button">Go Home</button>
                 </Link>
