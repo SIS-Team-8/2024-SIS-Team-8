@@ -6,13 +6,21 @@ import './History.css';
 export default function History() {
     const location = useLocation();
     const initialMonth = location.state?.month || new Date();
+
     const [currentMonth, setCurrentMonth] = useState(initialMonth);
     const [viewMode, setViewMode] = useState("monthly");
     const [currentWeek, setCurrentWeek] = useState(1);
     const [currentYear, setCurrentYear] = useState(currentMonth.getFullYear());
 
+    useEffect(() => {
+        if (location.state?.month) {
+            setCurrentMonth(location.state.month);
+        }
+    }, [location.state?.month]);
+
     const toggleViewMode = () => {
-        const nextMode = viewMode === "monthly" ? "weekly" : viewMode === "weekly" ? "yearly" : "monthly";
+        const viewModes = { monthly: "weekly", weekly: "yearly", yearly: "monthly" };
+        const nextMode = viewModes[viewMode];
         setViewMode(nextMode);
 
         if (nextMode === "yearly") {
@@ -36,20 +44,8 @@ export default function History() {
         const weeksInMonth = Math.ceil(daysInMonth / 7);
         const nextWeek = currentWeek + direction;
 
-        if (nextWeek < 1) {
-            setCurrentWeek(weeksInMonth);
-        } else if (nextWeek > weeksInMonth) {
-            setCurrentWeek(1);
-        } else {
-            setCurrentWeek(nextWeek);
-        }
+        setCurrentWeek(nextWeek < 1 ? weeksInMonth : nextWeek > weeksInMonth ? 1 : nextWeek);
     };
-
-    useEffect(() => {
-        if (location.state?.month) {
-            setCurrentMonth(location.state.month);
-        }
-    }, [location.state?.month]);
 
     const getHeading = () => {
         if (viewMode === "weekly") {
@@ -57,14 +53,14 @@ export default function History() {
             const endOfWeek = new Date(startOfWeek);
             endOfWeek.setDate(startOfWeek.getDate() + 6);
             return `${startOfWeek.toLocaleDateString()} - ${endOfWeek.toLocaleDateString()}`;
-        } else if (viewMode === "yearly") {
-            return `${currentYear}`;
+        }
+
+        if (viewMode === "yearly") {
+            return currentYear.toString();
         }
 
         return currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' });
     };
-
-    const heading = getHeading();
 
     return (
         <div id="history-container">
@@ -78,21 +74,21 @@ export default function History() {
                 {viewMode === "monthly" && (
                     <>
                         <button onClick={() => changeMonth(-1)}>Previous</button>
-                        <h2>{heading}</h2>
+                        <h2>{getHeading()}</h2>
                         <button onClick={() => changeMonth(1)}>Next</button>
                     </>
                 )}
                 {viewMode === "weekly" && (
                     <>
                         <button onClick={() => changeWeek(-1)}>Previous Week</button>
-                        <h2>{heading}</h2>
+                        <h2>{getHeading()}</h2>
                         <button onClick={() => changeWeek(1)}>Next Week</button>
                     </>
                 )}
                 {viewMode === "yearly" && (
                     <>
                         <button onClick={() => changeMonth(-1)}>Previous Year</button>
-                        <h2>{heading}</h2>
+                        <h2>{getHeading()}</h2>
                         <button onClick={() => changeMonth(1)}>Next Year</button>
                     </>
                 )}
