@@ -34,6 +34,7 @@ button {
 
 #interval-navigation h2 {
     font-size: 24px;
+    margin-bottom: 0px;
 }
 
 #interval-navigation button {
@@ -43,7 +44,6 @@ button {
     color: #189ab4;
 }
 
-/* Fix problem of hover not working. */
 #interval-navigation button:hover {
     background-color: #0f7b8e;
     color: white;
