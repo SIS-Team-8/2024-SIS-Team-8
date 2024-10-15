@@ -1,5 +1,3 @@
-/* CalendarScreen.css */
-
 .calendar-screen {
     font-family: 'Poppins', sans-serif;
     display: flex;
@@ -84,8 +82,10 @@
 
 .button-container {
     display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    width: 20%;
 }
 
 .toggle-view-button,
@@ -98,7 +98,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
-    width: auto;
+    width: 150px;
 }
 
 .toggle-view-button:hover,
@@ -107,7 +107,6 @@
     color: white;
 }
 
-/* Yearly Calendar View Styling */
 .yearly-view {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

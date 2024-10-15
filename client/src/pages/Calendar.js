@@ -187,7 +187,7 @@ const CalendarScreen = ({ theme }) => {
         <div className={`calendar-screen ${theme}`}>
             <div className="button-container">
                 <button className="toggle-view-button" onClick={toggleView}>
-                    {isYearlyView ? "Switch to Monthly View" : "Switch to Yearly View"}
+                    {isYearlyView ? "Monthly View" : "Yearly View"}
                 </button>
                 <button className="history-button" onClick={() => navigate('/history')}>
                     Go to History
