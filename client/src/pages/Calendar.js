@@ -212,7 +212,7 @@ const CalendarScreen = ({ theme }) => {
                     <tbody>
                         <tr>
                             {Array(12).fill(null).map((_, i) => (
-                                <td key={i} style={{ backgroundColor: '#FFD700' }}>
+                                <td key={i} style={{ backgroundColor: 'white' }}>
                                     {/* Render yearly average data here if available */}
                                     <p>{/* Yearly data for each month, e.g., intensity */}</p>
                                 </td>
