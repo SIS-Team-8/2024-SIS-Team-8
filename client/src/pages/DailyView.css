@@ -41,8 +41,16 @@
 }
 
 .emoji {
-    font-size: 100px;
-    margin: 20px 0;
+    width: 150px;
+    height: 150px;
+    margin: 50px auto;
+    display: block;
+}
+
+.emoji img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
 .notes {

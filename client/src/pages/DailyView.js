@@ -2,6 +2,12 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './DailyView.css';
 
+import veryHappy from '../assets/emoji/very-happy.png';
+import happy from '../assets/emoji/happy.png';
+import bored from '../assets/emoji/bored.png';
+import sad from '../assets/emoji/sad.png';
+import miserable from '../assets/emoji/miserable.png';
+
 // Dummy mood data for the detailed view
 const moodData = {
     "2024-10-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
@@ -15,17 +21,17 @@ const moodData = {
 const getMoodEmoji = (mood) => {
     switch (mood) {
         case "very happy":
-            return "😄"; // Very happy emoji
+            return veryHappy;
         case "happy":
-            return "😊"; // Happy emoji
+            return happy;
         case "neutral":
-            return "😐"; // Neutral emoji
+            return bored;
         case "sad":
-            return "😢"; // Sad emoji
+            return sad;
         case "very sad":
-            return "😭"; // Very sad emoji
+            return miserable;
         default:
-            return "😶"; // Default emoji for no mood data
+            return bored;
     }
 };
 
@@ -50,7 +56,11 @@ const DailyView = () => {
 
             <div className="daily-view-content">
                 <h1>On {date}, you were feeling:</h1>
-                <div className="emoji">{getMoodEmoji(moodEntry.mood)}</div>
+
+                <div className="emoji">
+                    <img src={getMoodEmoji(moodEntry.mood)} alt={moodEntry.mood}/>
+                </div>
+
                 <p className="intensity">Mood Intensity: {moodEntry.intensity}/5</p>
                 <p className="notes">Notes: {moodEntry.notes}</p>
 
