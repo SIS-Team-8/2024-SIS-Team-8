@@ -66,7 +66,7 @@ const translations = {
         daily: "Täglich",
         weekly: "Wöchentlich",
         monthly: "Monatlich",
-        custom: "Benutzerdefiniert",
+        custom: "Individuell",
         languages: {
             English: "English",
             Spanish: "Español",
@@ -88,7 +88,7 @@ const translations = {
         importData: "Importer des données",
         homePage: "Aller à l'accueil",
         daily: "Quotidien",
-        weekly: "Hebdomadaire",
+        weekly: "Semaine",
         monthly: "Mensuel",
         custom: "Personnalisé",
         languages: {
