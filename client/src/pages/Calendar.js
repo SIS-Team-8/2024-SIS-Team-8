@@ -180,7 +180,7 @@ const CalendarScreen = ({theme, language }) => {
             </table>
 
             <div className="summary-statistics">
-                <h3>{t.summary} {currentMonth.toLocaleString('default', { month: 'long' })}</h3>
+                <h3>{t.summary} {t.months[currentMonth.getMonth()]}</h3>
                 <p>{t.avgIntensity} {summary.averageIntensity}</p>
                 <p>{t.mostCommonMood}: {getMoodEmoji(summary.mostCommonMood)}</p>
             </div>
