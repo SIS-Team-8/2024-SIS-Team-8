@@ -11,9 +11,9 @@ const translations = {
         dark: "Dark Mode",
         language: "Language Preferences",
         privacy: "Privacy Settings",
-        dataExport: "Data Export",
+        dataExport: "Export Data",
         deleteAccount: "Delete Account",
-        disableTracking: "Disable Tracking",
+        importData: "Import Data",
         homePage: "Go Home",
         daily: "Daily",
         weekly: "Weekly",
@@ -37,7 +37,7 @@ const translations = {
         privacy: "Configuración de Privacidad",
         dataExport: "Exportar Datos",
         deleteAccount: "Eliminar Cuenta",
-        disableTracking: "Deshabilitar Seguimiento",
+        importData: "Importar Datos",
         homePage: "Ir a Inicio",
         daily: "Diario",
         weekly: "Semanal",
@@ -61,7 +61,7 @@ const translations = {
         privacy: "Datenschutzeinstellungen",
         dataExport: "Daten exportieren",
         deleteAccount: "Konto löschen",
-        disableTracking: "Tracking deaktivieren",
+        importData: "Daten importieren",
         homePage: "Zur Startseite",
         daily: "Täglich",
         weekly: "Wöchentlich",
@@ -83,9 +83,9 @@ const translations = {
         dark: "Mode sombre",
         language: "Préférences linguistiques",
         privacy: "Paramètres de confidentialité",
-        dataExport: "Exporter les données",
+        dataExport: "Exporter des données",
         deleteAccount: "Supprimer le compte",
-        disableTracking: "Désactiver le suivi",
+        importData: "Importer des données",
         homePage: "Aller à l'accueil",
         daily: "Quotidien",
         weekly: "Hebdomadaire",
@@ -109,7 +109,7 @@ const translations = {
         privacy: "隐私设置",
         dataExport: "导出数据",
         deleteAccount: "删除账户",
-        disableTracking: "禁用跟踪",
+        importData: "导入数据",
         homePage: "回到主页",
         daily: "每日",
         weekly: "每周",
@@ -176,9 +176,9 @@ const Settings = ({ theme, toggleTheme, language, setLanguage }) => {
                 <div className="setting-group">
                     <h2>{t.privacy}</h2>
                     <div className="privacy-buttons-group">
+                        <button className="privacy-button">{t.importData}</button>
                         <button className="privacy-button">{t.dataExport}</button>
                         <button id="delete-button" className="privacy-button">{t.deleteAccount}</button>
-                        <button className="privacy-button">{t.disableTracking}</button>
                     </div>
                 </div>
 
