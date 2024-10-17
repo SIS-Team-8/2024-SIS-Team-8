@@ -21,10 +21,10 @@ const translations = {
         custom: "Custom",
         languages: {
             English: "English",
-            Spanish: "Spanish",
-            German: "German",
-            French: "French",
-            Chinese: "Chinese"
+            Spanish: "Español",
+            German: "Deutsch",
+            French: "Français",
+            Chinese: "中文"
         }
     },
     Spanish: {
@@ -44,11 +44,11 @@ const translations = {
         monthly: "Mensual",
         custom: "Personalizado",
         languages: {
-            English: "Inglés",
+            English: "English",
             Spanish: "Español",
-            German: "Alemán",
-            French: "Francés",
-            Chinese: "Chino"
+            German: "Deutsch",
+            French: "Français",
+            Chinese: "中文"
         }
     },
     German: {
@@ -68,11 +68,11 @@ const translations = {
         monthly: "Monatlich",
         custom: "Benutzerdefiniert",
         languages: {
-            English: "Englisch",
-            Spanish: "Spanisch",
+            English: "English",
+            Spanish: "Español",
             German: "Deutsch",
-            French: "Französisch",
-            Chinese: "Chinesisch"
+            French: "Français",
+            Chinese: "中文"
         }
     },
     French: {
@@ -92,11 +92,11 @@ const translations = {
         monthly: "Mensuel",
         custom: "Personnalisé",
         languages: {
-            English: "Anglais",
-            Spanish: "Espagnol",
-            German: "Allemand",
+            English: "English",
+            Spanish: "Español",
+            German: "Deutsch",
             French: "Français",
-            Chinese: "Chinois"
+            Chinese: "中文"
         }
     },
     Chinese: {
@@ -116,10 +116,10 @@ const translations = {
         monthly: "每月",
         custom: "自定义",
         languages: {
-            English: "英语",
-            Spanish: "西班牙语",
-            German: "德语",
-            French: "法语",
+            English: "English",
+            Spanish: "Español",
+            German: "Deutsch",
+            French: "Français",
             Chinese: "中文"
         }
     }
@@ -139,7 +139,6 @@ const Settings = ({ theme, toggleTheme, language, setLanguage }) => {
             <div className={`settings-container ${theme}`}>
                 <h1 className="settings-header">{t.title}</h1>
 
-                {/* Reminder Frequency */}
                 <div className="setting-group">
                     <h2>{t.reminder}</h2>
                     <div className="toggle-buttons-group">
@@ -150,7 +149,6 @@ const Settings = ({ theme, toggleTheme, language, setLanguage }) => {
                     </div>
                 </div>
 
-                {/* Theme Options */}
                 <div className="setting-group">
                     <h2>{t.theme}</h2>
                     <div className="options-group">
@@ -162,7 +160,6 @@ const Settings = ({ theme, toggleTheme, language, setLanguage }) => {
                     </div>
                 </div>
 
-                {/* Language Preferences */}
                 <div className="setting-group">
                     <h2>{t.language}</h2>
                     <div className="options-group">
@@ -176,7 +173,6 @@ const Settings = ({ theme, toggleTheme, language, setLanguage }) => {
                     </div>
                 </div>
 
-                {/* Privacy Settings */}
                 <div className="setting-group">
                     <h2>{t.privacy}</h2>
                     <div className="privacy-buttons-group">
@@ -186,7 +182,6 @@ const Settings = ({ theme, toggleTheme, language, setLanguage }) => {
                     </div>
                 </div>
 
-                {/* Home Page Button */}
                 <div className="center-button">
                     <button className="home-button" onClick={() => navigate('/')}>{t.homePage}</button>
                 </div>
