@@ -103,6 +103,10 @@
     width: 150px;
 }
 
+.dark .toggle-button {
+    color: #0F3D4B;
+}
+
 .toggle-button.selected {
     background-color: #0f7b8e;
     color: white;
@@ -133,6 +137,10 @@
     transition: background-color 0.3s;
 }
 
+.dark .privacy-button {
+    color: #0F3D4B;
+}
+
 .privacy-button:hover {
     background-color: #0f7b8e;
     color: white;
@@ -149,6 +157,10 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+
+.dark #delete-button {
+    color: #C11E3A;
 }
 
 #delete-button:hover {
@@ -172,6 +184,10 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+
+.dark .home-button {
+    color: #0F3D4B;
 }
 
 .home-button:hover {
