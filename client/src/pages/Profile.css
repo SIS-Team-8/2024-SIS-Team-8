@@ -34,6 +34,11 @@
     color: white;
 }
 
+.dark #navigation-button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
 /* Profile info section */
 .profile-info {
     display: flex;
