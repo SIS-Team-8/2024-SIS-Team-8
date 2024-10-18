@@ -10,7 +10,6 @@ const translations = {
 };
 
 const defaultEmoteData = [
-    //data goes here
     {
         name: 'Angry',
         emoteFreq: 5,
@@ -43,10 +42,10 @@ const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColor
         name: t[item.name] || item.name
     }));
 
-    return ( 
-        <ResponsiveContainer width="50%" height="50%">
+    return (
+        <ResponsiveContainer width="50%" height="40%">
             <BarChart id="bar-chart" data={translatedData} margin={{bottom: 30}}>
-                <YAxis stroke="white">    
+                <YAxis stroke="white">
                     <Label value={t.frequency} angle="-90" position="Left" fill="#dddd" dx={-10}/>
                 </YAxis>
                 <XAxis dataKey="name" stroke="white">
@@ -61,7 +60,7 @@ const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColor
                     }
                 </Bar>
             </BarChart>
-        </ResponsiveContainer>    
+        </ResponsiveContainer>
     )
 };
 
