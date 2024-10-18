@@ -80,6 +80,11 @@
     color: #0F3D4B;
 }
 
+.dark .month-navigation button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
 .summary-statistics {
     margin-top: 20px;
 }
