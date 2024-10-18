@@ -24,7 +24,7 @@ button {
     margin-bottom: 20px;
 }
 
-#month-navigation {
+#interval-navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -32,19 +32,52 @@ button {
     width: 50%;
 }
 
-#month-navigation h2 {
+#interval-navigation h2 {
     font-size: 24px;
+    margin-bottom: 0px;
 }
 
-#month-navigation button {
+#interval-navigation button {
     width: 150px;
     border-radius: 4px;
     background-color: white;
     color: #189ab4;
 }
 
-.dark #month-navigation button {
+.dark #interval-navigation button {
     color: #0F3D4B;
+}
+
+#interval-navigation button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
+.dark #interval-navigation button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
+.view-toggle-button {
+    width: 200px;
+    border-radius: 4px;
+    background-color: white;
+    color: #189ab4;
+    margin-bottom: 50px;
+}
+
+.dark .view-toggle-button {
+    color: #0F3D4B;
+}
+
+.view-toggle-button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
+.dark .view-toggle-button:hover {
+    background-color: #0C6270;
+    color: white;
 }
 
 #home-button {
@@ -58,16 +91,6 @@ button {
     color: #0F3D4B;
 }
 
-#month-navigation button:hover {
-    background-color: #0f7b8e;
-    color: white;
-}
-
-.dark #month-navigation button:hover {
-    background-color: #0C6270;
-    color: white;
-}
-
 #home-button:hover {
     background-color: #0f7b8e;
     color: white;
@@ -79,12 +102,11 @@ button {
 }
 
 #history-container.light {
-    background-color: #189ab4 !important; /* This will remain blue for light mode */
+    background-color: #189ab4 !important;
     color: white !important;
 }
 
-/* Dark Mode */
 #history-container.dark {
-    background-color: #0F3D4B !important; /* Override the blue background with dark mode */
+    background-color: #0F3D4B !important;
     color: white !important;
 }
