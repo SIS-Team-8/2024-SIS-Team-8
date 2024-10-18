@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo from './assets/logo.png';
 import dizzy from './assets/face-with-spiral-eyes.svg';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 import './App.css';
 
 import SplashScreen from "./pages/SplashScreen";
@@ -65,7 +68,6 @@ function App() {
     return (
         <div className="App">
             {isAuthenticated && <Navbar onLogout={handleLogout} />}
-
             <Routes>
                 <Route path="/" element={isAuthenticated ? <Home /> : <Login onLogin={handleLogin} />} />
                 <Route path="/onboarding" element={isAuthenticated ? <Onboarding onComplete={handleOnboardingComplete}/> : <Login onLogin={handleLogin} />} />
@@ -81,6 +83,7 @@ function App() {
                 <Route path="/sign-up" element={<SignUp />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
+            <ToastContainer/>
         </div>
     );
 
