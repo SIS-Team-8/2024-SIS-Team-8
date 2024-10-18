@@ -135,7 +135,7 @@ function App() {
                     <h2 class="noselect">{t.notFound}</h2>
 
                     <Link to="/login">
-                        <button id="error-button" class="noselect">{t.goHome}</button>
+                        <button id="error-button" class={`noselect ${theme}`}>{t.goHome}</button>
                     </Link>
                 </header>
             </div>
