@@ -31,6 +31,11 @@
     color: white;
 }
 
+.dark .help-container .button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
 .help-container h1 {
     font-size: 42px;
     padding-bottom: 30px;
