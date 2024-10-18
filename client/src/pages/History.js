@@ -159,7 +159,8 @@ export default function History({theme, language}) {
             return currentYear.toString();
         }
 
-        return currentMonth.toLocaleString('default', { month: 'long', year: 'numeric' });
+        const monthName = t.months[currentMonth.getMonth()];
+        return `${monthName} ${currentMonth.getFullYear()}`;
     };
 
     const chartData = [
