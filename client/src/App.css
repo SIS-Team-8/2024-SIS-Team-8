@@ -61,7 +61,7 @@ body {
 }
 
 #mood-selection:hover, #error-button:hover {
-    background-color: #0f7b8e;
+    background-color: #0C6270;
     color: white;
 }
 
@@ -78,6 +78,6 @@ body {
 }
 
 #home-button.dark:hover, #mood-selection.dark:hover {
-    background-color: #0f7b8e;
+    background-color: #0C6270;
     color: white;
 }
