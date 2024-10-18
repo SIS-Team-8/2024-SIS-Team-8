@@ -117,6 +117,11 @@
     color: white;
 }
 
+.dark .toggle-button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
 .privacy-buttons-group {
     display: flex;
     justify-content: space-around;
@@ -146,6 +151,11 @@
     color: white;
 }
 
+.dark .privacy-button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
 #delete-button {
     padding: 10px;
     font-size: medium;
@@ -165,6 +175,11 @@
 
 #delete-button:hover {
     background-color: #E7625F;
+    color: white;
+}
+
+.dark #delete-button:hover {
+    background-color: #C65552;
     color: white;
 }
 
@@ -192,6 +207,11 @@
 
 .home-button:hover {
     background-color: #0f7b8e;
+    color: white;
+}
+
+.dark .home-button:hover {
+    background-color: #0C6270;
     color: white;
 }
 
