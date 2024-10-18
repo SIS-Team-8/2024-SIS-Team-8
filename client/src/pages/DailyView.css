@@ -34,6 +34,11 @@
     color: white;
 }
 
+.dark .back-button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
 .daily-view-content {
     width: 100%;
     max-width: 600px;
@@ -96,8 +101,18 @@
     color: white;
 }
 
+.dark .edit-button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
 .delete-button:hover {
     background-color: #E7625F;
+    color: white;
+}
+
+.dark .delete-button:hover {
+    background-color: #C65552;
     color: white;
 }
 
