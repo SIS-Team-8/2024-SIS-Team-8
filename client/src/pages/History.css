@@ -63,8 +63,18 @@ button {
     color: white;
 }
 
+.dark #month-navigation button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
 #home-button:hover {
     background-color: #0f7b8e;
+    color: white;
+}
+
+.dark #home-button:hover {
+    background-color: #0C6270;
     color: white;
 }
 

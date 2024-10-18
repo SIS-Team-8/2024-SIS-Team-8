@@ -3,3 +3,9 @@
     padding: 0px 5px 0px 5px;
     border-radius: 4px;
 }
+
+#custom-tooltip.dark {
+    background-color: #0F3D4B;
+    color: #dddddd;
+    border: 1px solid #094E5A;
+}

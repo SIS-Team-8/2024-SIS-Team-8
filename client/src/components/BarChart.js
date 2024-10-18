@@ -35,7 +35,7 @@ const defaultEmoteData = [
 
 const colours = ['#ff746c', '#b3ebf2', '#ffee8c', 'grey', '#6c3baa'];
 
-const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColors, language }) => {
+const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColors, language, theme }) => {
     const t = translations[language] || translations.English;
 
     const translatedData = defaultEmoteData.map((item) => ({
@@ -52,7 +52,7 @@ const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColor
                 <XAxis dataKey="name" stroke="white">
                     <Label value={t.emotion} offset={0} position="bottom" fill="#dddd" dy={10}/>
                 </XAxis>
-                <Tooltip cursor={false} content={<CustomTooltip tooltipText={t.tooltipText} />}/>
+                <Tooltip cursor={false} content={<CustomTooltip tooltipText={t.tooltipText} theme={theme} />}/>
                 <Bar dataKey="emoteFreq">
                     {
                         translatedData.map((entry, index) => (
@@ -66,10 +66,10 @@ const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColor
 };
 
 
-const CustomTooltip = ({ active, payload, label, tooltipText}) => {
+const CustomTooltip = ({ active, payload, label, tooltipText, theme }) => {
     if (active && payload && payload.length) {
         return (
-            <div id="custom-tooltip"> 
+            <div id="custom-tooltip" className={theme}>
                 <p>{label}</p>
                 <p>
                     {tooltipText}: <span> {payload[0].value}</span>
@@ -78,6 +78,5 @@ const CustomTooltip = ({ active, payload, label, tooltipText}) => {
         );
     }
 };
-
 
 export default BarChartComponent;

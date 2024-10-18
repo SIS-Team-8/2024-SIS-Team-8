@@ -61,13 +61,14 @@ export default function History({theme, language}) {
                 <h2>{`${t.months[currentMonth.getMonth()]} ${currentMonth.getFullYear()}`}</h2>
                 <button onClick={() => changeMonth(1)}>{t.next}</button>
             </div>
-            <BarChart 
+            <BarChart
                 data={chartData}
                 xAxisLabel={t.chart.xAxisLabel}
                 yAxisLabel={t.chart.yAxisLabel}
                 tooltipText={t.chart.tooltipText}
                 barColors={["#ff746c", "#b3ebf2", "#ffee8c", "grey", "#6c3baa"]}
                 language={language}
+                theme={theme}
             />
             <div style={{ marginTop: '15px', textAlign: 'center' }}>
                 <Link to="/">
