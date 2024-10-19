@@ -137,15 +137,13 @@
     color: white;
 }
 
-.dark
-.toggle-view-button,
-.history-button {
+.dark .toggle-view-button,
+.dark .history-button {
     color: #0F3D4B;
 }
 
-.dark
-.toggle-view-button:hover,
-.history-button:hover {
+.dark .toggle-view-button:hover,
+.dark .history-button:hover {
     background-color: #0C6270;
     color: white;
 }
