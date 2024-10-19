@@ -81,19 +81,19 @@ const getYearlyMoodStatistics = (year) => {
 };
 
 const translations = {
-    English: { onDate: "On", summary: "Summary Statistics for", avgIntensity: "Average Mood Intensity:", mostCommonMood: "Most Common Mood", previous: "Previous", next: "Next",
+    English: { onDate: "On", summary: "Summary Statistics for", avgIntensity: "Average Mood Intensity:", mostCommonMood: "Most Common Mood", previous: "Previous", next: "Next", history: "Go to History", yearlyView: "Yearly View", monthlyView: "Monthly View",
         months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     },
-    Spanish: { onDate: "El", summary: "Estadísticas Resumidas para", avgIntensity: "Intensidad Media del Estado de Ánimo:", mostCommonMood: "Estado de Ánimo Más Común", previous: "Anterior", next: "Siguiente",
+    Spanish: { onDate: "El", summary: "Estadísticas Resumidas para", avgIntensity: "Intensidad Media del Estado de Ánimo:", mostCommonMood: "Estado de Ánimo Más Común", previous: "Anterior", next: "Siguiente", history: "Ir a Historial", yearlyView: "Vista Anual", monthlyView: "Vista Mensual",
         months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"], days: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"]
     },
-    German: { onDate: "Am", summary: "Zusammenfassende Statistiken für", avgIntensity: "Durchschnittliche Stimmung Intensität:", mostCommonMood: "Häufigste Stimmung", previous: "Vorherige", next: "Nächste",
+    German: { onDate: "Am", summary: "Zusammenfassende Statistiken für", avgIntensity: "Durchschnittliche Stimmung Intensität:", mostCommonMood: "Häufigste Stimmung", previous: "Vorherige", next: "Nächste", history: "Zur Geschichte", yearlyView: "Jahresübersicht", monthlyView: "Monatsübersicht",
         months: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"], days: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
     },
-    French: { onDate: "Le", summary: "Statistiques Résumées pour", avgIntensity: "Intensité Moyenne de l'Humeur:", mostCommonMood: "Humeur la Plus Commune", previous: "Précédente", next: "Suivante",
+    French: { onDate: "Le", summary: "Statistiques Résumées pour", avgIntensity: "Intensité Moyenne de l'Humeur:", mostCommonMood: "Humeur la Plus Commune", previous: "Précédente", next: "Suivante", history: "Aller à l'Historique", yearlyView: "Vue Annuelle", monthlyView: "Vue Mensuelle",
         months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"], days: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"]
     },
-    Chinese: { onDate: "在", summary: "总结统计", avgIntensity: "平均心情强度:", mostCommonMood: "最常见的心情", previous: "前一个", next: "下一个",
+    Chinese: { onDate: "在", summary: "总结统计", avgIntensity: "平均心情强度:", mostCommonMood: "最常见的心情", previous: "前一个", next: "下一个", history: "转到历史", yearlyView: "年度视图", monthlyView: "月度视图",
         months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], days: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
     }
 };
@@ -146,7 +146,7 @@ const CalendarScreen = ({theme, language }) => {
         <div className={ `calendar-screen ${theme}` }>
             <div className="button-container">
                 <button className="toggle-view-button" onClick={toggleView}>
-                    {isYearlyView ? t.previous : t.next}
+                    {isYearlyView ? t.monthlyView : t.yearlyView}
                 </button>
                 <button className="history-button" onClick={() => navigate('/history')}>
                     {t.history}
