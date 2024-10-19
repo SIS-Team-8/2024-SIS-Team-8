@@ -1,31 +1,51 @@
-/* Styles for Settings Screen */
-
+/* General Styles for Settings Screen */
 .settings-screen {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #189ab4;
-    color: white;
     text-align: center;
     padding: 0 20px;
 }
 
+/* Light Theme */
+.settings-screen.light {
+    background-color: #189ab4; /* Blue background for light mode */
+    color: black;
+}
+
+/* Dark Theme */
+.settings-screen.dark {
+    background-color: #0F3D4B;
+    color: white;
+}
+
+/* Settings Container */
 .settings-container {
     width: 100%;
     max-width: 600px;
     padding: 20px;
     font-family: 'Poppins', sans-serif;
-    background-color: #189ab4;
     border-radius: 8px;
-    color: white;
     text-align: left;
+}
+
+/* Light Theme for Container */
+.settings-container.light {
+    background-color: #189ab4; /* Same as light screen background */
+    color: white;
+}
+
+/* Dark Theme for Container */
+.settings-container.dark {
+    background-color: #0F3D4B;
+    color: white;
 }
 
 .settings-header {
     text-align: center;
-    color: white;
     margin-bottom: 20px;
+    color: inherit;
 }
 
 .setting-group {
@@ -37,6 +57,7 @@
 .setting-group h2 {
     margin: 0 0 10px;
     font-size: 18px;
+    color: inherit;
 }
 
 .options-group {
@@ -51,11 +72,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-}
-
-.options-group input[type="checkbox"],
-.options-group input[type="radio"] {
-    margin-right: 5px;
+    color: inherit;
 }
 
 .options-group select {
@@ -63,6 +80,8 @@
     font-size: 16px;
     width: 100%;
     cursor: pointer;
+    background-color: white;
+    color: black;
 }
 
 /* Toggle button styles for reminder frequency */
@@ -84,6 +103,10 @@
     width: 150px;
 }
 
+.dark .toggle-button {
+    color: #0F3D4B;
+}
+
 .toggle-button.selected {
     background-color: #0f7b8e;
     color: white;
@@ -91,6 +114,11 @@
 
 .toggle-button:hover {
     background-color: #0f7b8e;
+    color: white;
+}
+
+.dark .toggle-button:hover {
+    background-color: #0C6270;
     color: white;
 }
 
@@ -114,8 +142,17 @@
     transition: background-color 0.3s;
 }
 
+.dark .privacy-button {
+    color: #0F3D4B;
+}
+
 .privacy-button:hover {
     background-color: #0f7b8e;
+    color: white;
+}
+
+.dark .privacy-button:hover {
+    background-color: #0C6270;
     color: white;
 }
 
@@ -132,8 +169,17 @@
     transition: background-color 0.3s;
 }
 
+.dark #delete-button {
+    color: #C11E3A;
+}
+
 #delete-button:hover {
     background-color: #E7625F;
+    color: white;
+}
+
+.dark #delete-button:hover {
+    background-color: #C65552;
     color: white;
 }
 
@@ -155,20 +201,18 @@
     transition: background-color 0.3s;
 }
 
+.dark .home-button {
+    color: #0F3D4B;
+}
+
 .home-button:hover {
     background-color: #0f7b8e;
     color: white;
 }
 
-/* Dark mode styling */
-body.dark {
-    background-color: #333;
+.dark .home-button:hover {
+    background-color: #0C6270;
     color: white;
-}
-
-body.light {
-    background-color: white;
-    color: black;
 }
 
 /* Toggle Switch */

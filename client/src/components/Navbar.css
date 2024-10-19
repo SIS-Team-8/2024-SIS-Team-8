@@ -45,14 +45,6 @@
     color:white;
 }
 
-.custom-navbar .offcanvas {
-    background-color: #189ab4;
-}
-
-.custom-navbar .offcanvas-title {
-    color: white;
-}
-
 .hamburger-button {
     font-family: 'Poppins', sans-serif;
     background-color: white;
@@ -84,4 +76,39 @@
 
 .justify-content-end {
     font-family: 'Poppins', sans-serif;
+}
+
+.custom-navbar.dark {
+    background-color: #0F3D4B !important; /* Dark background */
+    color: #fff !important; /* White text */
+}
+
+.custom-navbar.dark .navbar-label,
+.custom-navbar.dark .custom-link {
+    color: #fff;
+}
+
+.custom-navbar.dark .navbar-label,
+.custom-navbar.dark .custom-link {
+    color: #fff;
+}
+
+.custom-navbar.dark .hamburger-button {
+    background-color: #0F3D4B;
+}
+
+/* Dark mode for offcanvas */
+[data-bs-theme="dark"] .offcanvas {
+    background-color: #2A2A2A !important;
+    color: #fff !important;
+}
+
+[data-bs-theme="dark"] .offcanvas-header,
+[data-bs-theme="dark"] .offcanvas-body {
+    background-color: #2A2A2A !important;
+    color: white !important;
+}
+
+[data-bs-theme="dark"] .offcanvas-title {
+    color: white !important;
 }

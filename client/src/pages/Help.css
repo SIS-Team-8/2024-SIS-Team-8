@@ -22,13 +22,17 @@
     transition: background-color 0.3s;
 }
 
+.dark .button {
+    color: #0F3D4B;
+}
+
 .help-container .button:hover {
     background-color: #0f7b8e;
     color: white;
 }
 
-.help-container .custom-button:hover {
-    background-color: #189ab4;
+.dark .help-container .button:hover {
+    background-color: #0C6270;
     color: white;
 }
 
@@ -65,6 +69,18 @@
 /* FAQ items */
 .help-container ul li {
     color: white;
+}
+
+/* Light Mode */
+.help-container.light {
+    background-color: #189ab4 !important; /* This will remain blue for light mode */
+    color: white !important;
+}
+
+/* Dark Mode */
+.help-container.dark {
+    background-color: #0F3D4B !important; /* Override the blue background with dark mode */
+    color: white !important;
 }
 
 #help-link {

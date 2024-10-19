@@ -6,6 +6,11 @@ html {
     padding: 0;
 }
 
+#container.dark {
+    background-color: #0F3D4B !important; /* Dark background color */
+    color: #ddd !important;
+}
+
 *,
 *:before,
 *:after {

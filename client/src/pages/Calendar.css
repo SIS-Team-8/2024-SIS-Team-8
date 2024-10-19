@@ -11,6 +11,16 @@
     flex-direction: column;
 }
 
+.calendar-screen.light {
+    background-color: #189ab4;
+    color: black;
+}
+
+.calendar-screen.dark {
+    background-color: #0F3D4B !important;
+    color: black !important;
+}
+
 .calendar-table {
     width: 80%;
     border-collapse: collapse;
@@ -76,6 +86,15 @@
     color: white;
 }
 
+.dark .month-navigation button {
+    color: #0F3D4B;
+}
+
+.dark .month-navigation button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
 .summary-statistics {
     margin-top: 30px;
 }
@@ -115,6 +134,17 @@
 .toggle-view-button:hover,
 .history-button:hover {
     background-color: #0f7b8e;
+    color: white;
+}
+
+.dark .toggle-view-button,
+.dark .history-button {
+    color: #0F3D4B;
+}
+
+.dark .toggle-view-button:hover,
+.dark .history-button:hover {
+    background-color: #0C6270;
     color: white;
 }
 

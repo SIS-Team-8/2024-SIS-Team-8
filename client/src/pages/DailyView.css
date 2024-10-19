@@ -25,8 +25,17 @@
     transition: background-color 0.3s;
 }
 
+.dark .back-button {
+    color: #0F3D4B;
+}
+
 .back-button:hover {
     background-color: #0f7b8e;
+    color: white;
+}
+
+.dark .back-button:hover {
+    background-color: #0C6270;
     color: white;
 }
 
@@ -83,8 +92,16 @@
     color: #189ab4;
 }
 
+.dark .edit-button {
+    color: #0F3D4B;
+}
+
 .delete-button {
     color: #DB1F48;
+}
+
+.dark .delete-button {
+    color: #C11E3A;
 }
 
 .edit-button:hover {
@@ -92,7 +109,26 @@
     color: white;
 }
 
+.dark .edit-button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
 .delete-button:hover {
     background-color: #E7625F;
     color: white;
+}
+
+.dark .delete-button:hover {
+    background-color: #C65552;
+    color: white;
+}
+
+.daily-view-screen.light {
+    background-color: #189ab4;
+}
+
+.daily-view-screen.dark {
+    background-color: #0F3D4B !important;
+    color: white !important;
 }

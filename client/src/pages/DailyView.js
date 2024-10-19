@@ -35,11 +35,23 @@ const getMoodEmoji = (mood) => {
     }
 };
 
-const DailyView = () => {
+const translations = {
+    English: { backToCalendar: "Back to Calendar", editEntry: "Edit Entry", deleteEntry: "Delete Entry", intensity: "Mood Intensity:", notes: "Notes:", noEntry: "No entry for this day." , youWereFeeling: "you were feeling", datePrefix: "On" },
+    Spanish: { backToCalendar: "Volver al Calendario", editEntry: "Editar Entrada", deleteEntry: "Eliminar Entrada", intensity: "Intensidad del Estado de Ánimo:", notes: "Notas:", noEntry: "No hay entrada para este día." , youWereFeeling: "te sentías", datePrefix: "En" },
+    German: { backToCalendar: "Zurück zum Kalender", editEntry: "Eintrag bearbeiten", deleteEntry: "Eintrag löschen", intensity: "Stimmungsintensität:", notes: "Notizen:", noEntry: "Keine Eintragung für diesen Tag." , youWereFeeling: "du hast dich gefühlt", datePrefix: "Am" },
+    French: { backToCalendar: "Retour au Calendrier", editEntry: "Modifier l'entrée", deleteEntry: "Supprimer l'entrée", intensity: "Intensité de l'humeur:", notes: "Remarques:", noEntry: "Aucune entrée pour ce jour." , youWereFeeling: "vous vous sentiez", datePrefix: "Le" },
+    Chinese: { backToCalendar: "返回日历", editEntry: "编辑条目", deleteEntry: "删除条目", intensity: "情绪强度:", notes: "笔记:", noEntry: "当天没有条目。" , youWereFeeling: "你当时的感觉是", datePrefix: "在" }
+};
+
+const DailyView = ({theme, language}) => {
     const { date } = useParams(); // Retrieves the date from the URL parameter
     const navigate = useNavigate();
 
+    const t = translations[language];
+
     const moodEntry = moodData[date] || { mood: "neutral", intensity: 3, notes: "No entry for this day." }; // Default mood if no entry
+
+    const translatedHeader = `${t.datePrefix} ${date}, ${t.youWereFeeling}:`;
 
     const handleDelete = () => {
         if (window.confirm("Are you sure you want to delete this entry?")) {
@@ -49,26 +61,26 @@ const DailyView = () => {
     };
 
     return (
-        <div className="daily-view-screen">
+        <div className={ `daily-view-screen ${theme} `}>
             <button className="back-button" onClick={() => navigate('/calendar')}>
-                ⬅ Back to Calendar
+                ⬅ {t.backToCalendar}
             </button>
 
             <div className="daily-view-content">
-                <h1>On {date}, you were feeling:</h1>
+                <h1 style={{ color: 'white' }}>{translatedHeader}</h1>
 
                 <div className="emoji">
                     <img src={getMoodEmoji(moodEntry.mood)} alt={moodEntry.mood}/>
                 </div>
 
-                <p className="intensity">Mood Intensity: {moodEntry.intensity}/5</p>
-                <p className="notes">Notes: {moodEntry.notes}</p>
+                <p className="intensity">{t.intensity} {moodEntry.intensity}/5</p>
+                <p className="notes">{t.notes} {moodEntry.notes}</p>
 
                 <button className="edit-button" onClick={() => alert("Edit functionality coming soon!")}>
-                    ✏ Edit Entry
+                    ✏ {t.editEntry}
                 </button>
                 <button className="delete-button" onClick={handleDelete}>
-                    🗑 Delete Entry
+                    🗑 {t.deleteEntry}
                 </button>
             </div>
         </div>

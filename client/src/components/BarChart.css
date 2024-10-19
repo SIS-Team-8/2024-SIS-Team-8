@@ -2,4 +2,11 @@
     background-color: #189ab4;
     padding: 0px 5px 0px 5px;
     border-radius: 4px;
+    border: 0.75px solid #168fa8;
+}
+
+#custom-tooltip.dark {
+    background-color: #0F3D4B;
+    color: #dddddd;
+    border: 1px solid #094E5A;
 }
