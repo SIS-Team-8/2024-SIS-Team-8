@@ -9,8 +9,8 @@ const mongoose = require('mongoose');
 const app = express(); // create express app
 
 const cookieParser = require("cookie-parser");
-const authRoute = require("./routes/AuthRoute");
-//const mongoRouter = require('./routes/MongoRoute');
+const {authMiddleware} = require("./middlewares/AuthMiddleware");
+const apiRouter = require("./routes/ApiRoute");
 
 // Connect to MongoDB server using environment variables
 const mogoURI = process.env.MONGODB_URI;
@@ -45,10 +45,19 @@ app.use(express.static("public"));
 //   res.send("This is from express.js");
 // });
 
+app.use((req, res, next) => {
+  if (req.path === '/login' || req.path === '/sign-up' || req.path === '/api/sign-up' || req.path === '/api/login') {
+    return next();
+  }
+  authMiddleware(req, res, next);
+});
 
-app.use('/api', authRoute);
-
+app.use('/api', apiRouter);
+//console.log("Default router passed");
 // handle react app routing
 app.use((req, res, next) => {
+  if (req.path.includes('/api')) {
+    return next();
+  }
   res.sendFile(path.join(__dirname, ".." , "client", "build", "index.html"));
 });
