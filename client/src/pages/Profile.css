@@ -25,8 +25,17 @@
     width: 150px;
 }
 
+.dark #navigation-button {
+    color: #0F3D4B;
+}
+
 #navigation-button:hover {
     background-color: #0f7b8e;
+    color: white;
+}
+
+.dark #navigation-button:hover {
+    background-color: #0C6270;
     color: white;
 }
 
@@ -97,4 +106,15 @@
     justify-content: space-between;
     align-items: center;
     width: 750px;
+}
+
+.profile-container.light {
+    background-color: #189ab4 !important; /* This will remain blue for light mode */
+    color: white !important;
+}
+
+/* Dark Mode */
+.profile-container.dark {
+    background-color: #0F3D4B !important; /* Override the blue background with dark mode */
+    color: white !important;
 }

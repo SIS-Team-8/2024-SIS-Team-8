@@ -68,7 +68,7 @@ input {
 }
 
 #link {
-    color: white;
+    color: white !important;
     font-family: 'Poppins';
     text-decoration: none;
 }
@@ -78,9 +78,21 @@ input {
     font-family: 'Poppins';
 }
 
-#forgotPassword {
-    float: right;
-    font-family: 'Poppins';
-    color: white;
-    text-decoration: none;
+/* Dark Mode Styles for Login */
+#login-container.dark {
+    background-color: #0F3D4B;
+    color: #ddd;
+}
+
+.dark #userBox, .dark #passBox {
+    background-repeat: no-repeat;
+    background-size: 25px, 25px;
+    background-position: 8px 2px !important;
+    padding-left: 40px;
+    background-color: transparent !important;
+}
+
+#button.dark {
+    background-color: white;
+    color: #0F3D4B;
 }

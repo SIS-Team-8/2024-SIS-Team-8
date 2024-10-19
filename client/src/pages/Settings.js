@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './Settings.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,14 +11,21 @@ const translations = {
         dark: "Dark Mode",
         language: "Language Preferences",
         privacy: "Privacy Settings",
-        dataExport: "Data Export",
+        dataExport: "Export Data",
         deleteAccount: "Delete Account",
-        disableTracking: "Disable Tracking",
+        importData: "Import Data",
         homePage: "Go Home",
         daily: "Daily",
         weekly: "Weekly",
         monthly: "Monthly",
-        custom: "Custom"
+        custom: "Custom",
+        languages: {
+            English: "English",
+            Spanish: "Español",
+            German: "Deutsch",
+            French: "Français",
+            Chinese: "中文"
+        }
     },
     Spanish: {
         title: "Configuración",
@@ -30,89 +37,151 @@ const translations = {
         privacy: "Configuración de Privacidad",
         dataExport: "Exportar Datos",
         deleteAccount: "Eliminar Cuenta",
-        disableTracking: "Deshabilitar Seguimiento",
+        importData: "Importar Datos",
         homePage: "Ir a Inicio",
         daily: "Diario",
         weekly: "Semanal",
         monthly: "Mensual",
-        custom: "Personalizado"
+        custom: "Personalizado",
+        languages: {
+            English: "English",
+            Spanish: "Español",
+            German: "Deutsch",
+            French: "Français",
+            Chinese: "中文"
+        }
+    },
+    German: {
+        title: "Einstellungen",
+        reminder: "Erinnerungshäufigkeit",
+        theme: "Themenoptionen",
+        light: "Heller Modus",
+        dark: "Dunkler Modus",
+        language: "Spracheinstellungen",
+        privacy: "Datenschutzeinstellungen",
+        dataExport: "Daten exportieren",
+        deleteAccount: "Konto löschen",
+        importData: "Daten importieren",
+        homePage: "Zur Startseite",
+        daily: "Täglich",
+        weekly: "Wöchentlich",
+        monthly: "Monatlich",
+        custom: "Individuell",
+        languages: {
+            English: "English",
+            Spanish: "Español",
+            German: "Deutsch",
+            French: "Français",
+            Chinese: "中文"
+        }
+    },
+    French: {
+        title: "Paramètres",
+        reminder: "Fréquence des rappels",
+        theme: "Options de thème",
+        light: "Mode clair",
+        dark: "Mode sombre",
+        language: "Préférences linguistiques",
+        privacy: "Paramètres de confidentialité",
+        dataExport: "Exporter des données",
+        deleteAccount: "Supprimer le compte",
+        importData: "Importer des données",
+        homePage: "Aller à l'accueil",
+        daily: "Quotidien",
+        weekly: "Semaine",
+        monthly: "Mensuel",
+        custom: "Personnalisé",
+        languages: {
+            English: "English",
+            Spanish: "Español",
+            German: "Deutsch",
+            French: "Français",
+            Chinese: "中文"
+        }
+    },
+    Chinese: {
+        title: "设置",
+        reminder: "提醒频率",
+        theme: "主题选项",
+        light: "亮模式",
+        dark: "暗模式",
+        language: "语言偏好",
+        privacy: "隐私设置",
+        dataExport: "导出数据",
+        deleteAccount: "删除账户",
+        importData: "导入数据",
+        homePage: "回到主页",
+        daily: "每日",
+        weekly: "每周",
+        monthly: "每月",
+        custom: "自定义",
+        languages: {
+            English: "English",
+            Spanish: "Español",
+            German: "Deutsch",
+            French: "Français",
+            Chinese: "中文"
+        }
     }
 };
 
-const Settings = () => {
-    const [reminderFrequency, setReminderFrequency] = useState('');
-    const [theme, setTheme] = useState('light');
-    const [language, setLanguage] = useState('English');
+const Settings = ({ theme, toggleTheme, language, setLanguage }) => {
+    const t = translations[language] || translations.English;
     const navigate = useNavigate();
 
-    useEffect(() => {
-        document.body.className = theme; // Apply the theme class to the body
-    }, [theme]);
-
-    const handleToggleButtonClick = (frequency) => {
-        setReminderFrequency((prev) => (prev === frequency ? '' : frequency));
+    const handleLanguageChange = (e) => {
+        const selectedLanguage = e.target.value;
+        setLanguage(selectedLanguage);
     };
-
-    const handleLanguageChange = (event) => {
-        setLanguage(event.target.value);
-    };
-
-    const t = translations[language]; // Fetch translation for the selected language
 
     return (
-        <div className="settings-screen">
-            <div className="settings-container">
+        <div className={`settings-screen ${theme}`}>
+            <div className={`settings-container ${theme}`}>
                 <h1 className="settings-header">{t.title}</h1>
 
-                {/* Reminder Frequency */}
                 <div className="setting-group">
                     <h2>{t.reminder}</h2>
-
                     <div className="toggle-buttons-group">
-                        <button className={`toggle-button ${reminderFrequency === 'Daily' ? 'selected' : ''}`} onClick={() => handleToggleButtonClick('Daily')}>{t.daily}</button>
-                        <button className={`toggle-button ${reminderFrequency === 'Weekly' ? 'selected' : ''}`} onClick={() => handleToggleButtonClick('Weekly')}>{t.weekly}</button>
-                        <button className={`toggle-button ${reminderFrequency === 'Monthly' ? 'selected' : ''}`} onClick={() => handleToggleButtonClick('Monthly')}>{t.monthly}</button>
-                        <button className={`toggle-button ${reminderFrequency === 'Custom' ? 'selected' : ''}`} onClick={() => handleToggleButtonClick('Custom')}>{t.custom}</button>
+                        <button className="toggle-button">{t.daily}</button>
+                        <button className="toggle-button">{t.weekly}</button>
+                        <button className="toggle-button">{t.monthly}</button>
+                        <button className="toggle-button">{t.custom}</button>
                     </div>
                 </div>
 
-                {/* Theme Options */}
                 <div className="setting-group">
                     <h2>{t.theme}</h2>
-
                     <div className="options-group">
                         <label className="switch">
-                            <input type="checkbox" onChange={() => setTheme(theme === 'light' ? 'dark' : 'light')} checked={theme === 'dark'} />
+                            <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} />
                             <span className="slider round"></span>
                         </label>
                         <span>{theme === 'light' ? t.light : t.dark}</span>
                     </div>
                 </div>
 
-                {/* Language Preferences */}
                 <div className="setting-group">
                     <h2>{t.language}</h2>
-
                     <div className="options-group">
                         <select value={language} onChange={handleLanguageChange}>
-                            <option value="English">English</option>
-                            <option value="Spanish">Spanish</option>
+                        {Object.keys(translations).map((langKey) => (
+                                <option key={langKey} value={langKey}>
+                                    {t.languages[langKey]} {/* Use the translated language names */}
+                                </option>
+                            ))}
                         </select>
                     </div>
                 </div>
 
-                {/* Privacy Settings */}
                 <div className="setting-group">
                     <h2>{t.privacy}</h2>
-
                     <div className="privacy-buttons-group">
-                        <button className="privacy-button" onClick={() => alert(t.dataExport)}>{t.dataExport}</button>
-                        <button className="privacy-button" id="delete-button" onClick={() => alert(t.deleteAccount)}>{t.deleteAccount}</button>
-                        <button className="privacy-button" onClick={() => alert(t.disableTracking)}>{t.disableTracking}</button>
+                        <button className="privacy-button">{t.importData}</button>
+                        <button className="privacy-button">{t.dataExport}</button>
+                        <button id="delete-button" className="privacy-button">{t.deleteAccount}</button>
                     </div>
                 </div>
 
-                {/* Home Page Button */}
                 <div className="center-button">
                     <button className="home-button" onClick={() => navigate('/')}>{t.homePage}</button>
                 </div>

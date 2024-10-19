@@ -68,3 +68,16 @@ body {
 #logo {
     width: 192px;
 }
+
+.App-header.dark {
+    background-color: #0F3D4B;
+}
+
+#error-button.dark, #mood-selection.dark {
+    color: #0F3D4B;
+}
+
+#error-button.dark:hover, #mood-selection.dark:hover {
+    background-color: #0C6270;
+    color: white;
+}

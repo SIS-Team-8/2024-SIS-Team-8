@@ -80,10 +80,30 @@ const getYearlyMoodStatistics = (year) => {
     return Object.keys(moodCount).reduce((a, b) => moodCount[a] > moodCount[b] ? a : b);
 };
 
-const CalendarScreen = ({ theme }) => {
+const translations = {
+    English: { onDate: "On", summary: "Summary Statistics", avgIntensity: "Average Mood Intensity:", mostCommonMood: "Most Common Mood", previous: "Previous", next: "Next", history: "Go to History", yearlyView: "Yearly View", monthlyView: "Monthly View",
+        months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    },
+    Spanish: { onDate: "El", summary: "Estadísticas Resumidas", avgIntensity: "Intensidad Media del Estado de Ánimo:", mostCommonMood: "Estado de Ánimo Más Común", previous: "Anterior", next: "Siguiente", history: "Ir a Historial", yearlyView: "Vista Anual", monthlyView: "Vista Mensual",
+        months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"], days: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"]
+    },
+    German: { onDate: "Am", summary: "Zusammenfassende Statistiken", avgIntensity: "Durchschnittliche Stimmung Intensität:", mostCommonMood: "Häufigste Stimmung", previous: "Vorherige", next: "Nächste", history: "Zur Geschichte", yearlyView: "Jahresübersicht", monthlyView: "Monatsübersicht",
+        months: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"], days: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
+    },
+    French: { onDate: "Le", summary: "Statistiques Résumées", avgIntensity: "Intensité Moyenne de l'Humeur:", mostCommonMood: "Humeur la Plus Commune", previous: "Précédente", next: "Suivante", history: "Aller à l'Historique", yearlyView: "Vue Annuelle", monthlyView: "Vue Mensuelle",
+        months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"], days: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"]
+    },
+    Chinese: { onDate: "在", summary: "统计总结", avgIntensity: "平均心情强度:", mostCommonMood: "最常见的心情", previous: "前一个", next: "下一个", history: "转到历史", yearlyView: "年度视图", monthlyView: "月度视图",
+        months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"], days: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+    }
+};
+
+const CalendarScreen = ({theme, language }) => {
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 9));
     const [isYearlyView, setIsYearlyView] = useState(false);
+
+    const t = translations[language];
 
     const changeMonth = (direction) => {
         if (isYearlyView) {
@@ -123,34 +143,34 @@ const CalendarScreen = ({ theme }) => {
     const yearlyMostCommonMood = getYearlyMoodStatistics(currentMonth.getFullYear());
 
     return (
-        <div className={`calendar-screen ${theme}`}>
+        <div className={ `calendar-screen ${theme}` }>
             <div className="button-container">
                 <button className="toggle-view-button" onClick={toggleView}>
-                    {isYearlyView ? "Monthly View" : "Yearly View"}
+                    {isYearlyView ? t.monthlyView : t.yearlyView}
                 </button>
                 <button className="history-button" onClick={() => navigate('/history')}>
-                    Go to History
+                    {t.history}
                 </button>
             </div>
 
             <div className="month-navigation">
-                <button onClick={() => changeMonth(-1)}>Previous</button>
-                <h2>{isYearlyView ? `${currentMonth.getFullYear()} Yearly Overview` : `${currentMonth.toLocaleString('default', { month: 'long' })} ${currentMonth.getFullYear()}`}</h2>
-                <button onClick={() => changeMonth(1)}>Next</button>
+                <button onClick={() => changeMonth(-1)}>{t.previous}</button>
+                <h2>{isYearlyView ? `${currentMonth.getFullYear()} ${t.summary}` : `${t.months[currentMonth.getMonth()]} ${currentMonth.getFullYear()}`}</h2>
+                <button onClick={() => changeMonth(1)}>{t.next}</button>
             </div>
 
             {isYearlyView ? (
                 <table className="calendar-table">
                     <thead>
                         <tr>
-                            {Array(12).fill(null).map((_, i) => <th key={i}>{new Date(0, i).toLocaleString('default', { month: 'short' })}</th>)}
+                            {t.months.map((month, i) => <th key={i}>{month}</th>)}
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             {Array(12).fill(null).map((_, i) => (
                                 <td key={i} style={{ backgroundColor: 'white' }}>
-                                    <p>Most Common Mood: {yearlyMostCommonMood !== "N/A" ? <img src={getMoodEmojiImage(yearlyMostCommonMood)} alt={yearlyMostCommonMood} className="calendar-emoji" /> : "N/A"}</p>
+                                    <p>{t.mostCommonMood}: {yearlyMostCommonMood !== "N/A" ? <img src={getMoodEmojiImage(yearlyMostCommonMood)} alt={yearlyMostCommonMood} className="calendar-emoji" /> : "N/A"}</p>
                                 </td>
                             ))}
                         </tr>
@@ -161,7 +181,7 @@ const CalendarScreen = ({ theme }) => {
                     <table className="calendar-table">
                         <thead>
                             <tr>
-                                <th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
+                                {t.days.map((day, i) => <th key={i}>{day}</th>)}
                             </tr>
                         </thead>
                         <tbody>
@@ -187,8 +207,8 @@ const CalendarScreen = ({ theme }) => {
                         </tbody>
                     </table>
                     <div className="summary-statistics">
-                        <h3>Summary for {currentMonth.toLocaleString('default', { month: 'long' })}</h3>
-                        <p>Most Common Mood: {summary.mostCommonMood !== "N/A" ? <img src={getMoodEmojiImage(summary.mostCommonMood)} alt={summary.mostCommonMood} className="calendar-emoji" /> : "N/A"}</p>
+                        <h3>{`${t.summary} ${t.months[currentMonth.getMonth()]}`}</h3>
+                        <p>{t.mostCommonMood}: {summary.mostCommonMood !== "N/A" ? (<img src={getMoodEmojiImage(summary.mostCommonMood)} alt={summary.mostCommonMood} className="calendar-emoji" />) : "N/A"}</p>
                     </div>
                 </>
             )}

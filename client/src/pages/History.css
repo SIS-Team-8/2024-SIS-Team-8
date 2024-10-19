@@ -44,8 +44,17 @@ button {
     color: #189ab4;
 }
 
+.dark #interval-navigation button {
+    color: #0F3D4B;
+}
+
 #interval-navigation button:hover {
     background-color: #0f7b8e;
+    color: white;
+}
+
+.dark #interval-navigation button:hover {
+    background-color: #0C6270;
     color: white;
 }
 
@@ -57,8 +66,17 @@ button {
     margin-bottom: 50px;
 }
 
+.dark .view-toggle-button {
+    color: #0F3D4B;
+}
+
 .view-toggle-button:hover {
     background-color: #0f7b8e;
+    color: white;
+}
+
+.dark .view-toggle-button:hover {
+    background-color: #0C6270;
     color: white;
 }
 
@@ -69,7 +87,26 @@ button {
     color: #189ab4;
 }
 
+.dark #home-button {
+    color: #0F3D4B;
+}
+
 #home-button:hover {
     background-color: #0f7b8e;
     color: white;
+}
+
+.dark #home-button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
+#history-container.light {
+    background-color: #189ab4 !important;
+    color: white !important;
+}
+
+#history-container.dark {
+    background-color: #0F3D4B !important;
+    color: white !important;
 }
