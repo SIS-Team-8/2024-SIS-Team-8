@@ -208,7 +208,7 @@ const CalendarScreen = ({theme, language }) => {
                     </table>
                     <div className="summary-statistics">
                         <h3>{`${t.summary} ${t.months[currentMonth.getMonth()]}`}</h3>
-                        <p>{`${t.mostCommonMood}: ${summary.mostCommonMood !== "N/A" ? <img src={getMoodEmojiImage(summary.mostCommonMood)} alt={summary.mostCommonMood} className="calendar-emoji" /> : "N/A"}`}</p>
+                        <p>{t.mostCommonMood}: {summary.mostCommonMood !== "N/A" ? (<img src={getMoodEmojiImage(summary.mostCommonMood)} alt={summary.mostCommonMood} className="calendar-emoji" />) : "N/A"}</p>
                     </div>
                 </>
             )}
