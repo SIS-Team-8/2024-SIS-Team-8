@@ -146,16 +146,16 @@ const CalendarScreen = ({theme, language }) => {
         <div className={ `calendar-screen ${theme}` }>
             <div className="button-container">
                 <button className="toggle-view-button" onClick={toggleView}>
-                    {isYearlyView ? "Monthly View" : "Yearly View"}
+                    {isYearlyView ? t.previous : t.next}
                 </button>
                 <button className="history-button" onClick={() => navigate('/history')}>
-                    Go to History
+                    {t.history}
                 </button>
             </div>
 
             <div className="month-navigation">
                 <button onClick={() => changeMonth(-1)}>{t.previous}</button>
-                <h2>{isYearlyView ? `${currentMonth.getFullYear()} Yearly Overview` : `${currentMonth.toLocaleString('default', { month: 'long' })} ${currentMonth.getFullYear()}`}</h2>
+                <h2>{isYearlyView ? `${currentMonth.getFullYear()} ${t.summary}` : `${t.months[currentMonth.getMonth()]} ${currentMonth.getFullYear()}`}</h2>
                 <button onClick={() => changeMonth(1)}>{t.next}</button>
             </div>
 
@@ -163,14 +163,14 @@ const CalendarScreen = ({theme, language }) => {
                 <table className="calendar-table">
                     <thead>
                         <tr>
-                            {Array(12).fill(null).map((_, i) => <th key={i}>{new Date(0, i).toLocaleString('default', { month: 'short' })}</th>)}
+                            {t.months.map((month, i) => <th key={i}>{month}</th>)}
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             {Array(12).fill(null).map((_, i) => (
                                 <td key={i} style={{ backgroundColor: 'white' }}>
-                                    <p>Most Common Mood: {yearlyMostCommonMood !== "N/A" ? <img src={getMoodEmojiImage(yearlyMostCommonMood)} alt={yearlyMostCommonMood} className="calendar-emoji" /> : "N/A"}</p>
+                                    <p>{t.mostCommonMood}: {yearlyMostCommonMood !== "N/A" ? <img src={getMoodEmojiImage(yearlyMostCommonMood)} alt={yearlyMostCommonMood} className="calendar-emoji" /> : "N/A"}</p>
                                 </td>
                             ))}
                         </tr>
@@ -181,7 +181,7 @@ const CalendarScreen = ({theme, language }) => {
                     <table className="calendar-table">
                         <thead>
                             <tr>
-                                <th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
+                                {t.days.map((day, i) => <th key={i}>{day}</th>)}
                             </tr>
                         </thead>
                         <tbody>
@@ -207,8 +207,8 @@ const CalendarScreen = ({theme, language }) => {
                         </tbody>
                     </table>
                     <div className="summary-statistics">
-                        <h3>Summary for {currentMonth.toLocaleString('default', { month: 'long' })}</h3>
-                        <p>Most Common Mood: {summary.mostCommonMood !== "N/A" ? <img src={getMoodEmojiImage(summary.mostCommonMood)} alt={summary.mostCommonMood} className="calendar-emoji" /> : "N/A"}</p>
+                        <h3>{`${t.summary} ${t.months[currentMonth.getMonth()]}`}</h3>
+                        <p>{`${t.mostCommonMood}: ${summary.mostCommonMood !== "N/A" ? <img src={getMoodEmojiImage(summary.mostCommonMood)} alt={summary.mostCommonMood} className="calendar-emoji" /> : "N/A"}`}</p>
                     </div>
                 </>
             )}
