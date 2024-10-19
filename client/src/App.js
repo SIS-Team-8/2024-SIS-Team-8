@@ -15,6 +15,8 @@ import Settings from "./pages/Settings";
 import MoodSelection from "./pages/MoodSelection";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import Onboarding from "./pages/Onboarding";
+import OnboardingOverview from "./pages/OnboardingOverview";
 
 import { Route, Routes } from "react-router-dom";
 
@@ -50,12 +52,21 @@ function App() {
 
     const handleLogin = () => {
         setIsAuthenticated(true);
-        navigate("/");
+        const hasCompletedOnboarding = localStorage.getItem("hasCompletedOnboarding");
+        if (!hasCompletedOnboarding) {
+            navigate("/onboarding");
+        } else {
+            navigate("/");
+        }
     };
 
     const handleLogout = () => {
         setIsAuthenticated(false);
         navigate("/login");
+    };
+
+    const handleOnboardingComplete = () => {
+        localStorage.setItem("hasCompletedOnboarding", true);
     };
 
     const toggleTheme = () => {
@@ -77,6 +88,8 @@ function App() {
 
             <Routes>
             <Route path="/" element={isAuthenticated ? <Home /> : <Login language={language} theme={theme} onLogin={handleLogin} />} />
+            <Route path="/onboarding" element={isAuthenticated ? <Onboarding onComplete={handleOnboardingComplete}/> : <Login onLogin={handleLogin} />} />
+            <Route path="/onboarding-overview" element={isAuthenticated ? <OnboardingOverview/> : <Login onLogin={handleLogin} />} />
             <Route path="/settings" element={<Settings theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} />} />
                 <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
