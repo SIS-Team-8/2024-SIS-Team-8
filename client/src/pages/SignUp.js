@@ -38,7 +38,7 @@ export default function SignUp( {language, theme }) {
         toast.success(msg, {
         });
     
-    const handleSubmit = async (e) => {
+    const handleSubmit = async () => {
         if (username === "" || password === "") {
             toast.error("Enter desired username and password to create account")
         }
@@ -61,7 +61,7 @@ export default function SignUp( {language, theme }) {
                     handleSuccess(message);
                     setTimeout(() => {
                         navigate("/");
-                    }, 1000);
+                    });
                 } else {
                     handleError(message);
                 }
@@ -75,7 +75,6 @@ export default function SignUp( {language, theme }) {
             password: "",
             confirmPassword: ""
         });
-        e.preventDefault();
     };
 
     const t = translations[language] || translations.English;
@@ -86,14 +85,14 @@ export default function SignUp( {language, theme }) {
 
             <div id="inputBox">
                 <form>
-                    <input id="userBox" placeholder={t.username} className={theme}></input>
+                    <input id="userBox" type="text" name="username" value={username} placeholder={t.username} onChange={handleOnChange} className={theme}></input>
                     <p></p>
-                    <input id="passBox" placeholder={t.password} type="password" className={theme}></input>
+                    <input id="passBox" type="password" name="password" value={password} placeholder={t.password} onChange={handleOnChange} className={theme}></input>
                     <p></p>
-                    <input id="passBox" placeholder={t.confirmPassword} type="password" className={theme}></input>
+                    <input id="passBox" type="password" name="confirmPassword" value={confirmPassword} placeholder={t.confirmPassword} onChange={handleOnChange} className={theme}></input>
                 </form>
 
-                <button id="button" onClick={handleSignUpClick}>{t.createAccount}</button>
+                <button id="button" onClick={handleSubmit}>{t.createAccount}</button>
 
                 <p id="bottomText">
                     <Link to="/login" id="link" className={theme}>{t.login}</Link>
