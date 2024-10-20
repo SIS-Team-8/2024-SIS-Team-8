@@ -17,6 +17,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Onboarding from "./pages/Onboarding";
 import OnboardingOverview from "./pages/OnboardingOverview";
+import ResetPassword from "./pages/ResetPassword";
 
 import { Route, Routes } from "react-router-dom";
 
@@ -96,6 +97,7 @@ function App() {
                 <Route path="/help" element={isAuthenticated ? <Help theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/history" element={isAuthenticated ? <History theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/profile" element={isAuthenticated ? <Profile theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/reset-password" element={isAuthenticated ? <ResetPassword theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/settings" element={isAuthenticated ? <Settings theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/mood-selection" element={isAuthenticated ? <MoodSelection theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/login" element={<Login language={language} theme={theme} onLogin={handleLogin} />} />

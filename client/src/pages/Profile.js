@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 import './Profile.css';
 
 const translations = {
@@ -13,14 +15,64 @@ const translations = {
 export default function Profile({theme, language}) {
     // State to manage profile data
     const [profile, setProfile] = useState({
-        name: '',
-        phone: '',
-        address: '',
+        name: "",
+        phone: "",
+        address: "",
     });
 
-    const handleEditProfile = () => {
+    const [avatarPhoto, setAvatarPhoto] = useState("https://via.placeholder.com/100");
+
+    const { name, phone, address} = profile;
+
+    const fileUploadRef = useRef();
+
+    const handleImageUpload = () => {
+        fileUploadRef.current.click();
+    }
+    
+    const uploadImageDisplay = () => {
+        const uploadedFile = fileUploadRef.current.files[0];
+        const cachedURL = URL.createObjectURL(uploadedFile);
+        setAvatarPhoto(cachedURL);
+    }
+
+    const handleOnChange = (e) => {
+        const { name, value } = e.target;
+        setProfile({
+            ...profile,
+            [name]: value
+        });
+    };
+
+    const handleError = (err) =>
+        toast.error(err, {
+    });
+
+    const handleSuccess = (msg) =>
+        toast.success(msg, {
+    });
+
+    const handleEditProfile = async () => {
         // Logic for editing the profile
-        alert("Changes saved.");
+        try {
+            const { data } = await axios.post(
+                "http://localhost:3000/api/profile",
+                {
+                    "name": profile.name,
+                    "phone": profile.phone,
+                    "address": profile.address
+                },
+            { withCredentials: true }
+            );
+            const { success, message} = data;
+            if (success) {
+                handleSuccess(message);
+            } else {
+                handleError(message);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const t = translations[language];
@@ -29,29 +81,34 @@ export default function Profile({theme, language}) {
         <div className={`profile-container ${theme}`}>
             {/* Profile Information Section */}
             <div className="profile-avatar">
-                <img src="https://via.placeholder.com/100" alt="Profile Avatar" />
+                <button id="profile-button" onClick={handleImageUpload}>
+                    <img src={avatarPhoto} alt="Profile Avatar"/>
+                </button>
+                <input type="file" name="avatarPhoto" accept=".png, .jpeg" ref={fileUploadRef} onChange={uploadImageDisplay} hidden/>
             </div>
             <div className="profile-details">
                 {/* Name Field */}
                 <div className="profile-field">
                     <label htmlFor="name">{t.name}</label>
-                    <input id="name" name="name" value={profile.name} onChange={(e) => setProfile({ ...profile, name: e.target.value })} placeholder="Johnny Appleseed" />
+                    <input id="name" type="text" name="name" value={name} onChange={handleOnChange} placeholder="Johnny Appleseed" />
                 </div>
 
                 {/* Phone Field */}
                 <div className="profile-field">
                     <label htmlFor="phone">{t.phone}</label>
-                    <input id="phone" name="phone" value={profile.phone} onChange={(e) => setProfile({ ...profile, phone: e.target.value })} placeholder="+888 555 5512" />
+                    <input id="phone" type="tel" name="phone" value={phone} onChange={handleOnChange} placeholder="+888 555 5512" />
                 </div>
 
                 {/* Address Field */}
                 <div className="profile-field">
                     <label htmlFor="address">{t.address}</label>
-                    <input id="address" name="address" value={profile.address} onChange={(e) => setProfile({ ...profile, address: e.target.value })} placeholder="11 Infinite Loop Cupertino, CA 95014" />
+                    <input id="address" type="text" name="address" value={address} onChange={handleOnChange} placeholder="11 Infinite Loop Cupertino, CA 95014" />
                 </div>
 
                 <div className="edit-profile-section">
-                    <button id="navigation-button">{t.resetPassword}</button>
+                    <Link to="/reset-password">
+                        <button id="navigation-button">{t.resetPassword}</button>
+                    </Link>
 
                     <Link to="/login">
                         <button id="navigation-button">{t.logOut}</button>
