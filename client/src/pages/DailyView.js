@@ -54,7 +54,7 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
     const [intensity, setIntensity] = useState(moodEntry.intensity);
     const [notes, setNotes] = useState(moodEntry.notes);
 
-    const isEntryPresent = entry.mood !== "N/A";
+    const isEntryPresent = moodEntry.mood !== "N/A";
 
      // Effect to update component state when moodData changes or date changes
      useEffect(() => {
