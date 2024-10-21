@@ -37,8 +37,10 @@ export default function SignUp( {language, theme }) {
     const handleSuccess = (msg) =>
         toast.success(msg, {
         });
-    
-    const handleSubmit = async () => {
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
         if (username === "" || password === "") {
             toast.error("Enter desired username and password to create account")
         }

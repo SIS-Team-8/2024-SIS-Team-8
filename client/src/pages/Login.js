@@ -36,6 +36,8 @@ export default function Login({ language, theme }) {
     const handleSuccess = (msg) => toast.success(msg, {});
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
+
         try {
             const { data } = await axios.post(
                 "http://localhost:3000/api/login",
