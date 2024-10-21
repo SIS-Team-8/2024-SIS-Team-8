@@ -21,7 +21,7 @@ export default function SignUp( {language, theme }) {
         confirmPassword: ""
     });
 
-    const { username, password, confirmPassword } = inputValue
+    const { username, password, confirmPassword } = inputValue;
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
@@ -92,10 +92,10 @@ export default function SignUp( {language, theme }) {
                     <input id="passBox" type="password" name="confirmPassword" value={confirmPassword} placeholder={t.confirmPassword} onChange={handleOnChange} className={theme}></input>
                 </form>
 
-                <button id="button" onClick={handleSubmit}>{t.createAccount}</button>
+                <button id="button" className={theme} onClick={handleSubmit}>{t.createAccount}</button>
 
-                <p id="bottomText">
-                    <Link to="/login" id="link" className={theme}>{t.login}</Link>
+                <p id="bottomText" className={theme}>
+                    <Link to="/login" id="link">{t.login}</Link>
                 </p>
             </div>
         </div>
