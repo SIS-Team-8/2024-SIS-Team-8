@@ -33,7 +33,14 @@ const moodData = {
     "2024-10-02": { mood: "happy", intensity: 4, notes: "Good day." },
     "2024-10-03": { mood: "neutral", intensity: 3, notes: "An average day." },
     "2024-10-04": { mood: "sad", intensity: 2, notes: "Feeling a bit down." },
-    "2024-10-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." }
+    "2024-10-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." },
+    "2024-10-06": { mood: "frustrated", intensity: 2, notes: "Things didn't go well." },
+    "2024-10-07": { mood: "ecstatic", intensity: 5, notes: "Amazing surprise!" },
+    "2024-10-08": { mood: "terrified", intensity: 1, notes: "Scary moment!" },
+    "2024-10-09": { mood: "amazed", intensity: 4, notes: "Saw something incredible." },
+    "2024-10-10": { mood: "overwhelmed", intensity: 3, notes: "Too much work." },
+    "2024-10-11": { mood: "bored", intensity: 2, notes: "Nothing to do." },
+    "2024-10-12": { mood: "annoyed", intensity: 2, notes: "Annoying neighbors." }
 };
 
 const moodEmojiMap = {
@@ -47,7 +54,34 @@ const moodEmojiMap = {
 };
 
 const moodColorMap = {
-    "very happy": "#00FF00", "happy": "#A8E6CF", "neutral": "#FFD700", "sad": "#FFB6C1", "very sad": "#FF6347", "default": "#FFFFFF"
+    "angry": "#FF6347",  // Tomator red
+    "annoyed": "#FFA500",  // Orange
+    "frustrated": "#FF4500",  // OrangeRed
+    "very angry": "#DC143C",  // Crimson
+    "extremely angry": "#B22222",  // Firebrick
+    "sad": "#87CEFA",  // LightSkyBlue
+    "upset": "#4682B4",  // SteelBlue
+    "deflated": "#708090",  // SlateGray
+    "distressed": "#778899",  // LightSlateGray
+    "miserable": "#2F4F4F",  // DarkSlateGray
+    "happy": "#ADFF2F",  // GreenYellow
+    "very happy": "#7CFC00",  // LawnGreen
+    "extremely happy": "#00FF00",  // Lime
+    "amazingly happy": "#32CD32",  // LimeGreen
+    "ecstatic": "#7FFF00",  // Chartreuse
+    "bored": "#F5F5DC",  // Beige
+    "exasperated": "#FFD700",  // Gold
+    "sarcastic": "#FFC0CB",  // Pink
+    "tired": "#A9A9A9",  // DarkGray
+    "exhausted": "#808080",  // Gray
+    "scared": "#FFA07A",  // LightSalmon
+    "surprised": "#FF69B4",  // HotPink
+    "nervous": "#DAA520",  // GoldenRod
+    "overwhelmed": "#FFB6C1",  // LightPink
+    "terrified": "#FF0000",  // Red
+    "neutral": "#D3D3D3",  // LightGray
+    "very sad": "#1E90FF",  // DodgerBlue
+    "default": "#FFFFFF"  // White
 };
 
 const getMoodEmojiImage = (mood) => moodEmojiMap[mood] || null;
@@ -141,6 +175,9 @@ const CalendarScreen = ({theme, language, moodData }) => {
 
     const summary = getSummaryStatistics(monthData);
     const yearlyMostCommonMood = getYearlyMoodStatistics(currentMonth.getFullYear());
+
+    const getMoodEmojiImage = (mood) => moodEmojiMap[mood] || null;
+    const getMoodColor = (mood) => moodColorMap[mood] || moodColorMap.default;
 
     return (
         <div className={ `calendar-screen ${theme}` }>
