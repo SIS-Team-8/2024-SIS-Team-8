@@ -49,7 +49,7 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
 
     const t = translations[language];
 
-    const moodEntry = moodData[date] || { mood: "neutral", intensity: 3, notes: "No entry for this day." }; // Default mood if no entry
+    const moodEntry = moodData[date] || { mood: "N/A", intensity: "N/A", notes: "No entry for this day." }; // Default mood if no entry
     const [mood, setMood] = useState(moodEntry.mood);
     const [intensity, setIntensity] = useState(moodEntry.intensity);
     const [notes, setNotes] = useState(moodEntry.notes);
