@@ -167,23 +167,11 @@ const CalendarScreen = ({theme, language, moodData }) => {
     }
 
     // Function to get most common mood for each month
-    const getMonthlyCommonMood = () => {
-        return Array.from({ length: 12 }, (_, i) => {
-            const month = i + 1; // Month as 1-indexed
-            const monthData = Object.entries(moodData).filter(([key, _]) => {
-                const [year, m] = key.split('-');
-                return parseInt(year) === currentYear && parseInt(m) === month;
-            }).map(([_, value]) => value.mood);
-
-            const moodCount = monthData.reduce((acc, mood) => {
-                acc[mood] = (acc[mood] || 0) + 1;
-                return acc;
-            }, {});
-
-            const mostCommonMood = Object.keys(moodCount).reduce((a, b) => moodCount[a] > moodCount[b] ? a : b, "N/A");
-            return { mood: mostCommonMood, color: getMoodColor(mostCommonMood) };
-        });
-    };
+    const monthData = {};
+    Array.from({ length: daysInMonth }, (_, i) => i + 1).forEach(day => {
+        const dateKey = generateDateKey(day);
+        if (moodData[dateKey]) monthData[dateKey] = moodData[dateKey];
+    });
 
     const summary = getSummaryStatistics(monthData);
     const yearlyMostCommonMood = getYearlyMoodStatistics(currentMonth.getFullYear());
