@@ -54,11 +54,20 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
     const [intensity, setIntensity] = useState(moodEntry.intensity);
     const [notes, setNotes] = useState(moodEntry.notes);
 
-    // Handle Save/Update Entry
-    const handleSave = () => {
-        updateEntry(date, { mood, intensity, notes });
-        navigate('/calendar'); // Navigate back to the calendar
-    };
+    const isEntryPresent = entry.mood !== "N/A";
+
+     // Effect to update component state when moodData changes or date changes
+     useEffect(() => {
+        if (moodData[date]) {
+            setMood(moodData[date].mood);
+            setIntensity(moodData[date].intensity);
+            setNotes(moodData[date].notes);
+        } else {
+            setMood('N/A');
+            setIntensity('N/A');
+            setNotes('No entry for this day.');
+        }
+    }, [date, moodData]);
 
     const translatedHeader = `${t.datePrefix} ${date}, ${t.youWereFeeling}:`;
 
@@ -85,7 +94,7 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
                 <p className="intensity">{t.intensity} {moodEntry.intensity}/5</p>
                 <p className="notes">{t.notes} {moodEntry.notes}</p>
 
-                <button className="edit-button" onClick={() => alert("Edit functionality coming soon!")}>
+                <button className="edit-button" onClick={() => updateEntry(date, { mood, intensity, notes })}>Save
                     ✏ {t.editEntry}
                 </button>
                 <button className="delete-button" onClick={handleDelete}>
