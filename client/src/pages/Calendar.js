@@ -166,7 +166,6 @@ const CalendarScreen = ({theme, language, moodData }) => {
         weeksArray.push(daysArray.slice(i, i + 7));
     }
 
-    // Function to get most common mood for each month
     const monthData = {};
     Array.from({ length: daysInMonth }, (_, i) => i + 1).forEach(day => {
         const dateKey = generateDateKey(day);
@@ -197,22 +196,22 @@ const CalendarScreen = ({theme, language, moodData }) => {
             </div>
 
             {isYearlyView ? (
-               <table className="calendar-table">
-               <thead>
-                   <tr>{t.months.map((month, index) => <th key={index}>{month}</th>)}</tr>
-               </thead>
-               <tbody>
-                   <tr>
-                       {monthlyMoods.map((moodInfo, index) => (
-                           <td key={index} style={{ backgroundColor: moodInfo.color }}>
-                               {moodInfo.mood !== "N/A" ? (
-                                   <img src={getMoodEmojiImage(moodInfo.mood)} alt={moodInfo.mood} style={{ width: '30px', height: '30px' }} />
-                               ) : "N/A"}
-                           </td>
-                       ))}
-                   </tr>
-               </tbody>
-           </table>
+                <table className="calendar-table">
+                    <thead>
+                        <tr>
+                            {t.months.map((month, i) => <th key={i}>{month}</th>)}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {Array(12).fill(null).map((_, i) => (
+                                <td key={i} style={{ backgroundColor: 'white' }}>
+                                    <p>{t.mostCommonMood}: {yearlyMostCommonMood !== "N/A" ? <img src={getMoodEmojiImage(yearlyMostCommonMood)} alt={yearlyMostCommonMood} className="calendar-emoji" /> : "N/A"}</p>
+                                </td>
+                            ))}
+                        </tr>
+                    </tbody>
+                </table>
             ) : (
                 <>
                     <table className="calendar-table">
