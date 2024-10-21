@@ -50,9 +50,10 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
     const t = translations[language];
 
     const moodEntry = moodData[date] || { mood: "N/A", intensity: "N/A", notes: "No entry for this day." }; // Default mood if no entry
-    const [mood, setMood] = useState(moodEntry.mood);
-    const [intensity, setIntensity] = useState(moodEntry.intensity);
-    const [notes, setNotes] = useState(moodEntry.notes);
+    const [mood, setMood] = useState('');
+    const [intensity, setIntensity] = useState('');
+    const [notes, setNotes] = useState('');
+    const [isEditing, setIsEditing] = useState(false);
 
     const isEntryPresent = moodEntry.mood !== "N/A";
 
@@ -68,6 +69,15 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
             setNotes('No entry for this day.');
         }
     }, [date, moodData]);
+
+    const handleEdit = () => {
+        setIsEditing(true); // Enable editing mode
+    };
+
+    const handleSave = () => {
+        updateEntry(date, { mood, intensity, notes });
+        setIsEditing(false);  // Exit editing mode
+    };
 
     const translatedHeader = `${t.datePrefix} ${date}, ${t.youWereFeeling}:`;
 
@@ -91,15 +101,25 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
                     <img src={getMoodEmoji(moodEntry.mood)} alt={moodEntry.mood}/>
                 </div>
 
-                <p className="intensity">{t.intensity} {moodEntry.intensity}/5</p>
-                <p className="notes">{t.notes} {moodEntry.notes}</p>
-
-                <button className="edit-button" onClick={() => updateEntry(date, { mood, intensity, notes })}>Save
-                    ✏ {t.editEntry}
-                </button>
-                <button className="delete-button" onClick={handleDelete}>
-                    🗑 {t.deleteEntry}
-                </button>
+                {isEditing ? (
+                    <>
+                        <input type="text" value={mood} onChange={e => setMood(e.target.value)} />
+                        <input type="number" value={intensity} onChange={e => setIntensity(e.target.value)} />
+                        <textarea value={notes} onChange={e => setNotes(e.target.value)} />
+                        <button onClick={handleSave}>Save</button>
+                    </>
+                ) : (
+                    <>
+                        <p className="intensity">{t.intensity} {intensity}/5</p>
+                        <p className="notes">{t.notes} {notes}</p>
+                        <button className="edit-button" onClick={handleEdit}>
+                            ✏ {t.editEntry}
+                        </button>
+                        <button className="delete-button" onClick={handleDelete} disabled={isEditing}>
+                            🗑 {t.deleteEntry}
+                        </button>
+                    </>
+                )}
             </div>
         </div>
     );
