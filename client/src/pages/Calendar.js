@@ -231,9 +231,12 @@ const CalendarScreen = ({theme, language, moodData }) => {
                                         const bgColor = moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF";
 
                                         return (
-                                            <td key={dayIndex} onClick={day ? () => navigate(`/daily-view/${dateKey}`) : null} style={{ backgroundColor: bgColor }}>
-                                                {day}
-                                                {emojiSrc && <img src={emojiSrc} alt={moodEntry.mood} />}
+                                            <td key={dayIndex} onClick={day ? () => navigate(`/daily-view/${dateKey}`) : null} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF" }}>
+                                                {emojiSrc ? (
+                                                    <img src={emojiSrc} alt={moodEntry.mood} className="calendar-emoji" />
+                                                ) : (
+                                                    <span>{day}</span>
+                                                )}
                                             </td>
                                         );
                                     })}
