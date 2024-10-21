@@ -116,7 +116,7 @@ function App() {
                 <Route path="/onboarding-overview" element={isAuthenticated ? <OnboardingOverview/> : <Login onLogin={handleLogin} />} />
                 <Route path="/settings" element={<Settings theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} />} />
                 <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView theme={theme} language={language} moodData={moodData} updateEntry={updateEntry} deleteEntry={deleteEntry} /> : <Login onLogin={handleLogin} />} />
-                <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} language={language} moodData={moodData} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/help" element={isAuthenticated ? <Help theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/history" element={isAuthenticated ? <History theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/profile" element={isAuthenticated ? <Profile theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />

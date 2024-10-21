@@ -98,7 +98,7 @@ const translations = {
     }
 };
 
-const CalendarScreen = ({theme, language }) => {
+const CalendarScreen = ({theme, language, moodData }) => {
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 9));
     const [isYearlyView, setIsYearlyView] = useState(false);
