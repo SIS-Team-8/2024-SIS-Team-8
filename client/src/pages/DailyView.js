@@ -2,11 +2,31 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './DailyView.css';
 
-import veryHappy from '../assets/emoji/very-happy.png';
-import happy from '../assets/emoji/happy.png';
-import bored from '../assets/emoji/bored.png';
+import angry from '../assets/emoji/angry.png';
+import annoyed from '../assets/emoji/annoyed.png';
+import frustrated from '../assets/emoji/frustrated.png';
+import veryAngry from '../assets/emoji/very-angry.png';
+import extremelyAngry from '../assets/emoji/extremely-angry.png';
 import sad from '../assets/emoji/sad.png';
+import upset from '../assets/emoji/upset.png';
+import deflated from '../assets/emoji/deflated.png';
+import distressed from '../assets/emoji/distressed.png';
 import miserable from '../assets/emoji/miserable.png';
+import happy from '../assets/emoji/happy.png';
+import veryHappy from '../assets/emoji/very-happy.png';
+import extremelyHappy from '../assets/emoji/extremely-happy.png';
+import amazinglyHappy from '../assets/emoji/amazingly-happy.png';
+import ecstatic from '../assets/emoji/ecstatic.png';
+import bored from '../assets/emoji/bored.png';
+import exasperated from '../assets/emoji/exasperated.png';
+import sarcastic from '../assets/emoji/sarcastic.png';
+import tired from '../assets/emoji/tired.png';
+import exhausted from '../assets/emoji/exhausted.png';
+import scared from '../assets/emoji/scared.png';
+import surprised from '../assets/emoji/surprised.png';
+import nervous from '../assets/emoji/nervous.png';
+import overwhelmed from '../assets/emoji/overwhelmed.png';
+import terrified from '../assets/emoji/terrified.png';
 
 // Dummy mood data for the detailed view
 const moodData = {
@@ -15,7 +35,13 @@ const moodData = {
     "2024-10-03": { mood: "neutral", intensity: 3, notes: "An average day." },
     "2024-10-04": { mood: "sad", intensity: 2, notes: "Feeling a bit down." },
     "2024-10-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." },
-    // Add more dates...
+    "2024-10-06": { mood: "frustrated", intensity: 2, notes: "Things didn't go well." },
+    "2024-10-07": { mood: "ecstatic", intensity: 5, notes: "Amazing surprise!" },
+    "2024-10-08": { mood: "terrified", intensity: 1, notes: "Scary moment!" },
+    "2024-10-09": { mood: "amazed", intensity: 4, notes: "Saw something incredible." },
+    "2024-10-10": { mood: "overwhelmed", intensity: 3, notes: "Too much work." },
+    "2024-10-11": { mood: "bored", intensity: 2, notes: "Nothing to do." },
+    "2024-10-12": { mood: "annoyed", intensity: 2, notes: "Annoying neighbors." }
 };
 
 const getMoodEmoji = (mood) => {

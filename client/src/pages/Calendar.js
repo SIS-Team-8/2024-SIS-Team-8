@@ -136,7 +136,6 @@ const CalendarScreen = ({theme, language, moodData }) => {
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 9));
     const [isYearlyView, setIsYearlyView] = useState(false);
-
     const t = translations[language];
 
     const changeMonth = (direction) => {
@@ -167,14 +166,29 @@ const CalendarScreen = ({theme, language, moodData }) => {
         weeksArray.push(daysArray.slice(i, i + 7));
     }
 
-    const monthData = {};
-    Array.from({ length: daysInMonth }, (_, i) => i + 1).forEach(day => {
-        const dateKey = generateDateKey(day);
-        if (moodData[dateKey]) monthData[dateKey] = moodData[dateKey];
-    });
+    // Function to get most common mood for each month
+    const getMonthlyCommonMood = () => {
+        return Array.from({ length: 12 }, (_, i) => {
+            const month = i + 1; // Month as 1-indexed
+            const monthData = Object.entries(moodData).filter(([key, _]) => {
+                const [year, m] = key.split('-');
+                return parseInt(year) === currentYear && parseInt(m) === month;
+            }).map(([_, value]) => value.mood);
+
+            const moodCount = monthData.reduce((acc, mood) => {
+                acc[mood] = (acc[mood] || 0) + 1;
+                return acc;
+            }, {});
+
+            const mostCommonMood = Object.keys(moodCount).reduce((a, b) => moodCount[a] > moodCount[b] ? a : b, "N/A");
+            return { mood: mostCommonMood, color: getMoodColor(mostCommonMood) };
+        });
+    };
 
     const summary = getSummaryStatistics(monthData);
     const yearlyMostCommonMood = getYearlyMoodStatistics(currentMonth.getFullYear());
+
+    const monthlyMoods = getMonthlyCommonMood();
 
     const getMoodEmojiImage = (mood) => moodEmojiMap[mood] || null;
     const getMoodColor = (mood) => moodColorMap[mood] || moodColorMap.default;
@@ -197,22 +211,22 @@ const CalendarScreen = ({theme, language, moodData }) => {
             </div>
 
             {isYearlyView ? (
-                <table className="calendar-table">
-                    <thead>
-                        <tr>
-                            {t.months.map((month, i) => <th key={i}>{month}</th>)}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            {Array(12).fill(null).map((_, i) => (
-                                <td key={i} style={{ backgroundColor: 'white' }}>
-                                    <p>{t.mostCommonMood}: {yearlyMostCommonMood !== "N/A" ? <img src={getMoodEmojiImage(yearlyMostCommonMood)} alt={yearlyMostCommonMood} className="calendar-emoji" /> : "N/A"}</p>
-                                </td>
-                            ))}
-                        </tr>
-                    </tbody>
-                </table>
+               <table className="calendar-table">
+               <thead>
+                   <tr>{t.months.map((month, index) => <th key={index}>{month}</th>)}</tr>
+               </thead>
+               <tbody>
+                   <tr>
+                       {monthlyMoods.map((moodInfo, index) => (
+                           <td key={index} style={{ backgroundColor: moodInfo.color }}>
+                               {moodInfo.mood !== "N/A" ? (
+                                   <img src={getMoodEmojiImage(moodInfo.mood)} alt={moodInfo.mood} style={{ width: '30px', height: '30px' }} />
+                               ) : "N/A"}
+                           </td>
+                       ))}
+                   </tr>
+               </tbody>
+           </table>
             ) : (
                 <>
                     <table className="calendar-table">
