@@ -101,17 +101,26 @@ const getSummaryStatistics = (monthData) => {
     return { mostCommonMood };
 };
 
-const getYearlyMoodStatistics = (year) => {
-    const yearMoodData = Object.entries(moodData).filter(([date]) => date.startsWith(`${year}-`)).map(([_, data]) => data.mood);
+const getYearlyMoodStatistics = (moodData, year) => {
+    let monthlyStats = [];
+    for (let month = 1; month <= 12; month++) {
+        const monthPadded = month.toString().padStart(2, '0');
+        const monthMoodData = Object.entries(moodData)
+            .filter(([date]) => date.startsWith(`${year}-${monthPadded}`))
+            .map(([, data]) => data.mood);
 
-    if (yearMoodData.length === 0) return "N/A";
+        const moodCount = monthMoodData.reduce((acc, mood) => {
+            acc[mood] = (acc[mood] || 0) + 1;
+            return acc;
+        }, {});
 
-    const moodCount = yearMoodData.reduce((acc, mood) => {
-        acc[mood] = (acc[mood] || 0) + 1;
-        return acc;
-    }, {});
+        const mostCommonMood = monthMoodData.length > 0
+            ? Object.keys(moodCount).reduce((a, b) => moodCount[a] > moodCount[b] ? a : b)
+            : "N/A";
 
-    return Object.keys(moodCount).reduce((a, b) => moodCount[a] > moodCount[b] ? a : b);
+        monthlyStats.push(mostCommonMood);
+    }
+    return monthlyStats;
 };
 
 const translations = {
