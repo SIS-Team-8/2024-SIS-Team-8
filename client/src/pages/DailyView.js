@@ -45,20 +45,36 @@ const moodData = {
 };
 
 const getMoodEmoji = (mood) => {
-    switch (mood) {
-        case "very happy":
-            return veryHappy;
-        case "happy":
-            return happy;
-        case "neutral":
-            return bored;
-        case "sad":
-            return sad;
-        case "very sad":
-            return miserable;
-        default:
-            return bored;
-    }
+    const moodEmojiMap = {
+        "angry": angry,
+        "annoyed": annoyed,
+        "frustrated": frustrated,
+        "very angry": veryAngry,
+        "extremely angry": extremelyAngry,
+        "sad": sad,
+        "upset": upset,
+        "deflated": deflated,
+        "distressed": distressed,
+        "miserable": miserable,
+        "happy": happy,
+        "very happy": veryHappy,
+        "extremely happy": extremelyHappy,
+        "amazingly happy": amazinglyHappy,
+        "ecstatic": ecstatic,
+        "bored": bored,
+        "exasperated": exasperated,
+        "sarcastic": sarcastic,
+        "tired": tired,
+        "exhausted": exhausted,
+        "scared": scared,
+        "surprised": surprised,
+        "nervous": nervous,
+        "overwhelmed": overwhelmed,
+        "terrified": terrified,
+        "neutral": bored, // Assuming neutral shows the 'bored' emoji
+        "very sad": miserable // Assuming very sad shows the 'miserable' emoji
+    };
+    return moodEmojiMap[mood] || bored;
 };
 
 const translations = {
