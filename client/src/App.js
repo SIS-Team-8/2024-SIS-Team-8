@@ -25,6 +25,13 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
     const [language, setLanguage] = useState(localStorage.getItem('language') || 'English');
+    const [moodData, setMoodData] = useState({
+        "2024-10-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
+        "2024-10-02": { mood: "happy", intensity: 4, notes: "Good day." },
+        "2024-10-03": { mood: "neutral", intensity: 3, notes: "An average day." },
+        "2024-10-04": { mood: "sad", intensity: 2, notes: "Feeling a bit down." },
+        "2024-10-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." }
+    });
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -49,6 +56,23 @@ function App() {
 
         return () => clearTimeout(timer);
     }, [isAuthenticated, navigate, location]);
+
+    // Function to update an entry
+    const updateEntry = (date, updatedEntry) => {
+        setMoodData(prevData => ({
+            ...prevData,
+            [date]: updatedEntry
+        }));
+    };
+
+    // Function to delete an entry
+    const deleteEntry = (date) => {
+        setMoodData(prevData => {
+            const newData = { ...prevData };
+            delete newData[date];
+            return newData;
+        });
+    };
 
     const handleLogin = () => {
         setIsAuthenticated(true);
@@ -91,7 +115,7 @@ function App() {
                 <Route path="/onboarding" element={isAuthenticated ? <Onboarding onComplete={handleOnboardingComplete}/> : <Login onLogin={handleLogin} />} />
                 <Route path="/onboarding-overview" element={isAuthenticated ? <OnboardingOverview/> : <Login onLogin={handleLogin} />} />
                 <Route path="/settings" element={<Settings theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} />} />
-                <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView theme={theme} language={language} moodData={moodData} updateEntry={updateEntry} deleteEntry={deleteEntry} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/help" element={isAuthenticated ? <Help theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/history" element={isAuthenticated ? <History theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />

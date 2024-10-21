@@ -43,13 +43,22 @@ const translations = {
     Chinese: { backToCalendar: "返回日历", editEntry: "编辑条目", deleteEntry: "删除条目", intensity: "情绪强度:", notes: "笔记:", noEntry: "当天没有条目。" , youWereFeeling: "你当时的感觉是", datePrefix: "在" }
 };
 
-const DailyView = ({theme, language}) => {
+const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
     const { date } = useParams(); // Retrieves the date from the URL parameter
     const navigate = useNavigate();
 
     const t = translations[language];
 
     const moodEntry = moodData[date] || { mood: "neutral", intensity: 3, notes: "No entry for this day." }; // Default mood if no entry
+    const [mood, setMood] = useState(entry.mood);
+    const [intensity, setIntensity] = useState(entry.intensity);
+    const [notes, setNotes] = useState(entry.notes);
+
+    // Handle Save/Update Entry
+    const handleSave = () => {
+        updateEntry(date, { mood, intensity, notes });
+        navigate('/calendar'); // Navigate back to the calendar
+    };
 
     const translatedHeader = `${t.datePrefix} ${date}, ${t.youWereFeeling}:`;
 
