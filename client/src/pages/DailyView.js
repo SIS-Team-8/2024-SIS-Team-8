@@ -44,6 +44,36 @@ const moodData = {
     "2024-10-12": { mood: "annoyed", intensity: 2, notes: "Annoying neighbors." }
 };
 
+const moodIntensityMap = {
+    "angry": 4,
+    "annoyed": 2,
+    "frustrated": 3,
+    "very angry": 5,
+    "extremely angry": 5,
+    "sad": 3,
+    "upset": 3,
+    "deflated": 2,
+    "distressed": 4,
+    "miserable": 5,
+    "happy": 3,
+    "very happy": 4,
+    "extremely happy": 5,
+    "amazingly happy": 5,
+    "ecstatic": 5,
+    "bored": 1,
+    "exasperated": 3,
+    "sarcastic": 2,
+    "tired": 2,
+    "exhausted": 4,
+    "scared": 4,
+    "surprised": 3,
+    "nervous": 3,
+    "overwhelmed": 4,
+    "terrified": 5,
+    "neutral": 2,
+    "very sad": 4
+};
+
 const getMoodEmoji = (mood) => {
     const moodEmojiMap = {
        "angry": angry, "annoyed": annoyed, "frustrated": frustrated, "very angry": veryAngry,
@@ -92,6 +122,12 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
         }
     }, [date, moodData]);
 
+    // Update intensity automatically when mood changes
+    const handleMoodChange = (newMood) => {
+        setMood(newMood);
+        setIntensity(moodIntensityMap[newMood]); // Update intensity based on the mood
+    };
+
     const handleEdit = () => {
         setIsEditing(true); // Enable editing mode
     };
@@ -125,7 +161,7 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
 
                 {isEditing ? (
                     <>
-                        <input type="text" value={mood} onChange={e => setMood(e.target.value)} />
+                        <input type="text" value={mood} onChange={e => handleMoodChange(e.target.value)} />
                         <input type="number" value={intensity} onChange={e => setIntensity(e.target.value)} />
                         <textarea value={notes} onChange={e => setNotes(e.target.value)} />
                         <button onClick={handleSave}>Save</button>
