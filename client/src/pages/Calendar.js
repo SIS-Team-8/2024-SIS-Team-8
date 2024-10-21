@@ -176,8 +176,6 @@ const CalendarScreen = ({theme, language, moodData }) => {
     const summary = getSummaryStatistics(monthData);
     const yearlyMostCommonMood = getYearlyMoodStatistics(currentMonth.getFullYear());
 
-    const monthlyMoods = getMonthlyCommonMood();
-
     const getMoodEmojiImage = (mood) => moodEmojiMap[mood] || null;
     const getMoodColor = (mood) => moodColorMap[mood] || moodColorMap.default;
 
