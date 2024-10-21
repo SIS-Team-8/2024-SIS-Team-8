@@ -76,10 +76,10 @@ const moodIntensityMap = {
 
 const intensityMoodMap = {
     1: ["bored"],
-    2: ["annoyed", "deflated", "sarcastic", "tired", "neutral"],
-    3: ["frustrated", "sad", "upset", "happy", "exasperated", "surprised", "nervous"],
-    4: ["angry", "distressed", "very happy", "exhausted", "scared", "overwhelmed", "very sad"],
-    5: ["very angry", "extremely angry", "miserable", "extremely happy", "amazingly happy", "ecstatic", "terrified"]
+    2: ["tired"],
+    3: ["happy"],
+    4: ["very happy"],
+    5: ["amazingly happy"]
 };
 
 const getMoodEmoji = (mood) => {
