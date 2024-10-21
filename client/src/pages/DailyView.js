@@ -46,33 +46,13 @@ const moodData = {
 
 const getMoodEmoji = (mood) => {
     const moodEmojiMap = {
-        "angry": angry,
-        "annoyed": annoyed,
-        "frustrated": frustrated,
-        "very angry": veryAngry,
-        "extremely angry": extremelyAngry,
-        "sad": sad,
-        "upset": upset,
-        "deflated": deflated,
-        "distressed": distressed,
-        "miserable": miserable,
-        "happy": happy,
-        "very happy": veryHappy,
-        "extremely happy": extremelyHappy,
-        "amazingly happy": amazinglyHappy,
-        "ecstatic": ecstatic,
-        "bored": bored,
-        "exasperated": exasperated,
-        "sarcastic": sarcastic,
-        "tired": tired,
-        "exhausted": exhausted,
-        "scared": scared,
-        "surprised": surprised,
-        "nervous": nervous,
-        "overwhelmed": overwhelmed,
-        "terrified": terrified,
-        "neutral": bored, // Assuming neutral shows the 'bored' emoji
-        "very sad": miserable // Assuming very sad shows the 'miserable' emoji
+       "angry": angry, "annoyed": annoyed, "frustrated": frustrated, "very angry": veryAngry,
+    "extremely angry": extremelyAngry, "sad": sad, "upset": upset, "deflated": deflated,
+    "distressed": distressed, "miserable": miserable, "happy": happy, "very happy": veryHappy,
+    "extremely happy": extremelyHappy, "amazingly happy": amazinglyHappy, "ecstatic": ecstatic,
+    "bored": bored, "exasperated": exasperated, "sarcastic": sarcastic, "tired": tired,
+    "exhausted": exhausted, "scared": scared, "surprised": surprised, "nervous": nervous,
+    "overwhelmed": overwhelmed, "terrified": terrified, "neutral": bored, "very sad": miserable
     };
     return moodEmojiMap[mood] || bored;
 };
