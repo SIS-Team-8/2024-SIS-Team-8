@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 import axios from "axios";
 import { toast } from "react-toastify";
 import logo from "../assets/logo.png";
@@ -15,38 +18,34 @@ const translations = {
 
 export default function SignUp( {language, theme }) {
     const navigate = useNavigate();
+
     const [inputValue, setInputValue] = useState({
         username: "",
         password: "",
         confirmPassword: ""
     });
 
-    const { username, password, confirmPassword } = inputValue
+    const { username, password, confirmPassword } = inputValue;
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
+
         setInputValue({
             ...inputValue,
             [name]: value,
         });
     };
 
-    const handleError = (err) =>
-        toast.error(err, {
-        });
-    const handleSuccess = (msg) =>
-        toast.success(msg, {
-        });
-    
+    const handleError = (err) => toast.error(err, {});
+
+    const handleSuccess = (msg) => toast.success(msg, {});
+
     const handleSubmit = async () => {
         if (username === "" || password === "") {
             toast.error("Enter desired username and password to create account")
-        }
-        else if (password !== confirmPassword) {
+        } else if (password !== confirmPassword) {
             toast.error("Passwords do not match");
-        }
-        else {
-
+        } else {
             try {
                 const { data } = await axios.post(
                     "http://localhost:3000/api/sign-up",
@@ -56,9 +55,12 @@ export default function SignUp( {language, theme }) {
                     },
                     { withCredentials: true }
                 );
+
                 const { success, message } = data;
+
                 if (success) {
                     handleSuccess(message);
+
                     setTimeout(() => {
                         navigate("/login");
                     });
@@ -69,6 +71,7 @@ export default function SignUp( {language, theme }) {
                 console.log(error);
             }
         }
+
         setInputValue({
             ...inputValue,
             username: "",
@@ -86,16 +89,19 @@ export default function SignUp( {language, theme }) {
             <div id="inputBox">
                 <form>
                     <input id="userBox" type="text" name="username" value={username} placeholder={t.username} onChange={handleOnChange} className={theme}></input>
+                    <input id="userBox" type="text" name="username" value={username} placeholder={t.username} onChange={handleOnChange} className={theme}></input>
                     <p></p>
+                    <input id="passBox" type="password" name="password" value={password} placeholder={t.password} onChange={handleOnChange} className={theme}></input>
                     <input id="passBox" type="password" name="password" value={password} placeholder={t.password} onChange={handleOnChange} className={theme}></input>
                     <p></p>
                     <input id="passBox" type="password" name="confirmPassword" value={confirmPassword} placeholder={t.confirmPassword} onChange={handleOnChange} className={theme}></input>
+                    <input id="passBox" type="password" name="confirmPassword" value={confirmPassword} placeholder={t.confirmPassword} onChange={handleOnChange} className={theme}></input>
                 </form>
 
-                <button id="button" onClick={handleSubmit}>{t.createAccount}</button>
+                <button id="button" className={theme} onClick={handleSubmit}>{t.createAccount}</button>
 
-                <p id="bottomText">
-                    <Link to="/login" id="link" className={theme}>{t.login}</Link>
+                <p id="bottomText" className={theme}>
+                    <Link to="/login" id="link">{t.login}</Link>
                 </p>
             </div>
         </div>
