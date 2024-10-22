@@ -15,6 +15,7 @@ const translations = {
 
 export default function SignUp( {language, theme }) {
     const navigate = useNavigate();
+
     const [inputValue, setInputValue] = useState({
         username: "",
         password: "",
@@ -25,30 +26,23 @@ export default function SignUp( {language, theme }) {
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
+
         setInputValue({
             ...inputValue,
             [name]: value,
         });
     };
 
-    const handleError = (err) =>
-        toast.error(err, {
-        });
-    const handleSuccess = (msg) =>
-        toast.success(msg, {
-        });
+    const handleError = (err) => toast.error(err, {});
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSuccess = (msg) => toast.success(msg, {});
 
+    const handleSubmit = async () => {
         if (username === "" || password === "") {
             toast.error("Enter desired username and password to create account")
-        }
-        else if (password !== confirmPassword) {
+        } else if (password !== confirmPassword) {
             toast.error("Passwords do not match");
-        }
-        else {
-
+        } else {
             try {
                 const { data } = await axios.post(
                     "http://localhost:3000/api/sign-up",
@@ -58,11 +52,14 @@ export default function SignUp( {language, theme }) {
                     },
                     { withCredentials: true }
                 );
+
                 const { success, message } = data;
+
                 if (success) {
                     handleSuccess(message);
+
                     setTimeout(() => {
-                        navigate("/");
+                        navigate("/login");
                     });
                 } else {
                     handleError(message);
@@ -71,6 +68,7 @@ export default function SignUp( {language, theme }) {
                 console.log(error);
             }
         }
+
         setInputValue({
             ...inputValue,
             username: "",

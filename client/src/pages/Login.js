@@ -13,7 +13,7 @@ const translations = {
     Chinese: { username: "用户名", password: "密码", login: "登录", signUp: "注册" }
 };
 
-export default function Login({ language, theme }) {
+export default function Login({ onLogin, language, theme }) {
     const navigate = useNavigate();
 
     const [inputValue, setInputValue] = useState({
@@ -35,9 +35,7 @@ export default function Login({ language, theme }) {
 
     const handleSuccess = (msg) => toast.success(msg, {});
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
+    const handleSubmit = async () => {
         try {
             const { data } = await axios.post(
                 "http://localhost:3000/api/login",
@@ -47,6 +45,8 @@ export default function Login({ language, theme }) {
                 },
                 { withCredentials: true }
             );
+
+            console.log(data);
 
             const { success, message } = data;
 
@@ -68,6 +68,8 @@ export default function Login({ language, theme }) {
             username: "",
             password: ""
         });
+
+        onLogin();
     };
 
     const t = translations[language] || translations.English;
