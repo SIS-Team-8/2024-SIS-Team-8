@@ -53,6 +53,8 @@ export default function Login({ onLogin, language, theme }) {
             if (success) {
                 handleSuccess(message);
 
+                onLogin();
+
                 setTimeout(() => {
                     navigate("/");
                 });
@@ -68,8 +70,6 @@ export default function Login({ onLogin, language, theme }) {
             username: "",
             password: ""
         });
-
-        onLogin();
     };
 
     const t = translations[language] || translations.English;
