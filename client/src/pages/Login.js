@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import logo from "../assets/logo.png";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 import './Login.css';
 
 const translations = {
@@ -17,60 +15,8 @@ export default function Login({ onLogin, language, theme }) {
 
     const t = translations[language] || translations.English;
 
-    const navigate = useNavigate();
-
-    const [inputValue, setInputValue] = useState({
-        username: "",
-        password: "",
-    });
-
-    const { username, password } = inputValue;
-
-    const handleOnChange = (e) => {
-        const { name, value } = e.target;
-        setInputValue({
-            ...inputValue,
-            [name]: value,
-        });
-    };
-
-    const handleError = (err) => toast.error(err, {});
-
-    const handleSuccess = (msg) => toast.success(msg, {});
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            const { data } = await axios.post(
-                "http://localhost:3000/api/login",
-                {
-                    "username": inputValue.username,
-                    "password": inputValue.password
-                },
-                { withCredentials: true }
-            );
-            console.log(data);
-            const { success, message } = data;
-
-            if (success) {
-                handleSuccess(message);
-
-                setTimeout(() => {
-                    navigate("/");
-                }, 1000);
-            } else {
-                handleError(message);
-            }
-        } catch (error) {
-            console.log(error);
-        }
+    const handleLoginClick = () => {
         onLogin();
-        setInputValue({
-            ...inputValue,
-            username: "",
-            password: ""
-        });
     };
 
     return (
@@ -79,12 +25,12 @@ export default function Login({ onLogin, language, theme }) {
 
             <div id="inputBox" className={theme}>
                 <form>
-                    <input id="userBox" type="text" name="username" value={username} placeholder={t.username} onChange={handleOnChange} className={theme}></input>
+                    <input id="userBox" className={theme} placeholder={t.username}></input>
                     <p></p>
-                    <input id="passBox" type="password" name="password" value={password} placeholder={t.password} onChange={handleOnChange} className={theme}></input>
+                    <input id="passBox" className={theme} placeholder={t.password} type="password"></input>
                 </form>
 
-                <button id="button" className={theme} onClick={handleSubmit}>{t.login}</button>
+                <button id="button" className={theme} onClick={handleLoginClick}>{t.login}</button>
 
                 <p id="bottomText" className={theme}>
                     <Link to="/sign-up" id="link">{t.signUp}</Link>
