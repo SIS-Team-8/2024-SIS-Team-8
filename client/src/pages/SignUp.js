@@ -60,7 +60,7 @@ export default function SignUp( {language, theme }) {
                 if (success) {
                     handleSuccess(message);
                     setTimeout(() => {
-                        navigate("/");
+                        navigate("/login");
                     });
                 } else {
                     handleError(message);
