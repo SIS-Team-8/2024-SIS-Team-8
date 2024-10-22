@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 import logo from "../assets/logo.png";
 import './SignUp.css';
 
@@ -13,9 +15,66 @@ const translations = {
 
 export default function SignUp( {language, theme }) {
     const navigate = useNavigate();
+    const [inputValue, setInputValue] = useState({
+        username: "",
+        password: "",
+        confirmPassword: ""
+    });
 
-    const handleSignUpClick = () => {
-        navigate("/login");
+    const { username, password, confirmPassword } = inputValue
+
+    const handleOnChange = (e) => {
+        const { name, value } = e.target;
+        setInputValue({
+            ...inputValue,
+            [name]: value,
+        });
+    };
+
+    const handleError = (err) =>
+        toast.error(err, {
+        });
+    const handleSuccess = (msg) =>
+        toast.success(msg, {
+        });
+    
+    const handleSubmit = async () => {
+        if (username === "" || password === "") {
+            toast.error("Enter desired username and password to create account")
+        }
+        else if (password !== confirmPassword) {
+            toast.error("Passwords do not match");
+        }
+        else {
+
+            try {
+                const { data } = await axios.post(
+                    "http://localhost:3000/api/sign-up",
+                    {
+                    "username": inputValue.username,
+                    "password": inputValue.password
+                    },
+                    { withCredentials: true }
+                );
+                const { success, message } = data;
+                if (success) {
+                    handleSuccess(message);
+                    setTimeout(() => {
+                        navigate("/login");
+                    });
+                } else {
+                    handleError(message);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        setInputValue({
+            ...inputValue,
+            username: "",
+            password: "",
+            confirmPassword: ""
+        });
     };
 
     const t = translations[language] || translations.English;
@@ -26,14 +85,14 @@ export default function SignUp( {language, theme }) {
 
             <div id="inputBox">
                 <form>
-                    <input id="userBox" placeholder={t.username} className={theme}></input>
+                    <input id="userBox" type="text" name="username" value={username} placeholder={t.username} onChange={handleOnChange} className={theme}></input>
                     <p></p>
-                    <input id="passBox" placeholder={t.password} type="password" className={theme}></input>
+                    <input id="passBox" type="password" name="password" value={password} placeholder={t.password} onChange={handleOnChange} className={theme}></input>
                     <p></p>
-                    <input id="passBox" placeholder={t.confirmPassword} type="password" className={theme}></input>
+                    <input id="passBox" type="password" name="confirmPassword" value={confirmPassword} placeholder={t.confirmPassword} onChange={handleOnChange} className={theme}></input>
                 </form>
 
-                <button id="button" onClick={handleSignUpClick}>{t.createAccount}</button>
+                <button id="button" onClick={handleSubmit}>{t.createAccount}</button>
 
                 <p id="bottomText">
                     <Link to="/login" id="link" className={theme}>{t.login}</Link>
