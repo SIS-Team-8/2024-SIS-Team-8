@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from "react-router-dom";
+// import { useCookies } from "react-cookie";
+// import axios from "axios";
 import logo from './assets/logo.png';
 import dizzy from './assets/face-with-spiral-eyes.svg';
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 import './App.css';
@@ -31,6 +33,9 @@ function App() {
     const navigate = useNavigate();
     const location = useLocation();
 
+    // const [cookies, removeCookie] = useCookies([]);
+    // const [username, setUsername] = useState("");
+
     useEffect(() => {
         document.body.classList.remove('light', 'dark'); // Remove any existing theme class
         document.body.classList.add(theme);  // Add the new theme class
@@ -41,17 +46,37 @@ function App() {
         localStorage.setItem('language', language); // Save language to localStorage for persistence
     }, [language]);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoaded(true);
-
-            if (!isAuthenticated && location.pathname !== "/sign-up") {
-                navigate("/login");
-            }
-        }, 3000);
-
-        return () => clearTimeout(timer);
-    }, [isAuthenticated, navigate, location]);
+    // useEffect(() => {
+    //     const verifyCookie = async () => {
+    //         if (!cookies.token) {
+    //             setIsAuthenticated(false);
+    //             navigate("/login");
+    //         }
+    //         try {
+    //             const { data } = await axios.post(
+    //                 "http://localhost:3000",
+    //                 {},
+    //                 { withCredentials: true }
+    //             );
+    //             const { status, user } = data;
+    //             setUsername(user);
+    //             if (status) {
+    //                 setIsAuthenticated(true);
+    //                 toast(`Hello ${user}`, { position: "top-right" });
+    //             } else {
+    //                 removeCookie("token");
+    //                 setIsAuthenticated(false);
+    //                 navigate("/login");
+    //             }
+    //         } catch (error) {
+    //             console.error("Error verifying token:", error);
+    //             removeCookie("token");
+    //             setIsAuthenticated(false);
+    //             navigate("/login");
+    //         }
+    //     };
+    //     verifyCookie();
+    // }, [cookies, navigate, removeCookie]);
 
     const handleLogin = () => {
         setIsAuthenticated(true);
@@ -65,6 +90,7 @@ function App() {
 
     const handleLogout = () => {
         setIsAuthenticated(false);
+        // removeCookie("token");
         navigate("/login");
     };
 
