@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo from './assets/logo.png';
 import dizzy from './assets/face-with-spiral-eyes.svg';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 import './App.css';
 
 import SplashScreen from "./pages/SplashScreen";
@@ -102,6 +105,7 @@ function App() {
                 <Route path="/sign-up" element={<SignUp language={language} theme={theme} />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
+            <ToastContainer/>
         </div>
     );
 
