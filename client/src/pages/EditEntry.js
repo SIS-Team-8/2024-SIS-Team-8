@@ -36,7 +36,7 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function EditEntry({ language = "English", theme = "light", moodData, onMoodUpdate }) {
+export default function EditEntry({ language = "English", theme = "light", moodData, updateEntry }) {
     const { date } = useParams(); // Use useParams to access 'date' from URL
     const navigate = useNavigate();
 
@@ -73,7 +73,7 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     // This function will be used to submit the new mood and note
     const handleSubmit = () => {
-        onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
+        updateEntry(date, { selectedMood, moodIntensity, note });
         navigate('/daily-view/');
     };
 
