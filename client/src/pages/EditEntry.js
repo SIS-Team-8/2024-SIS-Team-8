@@ -94,13 +94,10 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     useEffect(() => {
         if (moodData[date]) {
             setSelectedMood(moodData[date].mood);
-            setSelectedSubMood(moodData[date].subMood);
             setMoodIntensity(moodData[date].intensity);
             setNote(moodData[date].notes);
-            setMoodImages(moods[moodData[date].mood].subImages);
         } else {
             setSelectedMood('');
-            setSelectedSubMood('');
             setMoodIntensity('N/A');
             setNote('');
         }
@@ -188,7 +185,7 @@ export default function EditEntry({ language = "English", theme = "light", moodD
                                 className="subColumn"
                                 alt=""
                                 src={src}
-                                style={{ opacity: selectedSubMood === src ? 1 : subRowOpacity[index] }}  // Only update sub-row opacity
+                                style={{ opacity: subRowOpacity[index] }}  // Only update sub-row opacity
                                 onClick={() => handleSubRowClick(index)}
                                 onMouseEnter={() => setHoveredSubMood(extractMoodNameFromImage(src))}  // Extract name from sub-image
                                 onMouseLeave={() => setHoveredSubMood('')}  // Clear hovered sub-row mood on mouse leave
