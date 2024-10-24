@@ -42,8 +42,10 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     const moodEntry = moodData[date] || { mood: '', notes: '' };
 
-    const [selectedMood, setSelectedMood] = useState(moodEntry.mood);
-    const [note, setNote] = useState(moodEntry.notes);
+    // State to manage the selected mood and note
+    const [selectedMood, setSelectedMood] = useState(moodEntry.mood);  // Pre-fill with existing mood
+    const [note, setNote] = useState(moodEntry.notes);  // Pre-fill with existing notes
+
 
     const [mood, setMood] = useState(moodData[date]?.mood || '');
     const [notes, setNotes] = useState(moodData[date]?.notes || '');
@@ -68,9 +70,10 @@ export default function EditEntry({ language = "English", theme = "light", moodD
         setSubRowOpacity(Array(5).fill(1));  // Reset sub-row images' opacity to 1
     };
 
+    // This function will be used to submit the new mood and note
     const handleSubmit = () => {
         onMoodUpdate(date, { mood: selectedMood, notes: note });
-        navigate('/daily-view/' + date);
+        navigate('/daily-view/' + date);  // Navigate back to the daily view after updating
     };
 
     const t = translations[language];
@@ -102,7 +105,8 @@ export default function EditEntry({ language = "English", theme = "light", moodD
                             <img
                                 id={mood}
                                 className="column"
-                                onClick={() => setMoodImages(moods[mood].subImages, index)}  // Pass the sub-images
+                                //onClick={() => setMoodImages(moods[mood].subImages, index)}  // Pass the sub-images
+                                onClick={() => setSelectedMood(mood)}
                                 onMouseEnter={() => setHoveredMood(mood)}  // Set hovered mood on mouse enter
                                 onMouseLeave={() => setHoveredMood('')}  // Clear hovered mood on mouse leave
                                 alt={mood}
