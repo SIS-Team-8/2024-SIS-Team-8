@@ -129,9 +129,8 @@ export default function MoodSelection({ language = "English", theme = "light", o
 
                 <div id="flexContainer">
                     <textarea id="log" placeholder={t.addNote} className={theme} value={note} onChange={(e) => setNote(e.target.value)}/>
-                    <button onClick={handleSubmit}>Submit Mood</button>
                     <Link to="/">
-                        <img id="submit" className={theme} alt="submit" src={submit}/>
+                        <img id="submit" className={theme} alt="submit" src={submit} onClick={handleSubmit}/>
                     </Link>
                 </div>
             </div>
