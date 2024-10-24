@@ -36,7 +36,7 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate, selectedMood: initialMood = '', note: initialNote = '' }) {
+export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate, moodData, selectedMood: initialMood = '', note: initialNote = '' }) {
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
@@ -44,6 +44,50 @@ export default function MoodSelection({ language = "English", theme = "light", o
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
     const [selectedMood, setSelectedMood] = useState(initialMood);
     const [note, setNote] = useState(initialNote);
+    const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
+    const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);
+
+    const moodIntensityMap = {
+        "angry": 4,
+        "annoyed": 2,
+        "frustrated": 3,
+        "very angry": 5,
+        "extremely angry": 5,
+        "sad": 3,
+        "upset": 3,
+        "deflated": 2,
+        "distressed": 4,
+        "miserable": 5,
+        "happy": 3,
+        "very happy": 4,
+        "extremely happy": 5,
+        "amazingly happy": 5,
+        "ecstatic": 5,
+        "bored": 1,
+        "exasperated": 3,
+        "sarcastic": 2,
+        "tired": 2,
+        "exhausted": 4,
+        "scared": 4,
+        "surprised": 3,
+        "nervous": 3,
+        "overwhelmed": 4,
+        "terrified": 5,
+        "neutral": 2,
+        "very sad": 4
+    };
+
+    useEffect(() => {
+        if (moodData[date]) {
+            setSelectedMood(moodData[date].mood);
+            setMoodIntensity(moodData[date].intensity);
+            setNote(moodData[date].notes);
+        } else {
+            setSelectedMood('');
+            setMoodIntensity('N/A');
+            setNote('');
+        }
+    }, [date, moodData]);
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
@@ -56,7 +100,8 @@ export default function MoodSelection({ language = "English", theme = "light", o
     };
 
     const handleSubmit = () => {
-        onMoodUpdate(selectedMood, note);
+        //onMoodUpdate(selectedMood, note);
+        onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
     };
 
     const t = translations[language];
@@ -77,6 +122,8 @@ export default function MoodSelection({ language = "English", theme = "light", o
 
     const handleSubRowClick = (index) => {
         setSubRowOpacity(prev => prev.map((_, i) => (i === index ? 1 : 0.5)));  // Update only sub-row images' opacity
+        setSelectedSubMood(imageSrc[index]);  // Set selected sub-emoji
+        setMoodIntensity(index + 1);
     };
 
     return (
