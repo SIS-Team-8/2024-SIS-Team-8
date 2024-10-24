@@ -121,7 +121,7 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     const handleMoodChange = (mood) => {
         setSelectedMood(mood);
-        setSelectedSubMood(subMood);
+        //setSelectedSubMood(subMood);
         setMoodIntensity(moodIntensityMap[mood] || 'N/A');
         setMoodImages(moods[mood].subImages);
     };
