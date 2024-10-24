@@ -152,6 +152,10 @@ export default function EditEntry({ language = "English", theme = "light", moodD
                     ))}
                 </div>
 
+                <div id="intensity">
+                    {selectedSubMood && <p>Intensity: {moodIntensity}</p>}
+                </div>
+
                 <div id="flexContainer">
                     <textarea id="log" placeholder={t.addNote} className={theme} value={note} onChange={(e) => setNote(e.target.value)}/>
                     <Link to="/">
