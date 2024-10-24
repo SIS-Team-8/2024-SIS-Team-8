@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useParams, useNavigate, Link } from "react-router-dom";
 import './EditEntry.css'
 import veryAngry from '../assets/emoji/very-angry.png'
@@ -85,7 +85,7 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     // This function will be used to submit the new mood and note
     const handleSubmit = () => {
-        onMoodUpdate(date, { mood: selectedMood, intensity, notes: note });
+        onMoodUpdate(date, { mood: selectedMood, moodIntensity, notes: note });
         navigate(`/daily-view/${date}`);
     };
 
@@ -128,7 +128,7 @@ export default function EditEntry({ language = "English", theme = "light", moodD
                             <img
                                 id={mood}
                                 className="column"
-                                onClick={() => handleMoodClick(mood, moods[mood].subImages, index)}
+                                onClick={() => handleMoodChange(mood, moods[mood].subImages, index)}
                                 alt={mood}
                                 src={moods[mood].rowImg}
                                 //onClick={() => setSelectedMood(mood)}
