@@ -36,7 +36,7 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate, moodData, selectedMood: initialMood = '', note: initialNote = '' }) {
+export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate, moodData }) {
     const { date } = useParams(); // Use useParams to access 'date' from URL
     const navigate = useNavigate();
 
@@ -111,10 +111,15 @@ export default function MoodSelection({ language = "English", theme = "light", o
         setSubRowOpacity(Array(5).fill(1));  // Reset sub-row images' opacity to 1
     };
 
+    const handleMoodSelection = (mood, activeIndex) => {
+        setSelectedMood(mood);
+        setMoodIntensity(moodIntensityMap[mood] || 'N/A');  // Set intensity based on the mood
+    };
+
     const handleSubmit = () => {
         //onMoodUpdate(selectedMood, note);
         //onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
-        onMoodUpdate(date, { mood: selectedMood, subMood: selectedSubMood, intensity: moodIntensity, notes: note });
+        onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
     };
 
     const t = translations[language];
@@ -148,7 +153,7 @@ export default function MoodSelection({ language = "English", theme = "light", o
                             <img
                                 id={mood}
                                 className="column"
-                                onClick={() => setMoodImages(moods[mood].subImages, index)}  // Pass the sub-images
+                                onClick={() => handleMoodSelection(mood, index)}  // Pass the sub-images
                                 onMouseEnter={() => setHoveredMood(mood)}  // Set hovered mood on mouse enter
                                 onMouseLeave={() => setHoveredMood('')}  // Clear hovered mood on mouse leave
                                 alt={mood}
