@@ -36,26 +36,19 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate, moodData }) {
+export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate, moodData, selectedMood: initialMood = '', note: initialNote = '' }) {
     const { date } = useParams(); // Use useParams to access 'date' from URL
     const navigate = useNavigate();
-
-    const moodEntry = moodData[date] || { mood: '', notes: '', intensity: "N/A", subMood: '' };
-
+    
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
     const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
-    //const [selectedMood, setSelectedMood] = useState(initialMood);
-    //const [note, setNote] = useState(initialNote);
-    //const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
-    //const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);
-
-    const [selectedMood, setSelectedMood] = useState(moodEntry.mood)
-    const [note, setNote] = useState(moodEntry.notes);
-    const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);  // New state for sub-emoji
+    const [selectedMood, setSelectedMood] = useState(initialMood);
+    const [note, setNote] = useState(initialNote);
     const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
+    const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);
 
     const moodIntensityMap = {
         "angry": 4,
@@ -100,9 +93,7 @@ export default function MoodSelection({ language = "English", theme = "light", o
     }, [date, moodData]);
 
     const setMoodImages = (images, activeIndex) => {
-        //setImageSrc(images);  // Set sub-row images
-        setSelectedMood(Object.keys(moods)[activeIndex]);
-        setImageSrc(images);
+        setImageSrc(images);  // Set sub-row images
         setRowOpacity(prev => prev.map((_, i) => (i === activeIndex ? 1 : 0.5)));  // Change opacity of row images on click
         resetSubRowOpacity();
     };
@@ -111,14 +102,8 @@ export default function MoodSelection({ language = "English", theme = "light", o
         setSubRowOpacity(Array(5).fill(1));  // Reset sub-row images' opacity to 1
     };
 
-    const handleMoodSelection = (mood, activeIndex) => {
-        setSelectedMood(mood);
-        setMoodIntensity(moodIntensityMap[mood] || 'N/A');  // Set intensity based on the mood
-    };
-
     const handleSubmit = () => {
         //onMoodUpdate(selectedMood, note);
-        //onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
         onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
     };
 
@@ -153,7 +138,7 @@ export default function MoodSelection({ language = "English", theme = "light", o
                             <img
                                 id={mood}
                                 className="column"
-                                onClick={() => handleMoodSelection(mood, index)}  // Pass the sub-images
+                                onClick={() => setMoodImages(moods[mood].subImages, index)}  // Pass the sub-images
                                 onMouseEnter={() => setHoveredMood(mood)}  // Set hovered mood on mouse enter
                                 onMouseLeave={() => setHoveredMood('')}  // Clear hovered mood on mouse leave
                                 alt={mood}
@@ -173,7 +158,7 @@ export default function MoodSelection({ language = "English", theme = "light", o
                     {imageSrc.map((src, index) => (
                         <div key={index} style={{ position: 'relative', display: 'inline-block' }}>
                             <img
-                                id={`sub${index}`}
+                                id={'sub${index}'}
                                 className="subColumn"
                                 onClick={() => handleSubRowClick(index)}
                                 onMouseEnter={() => setHoveredSubMood(extractMoodNameFromImage(src))}  // Extract name from sub-image
