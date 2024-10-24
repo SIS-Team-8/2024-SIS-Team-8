@@ -17,6 +17,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Onboarding from "./pages/Onboarding";
 import OnboardingOverview from "./pages/OnboardingOverview";
+import EditEntry from "./pages/EditEntry";
 
 import { Route, Routes } from "react-router-dom";
 
