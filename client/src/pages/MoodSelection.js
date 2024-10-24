@@ -40,6 +40,8 @@ export default function MoodSelection({ language = "English", theme = "light", o
     const { date } = useParams(); // Use useParams to access 'date' from URL
     const navigate = useNavigate();
 
+    const moodEntry = moodData[date] || { mood: '', notes: '', intensity: "N/A", subMood: '' };
+
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
