@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import { useParams, useNavigate,Link } from "react-router-dom";
 import './EditEntry.css'
 import veryAngry from '../assets/emoji/very-angry.png'
 import sad from '../assets/emoji/sad.png'
@@ -36,7 +36,7 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate }) {
+export default function MoodSelection({ language = "English", theme = "light", moodData, onMoodUpdate }) {
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
@@ -59,7 +59,7 @@ export default function MoodSelection({ language = "English", theme = "light", o
 
     const handleSubmit = () => {
         onMoodUpdate(date, { mood: selectedMood, note });
-        navigate('/calendar'); // Navigate back to the calendar or another appropriate view
+        navigate('/calendar'); // Navigate back to the calendar or another appropriate view after update
     };
 
     const t = translations[language];
