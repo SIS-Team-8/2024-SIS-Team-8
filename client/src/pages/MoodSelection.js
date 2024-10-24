@@ -44,7 +44,6 @@ export default function MoodSelection({ language = "English", theme = "light", o
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
     const [selectedMood, setSelectedMood] = useState(initialMood || '');
     const [note, setNote] = useState(initialMood || '');
-    const { date, mood, notes, isEditing } = location.state || {};
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
@@ -57,7 +56,7 @@ export default function MoodSelection({ language = "English", theme = "light", o
     };
 
     const handleSubmit = () => {
-        onMoodUpdate(date, selectedMood, note);  // Assume date is properly handled or passed
+        onMoodUpdate(selectedMood, notes);
     };
 
     const t = translations[language];
@@ -128,7 +127,7 @@ export default function MoodSelection({ language = "English", theme = "light", o
                 </div>
 
                 <div id="flexContainer">
-                    <textarea id="log" placeholder={t.addNote} className={theme} value={note} onChange={(e) => setNote(e.target.value)}/>
+                    <textarea onChange={(e) => setNote(e.target.value)} id="log" placeholder={t.addNote} className={theme} value={note} />
                     <Link to="/">
                         <img id="submit" className={theme} alt="submit" src={submit} onClick={handleSubmit}/>
                     </Link>
