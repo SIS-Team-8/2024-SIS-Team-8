@@ -36,15 +36,14 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate }) {
+export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate, initialMood, initialNotes }) {
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
     const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
-    const [selectedMood, setSelectedMood] = useState(mood);
-    const [note, setNote] = useState(notes);
-    const { date, mood, notes, isEditing } = useState('') || { date: null, mood: '', notes: '', isEditing: false };
+    const [selectedMood, setSelectedMood] = useState(initialMood || '');
+    const [note, setNote] = useState(initialMood || '');
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
@@ -128,7 +127,7 @@ export default function MoodSelection({ language = "English", theme = "light", o
                 </div>
 
                 <div id="flexContainer">
-                    <textarea onChange={(e) => setNote(e.target.value)} id="log" placeholder={t.addNote} className={theme} value={note} />
+                    <textarea id="log" placeholder={t.addNote} className={theme} value={note} onChange={(e) => setNote(e.target.value)}/>
                     <Link to="/">
                         <img id="submit" className={theme} alt="submit" src={submit} onClick={handleSubmit}/>
                     </Link>
