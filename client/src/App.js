@@ -33,10 +33,10 @@ function App() {
         "2024-10-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." } */
     });
 
-    const handleMoodUpdate = (date, mood, note) => {
+    const handleMoodUpdate = (date, { mood, note }) => {
         setMoodData(prev => ({
             ...prev,
-            [date]: { mood, note }
+            [date]: { ...prev[date], mood, note }
         }));
     };
 
@@ -131,6 +131,7 @@ function App() {
                 <Route path="/mood-selection" element={isAuthenticated ? <MoodSelection theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} onMoodUpdate={handleMoodUpdate} mooddata={moodData} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/login" element={<Login language={language} theme={theme} onLogin={handleLogin} />} />
                 <Route path="/sign-up" element={<SignUp language={language} theme={theme} />} />
+                <Route path="/edit-entry/:date" element={<EditEntry theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} onMoodUpdate={handleMoodUpdate} />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </div>

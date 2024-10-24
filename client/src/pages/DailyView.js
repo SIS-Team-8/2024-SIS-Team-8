@@ -143,7 +143,7 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
     };
 
     const handleEdit = () => {
-        navigate('/mood-selection', { state: { date, mood: moodEntry.mood, notes: moodEntry.notes, isEditing: true } });
+        navigate(`/edit-entry/${date}`, { state: { mood: moodData[date].mood, notes: moodData[date].notes } });
     };
 
     const handleSave = () => {
