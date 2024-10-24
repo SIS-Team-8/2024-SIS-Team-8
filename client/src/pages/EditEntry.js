@@ -39,26 +39,26 @@ const translations = {
 export default function EditEntry({ language = "English", theme = "light", moodData, onMoodUpdate }) {
     const { date } = useParams(); // Use useParams to access 'date' from URL
     const navigate = useNavigate();
-
-    const moodEntry = moodData[date] || { mood: '', notes: '' };
-
-    // State to manage the selected mood and note
+    const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
+    const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
+    const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
+    const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
+    const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
     const [selectedMood, setSelectedMood] = useState(moodEntry.mood);
     const [note, setNote] = useState(moodEntry.notes);
 
+    const moodEntry = moodData[date] || { mood: '', notes: '' };
 
     const [mood, setMood] = useState(moodData[date]?.mood || '');
     const [notes, setNotes] = useState(moodData[date]?.notes || '');
 
-    const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
-    const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
-    const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
-
-    const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
-    const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
-    
     const initialMood = moodData[date]?.mood || '';
     const initialNote = moodData[date]?.notes || '';
+
+    const handleMoodClick = (mood, images, index) => {
+        setSelectedMood(mood);  // Set the selected mood
+        setMoodImages(images, index);  // Update the sub-emojis and row opacity
+    };
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
@@ -70,15 +70,8 @@ export default function EditEntry({ language = "English", theme = "light", moodD
         setSubRowOpacity(Array(5).fill(1));  // Reset sub-row images' opacity to 1
     };
 
-    // This function will be used to submit the new mood and note
     const handleSubmit = () => {
-        onMoodUpdate(date, { mood: selectedMood, notes: note });
-        navigate('/daily-view/' + date);  // Navigate back to the daily view after updating
-    };
-
-    const handleMoodClick = (mood, images) => {
-        setSelectedMood(mood);  // Set the selected mood
-        setImageSrc(images);  // Set sub-emojis to be shown
+        onMoodUpdate(selectedMood, note);
     };
 
     const t = translations[language];
@@ -110,10 +103,9 @@ export default function EditEntry({ language = "English", theme = "light", moodD
                             <img
                                 id={mood}
                                 className="column"
-                                //onClick={() => setMoodImages(moods[mood].subImages, index)}  // Pass the sub-images
+                                onClick={() => setMoodImages(moods[mood].subImages, index)}  // Pass the sub-images
                                 alt={mood}
                                 src={moods[mood].rowImg}
-                                onClick={() => setSelectedMood(mood)}
                                 onMouseEnter={() => setHoveredMood(mood)}  // Set hovered mood on mouse enter
                                 onMouseLeave={() => setHoveredMood('')}  // Clear hovered mood on mouse leave
                                 style={{ opacity: rowOpacity[index] }}  // Row opacity updates on click
