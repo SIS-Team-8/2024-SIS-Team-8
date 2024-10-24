@@ -45,6 +45,8 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     // State to manage the selected mood and note
     const [selectedMood, setSelectedMood] = useState(moodEntry.mood);
     const [note, setNote] = useState(moodEntry.notes);
+    const [selectedSubMood, setSelectedSubMood] = useState('');  // New state for sub-emoji
+    const [moodIntensity, setMoodIntensity] = useState(0);
 
 
     /*const [mood, setMood] = useState(moodData[date]?.mood || '');
@@ -72,13 +74,12 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     // This function will be used to submit the new mood and note
     const handleSubmit = () => {
-        onMoodUpdate(date, { mood: selectedMood, notes: note });
+        onMoodUpdate(selectedMood, note, moodIntensity);
     };
 
-    const handleMoodClick = (mood, images) => {
+    const handleMoodClick = (mood, images, index) => {
         setSelectedMood(mood);  // Set the selected mood
-        setImageSrc(images);  // Set sub-emojis to be shown
-        setNote(note);
+        setImageSrc(images, index);  // Set sub-emojis to be shown
     };
 
     const t = translations[language];
@@ -99,6 +100,8 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     const handleSubRowClick = (index) => {
         setSubRowOpacity(prev => prev.map((_, i) => (i === index ? 1 : 0.5)));  // Update only sub-row images' opacity
+        setSelectedSubMood(imageSrc[index]);  // Set selected sub-emoji
+        setMoodIntensity(index + 1);
     };
 
     return (
