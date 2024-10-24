@@ -44,6 +44,7 @@ export default function MoodSelection({ language = "English", theme = "light", o
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
     const [selectedMood, setSelectedMood] = useState(initialMood || '');
     const [note, setNote] = useState(initialMood || '');
+    const { date, mood, notes, isEditing } = location.state || {};
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
@@ -56,8 +57,8 @@ export default function MoodSelection({ language = "English", theme = "light", o
     };
 
     const handleSubmit = () => {
-        const date = new Date().toISOString().slice(0, 10);  // YYYY-MM-DD format for new entries
-        onMoodUpdate(date, selectedMood, note);
+        onMoodUpdate(date, selectedMood, note);  // Assume date is properly handled or passed
+        navigate('/daily-view/' + date);  // Redirect back to the DailyView
     };
 
     const t = translations[language];

@@ -65,11 +65,10 @@ function App() {
         return () => clearTimeout(timer);
     }, [isAuthenticated, navigate, location]);
 
-    // Function to update an entry
-    const updateEntry = (date, updatedEntry) => {
+    const updateEntry = (date, newEntry) => {
         setMoodData(prevData => ({
             ...prevData,
-            [date]: updatedEntry
+            [date]: newEntry
         }));
     };
 
