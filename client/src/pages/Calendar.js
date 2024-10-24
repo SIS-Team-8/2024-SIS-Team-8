@@ -141,12 +141,11 @@ const translations = {
     }
 };
 
-const CalendarScreen = ({theme, language, onUpdate }) => {
+const CalendarScreen = ({theme, language, moodData }) => {
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 9));
     const [isYearlyView, setIsYearlyView] = useState(false);
     const t = translations[language];
-    const [moodData, setMoodData] = useState(moodData);
 
     const changeMonth = (direction) => {
         if (isYearlyView) {
