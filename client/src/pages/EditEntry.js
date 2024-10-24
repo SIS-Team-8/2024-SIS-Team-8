@@ -40,13 +40,13 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     const { date } = useParams(); // Use useParams to access 'date' from URL
     const navigate = useNavigate();
 
-    const moodEntry = moodData[date] || { mood: '', notes: '' };
+    const moodEntry = moodData[date] || { mood: '', notes: '', intensity: "N/A" };
 
     // State to manage the selected mood and note
     const [selectedMood, setSelectedMood] = useState(moodEntry.mood);
     const [note, setNote] = useState(moodEntry.notes);
     const [selectedSubMood, setSelectedSubMood] = useState('');  // New state for sub-emoji
-    const [moodIntensity, setMoodIntensity] = useState(0);
+    const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
 
 
     /*const [mood, setMood] = useState(moodData[date]?.mood || '');
@@ -74,7 +74,7 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     // This function will be used to submit the new mood and note
     const handleSubmit = () => {
-        onMoodUpdate(selectedMood, note, moodIntensity);
+        onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
     };
 
     const handleMoodClick = (mood, images, index) => {
@@ -150,10 +150,6 @@ export default function EditEntry({ language = "English", theme = "light", moodD
                             )}
                         </div>
                     ))}
-                </div>
-
-                <div id="intensity">
-                    {selectedSubMood && <p>Intensity: {moodIntensity}</p>}
                 </div>
 
                 <div id="flexContainer">
