@@ -50,10 +50,10 @@ export default function MoodSelection({ language = "English", theme = "light", o
     //const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
     //const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);
 
-    const [selectedMood, setSelectedMood] = useState(moodData[date]?.mood || '');
-    const [selectedSubMood, setSelectedSubMood] = useState(moodData[date]?.subMood || '');
-    const [moodIntensity, setMoodIntensity] = useState(moodData[date]?.intensity || 1);
-    const [note, setNote] = useState(moodData[date]?.notes || '');
+    const [selectedMood, setSelectedMood] = useState(moodEntry.mood)
+    const [note, setNote] = useState(moodEntry.notes);
+    const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);  // New state for sub-emoji
+    const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
 
     const moodIntensityMap = {
         "angry": 4,
