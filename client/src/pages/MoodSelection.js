@@ -78,7 +78,7 @@ export default function MoodSelection({ language = "English", theme = "light", o
     };
 
     const handleSubmit = () => {
-        onMoodUpdate({ mood: selectedMood, subMood: selectedSubMood, note });  // Pass the mood, sub-mood, and note to the parent
+        onMoodUpdate(date, { mood: selectedMood, subMood: selectedSubMood, notes: note });
     };
 
     return (
@@ -90,7 +90,10 @@ export default function MoodSelection({ language = "English", theme = "light", o
                             <img
                                 id={mood}
                                 className="column"
-                                onClick={() => setMoodImages(moods[mood].subImages, index)}  // Pass the sub-images
+                                onClick={() => {
+                                    setSelectedMood(mood);
+                                    setMoodImages(moods[mood].subImages, index);
+                                }}
                                 onMouseEnter={() => setHoveredMood(mood)}  // Set hovered mood on mouse enter
                                 onMouseLeave={() => setHoveredMood('')}  // Clear hovered mood on mouse leave
                                 alt={mood}
