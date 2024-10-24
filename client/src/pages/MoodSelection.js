@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import './MoodSelection.css'
 import veryAngry from '../assets/emoji/very-angry.png'
 import sad from '../assets/emoji/sad.png'
