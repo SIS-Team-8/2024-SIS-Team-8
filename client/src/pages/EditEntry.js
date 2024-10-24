@@ -44,10 +44,10 @@ export default function MoodSelection({ language = "English", theme = "light", m
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
     const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
-    const [selectedMood, setSelectedMood] = useState(moodEntry ? moodEntry.mood : '');
+    /*const [selectedMood, setSelectedMood] = useState(moodEntry ? moodEntry.mood : '');
     const [note, setNote] = useState(moodEntry ? moodEntry.notes : '');
     const initialMood = moodData[date]?.mood || '';
-    const initialNote = moodData[date]?.notes || '';
+    const initialNote = moodData[date]?.notes || '';*/
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
