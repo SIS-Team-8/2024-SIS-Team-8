@@ -241,7 +241,8 @@ const CalendarScreen = ({theme, language, moodData }) => {
                                         return (
                                             <td key={dayIndex} onClick={day ? () => navigate(`/daily-view/${dateKey}`) : null} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF" }}>
                                                 {emojiSrc ? (
-                                                    <img src={emojiSrc} alt={moodEntry.mood} className="calendar-emoji" />
+                                                    //<img src={emojiSrc} alt={moodEntry.mood} className="calendar-emoji" />
+                                                    <img src={getMoodEmojiImage(moodEntry.mood)} alt={moodEntry.mood} />
                                                 ) : (
                                                     <span>{day}</span>
                                                 )}
