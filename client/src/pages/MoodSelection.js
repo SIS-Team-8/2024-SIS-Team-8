@@ -136,12 +136,12 @@ export default function MoodSelection({ language = "English", theme = "light", m
     };
 
     const handleSubmit = () => {
-        updateEntry(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
+        onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
     };
 
     return (
         <html>
-            <div id='container' className={'mood-selection ${theme}'}>
+            <div id='container' className={theme}>
                 <div id='row'>
                     {Object.keys(moods).map((mood, index) => (
                         <div key={mood} style={{ position: 'relative', display: 'inline-block' }}>
