@@ -77,9 +77,14 @@ export default function MoodSelection({ language = "English", theme = "light", m
         "very sad": 4
     };
 
-    const [selectedMood, setSelectedMood] = useState('');  // Selected main mood
+    /*const [selectedMood, setSelectedMood] = useState('');  // Selected main mood
     const [selectedSubMood, setSelectedSubMood] = useState('');  // Selected sub-mood
     const [note, setNote] = useState('');  // The note entered by the user
+    const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);*/
+
+    const [selectedMood, setSelectedMood] = useState(moodEntry.mood)
+    const [note, setNote] = useState(moodEntry.notes);
+    const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);  // New state for sub-emoji
     const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
 
     useEffect(() => {
@@ -112,6 +117,12 @@ export default function MoodSelection({ language = "English", theme = "light", m
         happy: { rowImg: happy, subImages: [happy, veryHappy, extremelyHappy, amazinglyHappy, ecstatic] },
         bored: { rowImg: bored, subImages: [bored, exasperated, sarcastic, tired, exhausted] },
         scared: { rowImg: scared, subImages: [surprised, nervous, overwhelmed, scared, terrified] }
+    };
+
+    const handleMoodChange = (mood) => {
+        setSelectedMood(mood);
+        setMoodIntensity(moodIntensityMap[mood] || 'N/A');
+        setMoodImages(moods[mood].subImages);
     };
 
     // Function to capitalize every word in the image name
