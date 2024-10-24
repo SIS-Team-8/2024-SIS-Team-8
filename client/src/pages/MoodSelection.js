@@ -47,6 +47,36 @@ export default function MoodSelection({ language = "English", theme = "light", m
 
     const moodEntry = moodData[date] || { mood: '', notes: '', intensity: "N/A", subMood: '' };
 
+    const moodIntensityMap = {
+        "angry": 4,
+        "annoyed": 2,
+        "frustrated": 3,
+        "very angry": 5,
+        "extremely angry": 5,
+        "sad": 3,
+        "upset": 3,
+        "deflated": 2,
+        "distressed": 4,
+        "miserable": 5,
+        "happy": 3,
+        "very happy": 4,
+        "extremely happy": 5,
+        "amazingly happy": 5,
+        "ecstatic": 5,
+        "bored": 1,
+        "exasperated": 3,
+        "sarcastic": 2,
+        "tired": 2,
+        "exhausted": 4,
+        "scared": 4,
+        "surprised": 3,
+        "nervous": 3,
+        "overwhelmed": 4,
+        "terrified": 5,
+        "neutral": 2,
+        "very sad": 4
+    };
+
     const [selectedMood, setSelectedMood] = useState('');  // Selected main mood
     const [selectedSubMood, setSelectedSubMood] = useState('');  // Selected sub-mood
     const [note, setNote] = useState('');  // The note entered by the user
@@ -95,7 +125,7 @@ export default function MoodSelection({ language = "English", theme = "light", m
     };
 
     const handleSubmit = () => {
-        onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, subMood: selectedSubMood, notes: note });
+        onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
     };
 
     return (
