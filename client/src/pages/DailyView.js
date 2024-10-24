@@ -133,7 +133,6 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
     // Update intensity automatically when mood changes
     const handleMoodChange = (newMood) => {
         setMood(newMood);
-        setMoodImages(newMood[mood].subImages);
         setIntensity(moodIntensityMap[newMood]); // Update intensity based on the mood
     };
 
@@ -172,6 +171,9 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
 
                 <div className="emoji">
                     <img src={getMoodEmoji(moodEntry.mood)} alt={moodEntry.mood}/>
+                    {moodEntry.subMood && (
+                        <img src={moodEntry.subMood} alt="subMood" />  // Display sub-mood if available
+                    )}
                 </div>
 
                 {isEditing ? (
