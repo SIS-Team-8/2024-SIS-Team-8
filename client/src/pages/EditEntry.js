@@ -67,7 +67,7 @@ export default function MoodSelection({ language = "English", theme = "light", m
 
     const handleSubmit = () => {
         onMoodUpdate(date, { mood: selectedMood, note });
-        navigate('/Calendar'); // Assuming you want to navigate to the root after submission
+        navigate('/calendar'); // Assuming you want to navigate to the root after submission
     };
 
     const t = translations[language];
