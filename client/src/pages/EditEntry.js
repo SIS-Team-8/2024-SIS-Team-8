@@ -39,14 +39,19 @@ const translations = {
 export default function MoodSelection({ language = "English", theme = "light", moodData, onMoodUpdate }) {
     const { date } = useParams(); // Use useParams to access 'date' from URL
     const navigate = useNavigate();
-    const moodEntry = moodData[date] || { mood: '', notes: '' };
+
+    const moodEntry = moodData && moodData[date] ? moodData[date] : { mood: '', notes: '' };
+
+    const [selectedMood, setSelectedMood] = useState(moodEntry ? moodEntry.mood : '');
+    const [note, setNote] = useState(moodEntry ? moodEntry.notes : '');
+
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
+
     const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
-    const [selectedMood, setSelectedMood] = useState(moodEntry ? moodEntry.mood : '');
-    const [note, setNote] = useState(moodEntry ? moodEntry.notes : '');
+    
     const initialMood = moodData[date]?.mood || '';
     const initialNote = moodData[date]?.notes || '';
 
@@ -62,6 +67,7 @@ export default function MoodSelection({ language = "English", theme = "light", m
 
     const handleSubmit = () => {
         onMoodUpdate(date, { mood: selectedMood, note });
+        navigate('/'); // Assuming you want to navigate to the root after submission
     };
 
     const t = translations[language];
