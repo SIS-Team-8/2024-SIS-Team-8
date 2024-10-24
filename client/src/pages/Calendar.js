@@ -146,7 +146,7 @@ const CalendarScreen = ({theme, language, onUpdate }) => {
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 9));
     const [isYearlyView, setIsYearlyView] = useState(false);
     const t = translations[language];
-    const [moodData, setMoodData] = useState(initialMoodData);
+    const [moodData, setMoodData] = useState(initialMood);
 
     const changeMonth = (direction) => {
         if (isYearlyView) {
