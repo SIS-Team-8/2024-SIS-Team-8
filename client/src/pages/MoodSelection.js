@@ -42,6 +42,8 @@ export default function MoodSelection({ language = "English", theme = "light", o
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
     const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
+    const [selectedMood, setSelectedMood] = useState(initialMood);
+    const [note, setNote] = useState(initialNote);
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
