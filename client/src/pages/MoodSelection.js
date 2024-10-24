@@ -45,6 +45,8 @@ export default function MoodSelection({ language = "English", theme = "light", o
     const [selectedMood, setSelectedMood] = useState(initialMood || '');
     const [note, setNote] = useState(initialMood || '');
     const { date, mood, notes, isEditing } = location.state || {};
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
