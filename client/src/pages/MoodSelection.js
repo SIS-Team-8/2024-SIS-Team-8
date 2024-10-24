@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from "react-router-dom";
 import './MoodSelection.css'
 import veryAngry from '../assets/emoji/very-angry.png'
