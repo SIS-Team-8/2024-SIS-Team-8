@@ -37,7 +37,7 @@ function App() {
     const handleMoodUpdate = (date, { mood, note }) => {
         setMoodData(prev => ({
             ...prev,
-            [date]: { ...prev[date], mood, note }
+            [date]: { mood, notes: note }
         }));
     };
 

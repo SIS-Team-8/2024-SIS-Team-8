@@ -40,10 +40,13 @@ export default function MoodSelection({ language = "English", theme = "light", m
     const { date } = useParams(); // Use useParams to access 'date' from URL
     const navigate = useNavigate();
 
-    const moodEntry = moodData && moodData[date] ? moodData[date] : { mood: '', notes: '' };
+    const moodEntry = moodData[date] || { mood: '', notes: '' };
 
-    const [selectedMood, setSelectedMood] = useState(moodEntry ? moodEntry.mood : '');
-    const [note, setNote] = useState(moodEntry ? moodEntry.notes : '');
+    const [selectedMood, setSelectedMood] = useState(moodEntry.mood);
+    const [note, setNote] = useState(moodEntry.notes);
+
+    const [mood, setMood] = useState(moodData[date]?.mood || '');
+    const [notes, setNotes] = useState(moodData[date]?.notes || '');
 
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
@@ -66,8 +69,8 @@ export default function MoodSelection({ language = "English", theme = "light", m
     };
 
     const handleSubmit = () => {
-        onMoodUpdate(date, { mood: selectedMood, note });
-        navigate('/calendar'); // Assuming you want to navigate to the root after submission
+        onMoodUpdate(date, { mood: selectedMood, notes: note });
+        navigate('/daily-view/' + date);
     };
 
     const t = translations[language];
