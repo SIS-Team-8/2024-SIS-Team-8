@@ -56,7 +56,7 @@ export default function MoodSelection({ language = "English", theme = "light", o
     };
 
     const handleSubmit = () => {
-        onMoodUpdate(selectedMood, notes);
+        onMoodUpdate(selectedMood, note);
     };
 
     const t = translations[language];
