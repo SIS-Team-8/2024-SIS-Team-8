@@ -36,7 +36,7 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function EditEntry({ language = "English", theme = "light", moodData, updateEntry }) {
+export default function EditEntry({ language = "English", theme = "light", moodData, onMoodUpdate }) {
     const { date } = useParams(); // Use useParams to access 'date' from URL
     const navigate = useNavigate();
 
@@ -61,6 +61,18 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     const initialMood = moodData[date]?.mood || '';
     const initialNote = moodData[date]?.notes || '';
 
+    useEffect(() => {
+        if (moodData[date]) {
+            setSelectedMood(moodData[date].mood);
+            setMoodIntensity(moodData[date].intensity);
+            setNote(moodData[date].notes);
+        } else {
+            setSelectedMood('');
+            setMoodIntensity('N/A');
+            setNote('');
+        }
+    }, [date, moodData]);
+
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
         setRowOpacity(prev => prev.map((_, i) => (i === activeIndex ? 1 : 0.5)));  // Change opacity of row images on click
@@ -72,20 +84,17 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     };
 
     // This function will be used to submit the new mood and note
-    const handleSubmit = (selectedMood, moodIntensity, note) => {
-        updateEntry(date, { selectedMood, moodIntensity, note });
-        navigate('/daily-view/');
+    const handleSubmit = () => {
+        onMoodUpdate(date, { mood: selectedMood, intensity, notes: note });
+        navigate(`/daily-view/${date}`);
     };
 
-    const handleMoodClick = (selectedMood, images, index) => {
-        setSelectedMood(selectedMood);  // Set the selected mood
-        setImageSrc(images, index);  // Set sub-emojis to be shown
+    const handleMoodChange = (mood) => {
+        setSelectedMood(mood);
     };
 
-    const handleIntensityChange = (moodIntensity) => {
-        setMoodIntensity(moodIntensity);
-        //const newMood = intensityMoodMap[intensity] || 'neutral'; // Default to 'neutral' if no match
-        //setSelectedMood(mood);
+    const handleIntensityChange = (newIntensity) => {
+        setMoodIntensity(newIntensity);
     };
 
     const t = translations[language];
