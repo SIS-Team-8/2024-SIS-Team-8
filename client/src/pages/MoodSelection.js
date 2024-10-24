@@ -36,14 +36,14 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate }) {
+export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate, initialMood, initialNotes, isEditing }) {
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
     const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
-    const [selectedMood, setSelectedMood] = useState('');
-    const [note, setNote] = useState('');
+    const [selectedMood, setSelectedMood] = useState(initialMood || '');
+    const [note, setNote] = useState(initialMood || '');
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
@@ -56,7 +56,7 @@ export default function MoodSelection({ language = "English", theme = "light", o
     };
 
     const handleSubmit = () => {
-        const date = new Date().toISOString().slice(0, 10);  // YYYY-MM-DD format
+        const date = new Date().toISOString().slice(0, 10);  // YYYY-MM-DD format for new entries
         onMoodUpdate(date, selectedMood, note);
     };
 
@@ -128,8 +128,8 @@ export default function MoodSelection({ language = "English", theme = "light", o
                 </div>
 
                 <div id="flexContainer">
-                    <textarea id="log" placeholder={t.addNote} className={theme}/>
-
+                    <textarea id="log" placeholder={t.addNote} className={theme} value={note} onChange={(e) => setNote(e.target.value)}/>
+                    <button onClick={handleSubmit}>Submit Mood</button>
                     <Link to="/">
                         <img id="submit" className={theme} alt="submit" src={submit}/>
                     </Link>
