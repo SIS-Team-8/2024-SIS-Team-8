@@ -109,7 +109,7 @@ export default function EditEntry({ language = "English", theme = "light", moodD
                             <img
                                 id={mood}
                                 className="column"
-                                onClick={() => handleMoodClick(moods[mood].subImages, index)}  // Pass the sub-images
+                                onClick={() => handleMoodClick(mood, moods[mood].subImages, index)}
                                 alt={mood}
                                 src={moods[mood].rowImg}
                                 //onClick={() => setSelectedMood(mood)}
