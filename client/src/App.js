@@ -26,12 +26,20 @@ function App() {
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
     const [language, setLanguage] = useState(localStorage.getItem('language') || 'English');
     const [moodData, setMoodData] = useState({
-        "2024-10-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
+       /* "2024-10-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
         "2024-10-02": { mood: "happy", intensity: 4, notes: "Good day." },
         "2024-10-03": { mood: "neutral", intensity: 3, notes: "An average day." },
         "2024-10-04": { mood: "sad", intensity: 2, notes: "Feeling a bit down." },
-        "2024-10-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." }
+        "2024-10-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." } */
     });
+
+    const handleMoodUpdate = (date, mood, note) => {
+        setMoodEntries(prev => ({
+            ...prev,
+            [date]: { mood, note }
+        }));
+    };
+
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -121,7 +129,7 @@ function App() {
                 <Route path="/history" element={isAuthenticated ? <History theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/profile" element={isAuthenticated ? <Profile theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/settings" element={isAuthenticated ? <Settings theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} /> : <Login onLogin={handleLogin} />} />
-                <Route path="/mood-selection" element={isAuthenticated ? <MoodSelection theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/mood-selection" element={isAuthenticated ? <MoodSelection theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} nMoodSelect={handleMoodUpdate} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/login" element={<Login language={language} theme={theme} onLogin={handleLogin} />} />
                 <Route path="/sign-up" element={<SignUp language={language} theme={theme} />} />
                 <Route path="*" element={<NotFound />} />

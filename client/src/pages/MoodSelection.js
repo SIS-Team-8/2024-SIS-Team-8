@@ -49,6 +49,12 @@ export default function MoodSelection({ language = "English", theme = "light" })
         resetSubRowOpacity();
     };
 
+    // Inside MoodSelection component
+    const submitMood = () => {
+        const date = new Date().toISOString().slice(0, 10); // or any appropriate date
+        onMoodSelect(date, selectedMood, note);
+    };
+
     const resetSubRowOpacity = () => {
         setSubRowOpacity(Array(5).fill(1));  // Reset sub-row images' opacity to 1
     };
