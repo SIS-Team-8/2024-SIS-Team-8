@@ -109,10 +109,10 @@ export default function EditEntry({ language = "English", theme = "light", moodD
                             <img
                                 id={mood}
                                 className="column"
-                                //onClick={() => setMoodImages(moods[mood].subImages, index)}  // Pass the sub-images
+                                onClick={() => setMoodImages(moods[mood].subImages, index)}  // Pass the sub-images
                                 alt={mood}
                                 src={moods[mood].rowImg}
-                                onClick={() => setSelectedMood(mood)}
+                                //onClick={() => setSelectedMood(mood)}
                                 onMouseEnter={() => setHoveredMood(mood)}  // Set hovered mood on mouse enter
                                 onMouseLeave={() => setHoveredMood('')}  // Clear hovered mood on mouse leave
                                 style={{ opacity: rowOpacity[index] }}  // Row opacity updates on click
