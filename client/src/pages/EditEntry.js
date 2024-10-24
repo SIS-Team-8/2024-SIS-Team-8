@@ -113,6 +113,7 @@ export default function EditEntry({ language = "English", theme = "light", moodD
         setSubRowOpacity(Array(5).fill(1));  // Reset sub-row images' opacity to 1
     };
 
+    // This function will be used to submit the new mood and note
     const handleSubmit = () => {
         onMoodUpdate(date, { mood: selectedMood, subMood: selectedSubMood, intensity: moodIntensity, notes: note });
         navigate(`/daily-view/${date}`);
@@ -120,7 +121,6 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     const handleMoodChange = (mood) => {
         setSelectedMood(mood);
-        setMoodImages(moods[mood].subImages);
         setMoodIntensity(moodIntensityMap[mood] || 'N/A');
         setMoodImages(moods[mood].subImages);
     };
