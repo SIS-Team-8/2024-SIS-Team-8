@@ -43,8 +43,8 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     const moodEntry = moodData[date] || { mood: '', notes: '' };
 
     // State to manage the selected mood and note
-    const [selectedMood, setSelectedMood] = useState(moodEntry.mood);  // Pre-fill with existing mood
-    const [note, setNote] = useState(moodEntry.notes);  // Pre-fill with existing notes
+    const [selectedMood, setSelectedMood] = useState(moodEntry.mood);
+    const [note, setNote] = useState(moodEntry.notes);
 
 
     const [mood, setMood] = useState(moodData[date]?.mood || '');
@@ -74,6 +74,11 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     const handleSubmit = () => {
         onMoodUpdate(date, { mood: selectedMood, notes: note });
         navigate('/daily-view/' + date);  // Navigate back to the daily view after updating
+    };
+
+    const handleMoodClick = (mood, images) => {
+        setSelectedMood(mood);  // Set the selected mood
+        setImageSrc(images);  // Set sub-emojis to be shown
     };
 
     const t = translations[language];
@@ -106,12 +111,12 @@ export default function EditEntry({ language = "English", theme = "light", moodD
                                 id={mood}
                                 className="column"
                                 //onClick={() => setMoodImages(moods[mood].subImages, index)}  // Pass the sub-images
-                                onMouseEnter={() => setHoveredMood(mood)}  // Set hovered mood on mouse enter
-                                onMouseLeave={() => setHoveredMood('')}  // Clear hovered mood on mouse leave
                                 alt={mood}
                                 src={moods[mood].rowImg}
-                                style={{ opacity: rowOpacity[index] }}  // Row opacity updates on click
                                 onClick={() => setSelectedMood(mood)}
+                                onMouseEnter={() => setHoveredMood(mood)}  // Set hovered mood on mouse enter
+                                onMouseLeave={() => setHoveredMood('')}  // Clear hovered mood on mouse leave
+                                style={{ opacity: rowOpacity[index] }}  // Row opacity updates on click
                             />
                             {hoveredMood === mood && (
                                 <span id="emojiLabel">
@@ -128,12 +133,12 @@ export default function EditEntry({ language = "English", theme = "light", moodD
                             <img
                                 id={`sub${index}`}
                                 className="subColumn"
-                                onClick={() => handleSubRowClick(index)}
-                                onMouseEnter={() => setHoveredSubMood(extractMoodNameFromImage(src))}  // Extract name from sub-image
-                                onMouseLeave={() => setHoveredSubMood('')}  // Clear hovered sub-row mood on mouse leave
                                 alt=""
                                 src={src}
                                 style={{ opacity: subRowOpacity[index] }}  // Only update sub-row opacity
+                                onClick={() => handleSubRowClick(index)}
+                                onMouseEnter={() => setHoveredSubMood(extractMoodNameFromImage(src))}  // Extract name from sub-image
+                                onMouseLeave={() => setHoveredSubMood('')}  // Clear hovered sub-row mood on mouse leave
                             />
                             {hoveredSubMood === extractMoodNameFromImage(src) && (
                                 <span id='emojiLabel'>
