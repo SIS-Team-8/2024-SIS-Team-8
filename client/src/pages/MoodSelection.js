@@ -44,7 +44,7 @@ export default function MoodSelection({ language = "English", theme = "light", o
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
     const [selectedMood, setSelectedMood] = useState(mood);
     const [note, setNote] = useState(notes);
-    const { date, mood, notes, isEditing } = location.state || { date: null, mood: '', notes: '', isEditing: false };
+    const { date, mood, notes, isEditing } = useState('') || { date: null, mood: '', notes: '', isEditing: false };
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
