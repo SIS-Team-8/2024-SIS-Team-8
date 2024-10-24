@@ -58,7 +58,6 @@ export default function MoodSelection({ language = "English", theme = "light", o
 
     const handleSubmit = () => {
         onMoodUpdate(date, selectedMood, note);  // Assume date is properly handled or passed
-        navigate('/daily-view/' + date);  // Redirect back to the DailyView
     };
 
     const t = translations[language];
