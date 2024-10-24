@@ -36,18 +36,33 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate }) {
+export default function MoodSelection({ language = "English", theme = "light", moodData, onMoodUpdate }) {
     const { date } = useParams();
-    
+
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
     const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
 
+    const moodEntry = moodData[date] || { mood: '', notes: '', intensity: "N/A", subMood: '' };
+
     const [selectedMood, setSelectedMood] = useState('');  // Selected main mood
     const [selectedSubMood, setSelectedSubMood] = useState('');  // Selected sub-mood
     const [note, setNote] = useState('');  // The note entered by the user
+    const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
+
+    useEffect(() => {
+        if (moodData[date]) {
+            setSelectedMood(moodData[date].mood);
+            setMoodIntensity(moodData[date].intensity);
+            setNote(moodData[date].notes);
+        } else {
+            setSelectedMood('');
+            setMoodIntensity('N/A');
+            setNote('');
+        }
+    }, [date, moodData]);
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
@@ -80,7 +95,7 @@ export default function MoodSelection({ language = "English", theme = "light", o
     };
 
     const handleSubmit = () => {
-        onMoodUpdate(date, { mood: selectedMood, subMood: selectedSubMood, notes: note });
+        onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, subMood: selectedSubMood, notes: note });
     };
 
     return (
