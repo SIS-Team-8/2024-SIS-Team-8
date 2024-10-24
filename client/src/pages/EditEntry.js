@@ -115,8 +115,12 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     // This function will be used to submit the new mood and note
     const handleSubmit = () => {
-        onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
-        navigate('/calendar');
+        onMoodUpdate(date, { 
+            mood: selectedSubMood || selectedMood, // Ensure the sub-emoji is passed as the mood if selected
+            intensity: moodIntensity, 
+            notes: note 
+        });
+        navigate(`/daily-view/${date}`);
     };
 
     const handleMoodChange = (mood) => {
