@@ -36,7 +36,7 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function MoodSelection({ language = "English", theme = "light", moodData, updateEntry }) {
+export default function MoodSelection({ language = "English", theme = "light", moodData, onMoodUpdate }) {
     const { date } = useParams();
 
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
