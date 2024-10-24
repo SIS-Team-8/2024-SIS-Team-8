@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import './MoodSelection.css'
 import veryAngry from '../assets/emoji/very-angry.png'
 import sad from '../assets/emoji/sad.png'
@@ -36,63 +36,12 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate, moodData, selectedMood: initialMood = '', note: initialNote = '' }) {
-    const { date } = useParams(); // Use useParams to access 'date' from URL
-    const navigate = useNavigate();
-    
-    const moodEntry = moodData[date] || { mood: '', notes: '', intensity: "N/A", subMood: '' };
-
+export default function MoodSelection({ language = "English", theme = "light" }) {
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
     const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
-    const [selectedMood, setSelectedMood] = useState(initialMood);
-    const [note, setNote] = useState(initialNote);
-    const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
-    const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);
-
-    const moodIntensityMap = {
-        "angry": 4,
-        "annoyed": 2,
-        "frustrated": 3,
-        "very angry": 5,
-        "extremely angry": 5,
-        "sad": 3,
-        "upset": 3,
-        "deflated": 2,
-        "distressed": 4,
-        "miserable": 5,
-        "happy": 3,
-        "very happy": 4,
-        "extremely happy": 5,
-        "amazingly happy": 5,
-        "ecstatic": 5,
-        "bored": 1,
-        "exasperated": 3,
-        "sarcastic": 2,
-        "tired": 2,
-        "exhausted": 4,
-        "scared": 4,
-        "surprised": 3,
-        "nervous": 3,
-        "overwhelmed": 4,
-        "terrified": 5,
-        "neutral": 2,
-        "very sad": 4
-    };
-
-    useEffect(() => {
-        if (moodData[date]) {
-            setSelectedMood(moodData[date].mood);
-            setMoodIntensity(moodData[date].intensity);
-            setNote(moodData[date].notes);
-        } else {
-            setSelectedMood('');
-            setMoodIntensity('N/A');
-            setNote('');
-        }
-    }, [date, moodData]);
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
@@ -102,11 +51,6 @@ export default function MoodSelection({ language = "English", theme = "light", o
 
     const resetSubRowOpacity = () => {
         setSubRowOpacity(Array(5).fill(1));  // Reset sub-row images' opacity to 1
-    };
-
-    const handleSubmit = () => {
-        //onMoodUpdate(selectedMood, note);
-        onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
     };
 
     const t = translations[language];
@@ -127,8 +71,6 @@ export default function MoodSelection({ language = "English", theme = "light", o
 
     const handleSubRowClick = (index) => {
         setSubRowOpacity(prev => prev.map((_, i) => (i === index ? 1 : 0.5)));  // Update only sub-row images' opacity
-        setSelectedSubMood(imageSrc[index]);  // Set selected sub-emoji
-        setMoodIntensity(index + 1);
     };
 
     return (
@@ -160,7 +102,7 @@ export default function MoodSelection({ language = "English", theme = "light", o
                     {imageSrc.map((src, index) => (
                         <div key={index} style={{ position: 'relative', display: 'inline-block' }}>
                             <img
-                                id={'sub${index}'}
+                                id={`sub${index}`}
                                 className="subColumn"
                                 onClick={() => handleSubRowClick(index)}
                                 onMouseEnter={() => setHoveredSubMood(extractMoodNameFromImage(src))}  // Extract name from sub-image
@@ -179,9 +121,10 @@ export default function MoodSelection({ language = "English", theme = "light", o
                 </div>
 
                 <div id="flexContainer">
-                    <textarea id="log" placeholder={t.addNote} className={theme} value={note} onChange={(e) => setNote(e.target.value)}/>
+                    <textarea id="log" placeholder={t.addNote} className={theme}/>
+
                     <Link to="/">
-                        <img id="submit" className={theme} alt="submit" src={submit} onClick={handleSubmit}/>
+                        <img id="submit" className={theme} alt="submit" src={submit}/>
                     </Link>
                 </div>
             </div>
