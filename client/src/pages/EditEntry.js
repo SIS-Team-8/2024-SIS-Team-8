@@ -36,15 +36,17 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function EditEntry({ language = "English", theme = "light", moodData, onMoodUpdate }) {
+export default function EditEntry({ language = "English", theme = "light", moodData, onMoodUpdate, selectedMood: initialMood = '', note: initialNote = '' }) {
     const { date } = useParams(); // Use useParams to access 'date' from URL
     const navigate = useNavigate();
 
     const moodEntry = moodData[date] || { mood: '', notes: '' };
 
     // State to manage the selected mood and note
-    const [selectedMood, setSelectedMood] = useState(moodEntry.mood);
-    const [note, setNote] = useState(moodEntry.notes);
+    const [selectedMood, setSelectedMood] = useState(initialMood);
+    const [note, setNote] = useState(initialNote);
+    const [selectedSubMood, setSelectedSubMood] = useState('');
+    const [moodIntensity, setMoodIntensity] = useState(0);
 
 
     /*const [mood, setMood] = useState(moodData[date]?.mood || '');
@@ -72,12 +74,12 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     // This function will be used to submit the new mood and note
     const handleSubmit = () => {
-        onMoodUpdate(date, { mood: selectedMood, notes: note });
+        onMoodUpdate(selectedMood, note, moodIntensity);
     };
 
     const handleMoodClick = (mood, images) => {
         setSelectedMood(mood);  // Set the selected mood
-        setImageSrc(images);  // Set sub-emojis to be shown
+        setImageSrc(images, index);  // Set sub-emojis to be shown
     };
 
     const t = translations[language];
@@ -98,6 +100,8 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     const handleSubRowClick = (index) => {
         setSubRowOpacity(prev => prev.map((_, i) => (i === index ? 1 : 0.5)));  // Update only sub-row images' opacity
+        setSelectedSubMood(imageSrc[index]);  // Set selected sub-emoji
+        setMoodIntensity(index + 1);
     };
 
     return (
@@ -146,6 +150,10 @@ export default function EditEntry({ language = "English", theme = "light", moodD
                             )}
                         </div>
                     ))}
+                </div>
+
+                <div id="intensity">
+                    {selectedSubMood && <p>Intensity: {moodIntensity}</p>}
                 </div>
 
                 <div id="flexContainer">
