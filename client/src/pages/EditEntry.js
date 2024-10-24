@@ -84,7 +84,7 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     const handleIntensityChange = (intensity) => {
         setMoodIntensity(intensity);
-        const newMood = intensityMoodMap[intensity] || 'neutral'; // Default to 'neutral' if no match
+        //const newMood = intensityMoodMap[intensity] || 'neutral'; // Default to 'neutral' if no match
         //setSelectedMood(mood);
     };
 
