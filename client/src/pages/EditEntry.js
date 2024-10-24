@@ -36,7 +36,7 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function EditEntry({ language = "English", theme = "light", moodData, onMoodUpdate, selectedMood: initialMood = '', note: initialNote = '' }) {
+export default function EditEntry({ language = "English", theme = "light", moodData, onMoodUpdate }) {
     const { date } = useParams(); // Use useParams to access 'date' from URL
     const navigate = useNavigate();
 
