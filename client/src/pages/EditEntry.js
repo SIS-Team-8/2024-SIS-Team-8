@@ -43,7 +43,7 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     const moodEntry = moodData[date] || { mood: '', notes: '', intensity: "N/A", subMood: '' };
 
     // State to manage the selected mood and note
-    const [selectedMood, setSelectedMood] = useState(moodEntry.mood);
+    const [selectedMood, setSelectedMood] = useState(moodEntry.mood)
     const [note, setNote] = useState(moodEntry.notes);
     const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);  // New state for sub-emoji
     const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
