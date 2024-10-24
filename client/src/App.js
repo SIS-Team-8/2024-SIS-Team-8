@@ -123,7 +123,7 @@ function App() {
                 <Route path="/onboarding" element={isAuthenticated ? <Onboarding onComplete={handleOnboardingComplete}/> : <Login onLogin={handleLogin} />} />
                 <Route path="/onboarding-overview" element={isAuthenticated ? <OnboardingOverview/> : <Login onLogin={handleLogin} />} />
                 <Route path="/settings" element={<Settings theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} />} />
-                <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView theme={theme} language={language} moodData={moodData} updateEntry={handleMoodUpdate} deleteEntry={deleteEntry} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView theme={theme} language={language} moodData={moodData} updateEntry={updateEntry} deleteEntry={deleteEntry} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} language={language} moodData={moodData} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/help" element={isAuthenticated ? <Help theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/history" element={isAuthenticated ? <History theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
@@ -132,7 +132,7 @@ function App() {
                 <Route path="/mood-selection" element={isAuthenticated ? <MoodSelection theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} onMoodUpdate={handleMoodUpdate} mooddata={moodData} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/login" element={<Login language={language} theme={theme} onLogin={handleLogin} />} />
                 <Route path="/sign-up" element={<SignUp language={language} theme={theme} />} />
-                <Route path="/edit-entry/:date" element={isAuthenticated ? <EditEntry theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} onMoodUpdate={handleMoodUpdate} moodData={moodData}/> : <Login onLogin={handleLogin} />} />
+                <Route path="/edit-entry/:date" element={isAuthenticated ? <EditEntry theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} onMoodUpdate={updateEntry} moodData={moodData}/> : <Login onLogin={handleLogin} />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </div>
