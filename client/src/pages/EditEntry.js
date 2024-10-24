@@ -55,11 +55,6 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     const initialMood = moodData[date]?.mood || '';
     const initialNote = moodData[date]?.notes || '';
 
-    const handleMoodClick = (mood, images, index) => {
-        setSelectedMood(mood);  // Set the selected mood
-        setMoodImages(images, index);  // Update the sub-emojis and row opacity
-    };
-
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
         setRowOpacity(prev => prev.map((_, i) => (i === activeIndex ? 1 : 0.5)));  // Change opacity of row images on click
@@ -70,8 +65,15 @@ export default function EditEntry({ language = "English", theme = "light", moodD
         setSubRowOpacity(Array(5).fill(1));  // Reset sub-row images' opacity to 1
     };
 
+    // This function will be used to submit the new mood and note
     const handleSubmit = () => {
-        onMoodUpdate(selectedMood, note);
+        onMoodUpdate(date, { mood: selectedMood, notes: note });
+        navigate('/daily-view/' + date);  // Navigate back to the daily view after updating
+    };
+
+    const handleMoodClick = (mood, images, index) => {
+        setSelectedMood(mood);  // Set the selected mood
+        setMoodImages(images, index);  // Update the sub-emojis and row opacity
     };
 
     const t = translations[language];
@@ -106,6 +108,7 @@ export default function EditEntry({ language = "English", theme = "light", moodD
                                 onClick={() => setMoodImages(moods[mood].subImages, index)}  // Pass the sub-images
                                 alt={mood}
                                 src={moods[mood].rowImg}
+                                //onClick={() => setSelectedMood(mood)}
                                 onMouseEnter={() => setHoveredMood(mood)}  // Set hovered mood on mouse enter
                                 onMouseLeave={() => setHoveredMood('')}  // Clear hovered mood on mouse leave
                                 style={{ opacity: rowOpacity[index] }}  // Row opacity updates on click
