@@ -36,7 +36,7 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function EditEntry({ language = "English", theme = "light", moodData, onMoodUpdate, selectedMood: initialMood = '', note: initialNote = '' }) {
+export default function EditEntry({ language = "English", theme = "light", moodData, onMoodUpdate }) {
     const { date } = useParams(); // Use useParams to access 'date' from URL
     const navigate = useNavigate();
 
@@ -47,6 +47,7 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     const [note, setNote] = useState(initialNote);
     const [selectedSubMood, setSelectedSubMood] = useState('');
     const [moodIntensity, setMoodIntensity] = useState(0);
+    
 
 
     /*const [mood, setMood] = useState(moodData[date]?.mood || '');
@@ -79,7 +80,8 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     const handleMoodClick = (mood, images) => {
         setSelectedMood(mood);  // Set the selected mood
-        setImageSrc(images, index);  // Set sub-emojis to be shown
+        setImageSrc(images);  // Set sub-emojis to be shown
+        setNote(note);
     };
 
     const t = translations[language];
