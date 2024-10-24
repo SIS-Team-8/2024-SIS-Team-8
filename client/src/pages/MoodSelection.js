@@ -36,6 +36,9 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
+const navigate = useNavigate();
+const location = useLocation();
+
 export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate, initialMood, initialNotes }) {
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
@@ -45,8 +48,6 @@ export default function MoodSelection({ language = "English", theme = "light", o
     const [selectedMood, setSelectedMood] = useState(initialMood || '');
     const [note, setNote] = useState(initialMood || '');
     const { date, mood, notes, isEditing } = location.state || {};
-    const navigate = useNavigate();
-    const location = useLocation();
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
