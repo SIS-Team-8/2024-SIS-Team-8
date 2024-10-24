@@ -48,7 +48,6 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     const [selectedSubMood, setSelectedSubMood] = useState('');  // New state for sub-emoji
     const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
 
-
     /*const [mood, setMood] = useState(moodData[date]?.mood || '');
     const [notes, setNotes] = useState(moodData[date]?.notes || '');*/
 
@@ -75,11 +74,18 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     // This function will be used to submit the new mood and note
     const handleSubmit = () => {
         onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
+        navigate('/daily-view/');
     };
 
     const handleMoodClick = (mood, images, index) => {
         setSelectedMood(mood);  // Set the selected mood
         setImageSrc(images, index);  // Set sub-emojis to be shown
+    };
+
+    const handleIntensityChange = (intensity) => {
+        setMoodIntensity(intensity);
+        const newMood = intensityMoodMap[intensity] || 'neutral'; // Default to 'neutral' if no match
+        //setSelectedMood(mood);
     };
 
     const t = translations[language];
