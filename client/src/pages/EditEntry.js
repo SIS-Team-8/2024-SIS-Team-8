@@ -115,13 +115,14 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     // This function will be used to submit the new mood and note
     const handleSubmit = () => {
-        onMoodUpdate(date, { mood: selectedMood, moodIntensity, notes: note });
+        onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
         navigate('/calendar');
     };
 
     const handleMoodChange = (mood) => {
         setSelectedMood(mood);
         setMoodIntensity(moodIntensityMap[mood] || 'N/A');
+        setMoodImages(moods[mood].subImages);
     };
 
     const handleIntensityChange = (newIntensity) => {
