@@ -36,14 +36,17 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate, initialMood, initialNotes }) {
+export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate }) {
+    const location = useLocation();
+    const navigate = useNavigate();
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
     const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
-    const [selectedMood, setSelectedMood] = useState(initialMood || '');
-    const [note, setNote] = useState(initialMood || '');
+    const [selectedMood, setSelectedMood] = useState(mood);
+    const [note, setNote] = useState(notes);
+    const { date, mood, notes, isEditing } = location.state || { date: null, mood: '', notes: '', isEditing: false };
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
@@ -56,7 +59,11 @@ export default function MoodSelection({ language = "English", theme = "light", o
     };
 
     const handleSubmit = () => {
-        onMoodUpdate(selectedMood, note);
+        onMoodUpdate(date, selectedMood, note);
+        // Optionally, clear the form or give feedback
+        alert('Mood updated successfully!');
+        setSelectedMood('');
+        setNote('');
     };
 
     const t = translations[language];
