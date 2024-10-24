@@ -106,12 +106,12 @@ export default function EditEntry({ language = "English", theme = "light", moodD
                                 id={mood}
                                 className="column"
                                 //onClick={() => setMoodImages(moods[mood].subImages, index)}  // Pass the sub-images
-                                onClick={() => setSelectedMood(mood)}
                                 onMouseEnter={() => setHoveredMood(mood)}  // Set hovered mood on mouse enter
                                 onMouseLeave={() => setHoveredMood('')}  // Clear hovered mood on mouse leave
                                 alt={mood}
                                 src={moods[mood].rowImg}
                                 style={{ opacity: rowOpacity[index] }}  // Row opacity updates on click
+                                onClick={() => setSelectedMood(mood)}
                             />
                             {hoveredMood === mood && (
                                 <span id="emojiLabel">
