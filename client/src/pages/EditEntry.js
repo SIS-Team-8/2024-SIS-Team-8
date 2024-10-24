@@ -83,7 +83,7 @@ export default function EditEntry({ language = "English", theme = "light", moodD
         onMoodUpdate(selectedMood, note, moodIntensity);
     };
 
-    const handleMoodClick = (mood, images) => {
+    const handleMoodClick = (mood, images, index) => {
         setSelectedMood(mood);  // Set the selected mood
         setImageSrc(images, index);  // Set sub-emojis to be shown
     };
