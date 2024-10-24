@@ -40,12 +40,12 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     const { date } = useParams(); // Use useParams to access 'date' from URL
     const navigate = useNavigate();
 
-    const moodEntry = moodData[date] || { mood: '', notes: '', intensity: "N/A" };
+    const moodEntry = moodData[date] || { mood: '', notes: '', intensity: "N/A", subMood: '' };
 
     // State to manage the selected mood and note
     const [selectedMood, setSelectedMood] = useState(moodEntry.mood);
     const [note, setNote] = useState(moodEntry.notes);
-    const [selectedSubMood, setSelectedSubMood] = useState('');  // New state for sub-emoji
+    const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);  // New state for sub-emoji
     const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
 
     /*const [mood, setMood] = useState(moodData[date]?.mood || '');
@@ -115,12 +115,13 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     // This function will be used to submit the new mood and note
     const handleSubmit = () => {
-        onMoodUpdate(date, { mood: selectedSubMood, intensity: moodIntensity, notes: note });
+        onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
         navigate(`/daily-view/${date}`);
     };
 
     const handleMoodChange = (mood) => {
         setSelectedMood(mood);
+        setSelectedSubMood(subMood);
         setMoodIntensity(moodIntensityMap[mood] || 'N/A');
         setMoodImages(moods[mood].subImages);
     };
