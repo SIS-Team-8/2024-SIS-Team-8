@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import './MoodSelection.css'
 import veryAngry from '../assets/emoji/very-angry.png'
@@ -37,15 +37,23 @@ const translations = {
 };
 
 export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate, moodData, selectedMood: initialMood = '', note: initialNote = '' }) {
+    const { date } = useParams(); // Use useParams to access 'date' from URL
+    const navigate = useNavigate();
+
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
     const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
-    const [selectedMood, setSelectedMood] = useState(initialMood);
-    const [note, setNote] = useState(initialNote);
-    const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
-    const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);
+    //const [selectedMood, setSelectedMood] = useState(initialMood);
+    //const [note, setNote] = useState(initialNote);
+    //const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
+    //const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);
+
+    const [selectedMood, setSelectedMood] = useState(moodData[date]?.mood || '');
+    const [selectedSubMood, setSelectedSubMood] = useState(moodData[date]?.subMood || '');
+    const [moodIntensity, setMoodIntensity] = useState(moodData[date]?.intensity || 1);
+    const [note, setNote] = useState(moodData[date]?.notes || '');
 
     const moodIntensityMap = {
         "angry": 4,
@@ -90,7 +98,9 @@ export default function MoodSelection({ language = "English", theme = "light", o
     }, [date, moodData]);
 
     const setMoodImages = (images, activeIndex) => {
-        setImageSrc(images);  // Set sub-row images
+        //setImageSrc(images);  // Set sub-row images
+        setSelectedMood(Object.keys(moods)[activeIndex]);
+        setImageSrc(images);
         setRowOpacity(prev => prev.map((_, i) => (i === activeIndex ? 1 : 0.5)));  // Change opacity of row images on click
         resetSubRowOpacity();
     };
@@ -101,7 +111,8 @@ export default function MoodSelection({ language = "English", theme = "light", o
 
     const handleSubmit = () => {
         //onMoodUpdate(selectedMood, note);
-        onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
+        //onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
+        onMoodUpdate(date, { mood: selectedMood, subMood: selectedSubMood, intensity: moodIntensity, notes: note });
     };
 
     const t = translations[language];
