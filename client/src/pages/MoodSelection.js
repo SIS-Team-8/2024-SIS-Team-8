@@ -36,12 +36,16 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function MoodSelection({ language = "English", theme = "light" }) {
+export default function MoodSelection({ language = "English", theme = "light", onMoodUpdate }) {
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
     const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
+
+    const [selectedMood, setSelectedMood] = useState('');  // Selected main mood
+    const [selectedSubMood, setSelectedSubMood] = useState('');  // Selected sub-mood
+    const [note, setNote] = useState('');  // The note entered by the user
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
@@ -71,6 +75,10 @@ export default function MoodSelection({ language = "English", theme = "light" })
 
     const handleSubRowClick = (index) => {
         setSubRowOpacity(prev => prev.map((_, i) => (i === index ? 1 : 0.5)));  // Update only sub-row images' opacity
+    };
+
+    const handleSubmit = () => {
+        onMoodUpdate({ mood: selectedMood, subMood: selectedSubMood, note });  // Pass the mood, sub-mood, and note to the parent
     };
 
     return (
@@ -121,10 +129,10 @@ export default function MoodSelection({ language = "English", theme = "light" })
                 </div>
 
                 <div id="flexContainer">
-                    <textarea id="log" placeholder={t.addNote} className={theme}/>
+                    <textarea id="log" placeholder={t.addNote} className={theme} onChange={(e) => setNote(e.target.value)} />
 
                     <Link to="/">
-                        <img id="submit" className={theme} alt="submit" src={submit}/>
+                        <img id="submit" className={theme} alt="submit" src={submit} onClick={handleSubmit} />
                     </Link>
                 </div>
             </div>
