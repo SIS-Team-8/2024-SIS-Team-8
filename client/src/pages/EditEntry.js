@@ -61,6 +61,36 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     const initialMood = moodData[date]?.mood || '';
     const initialNote = moodData[date]?.notes || '';
 
+    const moodIntensityMap = {
+        "angry": 4,
+        "annoyed": 2,
+        "frustrated": 3,
+        "very angry": 5,
+        "extremely angry": 5,
+        "sad": 3,
+        "upset": 3,
+        "deflated": 2,
+        "distressed": 4,
+        "miserable": 5,
+        "happy": 3,
+        "very happy": 4,
+        "extremely happy": 5,
+        "amazingly happy": 5,
+        "ecstatic": 5,
+        "bored": 1,
+        "exasperated": 3,
+        "sarcastic": 2,
+        "tired": 2,
+        "exhausted": 4,
+        "scared": 4,
+        "surprised": 3,
+        "nervous": 3,
+        "overwhelmed": 4,
+        "terrified": 5,
+        "neutral": 2,
+        "very sad": 4
+    };
+
     useEffect(() => {
         if (moodData[date]) {
             setSelectedMood(moodData[date].mood);
@@ -86,11 +116,12 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     // This function will be used to submit the new mood and note
     const handleSubmit = () => {
         onMoodUpdate(date, { mood: selectedMood, moodIntensity, notes: note });
-        navigate(`/daily-view/${date}`);
+        navigate('/calendar');
     };
 
     const handleMoodChange = (mood) => {
         setSelectedMood(mood);
+        setMoodIntensity(moodIntensityMap[mood] || 'N/A');
     };
 
     const handleIntensityChange = (newIntensity) => {
