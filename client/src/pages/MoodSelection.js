@@ -119,10 +119,10 @@ export default function MoodSelection({ language = "English", theme = "light", m
         scared: { rowImg: scared, subImages: [surprised, nervous, overwhelmed, scared, terrified] }
     };
 
-    const handleMoodChange = (mood) => {
+    const handleMoodChange = (mood, subImages, activeIndex) => {
         setSelectedMood(mood);
+        setMoodImages(subImages, activeIndex);
         setMoodIntensity(moodIntensityMap[mood] || 'N/A');
-        setMoodImages(moods[mood].subImages);
     };
 
     // Function to capitalize every word in the image name
@@ -148,10 +148,7 @@ export default function MoodSelection({ language = "English", theme = "light", m
                             <img
                                 id={mood}
                                 className="column"
-                                onClick={() => {
-                                    setSelectedMood(mood);
-                                    setMoodImages(moods[mood].subImages, index);
-                                }}
+                                onClick={() => handleMoodChange(mood, moods[mood].subImages, index)}
                                 onMouseEnter={() => setHoveredMood(mood)}  // Set hovered mood on mouse enter
                                 onMouseLeave={() => setHoveredMood('')}  // Clear hovered mood on mouse leave
                                 alt={mood}
