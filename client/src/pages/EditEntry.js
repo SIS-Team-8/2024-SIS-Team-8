@@ -36,7 +36,7 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function EditEntry({ language = "English", theme = "light", moodData, onMoodUpdate }) {
+export default function EditEntry({ language = "English", theme = "light", moodData, onMoodUpdate, selectedMood: initialMood = '', note: initialNote = '' }) {
     const { date } = useParams(); // Use useParams to access 'date' from URL
     const navigate = useNavigate();
 
@@ -74,12 +74,12 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     // This function will be used to submit the new mood and note
     const handleSubmit = () => {
-        onMoodUpdate(selectedMood, note, moodIntensity);
+        onMoodUpdate(date, { mood: selectedMood, notes: note });
     };
 
     const handleMoodClick = (mood, images) => {
         setSelectedMood(mood);  // Set the selected mood
-        setImageSrc(images);  // Set sub-emojis to be shown
+        setImageSrc(images, index);  // Set sub-emojis to be shown
     };
 
     const t = translations[language];
@@ -150,10 +150,6 @@ export default function EditEntry({ language = "English", theme = "light", moodD
                             )}
                         </div>
                     ))}
-                </div>
-
-                <div id="intensity">
-                    {selectedSubMood && <p>Intensity: {moodIntensity}</p>}
                 </div>
 
                 <div id="flexContainer">
