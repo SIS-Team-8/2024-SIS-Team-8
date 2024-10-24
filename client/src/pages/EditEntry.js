@@ -72,6 +72,12 @@ export default function EditEntry({ language = "English", theme = "light", moodD
         setSubRowOpacity(Array(5).fill(1));  // Reset sub-row images' opacity to 1
     };
 
+    const handleSubRowClick = (index) => {
+        setSubRowOpacity(prev => prev.map((_, i) => (i === index ? 1 : 0.5)));  // Update only sub-row images' opacity
+        setSelectedSubMood(imageSrc[index]);  // Set selected sub-emoji
+        setMoodIntensity(index + 1);
+    };
+
     // This function will be used to submit the new mood and note
     const handleSubmit = () => {
         onMoodUpdate(selectedMood, note, moodIntensity);
@@ -96,12 +102,6 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     const extractMoodNameFromImage = (image) => {
         const imageName = image.toString().split('/').pop().split('.')[0];  // Extracts name from path or variable
         return imageName.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-    };
-
-    const handleSubRowClick = (index) => {
-        setSubRowOpacity(prev => prev.map((_, i) => (i === index ? 1 : 0.5)));  // Update only sub-row images' opacity
-        setSelectedSubMood(imageSrc[index]);  // Set selected sub-emoji
-        setMoodIntensity(index + 1);
     };
 
     return (
