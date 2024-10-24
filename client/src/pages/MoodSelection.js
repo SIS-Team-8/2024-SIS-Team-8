@@ -141,7 +141,7 @@ export default function MoodSelection({ language = "English", theme = "light", m
 
     return (
         <html>
-            <div id='container' className={theme}>
+            <div id='container' className={'mood-selection ${theme}'}>
                 <div id='row'>
                     {Object.keys(moods).map((mood, index) => (
                         <div key={mood} style={{ position: 'relative', display: 'inline-block' }}>
