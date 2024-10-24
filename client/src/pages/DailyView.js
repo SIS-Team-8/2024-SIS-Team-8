@@ -133,6 +133,7 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
     // Update intensity automatically when mood changes
     const handleMoodChange = (newMood) => {
         setMood(newMood);
+        setMoodImages(newMood[mood].subImages);
         setIntensity(moodIntensityMap[newMood]); // Update intensity based on the mood
     };
 
