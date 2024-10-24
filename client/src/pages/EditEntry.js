@@ -94,10 +94,12 @@ export default function EditEntry({ language = "English", theme = "light", moodD
     useEffect(() => {
         if (moodData[date]) {
             setSelectedMood(moodData[date].mood);
+            setSelectedSubMood(moodData[date].subMood);
             setMoodIntensity(moodData[date].intensity);
             setNote(moodData[date].notes);
         } else {
             setSelectedMood('');
+            setSelectedSubMood('');
             setMoodIntensity('N/A');
             setNote('');
         }
@@ -115,13 +117,13 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     // This function will be used to submit the new mood and note
     const handleSubmit = () => {
-        onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
+        onMoodUpdate(date, { mood: selectedMood, subMood: selectedSubMood, intensity: moodIntensity, notes: note });
         navigate(`/daily-view/${date}`);
     };
 
     const handleMoodChange = (mood) => {
         setSelectedMood(mood);
-        //setSelectedSubMood(subMood);
+        setSelectedSubMood(subImages);
         setMoodIntensity(moodIntensityMap[mood] || 'N/A');
         setMoodImages(moods[mood].subImages);
     };
