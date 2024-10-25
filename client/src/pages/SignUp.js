@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
-import { toast } from "react-toastify";
 import axios from "axios";
 import { toast } from "react-toastify";
 import logo from "../assets/logo.png";
@@ -89,12 +86,9 @@ export default function SignUp( {language, theme }) {
             <div id="inputBox">
                 <form>
                     <input id="userBox" type="text" name="username" value={username} placeholder={t.username} onChange={handleOnChange} className={theme}></input>
-                    <input id="userBox" type="text" name="username" value={username} placeholder={t.username} onChange={handleOnChange} className={theme}></input>
                     <p></p>
                     <input id="passBox" type="password" name="password" value={password} placeholder={t.password} onChange={handleOnChange} className={theme}></input>
-                    <input id="passBox" type="password" name="password" value={password} placeholder={t.password} onChange={handleOnChange} className={theme}></input>
                     <p></p>
-                    <input id="passBox" type="password" name="confirmPassword" value={confirmPassword} placeholder={t.confirmPassword} onChange={handleOnChange} className={theme}></input>
                     <input id="passBox" type="password" name="confirmPassword" value={confirmPassword} placeholder={t.confirmPassword} onChange={handleOnChange} className={theme}></input>
                 </form>
 

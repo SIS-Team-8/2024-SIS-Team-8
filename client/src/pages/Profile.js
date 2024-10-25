@@ -22,7 +22,7 @@ export default function Profile({theme, language}) {
 
     const [avatarPhoto, setAvatarPhoto] = useState("https://via.placeholder.com/100");
 
-    const { name, phone, address} = profile;
+    const { name, phone, address } = profile;
 
     const fileUploadRef = useRef();
 
@@ -62,7 +62,7 @@ export default function Profile({theme, language}) {
                     "phone": profile.phone,
                     "address": profile.address
                 },
-            { withCredentials: true }
+            {}
             );
             const { success, message} = data;
             if (success) {
