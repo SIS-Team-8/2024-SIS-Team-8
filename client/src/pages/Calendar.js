@@ -152,6 +152,7 @@ const CalendarScreen = ({theme, language, moodData, moodEntries }) => {
         return entry ? (
             <div>
                 <img src={moodEmojiMap[entry.mood]} alt={entry.mood} />
+                <p className="calendar-intensity">Intensity: {entry.intensity}</p>
                 <p>{entry.notes}</p>
             </div>
         ) : null;
