@@ -133,15 +133,15 @@ function App() {
                     navigate("/login");
                 }
 
-            const { data } = await axios.post(
-                "http://localhost:3000/api/auth",
-                {},
-                { withCredentials: true }
-            );
+                const { data } = await axios.post(
+                    "http://localhost:3000/api/auth",
+                    {},
+                    { withCredentials: true }
+                );
 
-            const {status, user } = data;
+                const {status, user } = data;
 
-            setUsername(user);
+                setUsername(user);
 
             return status ? toast('Hello ${user}', { position: "top-right", }) : (removeCookie("token"), navigate("/login"));
         };

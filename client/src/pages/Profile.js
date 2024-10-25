@@ -18,6 +18,7 @@ export default function Profile({theme, language}) {
         name: "",
         phone: "",
         address: "",
+        profile_pic: ""
     });
 
     const [avatarPhoto, setAvatarPhoto] = useState("https://via.placeholder.com/100");
@@ -30,10 +31,26 @@ export default function Profile({theme, language}) {
         fileUploadRef.current.click();
     }
     
-    const uploadImageDisplay = () => {
+    const uploadImageDisplay = async () => {
         const uploadedFile = fileUploadRef.current.files[0];
         const cachedURL = URL.createObjectURL(uploadedFile);
+        const base64 = await convertToBase64(uploadedFile);
+        console.log(base64);
+        setProfile({...profile, profile_pic: base64});
         setAvatarPhoto(cachedURL);
+    }
+
+    const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+            fileReader.onload = () => {
+                resolve(fileReader.result)
+            };
+            fileReader.onerror = (error) => {
+                reject(error)
+            }
+        })
     }
 
     const handleOnChange = (e) => {
@@ -60,7 +77,8 @@ export default function Profile({theme, language}) {
                 {
                     "name": profile.name,
                     "phone": profile.phone,
-                    "address": profile.address
+                    "address": profile.address,
+                    "profile_pic": profile.profile_pic
                 },
             {}
             );
@@ -76,6 +94,27 @@ export default function Profile({theme, language}) {
     };
 
     const t = translations[language];
+/*
+    useEffect(() => {
+        const getProfile = async () => {
+            try {
+            const { data } = await axios.post(
+                "http://localhost:3000/api/get-profile",
+                {},
+                {}
+            );
+
+            const {status, user } = data;
+
+            setUsername(user);
+            } catch {
+
+            }
+        }
+    });
+*/
+    
+
 
     return (
         <div className={`profile-container ${theme}`}>

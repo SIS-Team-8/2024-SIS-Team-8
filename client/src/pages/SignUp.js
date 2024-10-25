@@ -64,6 +64,7 @@ export default function SignUp( {language, theme }) {
                 } else {
                     handleError(message);
                 }
+                console.log(success);
             } catch (error) {
                 console.log(error);
             }

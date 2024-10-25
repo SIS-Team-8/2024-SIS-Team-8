@@ -6,6 +6,7 @@ const path = require("path");
 const cors = require("cors");
 const express = require("express");
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const app = express(); // create express app
 
 const cookieParser = require("cookie-parser");
@@ -14,6 +15,8 @@ const apiRouter = require("./routes/ApiRoute");
 
 // Connect to MongoDB server using environment variables
 const mogoURI = process.env.MONGODB_URI;
+
+app.use(bodyParser.json({ limit: '500kb'}));
 
 mongoose.connect(mogoURI, {
     dbName: process.env.MONGODB_DB,
