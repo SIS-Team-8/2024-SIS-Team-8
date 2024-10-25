@@ -46,7 +46,7 @@ export default function MoodSelection({ language = "English", theme = "light", m
     const [selectedMood, setSelectedMood] = useState('')
     const [note, setNote] = useState('');
     const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);  // New state for sub-emoji
-    const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
+    const [moodIntensity, setMoodIntensity] = useState('');
 
     /*const [mood, setMood] = useState(moodData[date]?.mood || '');
     const [notes, setNotes] = useState(moodData[date]?.notes || '');*/
@@ -115,7 +115,7 @@ export default function MoodSelection({ language = "English", theme = "light", m
 
     // This function will be used to submit the new mood and note
     const handleSubmit = () => {
-        const date = new Date().toISOString().split('T')[0];  // Format date as YYYY-MM-DD
+        const date = new Date().toISOString().split('T')[0];
         onMoodUpdate(date, { mood: selectedMood, note });
     };
 
@@ -153,7 +153,7 @@ export default function MoodSelection({ language = "English", theme = "light", m
 
     return (
         <html>
-            <div id='container' className={`edit-entry-container ${theme}`}>
+            <div id='container' className={theme}>
                 <div id='row'>
                     {Object.keys(moods).map((mood, index) => (
                         <div key={mood} style={{ position: 'relative', display: 'inline-block' }}>

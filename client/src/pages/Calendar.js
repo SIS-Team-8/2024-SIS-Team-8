@@ -148,11 +148,11 @@ const CalendarScreen = ({theme, language, moodData, moodEntries }) => {
     const t = translations[language];
 
     const renderMoodForDate = (date) => {
-        const entry = moodEntries[date];
+        const entry = moodData[date];
         return entry ? (
             <div>
-                <img src={getMoodEmojiImage(entry.mood)} alt={entry.mood} />
-                <p>{entry.note}</p>
+                <img src={moodEmojiMap[entry.mood]} alt={entry.mood} />
+                <p>{entry.notes}</p>
             </div>
         ) : null;
     };
