@@ -11,7 +11,7 @@ router.post('/profile', updateProfile);
 router.post('/logEmote', logEmote);
 router.post('/requestHistory', requestHistory);
 router.post('/requestJournal', requestJournal);
-router.post('/get-profile', getProfile);
+router.get('/get-profile', getProfile);
 router.post('/password', updatePassword);
 
 module.exports = router;

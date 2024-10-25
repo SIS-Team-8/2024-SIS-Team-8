@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -94,27 +94,33 @@ export default function Profile({theme, language}) {
     };
 
     const t = translations[language];
-/*
+
     useEffect(() => {
-        const getProfile = async () => {
-            try {
-            const { data } = await axios.post(
+            axios.get(
                 "http://localhost:3000/api/get-profile",
-                {},
-                {}
-            );
+            ).then(res => {
+                console.log(res.data)
+                setProfile({...profile, name: res.data.user.name, 
+                    phone: res.data.user.phone, 
+                    address: res.data.user.address,
+                    profile_pic: res.data.user.profile_pic
+                });
+                const base64Data = profile.profile_pic.split(',')[1];
+                const binaryString = window.atob(base64Data);
+                const len = binaryString.length;
+                const bytes = new Uint8Array(len);
+                console.log(binaryString);
 
-            const {status, user } = data;
-
-            setUsername(user);
-            } catch {
-
-            }
-        }
-    });
-*/
-    
-
+                for (let i = 0; i < len; i++) {
+                    bytes[i] = binaryString.charCodeAt(i)
+                }
+                const blob = new Blob([bytes], { type: 'image/png' });
+                const url = URL.createObjectURL(blob);
+                setAvatarPhoto(url);
+                console.log(avatarPhoto);
+            })
+            .catch(err => console.log(err));
+    }, []);
 
     return (
         <div className={`profile-container ${theme}`}>

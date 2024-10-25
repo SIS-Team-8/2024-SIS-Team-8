@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import axios from "axios";
 import { toast } from "react-toastify";
 import './ResetPassword.css';
 
 export default function ResetPassword( {language, theme }) {
+    const navigate = useNavigate();
+
     const [inputValue, setInputValue] = useState({
         currentPassword: "",
         newPassword: "",
