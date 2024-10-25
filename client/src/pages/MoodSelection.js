@@ -36,7 +36,7 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function MoodSelection({ language = "English", theme = "light", moodData, onMoodUpdate }) {
+export default function MoodSelection({ language = "English", theme = "light", moodData, onMoodUpdate, setMoodData }) {
     const { date } = useParams(); // Use useParams to access 'date' from URL
     const navigate = useNavigate();
 
@@ -60,6 +60,14 @@ export default function MoodSelection({ language = "English", theme = "light", m
     
     const initialMood = moodData[date]?.mood || '';
     const initialNote = moodData[date]?.notes || '';
+
+    // Add a function to handle setting mood data
+    const handleSetMood = (mood, intensity, notes) => {
+        const today = new Date().toISOString().slice(0, 10); // Gets today's date in 'YYYY-MM-DD' format
+        const newMoodData = { mood, intensity, notes };
+        setMoodData({ [today]: newMoodData });
+        navigate('/calendar'); // Navigate to calendar after setting mood
+    };
 
     const moodIntensityMap = {
         "angry": 4,
