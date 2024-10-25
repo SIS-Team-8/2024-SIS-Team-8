@@ -141,11 +141,21 @@ const translations = {
     }
 };
 
-const CalendarScreen = ({theme, language, moodData }) => {
+const CalendarScreen = ({theme, language, moodData, moodEntries }) => {
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 9));
     const [isYearlyView, setIsYearlyView] = useState(false);
     const t = translations[language];
+
+    const renderMoodForDate = (date) => {
+        const entry = moodEntries[date];
+        return entry ? (
+            <div>
+                <img src={getMoodEmojiImage(entry.mood)} alt={entry.mood} />
+                <p>{entry.note}</p>
+            </div>
+        ) : null;
+    };
 
     const changeMonth = (direction) => {
         if (isYearlyView) {

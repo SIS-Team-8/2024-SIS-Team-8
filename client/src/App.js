@@ -34,6 +34,8 @@ function App() {
         "2024-10-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." } */
     });
 
+    const [moodEntries, setMoodEntries] = useState({});
+
     const handleMoodUpdate = (date, { mood, note }) => {
         setMoodData(prev => ({
             ...prev,
@@ -41,20 +43,22 @@ function App() {
         }));
     };
 
-    const handleMoodUpdate2 = (date, newMoodData) => {
+    /*const handleMoodUpdate2 = (date, newMoodData) => {
         setMoodData(prevMoodData => ({
             ...prevMoodData,
             [date]: newMoodData  // Update the mood data for the given date
         }));
+    };*/
+
+    // Function to add or update a mood entry
+    const handleMoodUpdate2 = (date, moodData) => {
+        setMoodEntries(prevEntries => ({
+            ...prevEntries,
+            [date]: moodData
+        }));
     };
 
-    // Add a function to handle setting mood data
-    const handleSetMood = (mood, intensity, notes) => {
-        const today = new Date().toISOString().slice(0, 10); // Gets today's date in 'YYYY-MM-DD' format
-        const newMoodData = { mood, intensity, notes };
-        setMoodData({ [today]: newMoodData });
-        navigate('/calendar'); // Navigate to calendar after setting mood
-    };
+
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -139,12 +143,12 @@ function App() {
                 <Route path="/onboarding-overview" element={isAuthenticated ? <OnboardingOverview/> : <Login onLogin={handleLogin} />} />
                 <Route path="/settings" element={<Settings theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} />} />
                 <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView theme={theme} language={language} moodData={moodData} updateEntry={updateEntry} deleteEntry={deleteEntry} /> : <Login onLogin={handleLogin} />} />
-                <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} language={language} moodData={moodData} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} language={language} moodData={moodData} moodEntries={moodEntries} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/help" element={isAuthenticated ? <Help theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/history" element={isAuthenticated ? <History theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/profile" element={isAuthenticated ? <Profile theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/settings" element={isAuthenticated ? <Settings theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} /> : <Login onLogin={handleLogin} />} />
-                <Route path="/mood-selection" element={isAuthenticated ? <MoodSelection theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} setMoodData={handleSetMood} moodData={moodData}  /> : <Login onLogin={handleLogin} />} />
+                <Route path="/mood-selection" element={isAuthenticated ? <MoodSelection theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} onMoodUpdate={handleMoodUpdate2} moodData={moodData}  /> : <Login onLogin={handleLogin} />} />
                 <Route path="/login" element={<Login language={language} theme={theme} onLogin={handleLogin} />} />
                 <Route path="/sign-up" element={<SignUp language={language} theme={theme} />} />
                 <Route path="/edit-entry/:date" element={isAuthenticated ? <EditEntry theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} onMoodUpdate={updateEntry} moodData={moodData}/> : <Login onLogin={handleLogin} />} />

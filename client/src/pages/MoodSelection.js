@@ -36,15 +36,15 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function MoodSelection({ language = "English", theme = "light", moodData, onMoodUpdate, setMoodData }) {
+export default function MoodSelection({ language = "English", theme = "light", moodData, onMoodUpdate }) {
     const { date } = useParams(); // Use useParams to access 'date' from URL
     const navigate = useNavigate();
 
     const moodEntry = moodData[date] || { mood: '', notes: '', intensity: "N/A", subMood: '' };
 
     // State to manage the selected mood and note
-    const [selectedMood, setSelectedMood] = useState(moodEntry.mood)
-    const [note, setNote] = useState(moodEntry.notes);
+    const [selectedMood, setSelectedMood] = useState('')
+    const [note, setNote] = useState('');
     const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);  // New state for sub-emoji
     const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
 
@@ -60,14 +60,6 @@ export default function MoodSelection({ language = "English", theme = "light", m
     
     const initialMood = moodData[date]?.mood || '';
     const initialNote = moodData[date]?.notes || '';
-
-    // Add a function to handle setting mood data
-    const handleSetMood = (mood, intensity, notes) => {
-        const today = new Date().toISOString().slice(0, 10); // Gets today's date in 'YYYY-MM-DD' format
-        const newMoodData = { mood, intensity, notes };
-        setMoodData({ [today]: newMoodData });
-        navigate('/calendar'); // Navigate to calendar after setting mood
-    };
 
     const moodIntensityMap = {
         "angry": 4,
@@ -123,8 +115,8 @@ export default function MoodSelection({ language = "English", theme = "light", m
 
     // This function will be used to submit the new mood and note
     const handleSubmit = () => {
-        onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, notes: note });
-        navigate(`/daily-view/${date}`);
+        const date = new Date().toISOString().split('T')[0];  // Format date as YYYY-MM-DD
+        onMoodUpdate(date, { mood: selectedMood, note });
     };
 
     const handleMoodChange = (mood) => {
