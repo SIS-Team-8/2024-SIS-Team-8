@@ -48,6 +48,14 @@ function App() {
         }));
     };
 
+    // Add a function to handle setting mood data
+    const handleSetMood = (mood, intensity, notes) => {
+        const today = new Date().toISOString().slice(0, 10); // Gets today's date in 'YYYY-MM-DD' format
+        const newMoodData = { mood, intensity, notes };
+        setMoodData({ [today]: newMoodData });
+        navigate('/calendar'); // Navigate to calendar after setting mood
+    };
+
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -136,7 +144,7 @@ function App() {
                 <Route path="/history" element={isAuthenticated ? <History theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/profile" element={isAuthenticated ? <Profile theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/settings" element={isAuthenticated ? <Settings theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} /> : <Login onLogin={handleLogin} />} />
-                <Route path="/mood-selection" element={isAuthenticated ? <MoodSelection theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} setMoodData={handleSetMoodData} moodData={moodData}  /> : <Login onLogin={handleLogin} />} />
+                <Route path="/mood-selection" element={isAuthenticated ? <MoodSelection theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} setMoodData={handleSetMood} moodData={moodData}  /> : <Login onLogin={handleLogin} />} />
                 <Route path="/login" element={<Login language={language} theme={theme} onLogin={handleLogin} />} />
                 <Route path="/sign-up" element={<SignUp language={language} theme={theme} />} />
                 <Route path="/edit-entry/:date" element={isAuthenticated ? <EditEntry theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} onMoodUpdate={updateEntry} moodData={moodData}/> : <Login onLogin={handleLogin} />} />
