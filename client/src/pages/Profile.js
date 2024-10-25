@@ -62,7 +62,7 @@ export default function Profile({theme, language}) {
     };
 
     const handleError = (err) =>
-        toast.error(err, {
+        toast.success(err, { //fix later
     });
 
     const handleSuccess = (msg) =>
@@ -99,13 +99,14 @@ export default function Profile({theme, language}) {
             axios.get(
                 "http://localhost:3000/api/get-profile",
             ).then(res => {
-                console.log(res.data)
                 setProfile({...profile, name: res.data.user.name, 
                     phone: res.data.user.phone, 
                     address: res.data.user.address,
                     profile_pic: res.data.user.profile_pic
                 });
-                const base64Data = profile.profile_pic.split(',')[1];
+                console.log(res.data.user.profile_pic);
+                const base64Data = res.data.user.profile_pic.split(',')[1];
+                console.log(base64Data);
                 const binaryString = window.atob(base64Data);
                 const len = binaryString.length;
                 const bytes = new Uint8Array(len);

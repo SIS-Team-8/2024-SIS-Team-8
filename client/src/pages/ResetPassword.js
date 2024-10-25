@@ -25,7 +25,7 @@ export default function ResetPassword( {language, theme }) {
         });
     };
 
-    const handleError = (err) => toast.error(err, {});
+    const handleError = (err) => toast.success(err, {}); //fix later
 
     const handleSuccess = (msg) => toast.success(msg, {});
 
