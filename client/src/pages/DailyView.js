@@ -115,6 +115,8 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
     const [notes, setNotes] = useState('');
     const [isEditing, setIsEditing] = useState(false);
 
+    const displayMood = moodEntry.subMood || moodEntry.mood;
+
     const isEntryPresent = moodEntry.mood !== "N/A";
 
      // Effect to update component state when moodData changes or date changes
@@ -170,7 +172,7 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
                 <h1 style={{ color: 'white' }}>{translatedHeader}</h1>
 
                 <div className="emoji">
-                    <img src={getMoodEmoji(moodEntry.mood)} alt={moodEntry.mood}/>
+                    <img src={getMoodEmoji(displayMood)} alt={displayMood}/>
                 </div>
 
                 {isEditing ? (
@@ -182,7 +184,7 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
                     </>
                 ) : (
                     <>
-                        <p className="intensity">{t.intensity} {intensity}</p>
+                        <p className="intensity">{t.intensity} {moodEntry.intensity}</p>
                         <p className="notes">{t.notes} {notes}</p>
                         <button className="edit-button" onClick={handleEdit}>
                             ✏ {t.editEntry}
