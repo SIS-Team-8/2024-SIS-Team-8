@@ -20,7 +20,7 @@ const defaultEmoteData = [
     },
     {
         name: 'Happy',
-        emoteFreq: 10,
+        emoteFreq: 5,
     },
     {
         name: 'Bored',
