@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 import logo from './assets/logo.png';
 import dizzy from './assets/face-with-spiral-eyes.svg';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 import './App.css';
 
 import SplashScreen from "./pages/SplashScreen";
@@ -103,11 +108,11 @@ function App() {
 
     const handleLogin = () => {
         setIsAuthenticated(true);
+
         const hasCompletedOnboarding = localStorage.getItem("hasCompletedOnboarding");
+
         if (!hasCompletedOnboarding) {
             navigate("/onboarding");
-        } else {
-            navigate("/");
         }
     };
 
@@ -138,7 +143,7 @@ function App() {
             {isAuthenticated && <Navbar onLogout={handleLogout} theme={theme} toggleTheme={toggleTheme} language={language} onLanguageChange={handleLanguageChange} />}
 
             <Routes>
-                <Route path="/" element={isAuthenticated ? <Home /> : <Login language={language} theme={theme} onLogin={handleLogin} />} />
+                <Route path="/" element={isAuthenticated ? <Home theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/onboarding" element={isAuthenticated ? <Onboarding onComplete={handleOnboardingComplete}/> : <Login onLogin={handleLogin} />} />
                 <Route path="/onboarding-overview" element={isAuthenticated ? <OnboardingOverview/> : <Login onLogin={handleLogin} />} />
                 <Route path="/settings" element={<Settings theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} />} />
@@ -154,6 +159,7 @@ function App() {
                 <Route path="/edit-entry/:date" element={isAuthenticated ? <EditEntry theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} onMoodUpdate={updateEntry} moodData={moodData}/> : <Login onLogin={handleLogin} />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
+            <ToastContainer/>
         </div>
     );
 
@@ -167,6 +173,31 @@ function App() {
         };
 
         const t = translations[language];
+        const navigate = useNavigate();
+        const [cookies, removeCookie] = useCookies([]);
+        const [username, setUsername] = useState("");
+
+        useEffect(() => {
+            const verifyCookie = async () => {
+                if (!cookies.token) {
+                    navigate("/login");
+                }
+
+            const { data } = await axios.post(
+                "http://localhost:3000/api/auth",
+                {},
+                { withCredentials: true }
+            );
+
+            const {status, user } = data;
+
+            setUsername(user);
+
+            return status ? toast('Hello ${user}', { position: "top-right", }) : (removeCookie("token"), navigate("/login"));
+        };
+
+        verifyCookie();
+    }, [cookies, navigate, removeCookie]);
 
         return (
             <div className={`home-screen ${theme}`}>

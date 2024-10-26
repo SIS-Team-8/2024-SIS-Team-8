@@ -207,3 +207,14 @@ all of the following api calls require the token cookie to be set by logging in 
       "endDate":"2024-10-12T11:36:28.829Z"
     }
     ```
+
+* the url to send a POST request for full journal user profile for use on the profile page is `http://localhost:3000/api/get-profile`
+
+* the url to send a POST request to change the password for a user `http://localhost:3000/api/password`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+      "password":"newpassword"
+    }
+    ```

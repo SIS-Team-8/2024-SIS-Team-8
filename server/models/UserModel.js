@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema({
         default: ""
     },
 
+    profile_pic: {
+        type: String,
+        default: ""
+    },
+
     password:{
         type: String,
         required: [true, "An password is required"],
@@ -53,8 +58,11 @@ const userSchema = new mongoose.Schema({
     ]
 });
 
-userSchema.pre("save", async function () {
-  this.password = await bcrypt.hash(this.password, 12);
+userSchema.pre("save", async function (next) {
+    const user = this;
+    if (!user.isModified('password')) return next();
+    user.password = await bcrypt.hash(user.password, 12);
+    next();
 });
 
 module.exports = mongoose.model("User", userSchema);

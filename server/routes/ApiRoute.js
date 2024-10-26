@@ -1,4 +1,4 @@
-const {updateProfile} = require('../controllers/ProfileController')
+const {updateProfile, getProfile, updatePassword} = require('../controllers/ProfileController')
 const {logEmote} = require('../controllers/EmoteController')
 const {requestHistory} = require('../controllers/HistoryController')
 const {requestJournal} = require('../controllers/CalendarController')
@@ -11,5 +11,7 @@ router.post('/profile', updateProfile);
 router.post('/logEmote', logEmote);
 router.post('/requestHistory', requestHistory);
 router.post('/requestJournal', requestJournal);
+router.post('/get-profile', getProfile);
+router.post('/password', updatePassword);
 
 module.exports = router;
