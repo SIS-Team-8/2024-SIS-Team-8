@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import BarChart from '../components/BarChart';
 import { Link, useLocation } from "react-router-dom";
+import axios from 'axios';
+import { toast } from "react-toastify";
 import './History.css';
 
 const translations = {
@@ -105,6 +107,8 @@ export default function History({theme, language}) {
     const location = useLocation();
     const initialMonth = location.state?.month || new Date();
 
+    const [moodData, setMoodData] = useState([]);
+
     const [currentMonth, setCurrentMonth] = useState(initialMonth);
     const [viewMode, setViewMode] = useState("monthly");
     const [currentWeek, setCurrentWeek] = useState(1);
@@ -112,11 +116,38 @@ export default function History({theme, language}) {
 
     const t = translations[language];
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (location.state?.month) {
             setCurrentMonth(location.state.month);
         }
-    }, [location.state?.month]);
+    }, [location.state?.month]);*/
+
+    useEffect(() => {
+        async function fetchMoodHistory() {
+            try {
+                const response = await axios.get('/api/moodHistory');  // Backend endpoint
+                setMoodData(response.data);
+            } catch (error) {
+                console.error("Error fetching mood history:", error);
+            }
+        }
+    
+        fetchMoodHistory();
+    }, []);
+
+    useEffect(() => {
+        const moodUpdate = location.state?.moodUpdate;
+        if (moodUpdate) {
+            setMoodData((prevData) => {
+                const updatedData = [...prevData];
+                const moodIndex = updatedData.findIndex((entry) => entry.id === moodUpdate.id);
+                if (moodIndex !== -1) {
+                    updatedData[moodIndex] = { ...updatedData[moodIndex], ...moodUpdate };
+                }
+                return updatedData;
+            });
+        }
+    }, [location.state]);
 
     const toggleViewMode = () => {
         const viewModes = { monthly: "weekly", weekly: "yearly", yearly: "monthly" };
@@ -204,7 +235,7 @@ export default function History({theme, language}) {
             </div>
 
             <BarChart
-                data={chartData}
+                data={moodData}
                 xAxisLabel={t.chart.xAxisLabel}
                 yAxisLabel={t.chart.yAxisLabel}
                 tooltipText={t.chart.tooltipText}
