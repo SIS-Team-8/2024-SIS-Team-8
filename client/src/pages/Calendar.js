@@ -109,6 +109,11 @@ const getYearlyMoodStatistics = (moodData, year) => {
             .filter(([date]) => date.startsWith(`${year}-${monthPadded}`))
             .map(([, data]) => data.mood);
 
+            if (monthMoodData.length === 0) {
+                monthlyStats.push("N/A");
+                continue;
+            }
+
         const moodCount = monthMoodData.reduce((acc, mood) => {
             acc[mood] = (acc[mood] || 0) + 1;
             return acc;
@@ -224,9 +229,9 @@ const CalendarScreen = ({theme, language, moodData, moodEntries }) => {
                     </thead>
                     <tbody>
                         <tr>
-                            {yearlyMostCommonMood.map((mood, i) => (
+                        {yearlyMostCommonMood.map((mood, i) => (
                                 <td key={i} style={{ backgroundColor: 'white' }}>
-                                    <p>{t.mostCommonMood}: {yearlyMostCommonMood !== "N/A" ? <img src={getMoodEmojiImage(mood)} alt={mood} className="calendar-emoji" />: "N/A"}</p>
+                                    <p>{t.mostCommonMood}: {mood !== "N/A" ? <img src={getMoodEmojiImage(mood)} alt={mood} className="calendar-emoji" />: "N/A"}</p>
                                 </td>
                             ))}
                         </tr>
