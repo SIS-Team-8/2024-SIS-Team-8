@@ -210,6 +210,10 @@ export default function MoodSelection({ language = "English", theme = "light", m
                     ))}
                 </div>
 
+                <div className="intensity-display">
+                    Mood Intensity: {moodIntensity}
+                </div>
+
                 <div id="flexContainer">
                     <textarea id="log" placeholder={t.addNote} className={theme} value={note} onChange={(e) => setNote(e.target.value)}/>
                     <Link to="/">
