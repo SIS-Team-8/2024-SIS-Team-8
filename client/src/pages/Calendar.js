@@ -231,7 +231,7 @@ const CalendarScreen = ({theme, language, moodData, moodEntries }) => {
                         <tr>
                         {yearlyMostCommonMood.map((mood, i) => (
                                 <td key={i} style={{ backgroundColor: 'white' }}>
-                                    <p>{t.mostCommonMood}: {yearlyMostCommonMood !== "N/A" ? <img src={getMoodEmojiImage(summary.mostCommonMood)} alt={summary.mostCommonMood} className="calendar-emoji" />: "N/A"}</p>
+                                    <p>{t.mostCommonMood}: {mood !== "N/A" ? <img src={getMoodEmojiImage(summary.mostCommonMood)} alt={summary.mostCommonMood} className="calendar-emoji" />: "N/A"}</p>
                                 </td>
                             ))}
                         </tr>
