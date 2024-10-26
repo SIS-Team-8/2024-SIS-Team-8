@@ -123,6 +123,7 @@ export default function History({theme, language}) {
         }
     }, [location.state?.month]);*/
 
+    // Fetch mood history from backend
     useEffect(() => {
         async function fetchMoodHistory() {
             try {
@@ -153,7 +154,7 @@ export default function History({theme, language}) {
         return filteredData;
     };
 
-    useEffect(() => {
+   /* useEffect(() => {
         const moodUpdate = location.state?.moodUpdate;
         if (moodUpdate) {
             setMoodData((prevData) => {
@@ -165,7 +166,32 @@ export default function History({theme, language}) {
                 return updatedData;
             });
         }
-    }, [location.state]);
+    }, [location.state]);*/
+
+    const filterMoodDataBySelection = (data, moodUpdate) => {
+        if (!moodUpdate) return data;
+        
+        // Update or add the new mood entry
+        const updatedData = [...data];
+        const moodIndex = updatedData.findIndex((entry) => entry.id === moodUpdate.id);
+        if (moodIndex !== -1) {
+            updatedData[moodIndex] = { ...updatedData[moodIndex], ...moodUpdate };
+        } else {
+            updatedData.push(moodUpdate);
+        }
+        return updatedData;
+    };
+
+    // Apply filtering whenever a mood update is detected
+    useEffect(() => {
+        const moodUpdate = location.state?.moodUpdate;  // Assuming mood updates are sent via route state
+        if (moodUpdate) {
+            const updatedData = filterMoodDataBySelection(moodData, moodUpdate);
+            setFilteredMoodData(updatedData);
+        } else {
+            setFilteredMoodData(moodData);
+        }
+    }, [location.state, moodData]);
 
     useEffect(() => {
         setFilteredMoodData(filterMoodDataByView(moodData));
@@ -257,7 +283,7 @@ export default function History({theme, language}) {
             </div>
 
             <BarChart
-                data={moodData}
+                data={filteredMoodData}
                 xAxisLabel={t.chart.xAxisLabel}
                 yAxisLabel={t.chart.yAxisLabel}
                 tooltipText={t.chart.tooltipText}
