@@ -210,14 +210,16 @@ export default function MoodSelection({ language = "English", theme = "light", m
                     ))}
                 </div>
 
-                <div className="intensity-display">
-                    Mood Intensity: {moodIntensity}
-                </div>
-
                 <div id="flexContainer">
                     <textarea id="log" placeholder={t.addNote} className={theme} value={note} onChange={(e) => setNote(e.target.value)}/>
                     <Link to="/">
-                        <img id="submit" className={theme} alt="submit" src={submit} onClick={handleSubmit}/>
+                        <img id="submit" className={theme} alt="submit" src={submit} onClick={() =>
+            onMoodUpdate(date, {
+                mood: selectedMood,
+                intensity: moodIntensity,  // Include moodIntensity here
+                note
+            })
+        }/>
                     </Link>
                 </div>
             </div>
