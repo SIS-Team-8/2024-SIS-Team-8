@@ -46,14 +46,11 @@ export default function Login({ onLogin, language, theme }) {
                 { withCredentials: true }
             );
 
-            console.log(data);
-
             const { success, message } = data;
 
             if (success) {
-                handleSuccess(message);
-
                 onLogin();
+                handleSuccess(message);
                 const hasCompletedOnboarding = localStorage.getItem("hasCompletedOnboarding");
                 
                 if (hasCompletedOnboarding) 

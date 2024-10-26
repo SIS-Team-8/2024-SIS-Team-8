@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import profilePlaceholder from '../assets/profile-placeholder.jpg'
 import './Profile.css';
 
 const translations = {
@@ -12,7 +13,7 @@ const translations = {
     Chinese: { resetPassword: "重设密码", logOut: "登出", saveChanges: "保存更改", goHome: "回到主页", name: "姓名", phone: "电话", address: "地址" }
 };
 
-export default function Profile({theme, language}) {
+export default function Profile( { onLogout, theme, language}) {
     // State to manage profile data
     const [profile, setProfile] = useState({
         name: "",
@@ -21,7 +22,7 @@ export default function Profile({theme, language}) {
         profile_pic: ""
     });
 
-    const [avatarPhoto, setAvatarPhoto] = useState("https://via.placeholder.com/100");
+    const [avatarPhoto, setAvatarPhoto] = useState(profilePlaceholder);
 
     const { name, phone, address } = profile;
 
@@ -54,6 +55,7 @@ export default function Profile({theme, language}) {
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
+        console.log(avatarPhoto);
         setProfile({
             ...profile,
             [name]: value
@@ -103,17 +105,19 @@ export default function Profile({theme, language}) {
                     address: res.data.user.address,
                     profile_pic: res.data.user.profile_pic
                 });
-                const base64Data = res.data.user.profile_pic.split(',')[1];
-                const binaryString = window.atob(base64Data);
-                const len = binaryString.length;
-                const bytes = new Uint8Array(len);
-
-                for (let i = 0; i < len; i++) {
-                    bytes[i] = binaryString.charCodeAt(i)
+                console.log(avatarPhoto);
+                if (res.data.user.profile_pic !== "") {   
+                    const base64Data = res.data.user.profile_pic.split(',')[1];
+                    const binaryString = window.atob(base64Data);
+                    const len = binaryString.length;
+                    const bytes = new Uint8Array(len);
+                    for (let i = 0; i < len; i++) {
+                        bytes[i] = binaryString.charCodeAt(i)
+                    }
+                    const blob = new Blob([bytes], { type: 'image/png' });
+                    const url = URL.createObjectURL(blob);
+                    setAvatarPhoto(url);
                 }
-                const blob = new Blob([bytes], { type: 'image/png' });
-                const url = URL.createObjectURL(blob);
-                setAvatarPhoto(url);
             })
             .catch(err => console.log(err));
     }, []);
@@ -152,7 +156,7 @@ export default function Profile({theme, language}) {
                     </Link>
 
                     <Link to="/login">
-                        <button id="navigation-button">{t.logOut}</button>
+                        <button id="navigation-button" onClick={onLogout}>{t.logOut}</button>
                     </Link>
 
                     <button id="navigation-button" onClick={handleEditProfile}>{t.saveChanges}</button>
