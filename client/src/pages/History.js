@@ -154,6 +154,18 @@ export default function History({theme, language}) {
         return filteredData;
     };
 
+    // Update chart data dynamically based on filteredMoodData
+    const generateChartData = (data) => {
+        const moodCounts = { Angry: 0, Sad: 0, Happy: 0, Bored: 0, Scared: 0 };
+        data.forEach((entry) => {
+            moodCounts[entry.mood] = (moodCounts[entry.mood] || 0) + 1;
+        });
+        return Object.keys(moodCounts).map((mood, index) => ({
+            name: translations.English.chart.xLabels[index],
+            emoteFreq: moodCounts[mood],
+        }));
+    };
+
    /* useEffect(() => {
         const moodUpdate = location.state?.moodUpdate;
         if (moodUpdate) {
@@ -242,13 +254,16 @@ export default function History({theme, language}) {
         return `${monthName} ${currentMonth.getFullYear()}`;
     };
 
-    const chartData = [
+    /*const chartData = [
         { name: t.chart.xLabels[0], emoteFreq: 5 },
         { name: t.chart.xLabels[1], emoteFreq: 5 },
         { name: t.chart.xLabels[2], emoteFreq: 10 },
         { name: t.chart.xLabels[3], emoteFreq: 5 },
         { name: t.chart.xLabels[4], emoteFreq: 5 }
-    ];
+    ];*/
+
+    // Generate chart data based on real-time updates to mood data
+    const chartData = generateChartData(filteredMoodData);
 
     return (
         <div id="history-container" className={theme}>
@@ -283,7 +298,7 @@ export default function History({theme, language}) {
             </div>
 
             <BarChart
-                data={filteredMoodData}
+                data={chartData}
                 xAxisLabel={t.chart.xAxisLabel}
                 yAxisLabel={t.chart.yAxisLabel}
                 tooltipText={t.chart.tooltipText}
