@@ -46,7 +46,7 @@ export default function MoodSelection({ language = "English", theme = "light", m
     const [selectedMood, setSelectedMood] = useState('')
     const [note, setNote] = useState('');
     const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);  // New state for sub-emoji
-    const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
+    const [moodIntensity, setMoodIntensity] = useState(0);
 
     /*const [mood, setMood] = useState(moodData[date]?.mood || '');
     const [notes, setNotes] = useState(moodData[date]?.notes || '');*/
@@ -113,26 +113,17 @@ export default function MoodSelection({ language = "English", theme = "light", m
         setSubRowOpacity(Array(5).fill(1));  // Reset sub-row images' opacity to 1
     };
 
-    /* This function will be used to submit the new mood and note
+    // This function will be used to submit the new mood and note
     const handleSubmit = () => {
         const date = new Date().toISOString().split('T')[0];
         onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, note });
-    };*/
+    };
 
     /*const handleMoodChange = (mood) => {
         setSelectedMood(mood);
         setMoodIntensity(moodIntensityMap[mood] || 'N/A');
         setMoodImages(moods[mood].subImages);
     };*/
-
-    const handleSubmit = () => {
-        const date = new Date().toISOString().split('T')[0];  // Gets today's date
-        onMoodUpdate(date, {
-            mood: selectedMood,
-            intensity: moodIntensity,  // Include moodIntensity here
-            notes: note
-        });
-    };
 
     const handleMoodChange = (mood) => {
         if (selectedMood === mood) {
