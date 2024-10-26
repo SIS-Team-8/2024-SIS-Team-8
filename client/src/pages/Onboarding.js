@@ -3,7 +3,7 @@ import logo from '../assets/logo.png';
 import './Onboarding.css'
 
 export default function Onboarding({ onComplete }) {
-    const handleOnboardingComplete = () => {
+    const handleOnboardingComplete = () => { 
         onComplete();
     };
 

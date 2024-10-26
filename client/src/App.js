@@ -49,7 +49,7 @@ function App() {
             setIsLoaded(true);
 
             if (!isAuthenticated && location.pathname !== "/sign-up") {
-                navigate("/login");
+               navigate("/login");
             }
         }, 3000);
 
@@ -58,13 +58,10 @@ function App() {
 
     const handleLogin = () => {
         setIsAuthenticated(true);
-        console.log(isAuthenticated);
     };
 
     const handleOnboardingComplete = () => {
         localStorage.setItem("hasCompletedOnboarding", true);
-        console.log(isAuthenticated);
-        navigate("/");
     };
 
     const toggleTheme = () => {
@@ -126,8 +123,11 @@ function App() {
         useEffect(() => {
             const verifyCookie = async () => {
                 if (!cookies.token) {
-                    navigate("/login");
+                    //navigate("/login");
                 }
+            const hasCompletedOnboarding = localStorage.getItem("hasCompletedOnboarding");
+            if (!hasCompletedOnboarding) 
+                navigate("/onboarding");
         };
 
         verifyCookie();

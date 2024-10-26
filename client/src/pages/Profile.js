@@ -55,7 +55,6 @@ export default function Profile( { onLogout, theme, language}) {
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
-        console.log(avatarPhoto);
         setProfile({
             ...profile,
             [name]: value

@@ -50,13 +50,8 @@ export default function Login({ onLogin, language, theme }) {
 
             if (success) {
                 onLogin();
-                handleSuccess(message);
-                const hasCompletedOnboarding = localStorage.getItem("hasCompletedOnboarding");
-                
-                if (hasCompletedOnboarding) 
-                    navigate("/");
-                else 
-                    navigate("/onboarding");
+                handleSuccess(message); 
+                navigate("/");
             } else {
                 handleError(message);
             }
