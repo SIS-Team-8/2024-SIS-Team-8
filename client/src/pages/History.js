@@ -106,6 +106,7 @@ const translations = {
 export default function History({theme, language}) {
     const location = useLocation();
     const initialMonth = location.state?.month || new Date();
+    const [filteredMoodData, setFilteredMoodData] = useState([]);
 
     const [moodData, setMoodData] = useState([]);
 
@@ -125,15 +126,32 @@ export default function History({theme, language}) {
     useEffect(() => {
         async function fetchMoodHistory() {
             try {
-                const response = await axios.get('/api/moodHistory');  // Backend endpoint
+                const response = await axios.get('/api/moodHistory');
                 setMoodData(response.data);
             } catch (error) {
                 console.error("Error fetching mood history:", error);
             }
         }
-    
         fetchMoodHistory();
     }, []);
+
+    const filterMoodDataByView = (data) => {
+        const now = new Date();
+        let filteredData;
+        
+        if (viewMode === 'weekly') {
+            const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
+            filteredData = data.filter(entry => new Date(entry.date) >= startOfWeek);
+        } else if (viewMode === 'monthly') {
+            const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+            filteredData = data.filter(entry => new Date(entry.date) >= startOfMonth);
+        } else if (viewMode === 'yearly') {
+            const startOfYear = new Date(now.getFullYear(), 0, 1);
+            filteredData = data.filter(entry => new Date(entry.date) >= startOfYear);
+        }
+        
+        return filteredData;
+    };
 
     useEffect(() => {
         const moodUpdate = location.state?.moodUpdate;
@@ -148,6 +166,10 @@ export default function History({theme, language}) {
             });
         }
     }, [location.state]);
+
+    useEffect(() => {
+        setFilteredMoodData(filterMoodDataByView(moodData));
+    }, [viewMode, moodData]);
 
     const toggleViewMode = () => {
         const viewModes = { monthly: "weekly", weekly: "yearly", yearly: "monthly" };
