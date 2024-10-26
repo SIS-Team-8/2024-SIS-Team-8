@@ -58,12 +58,6 @@ function App() {
 
     const handleLogin = () => {
         setIsAuthenticated(true);
-
-        const hasCompletedOnboarding = localStorage.getItem("hasCompletedOnboarding");
-
-        if (!hasCompletedOnboarding) {
-            navigate("/onboarding");
-        }
     };
 
     const handleLogout = () => {

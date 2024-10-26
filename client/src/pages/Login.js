@@ -54,10 +54,12 @@ export default function Login({ onLogin, language, theme }) {
                 handleSuccess(message);
 
                 onLogin();
-
-                setTimeout(() => {
+                const hasCompletedOnboarding = localStorage.getItem("hasCompletedOnboarding");
+                
+                if (hasCompletedOnboarding) 
                     navigate("/");
-                });
+                else 
+                    navigate("/onboarding");
             } else {
                 handleError(message);
             }
