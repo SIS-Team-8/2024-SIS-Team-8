@@ -28,21 +28,6 @@ import nervous from '../assets/emoji/nervous.png';
 import overwhelmed from '../assets/emoji/overwhelmed.png';
 import terrified from '../assets/emoji/terrified.png';
 
-const moodData = {
-    "2024-10-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
-    "2024-10-02": { mood: "happy", intensity: 4, notes: "Good day." },
-    "2024-10-03": { mood: "neutral", intensity: 3, notes: "An average day." },
-    "2024-10-04": { mood: "sad", intensity: 2, notes: "Feeling a bit down." },
-    "2024-10-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." },
-    "2024-10-06": { mood: "frustrated", intensity: 2, notes: "Things didn't go well." },
-    "2024-10-07": { mood: "ecstatic", intensity: 5, notes: "Amazing surprise!" },
-    "2024-10-08": { mood: "terrified", intensity: 1, notes: "Scary moment!" },
-    "2024-10-09": { mood: "amazed", intensity: 4, notes: "Saw something incredible." },
-    "2024-10-10": { mood: "overwhelmed", intensity: 3, notes: "Too much work." },
-    "2024-10-11": { mood: "bored", intensity: 2, notes: "Nothing to do." },
-    "2024-10-12": { mood: "annoyed", intensity: 2, notes: "Annoying neighbors." }
-};
-
 const moodEmojiMap = {
     "angry": angry, "annoyed": annoyed, "frustrated": frustrated, "very angry": veryAngry,
     "extremely angry": extremelyAngry, "sad": sad, "upset": upset, "deflated": deflated,
@@ -84,9 +69,6 @@ const moodColorMap = {
     "default": "#FFFFFF"  // White
 };
 
-const getMoodEmojiImage = (mood) => moodEmojiMap[mood] || null;
-const getMoodColor = (mood) => moodColorMap[mood] || moodColorMap["default"];
-
 const getSummaryStatistics = (monthData) => {
     const moods = Object.values(monthData);
     if (moods.length === 0) return { mostCommonMood: "N/A" };
@@ -109,29 +91,16 @@ const getYearlyMoodStatistics = (moodData, year) => {
             .filter(([date]) => date.startsWith(`${year}-${monthPadded}`))
             .map(([, data]) => data.subMood || data.mood);
 
-            /*if (monthMoodData.length === 0) {
-                monthlyStats.push("N/A");
-                continue;
-            }*/
-             if (monthMoodData.length === 0) {
-                monthlyStats.push("N/A");
-                continue;
-            }
+        if (monthMoodData.length === 0) {
+            monthlyStats.push("N/A");
+            continue;
+        }
 
-        /*const moodCount = monthMoodData.reduce((acc, mood) => {
-            acc[mood] = (acc[mood] || 0) + 1;
-            return acc;
-        }, {});*/
         const subEmojiCount = monthMoodData.reduce((acc, subEmoji) => {
             acc[subEmoji] = (acc[subEmoji] || 0) + 1;
             return acc;
         }, {});
 
-        /*const mostCommonMood = monthMoodData.length > 0
-            ? Object.keys(moodCount).reduce((a, b) => moodCount[a] > moodCount[b] ? a : b)
-            : "N/A";
-
-        monthlyStats.push(mostCommonMood);*/
         const mostCommonSubEmoji = Object.keys(subEmojiCount).reduce((a, b) => subEmojiCount[a] > subEmojiCount[b] ? a : b);
         monthlyStats.push(mostCommonSubEmoji);
     }
@@ -161,17 +130,6 @@ const CalendarScreen = ({theme, language, moodData, moodEntries }) => {
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 9));
     const [isYearlyView, setIsYearlyView] = useState(false);
     const t = translations[language];
-
-    const renderMoodForDate = (date) => {
-        const entry = moodData[date];
-        return entry ? (
-            <div>
-                <img src={moodEmojiMap[entry.mood]} alt={entry.mood} />
-                <p className="calendar-intensity">Intensity: {entry.intensity}</p>
-                <p>{entry.notes}</p>
-            </div>
-        ) : null;
-    };
 
     const changeMonth = (direction) => {
         if (isYearlyView) {
@@ -262,7 +220,6 @@ const CalendarScreen = ({theme, language, moodData, moodEntries }) => {
                                         const dateKey = day ? generateDateKey(day) : null;
                                         const moodEntry = dateKey ? moodData[dateKey] : null;
                                         const emojiSrc = moodEntry ? getMoodEmojiImage(moodEntry.mood) : null;
-                                        const bgColor = moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF";
 
                                         return (
                                             <td key={dayIndex} onClick={day ? () => navigate(`/daily-view/${dateKey}`) : null} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF" }}>

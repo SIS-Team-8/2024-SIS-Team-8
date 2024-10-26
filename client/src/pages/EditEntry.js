@@ -57,9 +57,6 @@ export default function EditEntry({ language = "English", theme = "light", moodD
 
     const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
-    
-    const initialMood = moodData[date]?.mood || '';
-    const initialNote = moodData[date]?.notes || '';
 
     const moodIntensityMap = {
         "angry": 4,
@@ -123,10 +120,6 @@ export default function EditEntry({ language = "English", theme = "light", moodD
         setSelectedMood(mood);
         setMoodIntensity(moodIntensityMap[mood] || 'N/A');
         setMoodImages(moods[mood].subImages);
-    };
-
-    const handleIntensityChange = (newIntensity) => {
-        setMoodIntensity(newIntensity);
     };
 
     const t = translations[language];

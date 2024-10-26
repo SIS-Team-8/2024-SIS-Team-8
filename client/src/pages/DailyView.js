@@ -28,22 +28,6 @@ import nervous from '../assets/emoji/nervous.png';
 import overwhelmed from '../assets/emoji/overwhelmed.png';
 import terrified from '../assets/emoji/terrified.png';
 
-// Dummy mood data for the detailed view
-const moodData = {
-    "2024-10-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
-    "2024-10-02": { mood: "happy", intensity: 4, notes: "Good day." },
-    "2024-10-03": { mood: "neutral", intensity: 3, notes: "An average day." },
-    "2024-10-04": { mood: "sad", intensity: 2, notes: "Feeling a bit down." },
-    "2024-10-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." },
-    "2024-10-06": { mood: "frustrated", intensity: 2, notes: "Things didn't go well." },
-    "2024-10-07": { mood: "ecstatic", intensity: 5, notes: "Amazing surprise!" },
-    "2024-10-08": { mood: "terrified", intensity: 1, notes: "Scary moment!" },
-    "2024-10-09": { mood: "amazed", intensity: 4, notes: "Saw something incredible." },
-    "2024-10-10": { mood: "overwhelmed", intensity: 3, notes: "Too much work." },
-    "2024-10-11": { mood: "bored", intensity: 2, notes: "Nothing to do." },
-    "2024-10-12": { mood: "annoyed", intensity: 2, notes: "Annoying neighbors." }
-};
-
 const moodIntensityMap = {
     "angry": 4,
     "annoyed": 2,
@@ -84,14 +68,15 @@ const intensityMoodMap = {
 
 const getMoodEmoji = (mood) => {
     const moodEmojiMap = {
-       "angry": angry, "annoyed": annoyed, "frustrated": frustrated, "very angry": veryAngry,
-    "extremely angry": extremelyAngry, "sad": sad, "upset": upset, "deflated": deflated,
-    "distressed": distressed, "miserable": miserable, "happy": happy, "very happy": veryHappy,
-    "extremely happy": extremelyHappy, "amazingly happy": amazinglyHappy, "ecstatic": ecstatic,
-    "bored": bored, "exasperated": exasperated, "sarcastic": sarcastic, "tired": tired,
-    "exhausted": exhausted, "scared": scared, "surprised": surprised, "nervous": nervous,
-    "overwhelmed": overwhelmed, "terrified": terrified, "neutral": bored, "very sad": miserable
+        "angry": angry, "annoyed": annoyed, "frustrated": frustrated, "very angry": veryAngry,
+        "extremely angry": extremelyAngry, "sad": sad, "upset": upset, "deflated": deflated,
+        "distressed": distressed, "miserable": miserable, "happy": happy, "very happy": veryHappy,
+        "extremely happy": extremelyHappy, "amazingly happy": amazinglyHappy, "ecstatic": ecstatic,
+        "bored": bored, "exasperated": exasperated, "sarcastic": sarcastic, "tired": tired,
+        "exhausted": exhausted, "scared": scared, "surprised": surprised, "nervous": nervous,
+        "overwhelmed": overwhelmed, "terrified": terrified, "neutral": bored, "very sad": miserable
     };
+
     return moodEmojiMap[mood] || bored;
 };
 
@@ -114,8 +99,6 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
     const [intensity, setIntensity] = useState('');
     const [notes, setNotes] = useState('');
     const [isEditing, setIsEditing] = useState(false);
-
-    const isEntryPresent = moodEntry.mood !== "N/A";
 
      // Effect to update component state when moodData changes or date changes
      useEffect(() => {

@@ -38,7 +38,6 @@ const translations = {
 
 export default function MoodSelection({ language = "English", theme = "light", moodData, onMoodUpdate }) {
     const { date } = useParams(); // Use useParams to access 'date' from URL
-    const navigate = useNavigate();
 
     const moodEntry = moodData[date] || { mood: '', notes: '', intensity: "N/A", subMood: '' };
 
@@ -48,18 +47,12 @@ export default function MoodSelection({ language = "English", theme = "light", m
     const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);  // New state for sub-emoji
     const [moodIntensity, setMoodIntensity] = useState(0);
 
-    /*const [mood, setMood] = useState(moodData[date]?.mood || '');
-    const [notes, setNotes] = useState(moodData[date]?.notes || '');*/
-
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
 
     const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
-    
-    const initialMood = moodData[date]?.mood || '';
-    const initialNote = moodData[date]?.notes || '';
 
     const moodIntensityMap = {
         "angry": 4,
@@ -119,12 +112,6 @@ export default function MoodSelection({ language = "English", theme = "light", m
         onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, note });
     };
 
-    /*const handleMoodChange = (mood) => {
-        setSelectedMood(mood);
-        setMoodIntensity(moodIntensityMap[mood] || 'N/A');
-        setMoodImages(moods[mood].subImages);
-    };*/
-
     const handleMoodChange = (mood) => {
         if (selectedMood === mood) {
             setSelectedMood('');  // Deselect the mood if clicked again
@@ -134,10 +121,6 @@ export default function MoodSelection({ language = "English", theme = "light", m
             setMoodIntensity(moodIntensityMap[mood] || 'N/A');
             setMoodImages(moods[mood].subImages, Object.keys(moods).indexOf(mood));
         }
-    };
-
-    const handleIntensityChange = (newIntensity) => {
-        setMoodIntensity(newIntensity);
     };
 
     const t = translations[language];
