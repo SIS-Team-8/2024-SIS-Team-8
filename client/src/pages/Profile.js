@@ -35,7 +35,6 @@ export default function Profile({theme, language}) {
         const uploadedFile = fileUploadRef.current.files[0];
         const cachedURL = URL.createObjectURL(uploadedFile);
         const base64 = await convertToBase64(uploadedFile);
-        console.log(base64);
         setProfile({...profile, profile_pic: base64});
         setAvatarPhoto(cachedURL);
     }
@@ -62,7 +61,7 @@ export default function Profile({theme, language}) {
     };
 
     const handleError = (err) =>
-        toast.success(err, { //fix later
+        toast.error(err, {
     });
 
     const handleSuccess = (msg) =>
@@ -83,8 +82,6 @@ export default function Profile({theme, language}) {
             {}
             );
             const { success, message} = data;
-            console.log(success);
-            console.log(message);
             if (success) {
                 handleSuccess(message);
             } else {
@@ -106,13 +103,10 @@ export default function Profile({theme, language}) {
                     address: res.data.user.address,
                     profile_pic: res.data.user.profile_pic
                 });
-                console.log(res.data.user.profile_pic);
                 const base64Data = res.data.user.profile_pic.split(',')[1];
-                console.log(base64Data);
                 const binaryString = window.atob(base64Data);
                 const len = binaryString.length;
                 const bytes = new Uint8Array(len);
-                console.log(binaryString);
 
                 for (let i = 0; i < len; i++) {
                     bytes[i] = binaryString.charCodeAt(i)
@@ -120,7 +114,6 @@ export default function Profile({theme, language}) {
                 const blob = new Blob([bytes], { type: 'image/png' });
                 const url = URL.createObjectURL(blob);
                 setAvatarPhoto(url);
-                console.log(avatarPhoto);
             })
             .catch(err => console.log(err));
     }, []);

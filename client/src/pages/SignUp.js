@@ -52,7 +52,6 @@ export default function SignUp( {language, theme }) {
                     },
                     { withCredentials: true }
                 );
-
                 const { success, message } = data;
 
                 if (success) {
@@ -64,7 +63,6 @@ export default function SignUp( {language, theme }) {
                 } else {
                     handleError(message);
                 }
-                console.log(success);
             } catch (error) {
                 console.log(error);
             }
