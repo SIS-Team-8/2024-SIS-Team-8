@@ -113,7 +113,7 @@ const getYearlyMoodStatistics = (moodData, year) => {
                 monthlyStats.push("N/A");
                 continue;
             }*/
-             if (monthSubEmojiData.length === 0) {
+             if (monthMoodData.length === 0) {
                 monthlyStats.push("N/A");
                 continue;
             }
@@ -122,7 +122,7 @@ const getYearlyMoodStatistics = (moodData, year) => {
             acc[mood] = (acc[mood] || 0) + 1;
             return acc;
         }, {});*/
-        const subEmojiCount = monthSubEmojiData.reduce((acc, subEmoji) => {
+        const subEmojiCount = monthMoodData.reduce((acc, subEmoji) => {
             acc[subEmoji] = (acc[subEmoji] || 0) + 1;
             return acc;
         }, {});
