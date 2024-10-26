@@ -170,7 +170,7 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
                 <h1 style={{ color: 'white' }}>{translatedHeader}</h1>
 
                 <div className="emoji">
-                    <img src={getMoodEmoji(moodEntry.mood)} alt={moodEntry.mood}/>
+                   <img src={getMoodEmoji(moodEntry.mood)} alt={moodEntry.mood}/>
                 </div>
 
                 {isEditing ? (
