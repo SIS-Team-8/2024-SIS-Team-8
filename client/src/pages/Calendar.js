@@ -107,23 +107,33 @@ const getYearlyMoodStatistics = (moodData, year) => {
         const monthPadded = month.toString().padStart(2, '0');
         const monthMoodData = Object.entries(moodData)
             .filter(([date]) => date.startsWith(`${year}-${monthPadded}`))
-            .map(([, data]) => data.mood);
+            .map(([, data]) => data.subMood || data.mood);
 
-            if (monthMoodData.length === 0) {
+            /*if (monthMoodData.length === 0) {
+                monthlyStats.push("N/A");
+                continue;
+            }*/
+             if (monthSubEmojiData.length === 0) {
                 monthlyStats.push("N/A");
                 continue;
             }
 
-        const moodCount = monthMoodData.reduce((acc, mood) => {
+        /*const moodCount = monthMoodData.reduce((acc, mood) => {
             acc[mood] = (acc[mood] || 0) + 1;
+            return acc;
+        }, {});*/
+        const subEmojiCount = monthSubEmojiData.reduce((acc, subEmoji) => {
+            acc[subEmoji] = (acc[subEmoji] || 0) + 1;
             return acc;
         }, {});
 
-        const mostCommonMood = monthMoodData.length > 0
+        /*const mostCommonMood = monthMoodData.length > 0
             ? Object.keys(moodCount).reduce((a, b) => moodCount[a] > moodCount[b] ? a : b)
             : "N/A";
 
-        monthlyStats.push(mostCommonMood);
+        monthlyStats.push(mostCommonMood);*/
+        const mostCommonSubEmoji = Object.keys(subEmojiCount).reduce((a, b) => subEmojiCount[a] > subEmojiCount[b] ? a : b);
+        monthlyStats.push(mostCommonSubEmoji);
     }
     return monthlyStats;
 };
