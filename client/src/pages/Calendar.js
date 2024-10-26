@@ -198,7 +198,7 @@ const CalendarScreen = ({theme, language, moodData, moodEntries }) => {
     });
 
     const summary = getSummaryStatistics(monthData);
-    const yearlyMostCommonMood = getYearlyMoodStatistics(currentMonth.getFullYear());
+    const yearlyMostCommonMood = getYearlyMoodStatistics(moodData, currentMonth.getFullYear());
 
     const getMoodEmojiImage = (mood) => moodEmojiMap[mood] || null;
     const getMoodColor = (mood) => moodColorMap[mood] || moodColorMap.default;
@@ -231,7 +231,7 @@ const CalendarScreen = ({theme, language, moodData, moodEntries }) => {
                         <tr>
                         {yearlyMostCommonMood.map((mood, i) => (
                                 <td key={i} style={{ backgroundColor: 'white' }}>
-                                    <p>{t.mostCommonMood}: {mood !== "N/A" ? <img src={getMoodEmojiImage(summary.mostCommonMood)} alt={summary.mostCommonMood} className="calendar-emoji" />: "N/A"}</p>
+                                    <p>{t.mostCommonMood}: {mood !== "N/A" ? <img src={getMoodEmojiImage(mood)} alt={mood} className="calendar-emoji" />: "N/A"}</p>
                                 </td>
                             ))}
                         </tr>
