@@ -182,7 +182,7 @@ const DailyView = ({theme, language, moodData, updateEntry, deleteEntry}) => {
                     </>
                 ) : (
                     <>
-                        <p className="intensity">{t.intensity} {intensity}</p>
+                        <p className="intensity">{t.intensity} {moodEntry.Intensity}</p>
                         <p className="notes">{t.notes} {notes}</p>
                         <button className="edit-button" onClick={handleEdit}>
                             ✏ {t.editEntry}
