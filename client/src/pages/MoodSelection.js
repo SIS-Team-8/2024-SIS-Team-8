@@ -46,7 +46,7 @@ export default function MoodSelection({ language = "English", theme = "light", m
     const [selectedMood, setSelectedMood] = useState('')
     const [note, setNote] = useState('');
     const [selectedSubMood, setSelectedSubMood] = useState(moodEntry.subMood);  // New state for sub-emoji
-    const [moodIntensity, setMoodIntensity] = useState(0);
+    const [moodIntensity, setMoodIntensity] = useState(moodEntry.intensity);
 
     /*const [mood, setMood] = useState(moodData[date]?.mood || '');
     const [notes, setNotes] = useState(moodData[date]?.notes || '');*/
