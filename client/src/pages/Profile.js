@@ -83,6 +83,8 @@ export default function Profile({theme, language}) {
             {}
             );
             const { success, message} = data;
+            console.log(success);
+            console.log(message);
             if (success) {
                 handleSuccess(message);
             } else {
