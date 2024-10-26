@@ -119,10 +119,21 @@ export default function MoodSelection({ language = "English", theme = "light", m
         onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, note });
     };
 
-    const handleMoodChange = (mood) => {
+    /*const handleMoodChange = (mood) => {
         setSelectedMood(mood);
         setMoodIntensity(moodIntensityMap[mood] || 'N/A');
         setMoodImages(moods[mood].subImages);
+    };*/
+
+    const handleMoodChange = (mood) => {
+        if (selectedMood === mood) {
+            setSelectedMood('');  // Deselect the mood if clicked again
+            setImageSrc([]);  // Hide sub-emoji row
+        } else {
+            setSelectedMood(mood);  // Set selected mood
+            setMoodIntensity(moodIntensityMap[mood] || 'N/A');
+            setMoodImages(moods[mood].subImages, Object.keys(moods).indexOf(mood));
+        }
     };
 
     const handleIntensityChange = (newIntensity) => {
