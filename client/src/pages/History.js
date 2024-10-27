@@ -110,7 +110,6 @@ export default function History({theme, language}) {
 
     const [moodData, setMoodData] = useState([]);
     const pollingInterval = 5000;
-    const [chartData, setChartData] = useState([]);
 
     const [currentMonth, setCurrentMonth] = useState(initialMonth);
     const [viewMode, setViewMode] = useState("monthly");
@@ -160,18 +159,6 @@ export default function History({theme, language}) {
     useEffect(() => {
         fetchEmojiCount();
     }, [location.state]);
-
-    useEffect(() => {
-        // Initial fetch
-        fetchEmojiCount();
-
-        // Set up polling interval
-        const intervalId = setInterval(fetchEmojiCount, pollingInterval);
-
-        // Clear interval on component unmount
-        return () => clearInterval(intervalId);
-    }, []);
-
 
     const filterMoodDataByView = (data) => {
         const now = new Date();
@@ -298,6 +285,9 @@ export default function History({theme, language}) {
         { name: t.chart.xLabels[3], emoteFreq: 5 },
         { name: t.chart.xLabels[4], emoteFreq: 5 }
     ];*/
+
+    // Generate chart data based on real-time updates to mood data
+    const chartData = generateChartData(filteredMoodData);
 
     return (
         <div id="history-container" className={theme}>
