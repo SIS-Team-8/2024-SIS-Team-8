@@ -318,8 +318,7 @@ export default function History({theme, language}) {
             </div>
 
             <BarChart
-                //data={chartData}
-                moodEntry={moodEntry}
+                data={moodEntry}
                 xAxisLabel={t.chart.xAxisLabel}
                 yAxisLabel={t.chart.yAxisLabel}
                 tooltipText={t.chart.tooltipText}
