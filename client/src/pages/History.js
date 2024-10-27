@@ -103,7 +103,7 @@ const translations = {
     }
 };
 
-export default function History({theme, language, moodData}) {
+export default function History({theme, language}) {
     const location = useLocation();
     const initialMonth = location.state?.month || new Date();
     const [filteredMoodData, setFilteredMoodData] = useState([]);
