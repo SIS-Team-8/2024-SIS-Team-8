@@ -194,6 +194,14 @@ export default function History({theme, language}) {
         return updatedData;
     };
 
+    const handleMoodUpdate = (date, moodEntry) => {
+        setMoodData((prevData) => {
+            const updatedData = [...prevData, { date, ...moodEntry }];
+            setFilteredMoodData(updatedData);  // Refresh the chart data
+            return updatedData;
+        });
+    };
+
     // Apply filtering whenever a mood update is detected
     /*useEffect(() => {
         const moodUpdate = location.state?.moodUpdate;  // Assuming mood updates are sent via route state
