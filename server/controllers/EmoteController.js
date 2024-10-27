@@ -85,7 +85,7 @@ try
             return res.status(404).json({ message: "User not found" });
         }
 
-        const time_code = new Date(date);
+        let time_code = new Date(date);
 
         let logEntryFound = false;
 
@@ -93,6 +93,7 @@ try
         {
             if (user.journal[i].time_code.toDateString() === time_code.toDateString())
             {
+                user.journal[i].time_code = time_code;
                 user.journal[i].emoji = emoji;
                 user.journal[i].intensity = intensity;
                 user.journal[i].text = text;

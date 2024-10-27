@@ -180,7 +180,7 @@ all of the following api calls require the token cookie to be set by logging in 
       "intensity":"2",
       "text":"dftghdsrf",
       "image":"retytgrffd",
-      "time_code":"2024-10-11T09:36:28.829Z"
+      "date":"2024-10-11T09:36:28.829Z"
     }
     ```
 
