@@ -37,10 +37,11 @@ const colours = ['#ff746c', '#b3ebf2', '#ffee8c', 'grey', '#6c3baa'];
 const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColors, language, theme }) => {
     const t = translations[language] || translations.English;
 
-    const translatedData = defaultEmoteData.map((item) => ({
+    /*const translatedData = defaultEmoteData.map((item) => ({
         ...item,
         name: t[item.name] || item.name
-    }));
+    }));*/
+    const translatedData = data || [];
 
     return (
         <ResponsiveContainer width="50%" height="40%">
