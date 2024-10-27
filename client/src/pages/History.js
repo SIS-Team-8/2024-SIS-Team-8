@@ -109,7 +109,6 @@ export default function History({theme, language, moodEntry}) {
     const [filteredMoodData, setFilteredMoodData] = useState([]);
 
     const [moodData, setMoodData] = useState([]);
-    const [chartData, setChartData] = generateChartData(filteredMoodData);
 
     const [currentMonth, setCurrentMonth] = useState(initialMonth);
     const [viewMode, setViewMode] = useState("monthly");
@@ -196,17 +195,9 @@ export default function History({theme, language, moodEntry}) {
     };
 
     const handleMoodUpdate = (date, moodEntry) => {
-        setChartData(prevData => {
-            // Clone current data and update frequency of the selected mood
-            const updatedData = prevData.map(entry => 
-                entry.name === moodEntry.mood ? { ...entry, emoteFreq: entry.emoteFreq + 1 } : entry
-            );
-    
-            // Add the new mood if it doesn't already exist in `chartData`
-            if (!updatedData.some(entry => entry.name === moodEntry.mood)) {
-                updatedData.push({ name: moodEntry.mood, emoteFreq: 1 });
-            }
-    
+        setMoodData((prevData) => {
+            const updatedData = [...prevData, { date, ...moodEntry }];
+            setFilteredMoodData(updatedData);  // Refresh the chart data
             return updatedData;
         });
     };
@@ -290,6 +281,9 @@ export default function History({theme, language, moodEntry}) {
         { name: t.chart.xLabels[3], emoteFreq: 5 },
         { name: t.chart.xLabels[4], emoteFreq: 5 }
     ];*/
+
+    // Generate chart data based on real-time updates to mood data
+    const chartData = generateChartData(filteredMoodData);
 
     return (
         <div id="history-container" className={theme}>
