@@ -109,6 +109,7 @@ export default function History({theme, language, moodEntry}) {
     const [filteredMoodData, setFilteredMoodData] = useState([]);
 
     const [moodData, setMoodData] = useState([]);
+    const [chartData, setChartData] = generateChartData(filteredMoodData);
 
     const [currentMonth, setCurrentMonth] = useState(initialMonth);
     const [viewMode, setViewMode] = useState("monthly");
@@ -289,9 +290,6 @@ export default function History({theme, language, moodEntry}) {
         { name: t.chart.xLabels[3], emoteFreq: 5 },
         { name: t.chart.xLabels[4], emoteFreq: 5 }
     ];*/
-
-    // Generate chart data based on real-time updates to mood data
-    const chartData = generateChartData(filteredMoodData);
 
     return (
         <div id="history-container" className={theme}>
