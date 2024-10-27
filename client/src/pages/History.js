@@ -103,7 +103,7 @@ const translations = {
     }
 };
 
-export default function History({theme, language}) {
+export default function History({theme, language, moodData}) {
     const location = useLocation();
     const initialMonth = location.state?.month || new Date();
     const [filteredMoodData, setFilteredMoodData] = useState([]);
@@ -157,7 +157,7 @@ export default function History({theme, language}) {
     const generateChartData = (data) => {
         const moodCounts = { Angry: 0, Sad: 0, Happy: 0, Bored: 0, Scared: 0 };
         data.forEach((entry) => {
-            moodCounts[entry.mood] = (moodCounts[entry.mood] || 0) + 1;
+            moodCounts[moodData.mood] = (moodCounts[moodData.mood] || 0) + 1;
         });
         return Object.keys(moodCounts).map((mood) => ({
             name: mood,
