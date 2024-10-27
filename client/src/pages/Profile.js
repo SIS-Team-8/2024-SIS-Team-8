@@ -104,7 +104,6 @@ export default function Profile( { onLogout, theme, language}) {
                     address: res.data.user.address,
                     profile_pic: res.data.user.profile_pic
                 });
-                console.log(avatarPhoto);
                 if (res.data.user.profile_pic !== "") {   
                     const base64Data = res.data.user.profile_pic.split(',')[1];
                     const binaryString = window.atob(base64Data);

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 import './Calendar.css';
 
 import angry from '../assets/emoji/angry.png';
@@ -28,26 +29,42 @@ import nervous from '../assets/emoji/nervous.png';
 import overwhelmed from '../assets/emoji/overwhelmed.png';
 import terrified from '../assets/emoji/terrified.png';
 
-const moodData = {
-    "2024-10-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
-    "2024-10-02": { mood: "happy", intensity: 4, notes: "Good day." },
-    "2024-10-03": { mood: "neutral", intensity: 3, notes: "An average day." },
-    "2024-10-04": { mood: "sad", intensity: 2, notes: "Feeling a bit down." },
-    "2024-10-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." }
-};
-
 const moodEmojiMap = {
-    "angry": angry, "annoyed": annoyed, "frustrated": frustrated, "very angry": veryAngry,
-    "extremely angry": extremelyAngry, "sad": sad, "upset": upset, "deflated": deflated,
-    "distressed": distressed, "miserable": miserable, "happy": happy, "very happy": veryHappy,
-    "extremely happy": extremelyHappy, "amazingly happy": amazinglyHappy, "ecstatic": ecstatic,
-    "bored": bored, "exasperated": exasperated, "sarcastic": sarcastic, "tired": tired,
-    "exhausted": exhausted, "scared": scared, "surprised": surprised, "nervous": nervous,
-    "overwhelmed": overwhelmed, "terrified": terrified, "neutral": bored, "very sad": miserable
+    "02": angry, "00": annoyed, "01": frustrated, "03": veryAngry, "04": extremelyAngry, 
+    "11": sad, "10": upset, "12": deflated, "13": distressed, "14": miserable, 
+    "20": happy, "21": veryHappy, "22": extremelyHappy, "23": amazinglyHappy, "24": ecstatic,
+    "30": bored, "31": exasperated, "32": sarcastic, "33": tired, "34": exhausted, 
+    "43": scared, "40": surprised, "41": nervous, "42": overwhelmed, "44": terrified, "neutral": bored
 };
 
 const moodColorMap = {
-    "very happy": "#00FF00", "happy": "#A8E6CF", "neutral": "#FFD700", "sad": "#FFB6C1", "very sad": "#FF6347", "default": "#FFFFFF"
+    "02": "#FF6347",  // Tomator red
+    "00": "#FFA500",  // Orange
+    "01": "#FF4500",  // OrangeRed
+    "03": "#DC143C",  // Crimson
+    "04": "#B22222",  // Firebrick
+    "11": "#87CEFA",  // LightSkyBlue
+    "10": "#4682B4",  // SteelBlue
+    "12": "#708090",  // SlateGray
+    "13": "#778899",  // LightSlateGray
+    "14": "#2F4F4F",  // DarkSlateGray
+    "20": "#ADFF2F",  // GreenYellow
+    "21": "#7CFC00",  // LawnGreen
+    "22": "#00FF00",  // Lime
+    "23": "#32CD32",  // LimeGreen
+    "24": "#7FFF00",  // Chartreuse
+    "30": "#F5F5DC",  // Beige
+    "31": "#FFD700",  // Gold
+    "32": "#FFC0CB",  // Pink
+    "33": "#A9A9A9",  // DarkGray
+    "34": "#808080",  // Gray
+    "43": "#FFA07A",  // LightSalmon
+    "40": "#FF69B4",  // HotPink
+    "41": "#DAA520",  // GoldenRod
+    "42": "#FFB6C1",  // LightPink
+    "44": "#FF0000",  // Red
+    "neutral": "#D3D3D3",  // LightGray
+    "default": "#FFFFFF"  // White
 };
 
 const getMoodEmojiImage = (mood) => moodEmojiMap[mood] || null;
@@ -65,19 +82,6 @@ const getSummaryStatistics = (monthData) => {
     const mostCommonMood = Object.keys(moodCount).reduce((a, b) => moodCount[a] > moodCount[b] ? a : b);
 
     return { mostCommonMood };
-};
-
-const getYearlyMoodStatistics = (year) => {
-    const yearMoodData = Object.entries(moodData).filter(([date]) => date.startsWith(`${year}-`)).map(([_, data]) => data.mood);
-
-    if (yearMoodData.length === 0) return "N/A";
-
-    const moodCount = yearMoodData.reduce((acc, mood) => {
-        acc[mood] = (acc[mood] || 0) + 1;
-        return acc;
-    }, {});
-
-    return Object.keys(moodCount).reduce((a, b) => moodCount[a] > moodCount[b] ? a : b);
 };
 
 const translations = {
@@ -105,6 +109,64 @@ const CalendarScreen = ({theme, language }) => {
 
     const t = translations[language];
 
+    const [moodData, setMoodData] = useState({});
+
+    const handleMoodUpdate = (date, mood) => {
+        setMoodData(prevMoodData => ({
+            ...prevMoodData,
+            [date]: { mood }
+        }));
+        console.log(moodData);
+    };
+/*
+    const getYearlyMoodStatistics = (year) => {
+        const yearMoodData = Object.entries(moodData).filter(([date]) => date.startsWith(`${year}-`)).map(([_, data]) => data.mood);
+    
+        if (yearMoodData.length === 0) return "N/A";
+    
+        const moodCount = yearMoodData.reduce((acc, mood) => {
+            acc[mood] = (acc[mood] || 0) + 1;
+            return acc;
+        }, {});
+    
+        return Object.keys(moodCount).reduce((a, b) => moodCount[a] > moodCount[b] ? a : b);
+    };
+*/
+
+    const getYearlyMoodStatistics = (year) => {
+        const monthlyMoodStatistics = {};
+    
+        // Loop through each month
+        for (let month = 1; month <= 12; month++) {
+            const monthStr = month < 10 ? `0${month}` : `${month}`;
+            
+            // Filter mood data for the specified month
+            const monthMoodData = Object.entries(moodData)
+                .filter(([date]) => date.startsWith(`${year}-${monthStr}`))
+                .map(([_, data]) => data.mood);
+    
+            if (monthMoodData.length === 0) {
+                monthlyMoodStatistics[monthStr] = "N/A";
+                continue;
+            }
+    
+            // Calculate the most common mood for the month
+            const moodCount = monthMoodData.reduce((acc, mood) => {
+                acc[mood] = (acc[mood] || 0) + 1;
+                return acc;
+            }, {});
+    
+            const mostCommonMood = Object.keys(moodCount).reduce((a, b) =>
+                moodCount[a] > moodCount[b] ? a : b
+            );
+    
+            monthlyMoodStatistics[monthStr] = mostCommonMood;
+        }
+    
+        return monthlyMoodStatistics;
+    };
+    
+
     const changeMonth = (direction) => {
         if (isYearlyView) {
             const newYear = currentMonth.getFullYear() + direction;
@@ -123,6 +185,17 @@ const CalendarScreen = ({theme, language }) => {
         return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
     };
 
+    const generateNextMonthDateKey = (day) => {
+        const year = currentMonth.getFullYear();
+        const month = currentMonth.getMonth() + 2;
+        return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+    };
+
+    const generateYearKey = (year) => {
+        return `${year}-01-01`;
+    };
+
+
     const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
     const startDayOfWeek = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).getDay();
     const daysArray = Array.from({ length: startDayOfWeek }).fill(null)
@@ -140,8 +213,36 @@ const CalendarScreen = ({theme, language }) => {
     });
 
     const summary = getSummaryStatistics(monthData);
-    const yearlyMostCommonMood = getYearlyMoodStatistics(currentMonth.getFullYear());
+    const yearlyMostCommonMoods = getYearlyMoodStatistics(currentMonth.getFullYear());
+    
+    const getJournal = async () => {        
+        console.log(generateYearKey(currentMonth.getFullYear()));
+        console.log(generateYearKey(currentMonth.getFullYear()+1));
 
+        try {
+            const { data } = await axios.post(
+                "http://localhost:3000/api/requestJournal",
+                {
+                    startDate: generateYearKey(currentMonth.getFullYear()),
+                    endDate: generateYearKey(currentMonth.getFullYear()+1)
+                },
+                {}
+            );
+            console.log(data);
+            let emoji = "";
+            for (let i = 0; i < data.journal.length; i++){
+                emoji = data.journal[i].emoji.toString().concat(data.journal[i].intensity.toString());
+                handleMoodUpdate(data.journal[i].time_code.split("T")[0], emoji);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getJournal(false);
+    }, []);
+    
     return (
         <div className={ `calendar-screen ${theme}` }>
             <div className="button-container">
@@ -154,9 +255,9 @@ const CalendarScreen = ({theme, language }) => {
             </div>
 
             <div className="month-navigation">
-                <button onClick={() => changeMonth(-1)}>{t.previous}</button>
+                <button onClick={() => { changeMonth(-1); }}>{t.previous}</button>
                 <h2>{isYearlyView ? `${currentMonth.getFullYear()} ${t.summary}` : `${t.months[currentMonth.getMonth()]} ${currentMonth.getFullYear()}`}</h2>
-                <button onClick={() => changeMonth(1)}>{t.next}</button>
+                <button onClick={() => { changeMonth(1); }}>{t.next}</button>
             </div>
 
             {isYearlyView ? (
@@ -168,11 +269,17 @@ const CalendarScreen = ({theme, language }) => {
                     </thead>
                     <tbody>
                         <tr>
-                            {Array(12).fill(null).map((_, i) => (
-                                <td key={i} style={{ backgroundColor: 'white' }}>
-                                    <p>{t.mostCommonMood}: {yearlyMostCommonMood !== "N/A" ? <img src={getMoodEmojiImage(yearlyMostCommonMood)} alt={yearlyMostCommonMood} className="calendar-emoji" /> : "N/A"}</p>
-                                </td>
-                            ))}
+                        {Array.from({ length: 12 }, (_, i) => {
+                                const monthStr = (i + 1).toString().padStart(2, "0");
+                                const mood = yearlyMostCommonMoods[monthStr];
+                                const moodEmoji = mood !== "N/A" ? getMoodEmojiImage(mood) : null;
+
+                                return (
+                                    <td key={i} style={{ backgroundColor: mood !== "N/A" ? getMoodColor(mood) : "#FFFFFF" }}>
+                                        <p>{t.mostCommonMood}: {moodEmoji ? <img src={moodEmoji} alt={mood} className="calendar-emoji" /> : "N/A"}</p>
+                                    </td>
+                                );
+                            })}
                         </tr>
                     </tbody>
                 </table>
