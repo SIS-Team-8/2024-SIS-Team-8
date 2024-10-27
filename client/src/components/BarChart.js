@@ -1,5 +1,6 @@
 import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis, Tooltip, Label, Cell } from 'recharts';
 import './BarChart.css';
+import React, { useState, useEffect } from 'react';
 
 const translations = {
     English: { frequency: "Frequency", emotion: "Emotion", tooltipText: "Frequency", Angry: "Angry", Sad: "Sad", Happy: "Happy", Bored: "Bored", Scared: "Scared" },
@@ -34,7 +35,7 @@ const defaultEmoteData = [
 
 const colours = ['#ff746c', '#b3ebf2', '#ffee8c', 'grey', '#6c3baa'];
 
-const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColors, language, theme }) => {
+const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColors, language, theme, moodEntry }) => {
     const t = translations[language] || translations.English;
     const [chartData, setChartData] = useState([]);
 
