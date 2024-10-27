@@ -195,9 +195,17 @@ export default function History({theme, language, moodEntry}) {
     };
 
     const handleMoodUpdate = (date, moodEntry) => {
-        setMoodData((prevData) => {
-            const updatedData = [...prevData, { date, ...moodEntry }];
-            setFilteredMoodData(updatedData);  // Refresh the chart data
+        setChartData(prevData => {
+            // Clone current data and update frequency of the selected mood
+            const updatedData = prevData.map(entry => 
+                entry.name === moodEntry.mood ? { ...entry, emoteFreq: entry.emoteFreq + 1 } : entry
+            );
+    
+            // Add the new mood if it doesn't already exist in `chartData`
+            if (!updatedData.some(entry => entry.name === moodEntry.mood)) {
+                updatedData.push({ name: moodEntry.mood, emoteFreq: 1 });
+            }
+    
             return updatedData;
         });
     };
@@ -318,7 +326,7 @@ export default function History({theme, language, moodEntry}) {
             </div>
 
             <BarChart
-                data={moodEntry}
+                data={chartData}
                 xAxisLabel={t.chart.xAxisLabel}
                 yAxisLabel={t.chart.yAxisLabel}
                 tooltipText={t.chart.tooltipText}
