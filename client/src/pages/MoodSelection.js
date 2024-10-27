@@ -131,6 +131,7 @@ export default function MoodSelection({ language = "English", theme = "light", m
     const handleSubmit = () => {
         const date = new Date().toISOString().split('T')[0];
         onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, note });
+        onMoodUpdate(date, moodEntry);
     };
 
     /*const handleMoodChange = (mood) => {

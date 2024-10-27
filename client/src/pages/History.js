@@ -195,13 +195,25 @@ export default function History({theme, language}) {
     };
 
     // Apply filtering whenever a mood update is detected
-    useEffect(() => {
+    /*useEffect(() => {
         const moodUpdate = location.state?.moodUpdate;  // Assuming mood updates are sent via route state
         if (moodUpdate) {
             const updatedData = filterMoodDataBySelection(moodData, moodUpdate);
             setFilteredMoodData(updatedData);
         } else {
             setFilteredMoodData(moodData);
+        }
+    }, [location.state, moodData]);*/
+
+    useEffect(() => {
+        const moodUpdate = location.state?.moodUpdate;
+        if (moodUpdate) {
+            // Update moodData and chartData accordingly
+            setMoodData(prevData => {
+                const updatedData = [...prevData, moodUpdate];
+                setFilteredMoodData(updatedData);  // Refresh the filtered data for chart
+                return updatedData;
+            });
         }
     }, [location.state, moodData]);
 
