@@ -46,18 +46,12 @@ export default function Login({ onLogin, language, theme }) {
                 { withCredentials: true }
             );
 
-            console.log(data);
-
             const { success, message } = data;
 
             if (success) {
-                handleSuccess(message);
-
                 onLogin();
-
-                setTimeout(() => {
-                    navigate("/");
-                });
+                handleSuccess(message); 
+                navigate("/");
             } else {
                 handleError(message);
             }

@@ -25,6 +25,14 @@
     width: 150px;
 }
 
+#profile-button {
+    background-color: #189ab4;
+}
+
+.dark #profile-button {
+    background-color: #0F3D4B;
+}
+
 .dark #navigation-button {
     color: #0F3D4B;
 }

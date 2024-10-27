@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import axios from "axios";
 import logo from './assets/logo.png';
 import dizzy from './assets/face-with-spiral-eyes.svg';
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 import './App.css';
@@ -22,6 +21,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Onboarding from "./pages/Onboarding";
 import OnboardingOverview from "./pages/OnboardingOverview";
+import ResetPassword from "./pages/ResetPassword";
 
 import { Route, Routes } from "react-router-dom";
 
@@ -32,6 +32,7 @@ function App() {
     const [language, setLanguage] = useState(localStorage.getItem('language') || 'English');
     const navigate = useNavigate();
     const location = useLocation();
+    const [cookies, removeCookie] = useCookies([]);
 
     useEffect(() => {
         document.body.classList.remove('light', 'dark'); // Remove any existing theme class
@@ -48,7 +49,7 @@ function App() {
             setIsLoaded(true);
 
             if (!isAuthenticated && location.pathname !== "/sign-up") {
-                navigate("/login");
+               navigate("/login");
             }
         }, 3000);
 
@@ -57,17 +58,6 @@ function App() {
 
     const handleLogin = () => {
         setIsAuthenticated(true);
-
-        const hasCompletedOnboarding = localStorage.getItem("hasCompletedOnboarding");
-
-        if (!hasCompletedOnboarding) {
-            navigate("/onboarding");
-        }
-    };
-
-    const handleLogout = () => {
-        setIsAuthenticated(false);
-        navigate("/login");
     };
 
     const handleOnboardingComplete = () => {
@@ -87,6 +77,12 @@ function App() {
         return <SplashScreen theme={theme} />;
     }
 
+    const handleLogout = () => {
+        setIsAuthenticated(false);
+        removeCookie("token");
+        navigate("/login");
+    }
+
     return (
         <div className="App">
             {isAuthenticated && <Navbar onLogout={handleLogout} theme={theme} toggleTheme={toggleTheme} language={language} onLanguageChange={handleLanguageChange} />}
@@ -100,7 +96,8 @@ function App() {
                 <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/help" element={isAuthenticated ? <Help theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/history" element={isAuthenticated ? <History theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
-                <Route path="/profile" element={isAuthenticated ? <Profile theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/profile" element={isAuthenticated ? <Profile theme={theme} language={language} onLogout={handleLogout} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/reset-password" element={isAuthenticated ? <ResetPassword theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/settings" element={isAuthenticated ? <Settings theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/mood-selection" element={isAuthenticated ? <MoodSelection theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/login" element={<Login language={language} theme={theme} onLogin={handleLogin} />} />
@@ -122,26 +119,15 @@ function App() {
 
         const t = translations[language];
         const navigate = useNavigate();
-        const [cookies, removeCookie] = useCookies([]);
-        const [username, setUsername] = useState("");
 
         useEffect(() => {
             const verifyCookie = async () => {
                 if (!cookies.token) {
-                    navigate("/login");
+                    //navigate("/login");
                 }
-
-            const { data } = await axios.post(
-                "http://localhost:3000/api/auth",
-                {},
-                { withCredentials: true }
-            );
-
-            const {status, user } = data;
-
-            setUsername(user);
-
-            return status ? toast('Hello ${user}', { position: "top-right", }) : (removeCookie("token"), navigate("/login"));
+            const hasCompletedOnboarding = localStorage.getItem("hasCompletedOnboarding");
+            if (!hasCompletedOnboarding) 
+                navigate("/onboarding");
         };
 
         verifyCookie();

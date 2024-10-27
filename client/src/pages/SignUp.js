@@ -52,15 +52,11 @@ export default function SignUp( {language, theme }) {
                     },
                     { withCredentials: true }
                 );
-
                 const { success, message } = data;
 
                 if (success) {
                     handleSuccess(message);
-
-                    setTimeout(() => {
-                        navigate("/login");
-                    });
+                    navigate("/login");
                 } else {
                     handleError(message);
                 }

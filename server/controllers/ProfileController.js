@@ -25,7 +25,7 @@ module.exports.updateProfile = async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        res.status(200).json({ message: "Profile updated successfully", user: updatedUser });
+        res.status(200).json({ message: "Profile updated successfully", success: true, user: updatedUser });
     } catch (error) {
         res.status(500).json({ message: "Server error", error: error.message });
     }
@@ -66,7 +66,7 @@ module.exports.updatePassword = async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        res.status(200).json({ message: "Password updated successfully" });
+        res.status(200).json({ message: "Password updated successfully", success: true });
 
     }
     catch (error) {
