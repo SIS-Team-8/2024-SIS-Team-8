@@ -197,10 +197,13 @@ export default function History({theme, language}) {
     const handleMoodUpdate = (date, moodEntry) => {
         setMoodData((prevData) => {
             const updatedData = [...prevData, { date, ...moodEntry }];
-            setFilteredMoodData(updatedData);  // Refresh the chart data
+            const newFilteredData = filterMoodDataByView(updatedData);  // Filter based on the view mode
+            setFilteredMoodData(newFilteredData);  // Refresh filtered data for chart
             return updatedData;
         });
     };
+
+    const chartData = generateChartData(filteredMoodData);
 
     // Apply filtering whenever a mood update is detected
     /*useEffect(() => {
@@ -281,9 +284,6 @@ export default function History({theme, language}) {
         { name: t.chart.xLabels[3], emoteFreq: 5 },
         { name: t.chart.xLabels[4], emoteFreq: 5 }
     ];*/
-
-    // Generate chart data based on real-time updates to mood data
-    const chartData = generateChartData(filteredMoodData);
 
     return (
         <div id="history-container" className={theme}>
