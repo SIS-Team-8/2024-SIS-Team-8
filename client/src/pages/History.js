@@ -154,14 +154,13 @@ export default function History({theme, language}) {
         return filteredData;
     };
 
-    // Update chart data dynamically based on filteredMoodData
     const generateChartData = (data) => {
-        const moodCounts = { Angry: 0, Sad: 0, Happy: 0, Bored: 0, Scared: 0 };
+        const moodCounts = { Angry: 1, Sad: 2, Happy: 0, Bored: 0, Scared: 0 };
         data.forEach((entry) => {
             moodCounts[entry.mood] = (moodCounts[entry.mood] || 0) + 1;
         });
-        return Object.keys(moodCounts).map((mood, index) => ({
-            name: translations.English.chart.xLabels[index],
+        return Object.keys(moodCounts).map((mood) => ({
+            name: mood,
             emoteFreq: moodCounts[mood],
         }));
     };
