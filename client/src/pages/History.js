@@ -155,7 +155,7 @@ export default function History({theme, language}) {
     };
 
     const generateChartData = (data) => {
-        const moodCounts = { Angry: 1, Sad: 2, Happy: 0, Bored: 0, Scared: 0 };
+        const moodCounts = { Angry: 0, Sad: 0, Happy: 0, Bored: 0, Scared: 0 };
         data.forEach((entry) => {
             moodCounts[entry.mood] = (moodCounts[entry.mood] || 0) + 1;
         });
@@ -196,8 +196,8 @@ export default function History({theme, language}) {
     const handleMoodUpdate = (date, moodEntry) => {
         setMoodData((prevData) => {
             const updatedData = [...prevData, { date, ...moodEntry }];
-            const newFilteredData = filterMoodDataByView(updatedData);  // Filter based on the view mode
-            setFilteredMoodData(newFilteredData);  // Refresh filtered data for chart
+            setFilteredMoodData(updatedData);  // Update filtered data for the latest mood
+    
             return updatedData;
         });
     };
@@ -317,7 +317,7 @@ export default function History({theme, language}) {
             </div>
 
             <BarChart
-                data={chartData}
+                data={generateChartData(filteredMoodData)}
                 xAxisLabel={t.chart.xAxisLabel}
                 yAxisLabel={t.chart.yAxisLabel}
                 tooltipText={t.chart.tooltipText}
