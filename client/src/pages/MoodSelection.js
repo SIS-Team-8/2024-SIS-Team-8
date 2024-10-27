@@ -130,7 +130,10 @@ export default function MoodSelection({ language = "English", theme = "light", m
     // This function will be used to submit the new mood and note
     const handleSubmit = () => {
         const date = new Date().toISOString().split('T')[0];
-        onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, note });
+        //onMoodUpdate(date, { mood: selectedMood, intensity: moodIntensity, note });
+        const moodEntry = { mood: selectedMood, intensity: moodIntensity, note };
+
+        // Trigger the callback to pass mood to History page
         onMoodUpdate(date, moodEntry);
     };
 
