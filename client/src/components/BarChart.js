@@ -36,16 +36,34 @@ const colours = ['#ff746c', '#b3ebf2', '#ffee8c', 'grey', '#6c3baa'];
 
 const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColors, language, theme }) => {
     const t = translations[language] || translations.English;
+    const [chartData, setChartData] = useState([]);
 
-    /*const translatedData = defaultEmoteData.map((item) => ({
+    const translatedData = defaultEmoteData.map((item) => ({
         ...item,
         name: t[item.name] || item.name
-    }));*/
-    const translatedData = data || [];
+    }));
+
+    useEffect(() => {
+        if (moodEntry) {
+            // Check if the mood already exists in chartData, update or add it
+            setChartData(prevData => {
+                const updatedData = [...prevData];
+                const moodIndex = updatedData.findIndex(entry => entry.name === moodEntry.mood);
+                
+                if (moodIndex !== -1) {
+                    updatedData[moodIndex].emoteFreq += 1;
+                } else {
+                    updatedData.push({ name: moodEntry.mood, emoteFreq: 1 });
+                }
+
+                return updatedData;
+            });
+        }
+    }, [moodEntry]);
 
     return (
         <ResponsiveContainer width="50%" height="40%">
-            <BarChart id="bar-chart" data={translatedData} margin={{bottom: 30}}>
+            <BarChart id="bar-chart" data={chartData} margin={{bottom: 30}}>
                 <YAxis stroke="white">
                     <Label value={t.frequency} angle="-90" position="Left" fill="#dddd" dx={-10}/>
                 </YAxis>
