@@ -109,7 +109,6 @@ export default function History({theme, language}) {
     const [filteredMoodData, setFilteredMoodData] = useState([]);
 
     const [moodData, setMoodData] = useState([]);
-    const pollingInterval = 5000;
 
     const [currentMonth, setCurrentMonth] = useState(initialMonth);
     const [viewMode, setViewMode] = useState("monthly");
@@ -136,29 +135,6 @@ export default function History({theme, language}) {
         }
         fetchMoodHistory();
     }, []);
-
-    const fetchEmojiCount = async () => {
-        try {
-            const response = await axios.post('/api/requestHistory', {
-                startDate: '2024-01-01',  // Adjust as needed
-                endDate: new Date().toISOString()
-            });
-            const emojiCount = response.data.emojiCount;
-
-            const mappedChartData = emojiCount.map((count, index) => ({
-                name: translations.English.chart.xLabels[index],
-                emoteFreq: count
-            }));
-            setChartData(mappedChartData);
-
-        } catch (error) {
-            console.error("Error fetching emoji count:", error);
-        }
-    };
-
-    useEffect(() => {
-        fetchEmojiCount();
-    }, [location.state]);
 
     const filterMoodDataByView = (data) => {
         const now = new Date();
