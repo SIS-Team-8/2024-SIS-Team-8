@@ -50,7 +50,7 @@ module.exports.logEmote = async (req, res) => {
                 if (!updatedUser) {
                     return res.status(404).json({ message: "failed to update journal" });
                 }
-                res.status(200).json({ message: "Journal updated successfully", journal: updatedUser.journal });
+                res.status(200).json({ message: "Journal updated successfully", journal: updatedUser.journal, success: true });
 
                 logEntryFound = true;
                 break;

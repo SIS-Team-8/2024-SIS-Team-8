@@ -57,9 +57,8 @@ export default function SignUp( {language, theme }) {
                 if (success) {
                     handleSuccess(message);
                     navigate("/login");
-                } else {
+                } else
                     handleError(message);
-                }
             } catch (error) {
                 console.log(error);
             }

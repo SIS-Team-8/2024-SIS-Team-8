@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 import './MoodSelection.css'
 import veryAngry from '../assets/emoji/very-angry.png'
 import sad from '../assets/emoji/sad.png'
@@ -42,11 +44,31 @@ export default function MoodSelection({ language = "English", theme = "light" })
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
     const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
+    const [moodEntry, setMoodEntry] = useState({
+        emoji:"",
+        intensity:"",
+        text:"",
+        image:""
+    });
+
+    const { emoji, intensity, text } = moodEntry;
+
+    const navigate = useNavigate();
+
+    const handleTextChange = (e) => {
+        const { name, value } = e.target;
+        setMoodEntry({
+            ...moodEntry,
+            [name]: value
+        });
+    };
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
         setRowOpacity(prev => prev.map((_, i) => (i === activeIndex ? 1 : 0.5)));  // Change opacity of row images on click
         resetSubRowOpacity();
+        setMoodEntry({...moodEntry, emoji: activeIndex, intensity: ""})
+        console.log(activeIndex);
     };
 
     const resetSubRowOpacity = () => {
@@ -71,6 +93,41 @@ export default function MoodSelection({ language = "English", theme = "light" })
 
     const handleSubRowClick = (index) => {
         setSubRowOpacity(prev => prev.map((_, i) => (i === index ? 1 : 0.5)));  // Update only sub-row images' opacity
+        setMoodEntry({...moodEntry, intensity: index});
+        console.log(index);
+    };
+
+    const handleError = (err) => toast.error(err, {});
+
+    const handleSuccess = (msg) => toast.success(msg, {});
+
+    const handleSubmit = async () => {
+        if (emoji === "" || intensity === "") {
+            toast.error("Select how you feel to create an entry")
+        }
+        else {
+            try {
+                const { data } = await axios.post(
+                    "http://localhost:3000/api/logEmote",
+                    {
+                        "emoji": moodEntry.emoji,
+                        "intensity": moodEntry.intensity,
+                        "text": moodEntry.text,
+                        "image": "" 
+                    },
+                    { }
+                );
+                const { success, message } = data;
+
+                if (success) {
+                    handleSuccess(message);
+                    navigate("/");
+                } else 
+                    handleError(message);
+            } catch (error) {
+                console.log(error);
+            }
+        }
     };
 
     return (
@@ -121,11 +178,9 @@ export default function MoodSelection({ language = "English", theme = "light" })
                 </div>
 
                 <div id="flexContainer">
-                    <textarea id="log" placeholder={t.addNote} className={theme}/>
+                    <textarea id="log" name="text" value={text} onChange={handleTextChange} placeholder={t.addNote} className={theme}/>
 
-                    <Link to="/">
-                        <img id="submit" className={theme} alt="submit" src={submit}/>
-                    </Link>
+                    <img id="submit" className={theme} alt="submit" src={submit} onClick={handleSubmit}/>
                 </div>
             </div>
         </html>
