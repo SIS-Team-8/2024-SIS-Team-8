@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useParams, useNavigate, Link } from "react-router-dom";
+import axios from 'axios';
 import './MoodSelection.css'
 import veryAngry from '../assets/emoji/very-angry.png'
 import sad from '../assets/emoji/sad.png'
@@ -102,6 +103,19 @@ export default function MoodSelection({ language = "English", theme = "light", m
             setNote('');
         }
     }, [date, moodData]);
+
+    const handleMoodLog = async (mood) => {
+        try {
+            // Send mood data to the backend
+            await axios.post('/api/logMood', { mood: mood.id });
+
+            // Notify the History screen of a new mood entry
+            navigate('/history', { state: { moodLogged: true } });
+
+        } catch (error) {
+            console.error("Error logging mood:", error);
+        }
+    };
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images

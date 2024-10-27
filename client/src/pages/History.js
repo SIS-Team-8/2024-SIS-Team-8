@@ -109,6 +109,8 @@ export default function History({theme, language}) {
     const [filteredMoodData, setFilteredMoodData] = useState([]);
 
     const [moodData, setMoodData] = useState([]);
+    const pollingInterval = 5000;
+    const [chartData, setChartData] = useState([]);
 
     const [currentMonth, setCurrentMonth] = useState(initialMonth);
     const [viewMode, setViewMode] = useState("monthly");
@@ -135,6 +137,41 @@ export default function History({theme, language}) {
         }
         fetchMoodHistory();
     }, []);
+
+    const fetchEmojiCount = async () => {
+        try {
+            const response = await axios.post('/api/requestHistory', {
+                startDate: '2024-01-01',  // Adjust as needed
+                endDate: new Date().toISOString()
+            });
+            const emojiCount = response.data.emojiCount;
+
+            const mappedChartData = emojiCount.map((count, index) => ({
+                name: translations.English.chart.xLabels[index],
+                emoteFreq: count
+            }));
+            setChartData(mappedChartData);
+
+        } catch (error) {
+            console.error("Error fetching emoji count:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchEmojiCount();
+    }, [location.state]);
+
+    useEffect(() => {
+        // Initial fetch
+        fetchEmojiCount();
+
+        // Set up polling interval
+        const intervalId = setInterval(fetchEmojiCount, pollingInterval);
+
+        // Clear interval on component unmount
+        return () => clearInterval(intervalId);
+    }, []);
+
 
     const filterMoodDataByView = (data) => {
         const now = new Date();
@@ -261,9 +298,6 @@ export default function History({theme, language}) {
         { name: t.chart.xLabels[3], emoteFreq: 5 },
         { name: t.chart.xLabels[4], emoteFreq: 5 }
     ];*/
-
-    // Generate chart data based on real-time updates to mood data
-    const chartData = generateChartData(filteredMoodData);
 
     return (
         <div id="history-container" className={theme}>
