@@ -67,8 +67,7 @@ export default function MoodSelection({ language = "English", theme = "light" })
         setImageSrc(images);  // Set sub-row images
         setRowOpacity(prev => prev.map((_, i) => (i === activeIndex ? 1 : 0.5)));  // Change opacity of row images on click
         resetSubRowOpacity();
-        setMoodEntry({...moodEntry, emoji: activeIndex, intensity: ""})
-        console.log(activeIndex);
+        setMoodEntry({...moodEntry, emoji: activeIndex, intensity: ""});
     };
 
     const resetSubRowOpacity = () => {
@@ -94,7 +93,6 @@ export default function MoodSelection({ language = "English", theme = "light" })
     const handleSubRowClick = (index) => {
         setSubRowOpacity(prev => prev.map((_, i) => (i === index ? 1 : 0.5)));  // Update only sub-row images' opacity
         setMoodEntry({...moodEntry, intensity: index});
-        console.log(index);
     };
 
     const handleError = (err) => toast.error(err, {});
