@@ -79,7 +79,7 @@ const DailyView = ({ moodData, theme, language }) => {
 
                 <p className="notes">{t.notes} {moodEntry.notes}</p>
 
-                <button className="edit-button" onClick={() => alert("Edit functionality coming soon!")}>
+                <button className="edit-button" onClick={() => navigate(`/mood-selection/${date}`)}>
                     ✏ {t.editEntry}
                 </button>
                 <button className="delete-button" onClick={handleDelete}>

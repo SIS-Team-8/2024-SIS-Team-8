@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import './MoodSelection.css'
@@ -55,6 +55,8 @@ export default function MoodSelection({ language = "English", theme = "light" })
 
     const navigate = useNavigate();
 
+    const { date } = useParams();
+
     const handleTextChange = (e) => {
         const { name, value } = e.target;
         setMoodEntry({
@@ -68,6 +70,7 @@ export default function MoodSelection({ language = "English", theme = "light" })
         setRowOpacity(prev => prev.map((_, i) => (i === activeIndex ? 1 : 0.5)));  // Change opacity of row images on click
         resetSubRowOpacity();
         setMoodEntry({...moodEntry, emoji: activeIndex, intensity: ""});
+        console.log(date);
     };
 
     const resetSubRowOpacity = () => {
