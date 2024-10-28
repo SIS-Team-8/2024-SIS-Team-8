@@ -302,6 +302,26 @@ export default function History({historyData, historyUpdate, theme, language}) {
         { name: t.chart.xLabels[4], emoteFreq: 5 }
     ];
 
+    const getHistory = async () => {
+        try {
+            const { data } = await axios.post(
+                "http://localhost:3000/api/requestHistory",
+                {
+                    startDate: "2024-01-01",
+                    endDate: "2025-01-01"
+                },
+                {}
+            );
+            console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
+    } 
+
+    useEffect(() => {
+        getHistory();
+    })
+
     return (
         <div id="history-container" className={theme}>
             <div style={{ marginTop: '15px', textAlign: 'center' }}>
