@@ -155,12 +155,13 @@ const CalendarScreen = ({theme, language }) => {
         if (isYearlyView) {
             const newYear = currentMonth.getFullYear() + direction;
             setCurrentMonth(new Date(newYear, currentMonth.getMonth()));
+            getJournal(newYear);
         } else {
             const newDate = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
             setCurrentMonth(newDate);
-        }
-        if ((currentMonth.getMonth() - direction) === 12 || (currentMonth.getMonth() - direction) === -1) {
-            getJournal();
+            if ((currentMonth.getMonth() - direction) === 12 || (currentMonth.getMonth() - direction) === -1) {
+                getJournal(currentMonth.getFullYear());
+            }
         }
     };
 
@@ -195,13 +196,13 @@ const CalendarScreen = ({theme, language }) => {
     const summary = getSummaryStatistics(monthData);
     const yearlyMostCommonMoods = getYearlyMoodStatistics(currentMonth.getFullYear());
     
-    const getJournal = async () => {        
+    const getJournal = async (year) => {        
         try {
             const { data } = await axios.post(
                 "http://localhost:3000/api/requestJournal",
                 {
-                    startDate: generateYearKey(currentMonth.getFullYear()),
-                    endDate: generateYearKey(currentMonth.getFullYear()+1)
+                    startDate: generateYearKey(year),
+                    endDate: generateYearKey(year + 1)
                 },
                 {}
             );
@@ -216,7 +217,7 @@ const CalendarScreen = ({theme, language }) => {
     }
 
     useEffect(() => {
-        getJournal(false);
+        getJournal(currentMonth.getFullYear());
     }, []);
     
     return (
