@@ -9,6 +9,7 @@ const translations = {
     Chinese: { frequency: "频率", emotion: "情绪", tooltipText: "频率", Angry: "生气", Sad: "难过", Happy: "开心", Bored: "无聊", Scared: "害怕" }
 };
 
+// This needs to be replaced.
 const defaultEmoteData = [
     {
         name: 'Angry',
@@ -48,11 +49,11 @@ const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColor
                 <YAxis stroke="white">
                     <Label value={t.frequency} angle="-90" position="Left" fill="#dddd" dx={-10}/>
                 </YAxis>
-                <XAxis dataKey="name" stroke="white">
+                <XAxis dataKey="name" stroke="white"> {/* This needs to be replaced. */}
                     <Label value={t.emotion} offset={0} position="bottom" fill="#dddd" dy={10}/>
                 </XAxis>
                 <Tooltip cursor={false} content={<CustomTooltip tooltipText={t.tooltipText} theme={theme} />}/>
-                <Bar dataKey="emoteFreq">
+                <Bar dataKey="emoteFreq"> {/* This needs to be replaced. */}
                     {
                         translatedData.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={colours[index]}/>

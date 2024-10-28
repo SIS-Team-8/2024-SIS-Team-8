@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BarChart from '../components/BarChart';
 import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
 import './History.css';
 
 const translations = {
@@ -101,7 +102,7 @@ const translations = {
     }
 };
 
-export default function History({theme, language}) {
+export default function History({historyData, historyUpdate, theme, language}) {
     const location = useLocation();
     const initialMonth = location.state?.month || new Date();
 
@@ -117,6 +118,92 @@ export default function History({theme, language}) {
             setCurrentMonth(location.state.month);
         }
     }, [location.state?.month]);
+
+    // const getYearlyHistoryStatistics = (year) => {
+    //     const monthlyHistoryStatistics = {};
+
+    //     for (let month = 1; month <= 12; month++) {
+    //         const monthStr = month < 10 ? `0${month}` : `${month}`;
+
+    //         const monthHistoryData = Object.entries(historyData)
+    //             .filter(([date]) => date.startsWith(`${year}-${monthStr}`))
+    //             .map(([_, data]) => data.emotion);
+
+    //         if (monthHistoryData.length === 0) {
+    //             monthlyHistoryStatistics[monthStr] = "N/A";
+    //             continue;
+    //         }
+
+    //         const emoteFreq = monthHistoryData.reduce((acc, emotion) => {
+    //             acc[emotion] = (acc[emotion] || 0) + 1;
+    //             return acc;
+    //         }, {});
+    //     }
+
+    //     return monthlyHistoryStatistics;
+    // };
+
+    // const getMonthlyHistoryStatistics = (month, year) => {
+    //     const monthlyHistoryStatistics = {};
+
+    //     for (let month = 1; month <= 12; month++) {
+    //         const monthStr = month < 10 ? `0${month}` : `${month}`;
+
+    //         const monthHistoryData = Object.entries(historyData)
+    //             .filter(([date]) => date.startsWith(`${year}-${monthStr}`))
+    //             .map(([_, data]) => data.emotion);
+
+    //         if (monthHistoryData.length === 0) {
+    //             monthlyHistoryStatistics[monthStr] = "N/A";
+    //             continue;
+    //         }
+
+    //         const moodCount = monthHistoryData.reduce((acc, emotion) => {
+    //             acc[emotion] = (acc[emotion] || 0) + 1;
+    //             return acc;
+    //         }, {});
+    //     }
+
+    //     return monthlyHistoryStatistics;
+    // };
+
+    // const getWeeklyHistoryStatistics = (year) => {
+    //     const monthlyHistoryStatistics = {};
+    //     const weeklyHistoryStatistics = {};
+
+    //     for (let month = 1; month <= 12; month++) {
+    //          const monthStr = month < 10 ? `0${month}` : `${month}`;
+
+    //          const weekHistoryData = Object.entries(historyData)
+    //              .filter(([date]) => date.startsWith(`${year}-${monthStr}-${weekStr}`))
+    //              .map(([_, data]) => data.mood);
+
+    //              if (monthHistoryData.length === 0) {
+    //                  monthlyHistoryStatistics[monthStr] = "N/A";
+    //                  continue;
+    //              }
+
+    //          for (let week = 1; week <= 4; week++) {
+    //              const weekStr = week < 5 ? `0${week}` : `${week}`;
+
+    //              const weekHistoryData = Object.entries(historyData)
+    //                  .filter(([date]) => date.startsWith(`${year}-${monthStr}-${weekStr}`))
+    //                  .map(([_, data]) => data.emotion);
+
+    //              if (weekHistoryData.length === 0) {
+    //                  weekHistoryStatistics[weekStr] = "N/A";
+    //                  continue;
+    //              }
+
+    //              const emotionCount = monthHistoryData.reduce((acc, emotion) => {
+    //                  acc[emotion] = (acc[emotion] || 0) + 1;
+    //                  return acc;
+    //              }, {});
+    //          }
+    //      }
+
+    //     return monthlyHistoryStatistics;
+    // };
 
     const toggleViewMode = () => {
         const viewModes = { monthly: "weekly", weekly: "yearly", yearly: "monthly" };
@@ -162,6 +249,50 @@ export default function History({theme, language}) {
         const monthName = t.months[currentMonth.getMonth()];
         return `${monthName} ${currentMonth.getFullYear()}`;
     };
+
+    // const generateDateKey = (day) => {
+    //     const year = currentMonth.getFullYear();
+    //     const month = currentMonth.getMonth() + 1;
+    //     return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+    // };
+
+    // const generateWeekKey = (year, week) => {
+    //     return `${year}-01-${week}`;
+    // };
+
+    // const generateYearKey = (year) => {
+    //     return `${year}-01-01`;
+    // };
+
+    // const getHistory = async (year) => {
+    //     try {
+    //         const { data } = await axios.post(
+    //             "http://localhost:3000/api/requestHistory",
+    //             {
+    //                 startDate: generateYearKey(year),
+    //                 endDate: generateYearKey(year + 1)
+    //             },
+    //             {}
+    //         );
+    //
+    //         let emoji = "";
+    //
+    //         for (let i = 0; i < data.journal.length; i++){
+    //             emoji = data.journal[i].emoji.toString().concat(data.journal[i].intensity.toString());
+    //             historyUpdate(data.journal[i].time_code.split("T")[0], emoji, data.journal[i].text);
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
+    // const chartData = [
+    //     { name: t.chart.xLabels[0], emoteFreq: history.emoji_count },
+    //     { name: t.chart.xLabels[1], emoteFreq: history.emoji_count },
+    //     { name: t.chart.xLabels[2], emoteFreq: history.emoji_count },
+    //     { name: t.chart.xLabels[3], emoteFreq: history.emoji_count },
+    //     { name: t.chart.xLabels[4], emoteFreq: history.emoji_count }
+    // ];
 
     const chartData = [
         { name: t.chart.xLabels[0], emoteFreq: 5 },
