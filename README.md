@@ -171,6 +171,19 @@ all of the following api calls require the token cookie to be set by logging in 
     }
     ```
 
+* the url to send a POST request to edit or add an emoji on a given day is `http://localhost:3000/api/editJournalEntry`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+      "emoji":"4",
+      "intensity":"2",
+      "text":"dftghdsrf",
+      "image":"retytgrffd",
+      "date":"2024-10-11T09:36:28.829Z"
+    }
+    ```
+
 * the url to send a POST request for emoji numbers for use on the history page is `http://localhost:3000/api/requestHistory`
   * this request requires a JSON object with the following structure:
 
