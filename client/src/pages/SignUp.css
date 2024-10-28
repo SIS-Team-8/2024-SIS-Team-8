@@ -63,6 +63,11 @@ input {
     transition: background-color 0.3s;
 }
 
+#button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
 #bottomText {
     font-family: 'Poppins';
     color: white;
@@ -112,4 +117,9 @@ input {
 
 .dark ::placeholder {
     color: #d3d3d3 !important;
+}
+
+#button:hover.dark {
+    background-color: #0C6270;
+    color: white;
 }
