@@ -1,5 +1,7 @@
 import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis, Tooltip, Label, Cell } from 'recharts';
 import './BarChart.css';
+import React, { useEffect } from 'react';
+import axios from "axios";
 
 const translations = {
     English: { frequency: "Frequency", emotion: "Emotion", tooltipText: "Frequency", Angry: "Angry", Sad: "Sad", Happy: "Happy", Bored: "Bored", Scared: "Scared" },
@@ -13,39 +15,65 @@ const translations = {
 const defaultEmoteData = [
     {
         name: 'Angry',
-        emoteFreq: 5,
+        emoteFreq: 1,
     },
     {
         name: 'Sad',
-        emoteFreq: 5,
+        emoteFreq: 6,
     },
     {
         name: 'Happy',
-        emoteFreq: 10,
+        emoteFreq: 6,
     },
     {
         name: 'Bored',
-        emoteFreq: 5,
+        emoteFreq: 4,
     },
     {
         name: 'Scared',
-        emoteFreq: 5,
+        emoteFreq: 1
     },
 ];
+
 
 const colours = ['#ff746c', '#b3ebf2', '#ffee8c', 'grey', '#6c3baa'];
 
 const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColors, language, theme }) => {
     const t = translations[language] || translations.English;
 
-    const translatedData = defaultEmoteData.map((item) => ({
+    let defaultEmoteData = [
+        {
+            name: 'Angry',
+            emoteFreq: 0,
+        },
+        {
+            name: 'Sad',
+            emoteFreq: 0,
+        },
+        {
+            name: 'Happy',
+            emoteFreq: 0,
+        },
+        {
+            name: 'Bored',
+            emoteFreq: 0,
+        },
+        {
+            name: 'Scared',
+            emoteFreq: 0
+        },
+    ];
+
+    let translatedData = defaultEmoteData.map((item) => ({
         ...item,
         name: t[item.name] || item.name
     }));
+    
+    console.log(data);
 
     return (
         <ResponsiveContainer width="50%" height="40%">
-            <BarChart id="bar-chart" data={translatedData} margin={{bottom: 30}}>
+            <BarChart id="bar-chart" data={data} margin={{bottom: 30}}>
                 <YAxis stroke="white">
                     <Label value={t.frequency} angle="-90" position="Left" fill="#dddd" dx={-10}/>
                 </YAxis>

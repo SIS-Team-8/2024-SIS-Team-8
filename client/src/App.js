@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import { useCookies } from "react-cookie";
 import logo from './assets/logo.png';
 import dizzy from './assets/face-with-spiral-eyes.svg';
@@ -33,6 +34,8 @@ function App() {
     const navigate = useNavigate();
     const location = useLocation();
     const [cookies, removeCookie] = useCookies([]);
+
+    const [translatedData, setTranslatedData] = useState({});
 
     useEffect(() => {
         document.body.classList.remove('light', 'dark'); // Remove any existing theme class
@@ -95,7 +98,7 @@ function App() {
                 <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/help" element={isAuthenticated ? <Help theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
-                <Route path="/history" element={isAuthenticated ? <History theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/history" element={isAuthenticated ? <History theme={theme} language={language} data={translatedData} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/profile" element={isAuthenticated ? <Profile theme={theme} language={language} onLogout={handleLogout} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/reset-password" element={isAuthenticated ? <ResetPassword theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/settings" element={isAuthenticated ? <Settings theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} /> : <Login onLogin={handleLogin} />} />
@@ -132,6 +135,61 @@ function App() {
 
         verifyCookie();
     }, [cookies, navigate, removeCookie]);
+
+    let translatedData = {};
+
+    let defaultEmoteData = [
+        {
+            name: 'Angry',
+            emoteFreq: 0,
+        },
+        {
+            name: 'Sad',
+            emoteFreq: 0,
+        },
+        {
+            name: 'Happy',
+            emoteFreq: 0,
+        },
+        {
+            name: 'Bored',
+            emoteFreq: 0,
+        },
+        {
+            name: 'Scared',
+            emoteFreq: 0
+        },
+    ];
+
+    const getHistory = async () => {
+        try {
+            const { data } = await axios.post(
+                "http://localhost:3000/api/requestHistory",
+                {
+                    startDate: "2024-01-01",
+                    endDate: "2025-01-01"
+                },
+                {}
+            );
+            defaultEmoteData[0].emoteFreq = data.emojiCount[0];
+            defaultEmoteData[1].emoteFreq = data.emojiCount[1];
+            defaultEmoteData[2].emoteFreq = data.emojiCount[2];
+            defaultEmoteData[3].emoteFreq = data.emojiCount[3];
+            defaultEmoteData[4].emoteFreq = data.emojiCount[4];
+            translatedData = defaultEmoteData.map((item) => ({
+                ...item,
+                name: [item.name] || item.name
+            }));
+            setTranslatedData(translatedData);
+            console.log(translatedData);
+        } catch (error) {
+            console.log(error);
+        }
+    } 
+
+    useEffect(() => {
+        getHistory();
+    })
 
         return (
             <div className={`home-screen ${theme}`}>

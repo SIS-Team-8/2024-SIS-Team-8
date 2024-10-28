@@ -102,7 +102,7 @@ const translations = {
     }
 };
 
-export default function History({historyData, historyUpdate, theme, language}) {
+export default function History({data, historyUpdate, theme, language}) {
     const location = useLocation();
     const initialMonth = location.state?.month || new Date();
 
@@ -117,6 +117,7 @@ export default function History({historyData, historyUpdate, theme, language}) {
         if (location.state?.month) {
             setCurrentMonth(location.state.month);
         }
+        console.log(data);
     }, [location.state?.month]);
 
     // const getYearlyHistoryStatistics = (year) => {
@@ -294,6 +295,7 @@ export default function History({historyData, historyUpdate, theme, language}) {
     //     { name: t.chart.xLabels[4], emoteFreq: history.emoji_count }
     // ];
 
+    /*
     const chartData = [
         { name: t.chart.xLabels[0], emoteFreq: 5 },
         { name: t.chart.xLabels[1], emoteFreq: 5 },
@@ -301,26 +303,9 @@ export default function History({historyData, historyUpdate, theme, language}) {
         { name: t.chart.xLabels[3], emoteFreq: 5 },
         { name: t.chart.xLabels[4], emoteFreq: 5 }
     ];
+    */
 
-    const getHistory = async () => {
-        try {
-            const { data } = await axios.post(
-                "http://localhost:3000/api/requestHistory",
-                {
-                    startDate: "2024-01-01",
-                    endDate: "2025-01-01"
-                },
-                {}
-            );
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-        }
-    } 
-
-    useEffect(() => {
-        getHistory();
-    })
+    
 
     return (
         <div id="history-container" className={theme}>
@@ -355,13 +340,13 @@ export default function History({historyData, historyUpdate, theme, language}) {
             </div>
 
             <BarChart
-                data={chartData}
                 xAxisLabel={t.chart.xAxisLabel}
                 yAxisLabel={t.chart.yAxisLabel}
                 tooltipText={t.chart.tooltipText}
                 barColors={["#ff746c", "#b3ebf2", "#ffee8c", "grey", "#6c3baa"]}
                 language={language}
                 theme={theme}
+                data={data}
             />
 
             <div style={{ marginTop: '20px', textAlign: 'center' }}>

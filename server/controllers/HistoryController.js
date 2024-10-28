@@ -34,7 +34,7 @@ module.exports.requestHistory = async (req, res) => {
         // return the aggregate numbers of all the emojis in the date range
         let journal = user.journal;
         let requestedJournal = [];
-        let emojiCount = [0, 0, 0, 0, 0, 0, 0];
+        let emojiCount = [0, 0, 0, 0, 0];
         let startTimestamp = new Date(startDate);
         let endTimestamp = new Date(endDate);
 
