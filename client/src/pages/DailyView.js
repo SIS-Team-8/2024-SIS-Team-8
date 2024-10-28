@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './DailyView.css';
-import axios from "axios";
 import { toast } from "react-toastify";
 
 import angry from '../assets/emoji/angry.png';
@@ -32,12 +31,13 @@ import terrified from '../assets/emoji/terrified.png';
 
 const getMoodEmoji = (mood) => {
     const moodEmojiMap = {
-        "02": angry, "00": annoyed, "01": frustrated, "03": veryAngry, "04": extremelyAngry, 
-        "11": sad, "10": upset, "12": deflated, "13": distressed, "14": miserable, 
+        "02": angry, "00": annoyed, "01": frustrated, "03": veryAngry, "04": extremelyAngry,
+        "11": sad, "10": upset, "12": deflated, "13": distressed, "14": miserable,
         "20": happy, "21": veryHappy, "22": extremelyHappy, "23": amazinglyHappy, "24": ecstatic,
-        "30": bored, "31": exasperated, "32": sarcastic, "33": tired, "34": exhausted, 
+        "30": bored, "31": exasperated, "32": sarcastic, "33": tired, "34": exhausted,
         "43": scared, "40": surprised, "41": nervous, "42": overwhelmed, "44": terrified, "neutral": bored
     }
+
     return moodEmojiMap[mood] || bored;
 };
 
@@ -61,38 +61,6 @@ const DailyView = ({ moodData, theme, language }) => {
     const moodEntry = moodData[date] || { mood: "neutral", notes: "No entry for this day." }; // Default mood if no entry
 
     const translatedHeader = `${t.datePrefix} ${date}, ${t.youWereFeeling}:`;
-
-    const handleError = (err) => toast.error(err, {});
-
-    const handleDelete = async () => {
-        if (window.confirm("Are you sure you want to delete this entry?")) {
-            delete moodData[date]; // Remove the entry from the data
-            try {
-                const { data } = await axios.post(
-                    "http://localhost:3000/api/editJournalEntry",
-                    {
-                        "emoji": "0",
-                        "intensity": "0",
-                        "text": "",
-                        "image": "", 
-                        "date": ""
-                    },
-                    {}
-                );
-                const { success, message } = data;
-
-                if (success) {
-                    toast.success("Entry successfully deleted");
-                    navigate("/calendar");
-                } else
-                    handleError(message);
-                
-            } catch (error) {
-                console.log(error);
-            }
-            navigate('/calendar'); // Redirect back to the calendar after deletion
-        }
-    };
 
     const handleDisplay = () => {
         if (moodEntry.image === "" || moodEntry.image === undefined) {
@@ -128,9 +96,6 @@ const DailyView = ({ moodData, theme, language }) => {
 
                     <button className="edit-button" onClick={() => navigate(`/mood-selection/${date}`)}>
                         ✏ {t.editEntry}
-                    </button>
-                    <button className="delete-button" onClick={handleDelete}>
-                        🗑 {t.deleteEntry}
                     </button>
                     <button className="edit-button" onClick={handleDisplay}>
                         Display Photo
