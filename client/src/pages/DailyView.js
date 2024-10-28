@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './DailyView.css';
+import axios from "axios";
+import { toast } from "react-toastify";
 
 import angry from '../assets/emoji/angry.png';
 import annoyed from '../assets/emoji/annoyed.png';
@@ -51,41 +53,90 @@ const DailyView = ({ moodData, theme, language }) => {
     const { date } = useParams(); // Retrieves the date from the URL parameter
     const navigate = useNavigate();
 
+    const [photo, setPhoto] = useState();
+    const [show, setShow] = useState(false);
+
     const t = translations[language];
 
     const moodEntry = moodData[date] || { mood: "neutral", notes: "No entry for this day." }; // Default mood if no entry
 
     const translatedHeader = `${t.datePrefix} ${date}, ${t.youWereFeeling}:`;
 
-    const handleDelete = () => {
+    const handleError = (err) => toast.error(err, {});
+
+    const handleDelete = async () => {
         if (window.confirm("Are you sure you want to delete this entry?")) {
             delete moodData[date]; // Remove the entry from the data
+            try {
+                const { data } = await axios.post(
+                    "http://localhost:3000/api/editJournalEntry",
+                    {
+                        "emoji": "0",
+                        "intensity": "0",
+                        "text": "",
+                        "image": "", 
+                        "date": ""
+                    },
+                    {}
+                );
+                const { success, message } = data;
+
+                if (success) {
+                    toast.success("Entry successfully deleted");
+                    navigate("/calendar");
+                } else
+                    handleError(message);
+                
+            } catch (error) {
+                console.log(error);
+            }
             navigate('/calendar'); // Redirect back to the calendar after deletion
         }
     };
+
+    const handleDisplay = () => {
+        if (moodEntry.image === "" || moodEntry.image === undefined) {
+            toast.error("No image entered for this day");
+        }
+        else {
+            setPhoto(moodEntry.image);
+            setShow(true);
+        }
+    }
 
     return (
         <div className={ `daily-view-screen ${theme} `}>
             <button className="back-button" onClick={() => navigate('/calendar')}>
                 ⬅ {t.backToCalendar}
             </button>
-
-            <div className="daily-view-content">
-                <h1 style={{ color: 'white' }}>{translatedHeader}</h1>
-
-                <div className="emoji">
-                    <img src={getMoodEmoji(moodEntry.mood)} alt={moodEntry.mood}/>
+            {show ? (
+                <div>
+                    <img id="photo" src={photo} alt="Entry photo"/>
+                    <button className="edit-button" onClick={() => setShow(false)}>
+                            Display Entry
+                    </button>
                 </div>
+            ) : (
+                <div className="daily-view-content">
+                    <h1 style={{ color: 'white' }}>{translatedHeader}</h1>
 
-                <p className="notes">{t.notes} {moodEntry.notes}</p>
+                    <div className="emoji">
+                        <img src={getMoodEmoji(moodEntry.mood)} alt={moodEntry.mood}/>
+                    </div>
 
-                <button className="edit-button" onClick={() => navigate(`/mood-selection/${date}`)}>
-                    ✏ {t.editEntry}
-                </button>
-                <button className="delete-button" onClick={handleDelete}>
-                    🗑 {t.deleteEntry}
-                </button>
-            </div>
+                    <p className="notes">{t.notes} {moodEntry.notes}</p>
+
+                    <button className="edit-button" onClick={() => navigate(`/mood-selection/${date}`)}>
+                        ✏ {t.editEntry}
+                    </button>
+                    <button className="delete-button" onClick={handleDelete}>
+                        🗑 {t.deleteEntry}
+                    </button>
+                    <button className="edit-button" onClick={handleDisplay}>
+                        Display Photo
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

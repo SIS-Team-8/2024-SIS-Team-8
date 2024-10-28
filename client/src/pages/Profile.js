@@ -127,7 +127,7 @@ export default function Profile( { onLogout, theme, language}) {
                 <button id="profile-button" onClick={handleImageUpload}>
                     <img src={avatarPhoto} alt="Profile Avatar"/>
                 </button>
-                <input type="file" name="avatarPhoto" accept=".png, .jpeg" ref={fileUploadRef} onChange={uploadImageDisplay} hidden/>
+                <input type="file" name="avatarPhoto" accept=".png, .jpeg, .jpg" ref={fileUploadRef} onChange={uploadImageDisplay} hidden/>
             </div>
             <div className="profile-details">
                 {/* Name Field */}

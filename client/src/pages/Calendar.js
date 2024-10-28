@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { toast } from "react-toastify";
 import './Calendar.css';
 
 import angry from '../assets/emoji/angry.png';
@@ -186,7 +187,20 @@ const CalendarScreen = ({ moodData, onMoodUpdate, theme, language }) => {
 
     const summary = getSummaryStatistics(monthData);
     const yearlyMostCommonMoods = getYearlyMoodStatistics(currentMonth.getFullYear());
-    
+
+    const convertToURL = (base64) => {
+        const base64Data = base64.split(',')[1];
+        const binaryString = window.atob(base64Data);
+        const len = binaryString.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+            bytes[i] = binaryString.charCodeAt(i)
+        }
+        const blob = new Blob([bytes], { type: 'image/png' });
+        const url = URL.createObjectURL(blob);
+        return url;
+    }
+
     const getJournal = async (year) => {        
         try {
             const { data } = await axios.post(
@@ -198,12 +212,24 @@ const CalendarScreen = ({ moodData, onMoodUpdate, theme, language }) => {
                 {}
             );
             let emoji = "";
+            let url = "";
             for (let i = 0; i < data.journal.length; i++){
+                if (data.journal[i].image !== "") {
+                    url = convertToURL(data.journal[i].image);
+                }    
                 emoji = data.journal[i].emoji.toString().concat(data.journal[i].intensity.toString());
-                onMoodUpdate(data.journal[i].time_code.split("T")[0], emoji, data.journal[i].text);
+                onMoodUpdate(data.journal[i].time_code.split("T")[0], emoji, data.journal[i].text, url);
             }
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    const handleDateClick = (dateKey) => {
+        let currentTime = new Date();
+        let entryTime = new Date(dateKey);
+        if (entryTime < currentTime) {
+            navigate(`/daily-view/${dateKey}`);
         }
     }
 
@@ -268,7 +294,7 @@ const CalendarScreen = ({ moodData, onMoodUpdate, theme, language }) => {
                                         const emojiSrc = moodEntry ? getMoodEmojiImage(moodEntry.mood) : null;
 
                                         return (
-                                            <td key={dayIndex} onClick={day ? () => navigate(`/daily-view/${dateKey}`) : null} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF" }}>
+                                            <td key={dayIndex} onClick={day ? () => handleDateClick(dateKey) : null} style={{ backgroundColor: moodEntry ? getMoodColor(moodEntry.mood) : "#FFFFFF" }}>
                                                 {emojiSrc ? (
                                                     <img src={emojiSrc} alt={moodEntry.mood} className="calendar-emoji" />
                                                 ) : (

@@ -36,10 +36,10 @@ function App() {
 
     const [moodData, setMoodData] = useState({});
 
-    const handleMoodUpdate = (date, mood, notes) => {
+    const handleMoodUpdate = (date, mood, notes, image) => {
         setMoodData(prevMoodData => ({
             ...prevMoodData,
-            [date]: { mood, notes }
+            [date]: { mood, notes, image }
         }));
     };
 
@@ -108,7 +108,7 @@ function App() {
                 <Route path="/profile" element={isAuthenticated ? <Profile theme={theme} language={language} onLogout={handleLogout} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/reset-password" element={isAuthenticated ? <ResetPassword theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/settings" element={isAuthenticated ? <Settings theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} /> : <Login onLogin={handleLogin} />} />
-                <Route path="/mood-selection/:date" element={isAuthenticated ? <MoodSelection theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/mood-selection/:date" element={isAuthenticated ? <MoodSelection theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} moodData={moodData} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/login" element={<Login language={language} theme={theme} onLogin={handleLogin} />} />
                 <Route path="/sign-up" element={<SignUp language={language} theme={theme} />} />
                 <Route path="*" element={<NotFound />} />
