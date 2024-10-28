@@ -104,7 +104,6 @@ export default function Profile( { onLogout, theme, language}) {
                     address: res.data.user.address,
                     profile_pic: res.data.user.profile_pic
                 });
-                console.log(avatarPhoto);
                 if (res.data.user.profile_pic !== "") {   
                     const base64Data = res.data.user.profile_pic.split(',')[1];
                     const binaryString = window.atob(base64Data);
@@ -128,7 +127,7 @@ export default function Profile( { onLogout, theme, language}) {
                 <button id="profile-button" onClick={handleImageUpload}>
                     <img src={avatarPhoto} alt="Profile Avatar"/>
                 </button>
-                <input type="file" name="avatarPhoto" accept=".png, .jpeg" ref={fileUploadRef} onChange={uploadImageDisplay} hidden/>
+                <input type="file" name="avatarPhoto" accept=".png, .jpeg, .jpg" ref={fileUploadRef} onChange={uploadImageDisplay} hidden/>
             </div>
             <div className="profile-details">
                 {/* Name Field */}
