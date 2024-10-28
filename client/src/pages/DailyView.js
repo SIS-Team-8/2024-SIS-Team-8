@@ -42,11 +42,11 @@ const getMoodEmoji = (mood) => {
 };
 
 const translations = {
-    English: { backToCalendar: "Back to Calendar", editEntry: "Edit Entry", intensity: "Mood Intensity:", notes: "Notes:", noEntry: "No entry for this day." , youWereFeeling: "you were feeling", datePrefix: "On" },
-    Spanish: { backToCalendar: "Volver al Calendario", editEntry: "Editar Entrada", intensity: "Intensidad del Estado de Ánimo:", notes: "Notas:", noEntry: "No hay entrada para este día." , youWereFeeling: "te sentías", datePrefix: "En" },
-    German: { backToCalendar: "Zurück zum Kalender", editEntry: "Eintrag bearbeiten", intensity: "Stimmungsintensität:", notes: "Notizen:", noEntry: "Keine Eintragung für diesen Tag." , youWereFeeling: "du hast dich gefühlt", datePrefix: "Am" },
-    French: { backToCalendar: "Retour au Calendrier", editEntry: "Modifier l'entrée", intensity: "Intensité de l'humeur:", notes: "Remarques:", noEntry: "Aucune entrée pour ce jour." , youWereFeeling: "vous vous sentiez", datePrefix: "Le" },
-    Chinese: { backToCalendar: "返回日历", editEntry: "编辑条目", intensity: "情绪强度:", notes: "笔记:", noEntry: "当天没有条目。" , youWereFeeling: "你当时的感觉是", datePrefix: "在" }
+    English: { backToCalendar: "Back to Calendar", displayEntry: "Display Entry", editEntry: "Edit Entry", displayPhoto: "Display Photo", intensity: "Mood Intensity:", notes: "Notes:", noEntry: "No entry for this day." , youWereFeeling: "you were feeling", datePrefix: "On" },
+    Spanish: { backToCalendar: "Volver al Calendario", displayEntry: "Mostrar Entrada", editEntry: "Editar Entrada", displayPhoto: "Mostrar foto", intensity: "Intensidad del Estado de Ánimo:", notes: "Notas:", noEntry: "No hay entrada para este día." , youWereFeeling: "te sentías", datePrefix: "En" },
+    German: { backToCalendar: "Zurück zum Kalender", displayEntry: "Eintrag anzeigen", editEntry: "Eintrag bearbeiten", displayPhoto: "Foto anzeigen", intensity: "Stimmungsintensität:", notes: "Notizen:", noEntry: "Keine Eintragung für diesen Tag." , youWereFeeling: "du hast dich gefühlt", datePrefix: "Am" },
+    French: { backToCalendar: "Retour au Calendrier", displayEntry: "Afficher l'entrée", editEntry: "Modifier l'entrée", displayPhoto: "Afficher la photo", intensity: "Intensité de l'humeur:", notes: "Remarques:", noEntry: "Aucune entrée pour ce jour." , youWereFeeling: "vous vous sentiez", datePrefix: "Le" },
+    Chinese: { backToCalendar: "返回日历", displayEntry: "显示条目", editEntry: "编辑条目", displayPhoto: "显示照片", intensity: "情绪强度:", notes: "笔记:", noEntry: "当天没有条目。" , youWereFeeling: "你当时的感觉是", datePrefix: "在" }
 };
 
 const DailyView = ({ moodData, theme, language }) => {
@@ -79,9 +79,10 @@ const DailyView = ({ moodData, theme, language }) => {
             </button>
             {show ? (
                 <div>
-                    <img id="photo" src={photo} alt="Entry photo"/>
+                    <img id="photo" src={photo} alt="Entry photo."/>
+
                     <button className="edit-button" onClick={() => setShow(false)}>
-                            Display Entry
+                        {t.displayEntry}
                     </button>
                 </div>
             ) : (
@@ -97,8 +98,9 @@ const DailyView = ({ moodData, theme, language }) => {
                     <button className="edit-button" onClick={() => navigate(`/mood-selection/${date}`)}>
                         {t.editEntry}
                     </button>
+
                     <button className="display-button" onClick={handleDisplay}>
-                        Display Photo
+                        {t.displayPhoto}
                     </button>
                 </div>
             )}
