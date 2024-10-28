@@ -34,6 +34,15 @@ function App() {
     const location = useLocation();
     const [cookies, removeCookie] = useCookies([]);
 
+    const [moodData, setMoodData] = useState({});
+
+    const handleMoodUpdate = (date, mood, notes) => {
+        setMoodData(prevMoodData => ({
+            ...prevMoodData,
+            [date]: { mood, notes }
+        }));
+    };
+
     useEffect(() => {
         document.body.classList.remove('light', 'dark'); // Remove any existing theme class
         document.body.classList.add(theme);  // Add the new theme class
@@ -92,8 +101,8 @@ function App() {
                 <Route path="/onboarding" element={isAuthenticated ? <Onboarding onComplete={handleOnboardingComplete}/> : <Login onLogin={handleLogin} />} />
                 <Route path="/onboarding-overview" element={isAuthenticated ? <OnboardingOverview/> : <Login onLogin={handleLogin} />} />
                 <Route path="/settings" element={<Settings theme={theme} toggleTheme={toggleTheme} language={language} setLanguage={handleLanguageChange} />} />
-                <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
-                <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/daily-view/:date" element={isAuthenticated ? <DailyView theme={theme} language={language} moodData={moodData} /> : <Login onLogin={handleLogin} />} />
+                <Route path="/calendar" element={isAuthenticated ? <Calendar theme={theme} language={language} moodData={moodData} onMoodUpdate={handleMoodUpdate} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/help" element={isAuthenticated ? <Help theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/history" element={isAuthenticated ? <History theme={theme} language={language} /> : <Login onLogin={handleLogin} />} />
                 <Route path="/profile" element={isAuthenticated ? <Profile theme={theme} language={language} onLogout={handleLogout} /> : <Login onLogin={handleLogin} />} />

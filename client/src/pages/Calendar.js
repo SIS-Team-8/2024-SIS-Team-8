@@ -102,21 +102,12 @@ const translations = {
     }
 };
 
-const CalendarScreen = ({theme, language }) => {
+const CalendarScreen = ({ moodData, onMoodUpdate, theme, language }) => {
     const navigate = useNavigate();
     const [currentMonth, setCurrentMonth] = useState(new Date(2024, 9));
     const [isYearlyView, setIsYearlyView] = useState(false);
 
     const t = translations[language];
-
-    const [moodData, setMoodData] = useState({});
-
-    const handleMoodUpdate = (date, mood) => {
-        setMoodData(prevMoodData => ({
-            ...prevMoodData,
-            [date]: { mood }
-        }));
-    };
 
     const getYearlyMoodStatistics = (year) => {
         const monthlyMoodStatistics = {};
@@ -209,7 +200,7 @@ const CalendarScreen = ({theme, language }) => {
             let emoji = "";
             for (let i = 0; i < data.journal.length; i++){
                 emoji = data.journal[i].emoji.toString().concat(data.journal[i].intensity.toString());
-                handleMoodUpdate(data.journal[i].time_code.split("T")[0], emoji);
+                onMoodUpdate(data.journal[i].time_code.split("T")[0], emoji, data.journal[i].text);
             }
         } catch (error) {
             console.log(error);
