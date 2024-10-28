@@ -70,7 +70,6 @@ export default function MoodSelection({ language = "English", theme = "light" })
         setRowOpacity(prev => prev.map((_, i) => (i === activeIndex ? 1 : 0.5)));  // Change opacity of row images on click
         resetSubRowOpacity();
         setMoodEntry({...moodEntry, emoji: activeIndex, intensity: ""});
-        console.log(date);
     };
 
     const resetSubRowOpacity = () => {
@@ -107,26 +106,52 @@ export default function MoodSelection({ language = "English", theme = "light" })
             toast.error("Select how you feel to create an entry")
         }
         else {
-            try {
-                const { data } = await axios.post(
-                    "http://localhost:3000/api/logEmote",
-                    {
-                        "emoji": moodEntry.emoji,
-                        "intensity": moodEntry.intensity,
-                        "text": moodEntry.text,
-                        "image": "" 
-                    },
-                    { }
-                );
-                const { success, message } = data;
+            if (date === "today") {
+                try {
+                    const { data } = await axios.post(
+                        "http://localhost:3000/api/logEmote",
+                        {
+                            "emoji": moodEntry.emoji,
+                            "intensity": moodEntry.intensity,
+                            "text": moodEntry.text,
+                            "image": "" 
+                        },
+                        { }
+                    );
+                    const { success, message } = data;
 
-                if (success) {
-                    handleSuccess(message);
-                    navigate("/");
-                } else 
-                    handleError(message);
-            } catch (error) {
-                console.log(error);
+                    if (success) {
+                        handleSuccess(message);
+                        navigate("/");
+                    } else 
+                        handleError(message);
+                } catch (error) {
+                    console.log(error);
+                }
+            } else {
+                try {
+                    const { data } = await axios.post(
+                        "http://localhost:3000/api/editJournalEntry",
+                        {
+                            "emoji": moodEntry.emoji,
+                            "intensity": moodEntry.intensity,
+                            "text": moodEntry.text,
+                            "image": "", 
+                            "date": date
+                        },
+                        {}
+                    );
+                    const { success, message } = data;
+
+                    if (success) {
+                        handleSuccess(message);
+                        navigate("/calendar");
+                    } else
+                        handleError(message);
+                    
+                } catch (error) {
+                    console.log(error);
+                }
             }
         }
     };
