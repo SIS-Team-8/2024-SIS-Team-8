@@ -75,7 +75,7 @@ const DailyView = ({ moodData, theme, language }) => {
     return (
         <div className={ `daily-view-screen ${theme} `}>
             <button className="back-button" onClick={() => navigate('/calendar')}>
-                ⬅ {t.backToCalendar}
+                {t.backToCalendar}
             </button>
             {show ? (
                 <div>
@@ -95,9 +95,9 @@ const DailyView = ({ moodData, theme, language }) => {
                     <p className="notes">{t.notes} {moodEntry.notes}</p>
 
                     <button className="edit-button" onClick={() => navigate(`/mood-selection/${date}`)}>
-                        ✏ {t.editEntry}
+                        {t.editEntry}
                     </button>
-                    <button className="edit-button" onClick={handleDisplay}>
+                    <button className="display-button" onClick={handleDisplay}>
                         Display Photo
                     </button>
                 </div>

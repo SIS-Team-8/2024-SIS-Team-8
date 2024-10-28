@@ -74,32 +74,33 @@
     margin-top: 10px;
 }
 
-.edit-button {
+.edit-button, .display-button {
     margin-top: 25px;
     padding: 10px;
     font-size: medium;
-    min-width: 200px;
+    min-width: 150px;
     background-color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin: 15px;
 }
 
-.edit-button {
+.edit-button, .display-button {
     color: #189ab4;
 }
 
-.dark .edit-button {
+.dark .edit-button, .dark .display-button {
     color: #0F3D4B;
 }
 
-.edit-button:hover {
+.edit-button:hover, .display-button:hover {
     background-color: #0f7b8e;
     color: white;
 }
 
-.dark .edit-button:hover {
+.dark .edit-button:hover, .dark .display-button:hover {
     background-color: #0C6270;
     color: white;
 }
