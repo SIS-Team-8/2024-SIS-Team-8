@@ -116,22 +116,7 @@ const CalendarScreen = ({theme, language }) => {
             ...prevMoodData,
             [date]: { mood }
         }));
-        console.log(moodData);
     };
-/*
-    const getYearlyMoodStatistics = (year) => {
-        const yearMoodData = Object.entries(moodData).filter(([date]) => date.startsWith(`${year}-`)).map(([_, data]) => data.mood);
-    
-        if (yearMoodData.length === 0) return "N/A";
-    
-        const moodCount = yearMoodData.reduce((acc, mood) => {
-            acc[mood] = (acc[mood] || 0) + 1;
-            return acc;
-        }, {});
-    
-        return Object.keys(moodCount).reduce((a, b) => moodCount[a] > moodCount[b] ? a : b);
-    };
-*/
 
     const getYearlyMoodStatistics = (year) => {
         const monthlyMoodStatistics = {};
@@ -165,7 +150,6 @@ const CalendarScreen = ({theme, language }) => {
     
         return monthlyMoodStatistics;
     };
-    
 
     const changeMonth = (direction) => {
         if (isYearlyView) {
@@ -174,6 +158,9 @@ const CalendarScreen = ({theme, language }) => {
         } else {
             const newDate = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
             setCurrentMonth(newDate);
+        }
+        if ((currentMonth.getMonth() - direction) === 12 || (currentMonth.getMonth() - direction) === -1) {
+            getJournal();
         }
     };
 
@@ -185,16 +172,9 @@ const CalendarScreen = ({theme, language }) => {
         return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
     };
 
-    const generateNextMonthDateKey = (day) => {
-        const year = currentMonth.getFullYear();
-        const month = currentMonth.getMonth() + 2;
-        return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
-    };
-
     const generateYearKey = (year) => {
         return `${year}-01-01`;
     };
-
 
     const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
     const startDayOfWeek = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).getDay();
@@ -216,9 +196,6 @@ const CalendarScreen = ({theme, language }) => {
     const yearlyMostCommonMoods = getYearlyMoodStatistics(currentMonth.getFullYear());
     
     const getJournal = async () => {        
-        console.log(generateYearKey(currentMonth.getFullYear()));
-        console.log(generateYearKey(currentMonth.getFullYear()+1));
-
         try {
             const { data } = await axios.post(
                 "http://localhost:3000/api/requestJournal",
@@ -228,7 +205,6 @@ const CalendarScreen = ({theme, language }) => {
                 },
                 {}
             );
-            console.log(data);
             let emoji = "";
             for (let i = 0; i < data.journal.length; i++){
                 emoji = data.journal[i].emoji.toString().concat(data.journal[i].intensity.toString());
