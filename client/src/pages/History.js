@@ -111,6 +111,9 @@ export default function History({data, historyUpdate, theme, language}) {
     const [currentWeek, setCurrentWeek] = useState(1);
     const [currentYear, setCurrentYear] = useState(currentMonth.getFullYear());
 
+    const [translatedData, setTranslatedData] = useState({});
+
+
     const t = translations[language];
 
     useEffect(() => {
@@ -305,6 +308,56 @@ export default function History({data, historyUpdate, theme, language}) {
     ];
     */
 
+    let defaultEmoteData = [
+        {
+            name: 'Angry',
+            emoteFreq: 0,
+        },
+        {
+            name: 'Sad',
+            emoteFreq: 0,
+        },
+        {
+            name: 'Happy',
+            emoteFreq: 0,
+        },
+        {
+            name: 'Bored',
+            emoteFreq: 0,
+        },
+        {
+            name: 'Scared',
+            emoteFreq: 0
+        },
+    ];
+
+    const getHistory = async () => {
+        try {
+            const { data } = await axios.post(
+                "http://localhost:3000/api/requestHistory",
+                {
+                    startDate: "2024-01-01",
+                    endDate: "2025-01-01"
+                },
+                {}
+            );
+            defaultEmoteData[0].emoteFreq = data.emojiCount[0];
+            defaultEmoteData[1].emoteFreq = data.emojiCount[1];
+            defaultEmoteData[2].emoteFreq = data.emojiCount[2];
+            defaultEmoteData[3].emoteFreq = data.emojiCount[3];
+            defaultEmoteData[4].emoteFreq = data.emojiCount[4];
+            
+            setTranslatedData(defaultEmoteData);
+            console.log(translatedData);
+        } catch (error) {
+            console.log(error);
+        }
+    } 
+
+    useEffect(() => {
+        getHistory();
+    })
+
     
 
     return (
@@ -346,7 +399,7 @@ export default function History({data, historyUpdate, theme, language}) {
                 barColors={["#ff746c", "#b3ebf2", "#ffee8c", "grey", "#6c3baa"]}
                 language={language}
                 theme={theme}
-                data={data}
+                data={translatedData}
             />
 
             <div style={{ marginTop: '20px', textAlign: 'center' }}>
