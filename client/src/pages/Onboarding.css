@@ -21,8 +21,8 @@
     color: #189ab4;
     border: none;
     border-radius: 4px;
-    margin-top: 20px;
-    width: 308px;
+    margin: 20px;
+    width: 250px;
     transition: background-color 0.3s;
 }
 
@@ -50,7 +50,7 @@
 }
 
 #onboarding-image {
-    max-width: 700px; /* Ensure image stays within reasonable size */
+    max-width: 700px;
     height: 300px;
     display: block;
     margin: 0 auto;
