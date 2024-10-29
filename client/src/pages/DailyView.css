@@ -132,10 +132,3 @@
     background-color: #0F3D4B !important;
     color: white !important;
 }
-
-#photo {
-    width: 1000px;
-    height: 300px;
-    object-fit: contain;
-    display: block;
-}

@@ -1,44 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './DailyView.css';
-import axios from "axios";
-import { toast } from "react-toastify";
 
-import angry from '../assets/emoji/angry.png';
-import annoyed from '../assets/emoji/annoyed.png';
-import frustrated from '../assets/emoji/frustrated.png';
-import veryAngry from '../assets/emoji/very-angry.png';
-import extremelyAngry from '../assets/emoji/extremely-angry.png';
-import sad from '../assets/emoji/sad.png';
-import upset from '../assets/emoji/upset.png';
-import deflated from '../assets/emoji/deflated.png';
-import distressed from '../assets/emoji/distressed.png';
-import miserable from '../assets/emoji/miserable.png';
-import happy from '../assets/emoji/happy.png';
 import veryHappy from '../assets/emoji/very-happy.png';
-import extremelyHappy from '../assets/emoji/extremely-happy.png';
-import amazinglyHappy from '../assets/emoji/amazingly-happy.png';
-import ecstatic from '../assets/emoji/ecstatic.png';
+import happy from '../assets/emoji/happy.png';
 import bored from '../assets/emoji/bored.png';
-import exasperated from '../assets/emoji/exasperated.png';
-import sarcastic from '../assets/emoji/sarcastic.png';
-import tired from '../assets/emoji/tired.png';
-import exhausted from '../assets/emoji/exhausted.png';
-import scared from '../assets/emoji/scared.png';
-import surprised from '../assets/emoji/surprised.png';
-import nervous from '../assets/emoji/nervous.png';
-import overwhelmed from '../assets/emoji/overwhelmed.png';
-import terrified from '../assets/emoji/terrified.png';
+import sad from '../assets/emoji/sad.png';
+import miserable from '../assets/emoji/miserable.png';
+
+// Dummy mood data for the detailed view
+const moodData = {
+    "2024-10-01": { mood: "very happy", intensity: 5, notes: "Best day ever!" },
+    "2024-10-02": { mood: "happy", intensity: 4, notes: "Good day." },
+    "2024-10-03": { mood: "neutral", intensity: 3, notes: "An average day." },
+    "2024-10-04": { mood: "sad", intensity: 2, notes: "Feeling a bit down." },
+    "2024-10-05": { mood: "very sad", intensity: 1, notes: "Not a good day at all." },
+    // Add more dates...
+};
 
 const getMoodEmoji = (mood) => {
-    const moodEmojiMap = {
-        "02": angry, "00": annoyed, "01": frustrated, "03": veryAngry, "04": extremelyAngry, 
-        "11": sad, "10": upset, "12": deflated, "13": distressed, "14": miserable, 
-        "20": happy, "21": veryHappy, "22": extremelyHappy, "23": amazinglyHappy, "24": ecstatic,
-        "30": bored, "31": exasperated, "32": sarcastic, "33": tired, "34": exhausted, 
-        "43": scared, "40": surprised, "41": nervous, "42": overwhelmed, "44": terrified, "neutral": bored
+    switch (mood) {
+        case "very happy":
+            return veryHappy;
+        case "happy":
+            return happy;
+        case "neutral":
+            return bored;
+        case "sad":
+            return sad;
+        case "very sad":
+            return miserable;
+        default:
+            return bored;
     }
-    return moodEmojiMap[mood] || bored;
 };
 
 const translations = {
@@ -49,94 +43,46 @@ const translations = {
     Chinese: { backToCalendar: "返回日历", editEntry: "编辑条目", deleteEntry: "删除条目", intensity: "情绪强度:", notes: "笔记:", noEntry: "当天没有条目。" , youWereFeeling: "你当时的感觉是", datePrefix: "在" }
 };
 
-const DailyView = ({ moodData, theme, language }) => {
+const DailyView = ({theme, language}) => {
     const { date } = useParams(); // Retrieves the date from the URL parameter
     const navigate = useNavigate();
 
-    const [photo, setPhoto] = useState();
-    const [show, setShow] = useState(false);
-
     const t = translations[language];
 
-    const moodEntry = moodData[date] || { mood: "neutral", notes: "No entry for this day." }; // Default mood if no entry
+    const moodEntry = moodData[date] || { mood: "neutral", intensity: 3, notes: "No entry for this day." }; // Default mood if no entry
 
     const translatedHeader = `${t.datePrefix} ${date}, ${t.youWereFeeling}:`;
 
-    const handleError = (err) => toast.error(err, {});
-
-    const handleDelete = async () => {
+    const handleDelete = () => {
         if (window.confirm("Are you sure you want to delete this entry?")) {
             delete moodData[date]; // Remove the entry from the data
-            try {
-                const { data } = await axios.post(
-                    "http://localhost:3000/api/editJournalEntry",
-                    {
-                        "emoji": "0",
-                        "intensity": "0",
-                        "text": "",
-                        "image": "", 
-                        "date": ""
-                    },
-                    {}
-                );
-                const { success, message } = data;
-
-                if (success) {
-                    toast.success("Entry successfully deleted");
-                    navigate("/calendar");
-                } else
-                    handleError(message);
-                
-            } catch (error) {
-                console.log(error);
-            }
             navigate('/calendar'); // Redirect back to the calendar after deletion
         }
     };
-
-    const handleDisplay = () => {
-        if (moodEntry.image === "" || moodEntry.image === undefined) {
-            toast.error("No image entered for this day");
-        }
-        else {
-            setPhoto(moodEntry.image);
-            setShow(true);
-        }
-    }
 
     return (
         <div className={ `daily-view-screen ${theme} `}>
             <button className="back-button" onClick={() => navigate('/calendar')}>
                 ⬅ {t.backToCalendar}
             </button>
-            {show ? (
-                <div>
-                    <img id="photo" src={photo} alt="Entry photo"/>
-                    <button className="edit-button" onClick={() => setShow(false)}>
-                            Display Entry
-                    </button>
+
+            <div className="daily-view-content">
+                <h1 style={{ color: 'white' }}>{translatedHeader}</h1>
+
+                <div className="emoji">
+                    <img src={getMoodEmoji(moodEntry.mood)} alt={moodEntry.mood}/>
                 </div>
-            ) : (
-                <div className="daily-view-content">
-                    <h1 style={{ color: 'white' }}>{translatedHeader}</h1>
 
-                    <div className="emoji">
-                        <img src={getMoodEmoji(moodEntry.mood)} alt={moodEntry.mood}/>
-                    </div>
+                <p className="intensity">{t.intensity} {moodEntry.intensity}/5</p>
+                <p className="notes">{t.notes} {moodEntry.notes}</p>
 
-                    <p className="notes">{t.notes} {moodEntry.notes}</p>
-
-                    <button className="edit-button" onClick={() => navigate(`/mood-selection/${date}`)}>
-                        ✏ {t.editEntry}
-                    </button>
-                    <button className="delete-button" onClick={handleDelete}>
-                        🗑 {t.deleteEntry}
-                    </button>
-                    <button className="edit-button" onClick={handleDisplay}>
-                        Display Photo
-                    </button>
-                </div>
-            )}
+                <button className="edit-button" onClick={() => alert("Edit functionality coming soon!")}>
+                    ✏ {t.editEntry}
+                </button>
+                <button className="delete-button" onClick={handleDelete}>
+                    🗑 {t.deleteEntry}
+                </button>
+            </div>
         </div>
     );
 };
