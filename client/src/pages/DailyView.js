@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './DailyView.css';
-import axios from "axios";
 import { toast } from "react-toastify";
 
 import angry from '../assets/emoji/angry.png';
@@ -32,21 +31,22 @@ import terrified from '../assets/emoji/terrified.png';
 
 const getMoodEmoji = (mood) => {
     const moodEmojiMap = {
-        "02": angry, "00": annoyed, "01": frustrated, "03": veryAngry, "04": extremelyAngry, 
-        "11": sad, "10": upset, "12": deflated, "13": distressed, "14": miserable, 
+        "02": angry, "00": annoyed, "01": frustrated, "03": veryAngry, "04": extremelyAngry,
+        "11": sad, "10": upset, "12": deflated, "13": distressed, "14": miserable,
         "20": happy, "21": veryHappy, "22": extremelyHappy, "23": amazinglyHappy, "24": ecstatic,
-        "30": bored, "31": exasperated, "32": sarcastic, "33": tired, "34": exhausted, 
+        "30": bored, "31": exasperated, "32": sarcastic, "33": tired, "34": exhausted,
         "43": scared, "40": surprised, "41": nervous, "42": overwhelmed, "44": terrified, "neutral": bored
     }
+
     return moodEmojiMap[mood] || bored;
 };
 
 const translations = {
-    English: { backToCalendar: "Back to Calendar", editEntry: "Edit Entry", deleteEntry: "Delete Entry", intensity: "Mood Intensity:", notes: "Notes:", noEntry: "No entry for this day." , youWereFeeling: "you were feeling", datePrefix: "On" },
-    Spanish: { backToCalendar: "Volver al Calendario", editEntry: "Editar Entrada", deleteEntry: "Eliminar Entrada", intensity: "Intensidad del Estado de Ánimo:", notes: "Notas:", noEntry: "No hay entrada para este día." , youWereFeeling: "te sentías", datePrefix: "En" },
-    German: { backToCalendar: "Zurück zum Kalender", editEntry: "Eintrag bearbeiten", deleteEntry: "Eintrag löschen", intensity: "Stimmungsintensität:", notes: "Notizen:", noEntry: "Keine Eintragung für diesen Tag." , youWereFeeling: "du hast dich gefühlt", datePrefix: "Am" },
-    French: { backToCalendar: "Retour au Calendrier", editEntry: "Modifier l'entrée", deleteEntry: "Supprimer l'entrée", intensity: "Intensité de l'humeur:", notes: "Remarques:", noEntry: "Aucune entrée pour ce jour." , youWereFeeling: "vous vous sentiez", datePrefix: "Le" },
-    Chinese: { backToCalendar: "返回日历", editEntry: "编辑条目", deleteEntry: "删除条目", intensity: "情绪强度:", notes: "笔记:", noEntry: "当天没有条目。" , youWereFeeling: "你当时的感觉是", datePrefix: "在" }
+    English: { backToCalendar: "Back to Calendar", displayEntry: "Display Entry", editEntry: "Edit Entry", displayPhoto: "Display Photo", intensity: "Mood Intensity:", notes: "Notes:", noEntry: "No entry for this day." , youWereFeeling: "you were feeling", datePrefix: "On" },
+    Spanish: { backToCalendar: "Volver al Calendario", displayEntry: "Mostrar Entrada", editEntry: "Editar Entrada", displayPhoto: "Mostrar foto", intensity: "Intensidad del Estado de Ánimo:", notes: "Notas:", noEntry: "No hay entrada para este día." , youWereFeeling: "te sentías", datePrefix: "En" },
+    German: { backToCalendar: "Zurück zum Kalender", displayEntry: "Eintrag anzeigen", editEntry: "Eintrag bearbeiten", displayPhoto: "Foto anzeigen", intensity: "Stimmungsintensität:", notes: "Notizen:", noEntry: "Keine Eintragung für diesen Tag." , youWereFeeling: "du hast dich gefühlt", datePrefix: "Am" },
+    French: { backToCalendar: "Retour au Calendrier", displayEntry: "Afficher l'entrée", editEntry: "Modifier l'entrée", displayPhoto: "Afficher la photo", intensity: "Intensité de l'humeur:", notes: "Remarques:", noEntry: "Aucune entrée pour ce jour." , youWereFeeling: "vous vous sentiez", datePrefix: "Le" },
+    Chinese: { backToCalendar: "返回日历", displayEntry: "显示条目", editEntry: "编辑条目", displayPhoto: "显示照片", intensity: "情绪强度:", notes: "笔记:", noEntry: "当天没有条目。" , youWereFeeling: "你当时的感觉是", datePrefix: "在" }
 };
 
 const DailyView = ({ moodData, theme, language }) => {
@@ -62,38 +62,6 @@ const DailyView = ({ moodData, theme, language }) => {
 
     const translatedHeader = `${t.datePrefix} ${date}, ${t.youWereFeeling}:`;
 
-    const handleError = (err) => toast.error(err, {});
-
-    const handleDelete = async () => {
-        if (window.confirm("Are you sure you want to delete this entry?")) {
-            delete moodData[date]; // Remove the entry from the data
-            try {
-                const { data } = await axios.post(
-                    "http://localhost:3000/api/editJournalEntry",
-                    {
-                        "emoji": "0",
-                        "intensity": "0",
-                        "text": "",
-                        "image": "", 
-                        "date": ""
-                    },
-                    {}
-                );
-                const { success, message } = data;
-
-                if (success) {
-                    toast.success("Entry successfully deleted");
-                    navigate("/calendar");
-                } else
-                    handleError(message);
-                
-            } catch (error) {
-                console.log(error);
-            }
-            navigate('/calendar'); // Redirect back to the calendar after deletion
-        }
-    };
-
     const handleDisplay = () => {
         if (moodEntry.image === "" || moodEntry.image === undefined) {
             toast.error("No image entered for this day");
@@ -107,13 +75,14 @@ const DailyView = ({ moodData, theme, language }) => {
     return (
         <div className={ `daily-view-screen ${theme} `}>
             <button className="back-button" onClick={() => navigate('/calendar')}>
-                ⬅ {t.backToCalendar}
+                {t.backToCalendar}
             </button>
             {show ? (
                 <div>
-                    <img id="photo" src={photo} alt="Entry photo"/>
+                    <img id="photo" src={photo} alt="Entry photo."/>
+
                     <button className="edit-button" onClick={() => setShow(false)}>
-                            Display Entry
+                        {t.displayEntry}
                     </button>
                 </div>
             ) : (
@@ -127,13 +96,11 @@ const DailyView = ({ moodData, theme, language }) => {
                     <p className="notes">{t.notes} {moodEntry.notes}</p>
 
                     <button className="edit-button" onClick={() => navigate(`/mood-selection/${date}`)}>
-                        ✏ {t.editEntry}
+                        {t.editEntry}
                     </button>
-                    <button className="delete-button" onClick={handleDelete}>
-                        🗑 {t.deleteEntry}
-                    </button>
-                    <button className="edit-button" onClick={handleDisplay}>
-                        Display Photo
+
+                    <button className="display-button" onClick={handleDisplay}>
+                        {t.displayPhoto}
                     </button>
                 </div>
             )}
