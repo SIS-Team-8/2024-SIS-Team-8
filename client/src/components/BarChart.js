@@ -12,7 +12,7 @@ const translations = {
 
 const colours = ['#ff746c', '#b3ebf2', '#ffee8c', 'grey', '#6c3baa'];
 
-const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColors, language, theme }) => {
+const BarChartComponent = ({ data, language, theme }) => {
     const t = translations[language] || translations.English;
 
     let defaultEmoteData = [
