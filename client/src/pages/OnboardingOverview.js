@@ -42,7 +42,7 @@ export default function OnboardingOverview() {
                 <button id="swap-button" onClick={next}>Next</button>
             </div>
             <Link to="/">
-                <button id="onboarding-button">Go Home</button>
+                <button id="home-button">Go Home</button>
             </Link>
         </div>
     );

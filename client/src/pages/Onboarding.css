@@ -26,16 +26,29 @@
     transition: background-color 0.3s;
 }
 
-.dark #onboarding-button {
+#home-button {
+    padding: 7px;
+    font-size: large;
+    font-family: 'Poppins';
+    background-color: white;
+    color: #189ab4;
+    border: none;
+    border-radius: 4px;
+    margin: 40px;
+    width: 250px;
+    transition: background-color 0.3s;
+}
+
+.dark #onboarding-button, .dark #home-button {
     color: #0F3D4B;
 }
 
-#onboarding-button:hover {
+#onboarding-button:hover, #home-button:hover {
     background-color: #0f7b8e;
     color: white;
 }
 
-.dark #onboarding-button:hover {
+.dark #onboarding-button:hover, .dark #home-button:hover {
     background-color: #0C6270;
     color: white;
 }
