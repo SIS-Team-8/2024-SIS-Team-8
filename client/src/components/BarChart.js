@@ -43,18 +43,19 @@ const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColor
         name: t[item.name] || item.name
     }));
 
-    console.log(data);
-
     return (
         <ResponsiveContainer width="50%" height="40%">
             <BarChart id="bar-chart" data={data} margin={{bottom: 30}}>
                 <YAxis stroke="white">
                     <Label value={t.frequency} angle="-90" position="Left" fill="#dddd" dx={-10}/>
                 </YAxis>
+
                 <XAxis dataKey="name" stroke="white">
                     <Label value={t.emotion} offset={0} position="bottom" fill="#dddd" dy={10}/>
                 </XAxis>
+
                 <Tooltip cursor={false} content={<CustomTooltip tooltipText={t.tooltipText} theme={theme} />}/>
+
                 <Bar dataKey="emoteFreq">
                     {
                         translatedData.map((entry, index) => (
@@ -66,7 +67,6 @@ const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColor
         </ResponsiveContainer>
     )
 };
-
 
 const CustomTooltip = ({ active, payload, label, tooltipText, theme }) => {
     if (active && payload && payload.length) {

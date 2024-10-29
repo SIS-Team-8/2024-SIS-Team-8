@@ -113,14 +113,12 @@ export default function History({data, historyUpdate, theme, language}) {
 
     const [translatedData, setTranslatedData] = useState({});
 
-
     const t = translations[language];
 
     useEffect(() => {
         if (location.state?.month) {
             setCurrentMonth(location.state.month);
         }
-        console.log(data);
     }, [location.state?.month]);
 
     const toggleViewMode = () => {
@@ -133,6 +131,7 @@ export default function History({data, historyUpdate, theme, language}) {
         } else if (nextMode === "weekly") {
             setCurrentWeek(1);
         }
+
         getHistory(nextMode);
     };
 
@@ -143,6 +142,7 @@ export default function History({data, historyUpdate, theme, language}) {
             const newMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
             setCurrentMonth(newMonth);
         }
+
         getHistory(viewMode);
     };
 
@@ -173,12 +173,13 @@ export default function History({data, historyUpdate, theme, language}) {
 
     const generateMonthKey = (month, yearChange) => {
         const year = currentMonth.getFullYear() + yearChange;
+
         if (yearChange === 1) {
             month = 1;
-        }
-        else {
+        } else {
             month = month + 1;
         }
+
         return `${year}-${month < 10 ? '0' : ''}${month}-01`;
     };
 
@@ -212,23 +213,23 @@ export default function History({data, historyUpdate, theme, language}) {
     const getHistory = async (viewMode) => {
         let firstDate = "";
         let secondDate = "";
-        console.log(viewMode);
-        console.log(currentMonth.getFullYear());
+
         try {
             if (viewMode === "monthly") {
                 firstDate =  generateMonthKey(currentMonth.getMonth(), 0);
-                console.log(currentMonth.getMonth());
+
                 if (currentMonth.getMonth() === 11) {
                     secondDate = generateMonthKey(currentMonth.getMonth() + 1, 1)
-                }
-                else {
+                } else {
                     secondDate = generateMonthKey(currentMonth.getMonth() + 1, 0);
                 }
             }
+
             else if (viewMode === "yearly") {
                 firstDate =  generateYearKey(currentYear);
                 secondDate = generateYearKey(currentYear + 1);
             }
+
             const { data } = await axios.post(
                 "http://localhost:3000/api/requestHistory",
                 {
@@ -237,25 +238,24 @@ export default function History({data, historyUpdate, theme, language}) {
                 },
                 {}
             );
-                for (let i = 0; i < 5; i++) {
-                    defaultEmoteData[i].emoteFreq = data.emojiCount[i];
-                }
+
+            for (let i = 0; i < 5; i++) {
+                defaultEmoteData[i].emoteFreq = data.emojiCount[i];
+            }
 
             setTranslatedData(defaultEmoteData);
         } catch (error) {
             for (let i = 0; i < 5; i++) {
                 defaultEmoteData[i].emoteFreq = 0;
             }
+
             setTranslatedData(defaultEmoteData);
-            console.log(error);
         }
-        console.log(firstDate);
-        console.log(secondDate);
-    } 
+    }
 
     useEffect(() => {
         getHistory(viewMode);
-    }, [])
+    })
 
     return (
         <div id="history-container" className={theme}>
