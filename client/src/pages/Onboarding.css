@@ -71,8 +71,8 @@
     color: #189ab4;
     border: none;
     border-radius: 4px;
-    margin-top: 20px;
-    width: 100px;
+    margin: 20px;
+    width: 150px;
     transition: background-color 0.3s;
 }
 
