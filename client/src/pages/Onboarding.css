@@ -63,8 +63,17 @@
     transition: background-color 0.3s;
 }
 
+.dark #swap-button {
+    color: #0F3D4B;
+}
+
 #swap-button:hover {
     background-color: #0f7b8e;
+    color: white;
+}
+
+.dark #swap-button:hover {
+    background-color: #0C6270;
     color: white;
 }
 

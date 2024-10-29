@@ -10,7 +10,7 @@ const translations = {
     Chinese: { skipIntro: "跳过介绍", continueIntro: "继续介绍", welcome: "欢迎来到EmoteLog！", introDescription: "表情符号可以传达千言万语！" }
 };
 
-export default function Onboarding({ onComplete, theme, language }) {
+export default function Onboarding({ onComplete, language }) {
     const handleOnboardingComplete = () => {
         onComplete();
     };
