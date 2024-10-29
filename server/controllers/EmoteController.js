@@ -50,7 +50,7 @@ module.exports.logEmote = async (req, res) => {
                 if (!updatedUser) {
                     return res.status(404).json({ message: "failed to update journal" });
                 }
-                res.status(200).json({ message: "Journal updated successfully", journal: updatedUser.journal });
+                res.status(200).json({ message: "Journal updated successfully", journal: updatedUser.journal, success: true });
 
                 logEntryFound = true;
                 break;
@@ -66,7 +66,7 @@ module.exports.logEmote = async (req, res) => {
             if (!updatedUser) {
                 return res.status(404).json({ message: "failed to update journal" });
             }
-            res.status(200).json({ message: "Journal entry added successfully", journal: updatedUser.journal });
+            res.status(200).json({ message: "Journal entry added successfully", journal: updatedUser.journal, success: true });
         }
     } catch (error) {
         res.status(500).json({ message: "Server error", error: error.message });
@@ -104,7 +104,7 @@ try
                 if (!updatedUser) {
                     return res.status(404).json({ message: "failed to update journal" });
                 }
-                res.status(200).json({ message: "Journal updated successfully", journal: updatedUser.journal });
+                res.status(200).json({ message: "Journal updated successfully", journal: updatedUser.journal, success: true });
 
                 logEntryFound = true;
                 break;
@@ -120,7 +120,7 @@ try
             if (!updatedUser) {
                 return res.status(404).json({ message: "failed to update journal" });
             }
-            res.status(200).json({ message: "Journal entry added successfully", journal: updatedUser.journal });
+            res.status(200).json({ message: "Journal entry added successfully", journal: updatedUser.journal, success: true });
         }
 
     } catch (error)

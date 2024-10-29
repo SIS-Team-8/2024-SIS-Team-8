@@ -257,8 +257,6 @@ export default function History({data, historyUpdate, theme, language}) {
         getHistory(viewMode);
     }, [])
 
-    
-
     return (
         <div id="history-container" className={theme}>
             <div style={{ marginTop: '15px', textAlign: 'center' }}>
