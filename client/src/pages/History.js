@@ -13,13 +13,10 @@ const translations = {
             tooltipText: "Frequency"
         },
         viewToggle: {
-            monthly: "Switch to Weekly View",
-            weekly: "Switch to Yearly View",
+            monthly: "Switch to Yearly View",
             yearly: "Switch to Monthly View"
         },
         navigation: {
-            prevWeek: "Previous Week",
-            nextWeek: "Next Week",
             prevYear: "Previous Year",
             nextYear: "Next Year"
         }
@@ -32,13 +29,10 @@ const translations = {
             tooltipText: "Frecuencia"
         },
         viewToggle: {
-            monthly: "Cambiar a Vista Semanal",
-            weekly: "Cambiar a Vista Anual",
+            monthly: "Cambiar a Vista Anual",
             yearly: "Cambiar a Vista Mensual"
         },
         navigation: {
-            prevWeek: "Semana Anterior",
-            nextWeek: "Próxima Semana",
             prevYear: "Año Anterior",
             nextYear: "Próximo Año"
         }
@@ -51,13 +45,10 @@ const translations = {
             tooltipText: "Häufigkeit"
         },
         viewToggle: {
-            monthly: "Zur Wochenansicht wechseln",
-            weekly: "Zur Jahresansicht wechseln",
+            monthly: "Zur Jahresansicht wechseln",
             yearly: "Zur Monatsansicht wechseln"
         },
         navigation: {
-            prevWeek: "Vorherige Woche",
-            nextWeek: "Nächste Woche",
             prevYear: "Vorheriges Jahr",
             nextYear: "Nächstes Jahr"
         }
@@ -70,13 +61,10 @@ const translations = {
             tooltipText: "Fréquence"
         },
         viewToggle: {
-            monthly: "Passer à la vue hebdomadaire",
-            weekly: "Passer à la vue annuelle",
+            monthly: "Passer à la vue annuelle",
             yearly: "Passer à la vue mensuelle"
         },
         navigation: {
-            prevWeek: "Semaine Précédente",
-            nextWeek: "Semaine Suivante",
             prevYear: "Année Précédente",
             nextYear: "Année Suivante"
         }
@@ -89,13 +77,10 @@ const translations = {
             tooltipText: "频率"
         },
         viewToggle: {
-            monthly: "切换到每周视图",
-            weekly: "切换到年度视图",
+            monthly: "切换到年度视图",
             yearly: "切换到每月视图"
         },
         navigation: {
-            prevWeek: "上一周",
-            nextWeek: "下一周",
             prevYear: "上一年",
             nextYear: "下一年"
         }
@@ -108,7 +93,6 @@ export default function History({data, historyUpdate, theme, language}) {
 
     const [currentMonth, setCurrentMonth] = useState(initialMonth);
     const [viewMode, setViewMode] = useState("monthly");
-    const [currentWeek, setCurrentWeek] = useState(1);
     const [currentYear, setCurrentYear] = useState(currentMonth.getFullYear());
 
     const [translatedData, setTranslatedData] = useState({});
@@ -122,14 +106,12 @@ export default function History({data, historyUpdate, theme, language}) {
     }, [location.state?.month]);
 
     const toggleViewMode = () => {
-        const viewModes = { monthly: "weekly", weekly: "yearly", yearly: "monthly" };
+        const viewModes = { monthly: "yearly", yearly: "monthly" };
         const nextMode = viewModes[viewMode];
         setViewMode(nextMode);
 
         if (nextMode === "yearly") {
             setCurrentYear(currentMonth.getFullYear());
-        } else if (nextMode === "weekly") {
-            setCurrentWeek(1);
         }
 
         getHistory(nextMode);
@@ -146,23 +128,7 @@ export default function History({data, historyUpdate, theme, language}) {
         getHistory(viewMode);
     };
 
-    const changeWeek = (direction) => {
-        const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
-        const weeksInMonth = Math.ceil(daysInMonth / 7);
-        const nextWeek = currentWeek + direction;
-
-        setCurrentWeek(nextWeek < 1 ? weeksInMonth : nextWeek > weeksInMonth ? 1 : nextWeek);
-        getHistory(viewMode);
-    };
-
     const getHeading = () => {
-        if (viewMode === "weekly") {
-            const startOfWeek = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), (currentWeek - 1) * 7 + 1);
-            const endOfWeek = new Date(startOfWeek);
-            endOfWeek.setDate(startOfWeek.getDate() + 6);
-            return `${startOfWeek.toLocaleDateString()} - ${endOfWeek.toLocaleDateString()}`;
-        }
-
         if (viewMode === "yearly") {
             return currentYear.toString();
         }
@@ -273,13 +239,7 @@ export default function History({data, historyUpdate, theme, language}) {
                         <button onClick={() => changeMonth(1)}>{t.next}</button>
                     </>
                 )}
-                {viewMode === "weekly" && (
-                    <>
-                        <button onClick={() => changeWeek(-1)}>{t.navigation.prevWeek}</button>
-                        <h2>{getHeading()}</h2>
-                        <button onClick={() => changeWeek(1)}>{t.navigation.nextWeek}</button>
-                    </>
-                )}
+
                 {viewMode === "yearly" && (
                     <>
                         <button onClick={() => changeMonth(-1)}>{t.navigation.prevYear}</button>
