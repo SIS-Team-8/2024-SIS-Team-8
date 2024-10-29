@@ -216,7 +216,10 @@ const CalendarScreen = ({ moodData, onMoodUpdate, theme, language }) => {
             for (let i = 0; i < data.journal.length; i++){
                 if (data.journal[i].image !== "") {
                     url = convertToURL(data.journal[i].image);
-                }    
+                }
+                else {
+                    url = "";
+                }
                 emoji = data.journal[i].emoji.toString().concat(data.journal[i].intensity.toString());
                 onMoodUpdate(data.journal[i].time_code.split("T")[0], emoji, data.journal[i].text, url);
             }
