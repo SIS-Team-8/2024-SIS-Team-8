@@ -58,12 +58,12 @@
 
 #image-button-container {
     display: flex;
-    justify-content: space-between; /* Space between buttons */
+    justify-content: space-between;
     align-items: center;
-    width: 900px; /* Set a fixed width */
-    margin: 0 auto; /* Center the container horizontally */
+    width: 900px;
+    margin: 0 auto;
     margin-top: 20px;
-    position: relative; /* Keep layout stable */
+    position: relative;
 }
 
 #app-logo {
