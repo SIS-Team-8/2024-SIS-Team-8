@@ -240,7 +240,7 @@ export default function History({data, historyUpdate, theme, language}) {
                 for (let i = 0; i < 5; i++) {
                     defaultEmoteData[i].emoteFreq = data.emojiCount[i];
                 }
-            
+
             setTranslatedData(defaultEmoteData);
         } catch (error) {
             for (let i = 0; i < 5; i++) {
