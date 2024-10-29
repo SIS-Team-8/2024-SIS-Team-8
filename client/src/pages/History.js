@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BarChart from '../components/BarChart';
 import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
 import './History.css';
 
 const translations = {
@@ -12,13 +13,10 @@ const translations = {
             tooltipText: "Frequency"
         },
         viewToggle: {
-            monthly: "Switch to Weekly View",
-            weekly: "Switch to Yearly View",
+            monthly: "Switch to Yearly View",
             yearly: "Switch to Monthly View"
         },
         navigation: {
-            prevWeek: "Previous Week",
-            nextWeek: "Next Week",
             prevYear: "Previous Year",
             nextYear: "Next Year"
         }
@@ -31,13 +29,10 @@ const translations = {
             tooltipText: "Frecuencia"
         },
         viewToggle: {
-            monthly: "Cambiar a Vista Semanal",
-            weekly: "Cambiar a Vista Anual",
+            monthly: "Cambiar a Vista Anual",
             yearly: "Cambiar a Vista Mensual"
         },
         navigation: {
-            prevWeek: "Semana Anterior",
-            nextWeek: "Próxima Semana",
             prevYear: "Año Anterior",
             nextYear: "Próximo Año"
         }
@@ -50,13 +45,10 @@ const translations = {
             tooltipText: "Häufigkeit"
         },
         viewToggle: {
-            monthly: "Zur Wochenansicht wechseln",
-            weekly: "Zur Jahresansicht wechseln",
+            monthly: "Zur Jahresansicht wechseln",
             yearly: "Zur Monatsansicht wechseln"
         },
         navigation: {
-            prevWeek: "Vorherige Woche",
-            nextWeek: "Nächste Woche",
             prevYear: "Vorheriges Jahr",
             nextYear: "Nächstes Jahr"
         }
@@ -69,13 +61,10 @@ const translations = {
             tooltipText: "Fréquence"
         },
         viewToggle: {
-            monthly: "Passer à la vue hebdomadaire",
-            weekly: "Passer à la vue annuelle",
+            monthly: "Passer à la vue annuelle",
             yearly: "Passer à la vue mensuelle"
         },
         navigation: {
-            prevWeek: "Semaine Précédente",
-            nextWeek: "Semaine Suivante",
             prevYear: "Année Précédente",
             nextYear: "Année Suivante"
         }
@@ -88,27 +77,25 @@ const translations = {
             tooltipText: "频率"
         },
         viewToggle: {
-            monthly: "切换到每周视图",
-            weekly: "切换到年度视图",
+            monthly: "切换到年度视图",
             yearly: "切换到每月视图"
         },
         navigation: {
-            prevWeek: "上一周",
-            nextWeek: "下一周",
             prevYear: "上一年",
             nextYear: "下一年"
         }
     }
 };
 
-export default function History({theme, language}) {
+export default function History({data, historyUpdate, theme, language}) {
     const location = useLocation();
     const initialMonth = location.state?.month || new Date();
 
     const [currentMonth, setCurrentMonth] = useState(initialMonth);
     const [viewMode, setViewMode] = useState("monthly");
-    const [currentWeek, setCurrentWeek] = useState(1);
     const [currentYear, setCurrentYear] = useState(currentMonth.getFullYear());
+
+    const [translatedData, setTranslatedData] = useState({});
 
     const t = translations[language];
 
@@ -119,15 +106,15 @@ export default function History({theme, language}) {
     }, [location.state?.month]);
 
     const toggleViewMode = () => {
-        const viewModes = { monthly: "weekly", weekly: "yearly", yearly: "monthly" };
+        const viewModes = { monthly: "yearly", yearly: "monthly" };
         const nextMode = viewModes[viewMode];
         setViewMode(nextMode);
 
         if (nextMode === "yearly") {
             setCurrentYear(currentMonth.getFullYear());
-        } else if (nextMode === "weekly") {
-            setCurrentWeek(1);
         }
+
+        getHistory(nextMode);
     };
 
     const changeMonth = (direction) => {
@@ -137,24 +124,11 @@ export default function History({theme, language}) {
             const newMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
             setCurrentMonth(newMonth);
         }
-    };
 
-    const changeWeek = (direction) => {
-        const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
-        const weeksInMonth = Math.ceil(daysInMonth / 7);
-        const nextWeek = currentWeek + direction;
-
-        setCurrentWeek(nextWeek < 1 ? weeksInMonth : nextWeek > weeksInMonth ? 1 : nextWeek);
+        getHistory(viewMode);
     };
 
     const getHeading = () => {
-        if (viewMode === "weekly") {
-            const startOfWeek = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), (currentWeek - 1) * 7 + 1);
-            const endOfWeek = new Date(startOfWeek);
-            endOfWeek.setDate(startOfWeek.getDate() + 6);
-            return `${startOfWeek.toLocaleDateString()} - ${endOfWeek.toLocaleDateString()}`;
-        }
-
         if (viewMode === "yearly") {
             return currentYear.toString();
         }
@@ -163,13 +137,91 @@ export default function History({theme, language}) {
         return `${monthName} ${currentMonth.getFullYear()}`;
     };
 
-    const chartData = [
-        { name: t.chart.xLabels[0], emoteFreq: 5 },
-        { name: t.chart.xLabels[1], emoteFreq: 5 },
-        { name: t.chart.xLabels[2], emoteFreq: 10 },
-        { name: t.chart.xLabels[3], emoteFreq: 5 },
-        { name: t.chart.xLabels[4], emoteFreq: 5 }
+    const generateMonthKey = (month, yearChange) => {
+        const year = currentMonth.getFullYear() + yearChange;
+
+        if (yearChange === 1) {
+            month = 1;
+        } else {
+            month = month + 1;
+        }
+
+        return `${year}-${month < 10 ? '0' : ''}${month}-01`;
+    };
+
+    const generateYearKey = (year) => {
+        return `${year}-01-01`;
+    };
+
+    let defaultEmoteData = [
+        {
+            name: 'Angry',
+            emoteFreq: 0,
+        },
+        {
+            name: 'Sad',
+            emoteFreq: 0,
+        },
+        {
+            name: 'Happy',
+            emoteFreq: 0,
+        },
+        {
+            name: 'Bored',
+            emoteFreq: 0,
+        },
+        {
+            name: 'Scared',
+            emoteFreq: 0
+        },
     ];
+
+    const getHistory = async (viewMode) => {
+        let firstDate = "";
+        let secondDate = "";
+
+        try {
+            if (viewMode === "monthly") {
+                firstDate =  generateMonthKey(currentMonth.getMonth(), 0);
+
+                if (currentMonth.getMonth() === 11) {
+                    secondDate = generateMonthKey(currentMonth.getMonth() + 1, 1)
+                } else {
+                    secondDate = generateMonthKey(currentMonth.getMonth() + 1, 0);
+                }
+            }
+
+            else if (viewMode === "yearly") {
+                firstDate =  generateYearKey(currentYear);
+                secondDate = generateYearKey(currentYear + 1);
+            }
+
+            const { data } = await axios.post(
+                "http://localhost:3000/api/requestHistory",
+                {
+                    startDate: firstDate,
+                    endDate: secondDate
+                },
+                {}
+            );
+
+            for (let i = 0; i < 5; i++) {
+                defaultEmoteData[i].emoteFreq = data.emojiCount[i];
+            }
+
+            setTranslatedData(defaultEmoteData);
+        } catch (error) {
+            for (let i = 0; i < 5; i++) {
+                defaultEmoteData[i].emoteFreq = 0;
+            }
+
+            setTranslatedData(defaultEmoteData);
+        }
+    }
+
+    useEffect(() => {
+        getHistory(viewMode);
+    })
 
     return (
         <div id="history-container" className={theme}>
@@ -187,13 +239,7 @@ export default function History({theme, language}) {
                         <button onClick={() => changeMonth(1)}>{t.next}</button>
                     </>
                 )}
-                {viewMode === "weekly" && (
-                    <>
-                        <button onClick={() => changeWeek(-1)}>{t.navigation.prevWeek}</button>
-                        <h2>{getHeading()}</h2>
-                        <button onClick={() => changeWeek(1)}>{t.navigation.nextWeek}</button>
-                    </>
-                )}
+
                 {viewMode === "yearly" && (
                     <>
                         <button onClick={() => changeMonth(-1)}>{t.navigation.prevYear}</button>
@@ -204,13 +250,13 @@ export default function History({theme, language}) {
             </div>
 
             <BarChart
-                data={chartData}
                 xAxisLabel={t.chart.xAxisLabel}
                 yAxisLabel={t.chart.yAxisLabel}
                 tooltipText={t.chart.tooltipText}
                 barColors={["#ff746c", "#b3ebf2", "#ffee8c", "grey", "#6c3baa"]}
                 language={language}
                 theme={theme}
+                data={translatedData}
             />
 
             <div style={{ marginTop: '20px', textAlign: 'center' }}>
