@@ -100,14 +100,18 @@ textarea::placeholder {
     width: 90%;
     max-width: 775px;
     min-height: 150px;
-    background-image: url(../assets/camera-icon.png);
-    background-repeat: no-repeat;
-    background-size: 32px, 32px;
-    background-position: calc(100% - 20px) center;
     margin-right: 20px;
     padding: 10px;
     border-radius: 8px;
     cursor: pointer;
+}
+
+#log-image {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    right: 72px;
+    object-fit: contain;
 }
 
 #submit {

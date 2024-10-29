@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 import './MoodSelection.css'
 import veryAngry from '../assets/emoji/very-angry.png'
 import sad from '../assets/emoji/sad.png'
@@ -26,6 +28,7 @@ import surprised from '../assets/emoji/surprised.png'
 import nervous from '../assets/emoji/nervous.png'
 import overwhelmed from '../assets/emoji/overwhelmed.png'
 import terrified from '../assets/emoji/terrified.png'
+import camera from '../assets/camera-icon.png'
 import submit from '../assets/submit-icon.png'
 
 const translations = {
@@ -36,17 +39,46 @@ const translations = {
     Chinese: { addNote: "添加备注..." }
 };
 
-export default function MoodSelection({ language = "English", theme = "light" }) {
+/*
+const moodMap = {
+    "0": angry, "1": sad, "2": happy, "3": bored, "4": scared
+}
+*/
+
+export default function MoodSelection({ moodData, language = "English", theme = "light" }) {
     const [imageSrc, setImageSrc] = useState([]);  // Store sub-row images based on mood
     const [rowOpacity, setRowOpacity] = useState(Array(5).fill(1));  // Set initial opacity of row images to 1
     const [subRowOpacity, setSubRowOpacity] = useState(Array(5).fill(1));  // Sub-row opacity starts at 1
     const [hoveredMood, setHoveredMood] = useState('');  // State to track the hovered main row mood
     const [hoveredSubMood, setHoveredSubMood] = useState('');  // State to track the hovered sub row mood
+    const [moodEntry, setMoodEntry] = useState({
+        emoji:"",
+        intensity:"",
+        text:"",
+        image:""
+    });
+
+    const [photo, setPhoto] = useState(camera);
+
+    const { emoji, intensity, text } = moodEntry;
+
+    const navigate = useNavigate();
+
+    const { date } = useParams();
+
+    const handleTextChange = (e) => {
+        const { name, value } = e.target;
+        setMoodEntry({
+            ...moodEntry,
+            [name]: value
+        });
+    };
 
     const setMoodImages = (images, activeIndex) => {
         setImageSrc(images);  // Set sub-row images
         setRowOpacity(prev => prev.map((_, i) => (i === activeIndex ? 1 : 0.5)));  // Change opacity of row images on click
         resetSubRowOpacity();
+        setMoodEntry({...moodEntry, emoji: activeIndex, intensity: ""});
     };
 
     const resetSubRowOpacity = () => {
@@ -71,7 +103,110 @@ export default function MoodSelection({ language = "English", theme = "light" })
 
     const handleSubRowClick = (index) => {
         setSubRowOpacity(prev => prev.map((_, i) => (i === index ? 1 : 0.5)));  // Update only sub-row images' opacity
+        setMoodEntry({...moodEntry, intensity: index});
     };
+
+    const fileUploadRef = useRef();
+
+    const handleImageUpload = () => {
+        fileUploadRef.current.click();
+    }
+
+    const uploadImageDisplay = async () => {
+        const uploadedFile = fileUploadRef.current.files[0];
+        const cachedURL = URL.createObjectURL(uploadedFile);
+        const base64 = await convertToBase64(uploadedFile);
+        setMoodEntry({...moodEntry, image: base64});
+        setPhoto(cachedURL);
+    }
+
+    const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+            fileReader.onload = () => {
+                resolve(fileReader.result)
+            };
+            fileReader.onerror = (error) => {
+                reject(error)
+            }
+        })
+    }
+
+    const handleError = (err) => toast.error(err, {});
+
+    const handleSuccess = (msg) => toast.success(msg, {});
+
+    const handleSubmit = async () => {
+        if (emoji === "" || intensity === "") {
+            toast.error("Select how you feel to create an entry")
+        }
+        else {
+            if (date === "today") {
+                try {
+                    const { data } = await axios.post(
+                        "http://localhost:3000/api/logEmote",
+                        {
+                            "emoji": moodEntry.emoji,
+                            "intensity": moodEntry.intensity,
+                            "text": moodEntry.text,
+                            "image": moodEntry.image
+                        },
+                        { }
+                    );
+                    const { success, message } = data;
+
+                    if (success) {
+                        handleSuccess(message);
+                        navigate("/");
+                    } else 
+                        handleError(message);
+                } catch (error) {
+                    console.log(error);
+                }
+            } else {
+                try {
+                    const { data } = await axios.post(
+                        "http://localhost:3000/api/editJournalEntry",
+                        {
+                            "emoji": moodEntry.emoji,
+                            "intensity": moodEntry.intensity,
+                            "text": moodEntry.text,
+                            "image": moodEntry.image, 
+                            "date": date
+                        },
+                        {}
+                    );
+                    const { success, message } = data;
+
+                    if (success) {
+                        handleSuccess(message);
+                        navigate("/calendar");
+                    } else
+                        handleError(message);
+                    
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        }
+    };
+
+    useEffect(() => {
+        if (moodData[date] !== undefined ) {
+            console.log(moodData[date]);
+            if (date !== "today") {
+                setMoodEntry({...moodEntry, emoji: moodData[date].mood[0], 
+                    intensity: moodData[date].mood[1], 
+                    text: moodData[date].notes
+                });
+                console.log(moodData[date].image);
+                if (moodData[date].image !== "" && moodData[date].image !== undefined && moodData[date].image !== null) {
+                    setPhoto(moodData[date].image);
+                }
+            }
+        }
+    }, []);
 
     return (
         <html>
@@ -121,11 +256,10 @@ export default function MoodSelection({ language = "English", theme = "light" })
                 </div>
 
                 <div id="flexContainer">
-                    <textarea id="log" placeholder={t.addNote} className={theme}/>
-
-                    <Link to="/">
-                        <img id="submit" className={theme} alt="submit" src={submit}/>
-                    </Link>
+                    <textarea id="log" name="text" value={text} onChange={handleTextChange} placeholder={t.addNote} className={theme}/>
+                    <img id="log-image" src={photo} alt="Photo Submit" onClick={handleImageUpload}/>
+                    <input type="file" name="image" accept=".png, .jpeg, .jpg" ref={fileUploadRef} onChange={uploadImageDisplay} hidden/>
+                    <img id="submit" className={theme} alt="submit" src={submit} onClick={handleSubmit}/>
                 </div>
             </div>
         </html>
