@@ -1,0 +1,16 @@
+{
+  "name": "2024-sis-team-8",
+  "version": "0.1.1",
+  "description": "EmoteLog: Daily Emoji Journal - Conglomerated Package",
+  "scripts": {
+    "start": "npm run build-client && npm run start-server-dev",
+    "start-server": "cd server && npm start",
+    "start-server-dev": "cd server && npm run dev",
+    "start-client": "cd client && npm start",
+    "build-client": "cd client && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

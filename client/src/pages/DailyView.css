@@ -1,0 +1,121 @@
+/* DailyView.css */
+.daily-view-screen {
+    font-family: 'Poppins', sans-serif;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #189ab4;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.back-button {
+    padding: 10px;
+    font-size: medium;
+    min-width: 200px;
+    background-color: white;
+    color: #189ab4;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dark .back-button {
+    color: #0F3D4B;
+}
+
+.back-button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
+.dark .back-button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
+.daily-view-content {
+    width: 100%;
+    max-width: 600px;
+}
+
+.daily-view-content h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.emoji {
+    width: 150px;
+    height: 150px;
+    margin: 50px auto;
+    display: block;
+}
+
+.emoji img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.notes {
+    font-size: 18px;
+    color: white;
+    margin-top: 20px;
+}
+
+.intensity {
+    font-size: 18px;
+    color: #ddd;
+    margin-top: 10px;
+}
+
+.edit-button, .display-button {
+    padding: 10px;
+    font-size: medium;
+    min-width: 150px;
+    background-color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 25px;
+}
+
+.edit-button, .display-button {
+    color: #189ab4;
+}
+
+.dark .edit-button, .dark .display-button {
+    color: #0F3D4B;
+}
+
+.edit-button:hover, .display-button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
+.dark .edit-button:hover, .dark .display-button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
+.daily-view-screen.light {
+    background-color: #189ab4;
+}
+
+.daily-view-screen.dark {
+    background-color: #0F3D4B !important;
+    color: white !important;
+}
+
+#photo {
+    width: 1000px;
+    height: 300px;
+    object-fit: contain;
+    display: block;
+}

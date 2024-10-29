@@ -1,0 +1,66 @@
+require('dotenv').config();
+svConfig = require('../config/server.json');
+gblConfig = require('../config/global.json');
+
+const path = require("path");
+const cors = require("cors");
+const express = require("express");
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const app = express(); // create express app
+
+const cookieParser = require("cookie-parser");
+const {authMiddleware} = require("./middlewares/AuthMiddleware");
+const apiRouter = require("./routes/ApiRoute");
+
+// Connect to MongoDB server using environment variables
+const mogoURI = process.env.MONGODB_URI;
+
+app.use(bodyParser.json({ limit: '500kb'}));
+
+mongoose.connect(mogoURI, {
+    dbName: process.env.MONGODB_DB,
+}).then(() => console.log("MongoDB is  connected successfully"))
+  .catch((err) => console.error(err));;
+
+// // start express server
+app.listen(svConfig.server.port, () => {
+  console.log("server started on port " + svConfig.server.port);
+});
+
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],                  // update to live site
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
+app.use(express.json()); // For JSON request bodies
+app.use(express.urlencoded({ extended: true })); // For URL-encoded request bodies
+app.use(cookieParser());
+
+app.use(express.static(path.join(__dirname, ".." , "client", "build")));
+app.use(express.static("public"));
+
+
+// app.get("/", (req, res) => {
+//   res.send("This is from express.js");
+// });
+
+app.use((req, res, next) => {
+  if (req.path === '/login' || req.path === '/sign-up' || req.path === '/api/sign-up' || req.path === '/api/login') {
+    return next();
+  }
+  authMiddleware(req, res, next);
+});
+
+app.use('/api', apiRouter);
+//console.log("Default router passed");
+// handle react app routing
+app.use((req, res, next) => {
+  if (req.path.includes('/api')) {
+    return next();
+  }
+  res.sendFile(path.join(__dirname, ".." , "client", "build", "index.html"));
+});

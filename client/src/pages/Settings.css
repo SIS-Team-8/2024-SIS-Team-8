@@ -1,0 +1,173 @@
+/* General Styles for Settings Screen */
+.settings-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 0 20px;
+}
+
+/* Light Theme */
+.settings-screen.light {
+    background-color: #189ab4;
+    color: black;
+}
+
+/* Dark Theme */
+.settings-screen.dark {
+    background-color: #0F3D4B;
+    color: white;
+}
+
+/* Settings Container */
+.settings-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 8px;
+    text-align: left;
+}
+
+/* Light Theme for Container */
+.settings-container.light {
+    background-color: #189ab4;
+    color: white;
+}
+
+/* Dark Theme for Container */
+.settings-container.dark {
+    background-color: #0F3D4B;
+    color: white;
+}
+
+.settings-header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: inherit;
+}
+
+.setting-group {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.setting-group h2 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: inherit;
+}
+
+.options-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.options-group label {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: inherit;
+}
+
+.options-group select {
+    padding: 5px;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+}
+
+.center-button {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.home-button {
+    padding: 7px;
+    font-size: large;
+    width: 100%;
+    font-family: 'Poppins';
+    background-color: white;
+    color: #189ab4;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dark .home-button {
+    color: #0F3D4B;
+}
+
+.home-button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
+.dark .home-button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-left: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #0C6270;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Rounded switch */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}

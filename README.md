@@ -3,11 +3,13 @@
 ## EmoteLog: Daily Emoji Journal
 
 ### Tech Stack
-* **Frontend**: TBD
-* **Backend**: TBD
-* **Database**: TBD
+
+* **Frontend**: React
+* **Backend**: Express.js/Node.js
+* **Database**: MongoDB
 
 ## Team Members
+
 * [Andreas Skotadis](https://linkedin.com/in/andreas-skotadis/)
 * [Alexandar Nikolic](https://linkedin.com/in/alexandar-nikolic-26411b23b)
 * [Ishaan Verma](https://www.linkedin.com/in/ishaan-verma-uts)
@@ -31,3 +33,201 @@
 
 * Leave comments for each function in regards to their purpose, and possibly an explanation of the process.
 * Don't be afraid to leave small notes and comments whilst developing.
+
+### Getting Started - Client Only
+
+* clone repository.
+* Open in vscode.
+* run `npm install` in root directory.
+* cd into the client directory and run `npm install`.
+* return to the root directory with cd.
+
+#### Startup Procedure
+
+* To run only the client run `npm run start-client`.
+
+#### Testing
+
+* go to [application](http://localhost:3000) in your browser.
+
+#### Shutdown procedure
+
+* To stop the client run `ctrl/cmd + c` in the terminal.
+
+### Getting Started - Full Stack
+
+#### Setup
+
+* clone repository.
+* Open in vscode.
+* run `npm install` in both the client and server directories.
+* create a `.env` file in the server directory and add the following:
+
+```text
+MONGODB_URI=mongodb://dev:Endless2-Drift-Turf@localhost:28018
+MONGODB_DB=SIS-Team-8-dev
+TOKEN_KEY=secret
+```
+
+* return to the root directory with cd.
+
+#### Startup Procedure
+
+* make sure docker is installed and the daemon is running.
+* Start the development database by running `docker compose -f docker-compose.dev.yaml up -d` in the root directory.
+* To run the full stack application run `npm run start`.
+
+#### Testing
+
+* go to [application](http://localhost:3000) in your browser.
+* if using full stack, app will need to restart every time changes in client side code are made to see changes.
+* go to [mongo express](http://localhost:8081) in your browser.
+
+#### Shutdown procedure
+
+* To stop the full stack application run `ctrl/cmd + c` in the terminal.
+* shut down the database with `docker compose -f docker-compose.dev.yaml down`
+
+## TODO
+
+* CHECK IF WE ARE ONLY AALLOWING ONE JOURNAL ENTRY PER DAY
+
+## Backend implementation
+
+### Login API
+
+login implementation from [here](https://www.freecodecamp.org/news/how-to-secure-your-mern-stack-application/)
+
+```javascript
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+
+const [cookies, removeCookie] = useCookies([]);
+const [username, setUsername] = useState("");
+
+const verifyCookie = async () => {
+      if (!cookies.token) {
+        navigate("/login");
+      }
+      const { data } = await axios.post(
+        "http://localhost:3000/api/auth",
+        {},
+        { withCredentials: true }
+      );
+      const { status, user } = data;
+      setUsername(user);
+      return status;
+    };
+verifyCookie();
+// implement removeCookie("token") during the logout process
+```
+
+* the url to send a POST request to login is `http://localhost:3000/api/login`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+      "username": "john.doe",
+      "password": "test"
+    }
+    ```
+
+* the url to send a POST request to signup is `http://localhost:3000/api/sign-up`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+        "username": "john.doe",
+        "password": "test"
+    }
+    ```
+
+#### Secure API Calls
+
+all of the following api calls require the token cookie to be set by logging in first
+
+* the url to send a POST request to update profile is `http://localhost:3000/api/profile`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+      "name":"Jon day",
+      "phone":"9123847012934",
+      "address":"sadjhfg"
+    }
+    ```
+
+* the url to send a POST request to log an emoji is `http://localhost:3000/api/logEmote`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+      "emoji":"4",
+      "intensity":"2",
+      "text":"dftghdsrf",
+      "image":"retytgrffd"
+    }
+    ```
+
+* the url to send a POST request to edit or add an emoji on a given day is `http://localhost:3000/api/editJournalEntry`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+      "emoji":"4",
+      "intensity":"2",
+      "text":"dftghdsrf",
+      "image":"retytgrffd",
+      "date":"2024-10-11T09:36:28.829Z"
+    }
+    ```
+
+* the url to send a POST request for emoji numbers for use on the history page is `http://localhost:3000/api/requestHistory`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+      "startDate":"2024-10-11T09:36:28.829Z",
+      "endDate":"2024-10-12T11:36:28.829Z"
+    }
+    ```
+
+  * it returns a JSON object with the following structure:
+
+    ```json
+    {
+      "message": "Journal fetched successfully",
+      "emojiCount": [
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    }
+    ```
+
+* the url to send a POST request for full journal catalogue for use on the calendar page is `http://localhost:3000/api/requestJournal`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+      "startDate":"2024-10-11T09:36:28.829Z",
+      "endDate":"2024-10-12T11:36:28.829Z"
+    }
+    ```
+
+* the url to send a POST request for full journal user profile for use on the profile page is `http://localhost:3000/api/get-profile`
+
+* the url to send a POST request to change the password for a user `http://localhost:3000/api/password`
+  * this request requires a JSON object with the following structure:
+
+    ```json
+    {
+      "password":"newpassword"
+    }
+    ```

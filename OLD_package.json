@@ -1,0 +1,30 @@
+{
+  "name": "2024-sis-team-8",
+  "version": "0.0.1",
+  "description": "EmoteLog: Daily Emoji Journal",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm run build-client && npm run start-server-dev",
+    "start-client": "cd client && npm start",
+    "build-client": "cd client && npm run build",
+    "start-server": "node server/server.js",
+    "start-server-dev": "nodemon server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bootstrap": "^5.3.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.4",
+    "nodemon": "^3.1.4",
+    "react-bootstrap": "^2.10.4",
+    "react-router-dom": "^6.26.2"
+  }
+}

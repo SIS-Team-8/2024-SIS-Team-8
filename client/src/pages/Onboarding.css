@@ -1,0 +1,113 @@
+#onboarding-container {
+    padding: 30px;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #189ab4;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+#onboarding-button {
+    padding: 7px;
+    font-size: large;
+    font-family: 'Poppins';
+    background-color: white;
+    color: #189ab4;
+    border: none;
+    border-radius: 4px;
+    margin: 20px;
+    width: 250px;
+    transition: background-color 0.3s;
+}
+
+#home-button {
+    padding: 7px;
+    font-size: large;
+    font-family: 'Poppins';
+    background-color: white;
+    color: #189ab4;
+    border: none;
+    border-radius: 4px;
+    margin: 40px;
+    width: 250px;
+    transition: background-color 0.3s;
+}
+
+.dark #onboarding-button, .dark #home-button {
+    color: #0F3D4B;
+}
+
+#onboarding-button:hover, #home-button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
+.dark #onboarding-button:hover, .dark #home-button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
+.light #onboarding-container {
+    background-color: #189ab4;
+    color: white;
+}
+
+.dark #onboarding-container {
+    background-color: #0F3D4B !important;
+    color: white !important;
+}
+
+#swap-button {
+    padding: 7px;
+    font-size: large;
+    font-family: 'Poppins';
+    background-color: white;
+    color: #189ab4;
+    border: none;
+    border-radius: 4px;
+    margin: 20px;
+    width: 150px;
+    transition: background-color 0.3s;
+}
+
+.dark #swap-button {
+    color: #0F3D4B;
+}
+
+#swap-button:hover {
+    background-color: #0f7b8e;
+    color: white;
+}
+
+.dark #swap-button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
+#onboarding-image {
+    max-width: 700px;
+    height: 300px;
+    display: block;
+    margin: 0 auto;
+}
+
+#image-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 900px;
+    margin: 0 auto;
+    margin-top: 20px;
+    position: relative;
+}
+
+#app-logo {
+    height: 40vmin;
+    pointer-events: none;
+}

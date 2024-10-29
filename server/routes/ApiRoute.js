@@ -1,0 +1,18 @@
+const {updateProfile, getProfile, updatePassword} = require('../controllers/ProfileController')
+const {logEmote, editJournalEntry} = require('../controllers/EmoteController')
+const {requestHistory} = require('../controllers/HistoryController')
+const {requestJournal} = require('../controllers/CalendarController')
+const { Signup, Login } = require('../controllers/AuthController')
+const router = require("express").Router();
+
+router.post('/sign-up', Signup);
+router.post('/login', Login);
+router.post('/profile', updateProfile);
+router.post('/logEmote', logEmote);
+router.post('/editJournalEntry', editJournalEntry);
+router.post('/requestHistory', requestHistory);
+router.post('/requestJournal', requestJournal);
+router.get('/get-profile', getProfile);
+router.post('/password', updatePassword);
+
+module.exports = router;
