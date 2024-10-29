@@ -237,13 +237,6 @@ export default function History({data, historyUpdate, theme, language}) {
                 },
                 {}
             );
-                /*
-                defaultEmoteData[0].emoteFreq = data.emojiCount[0];
-                defaultEmoteData[1].emoteFreq = data.emojiCount[1];
-                defaultEmoteData[2].emoteFreq = data.emojiCount[2];
-                defaultEmoteData[3].emoteFreq = data.emojiCount[3];
-                defaultEmoteData[4].emoteFreq = data.emojiCount[4];
-                */
                 for (let i = 0; i < 5; i++) {
                     defaultEmoteData[i].emoteFreq = data.emojiCount[i];
                 }
