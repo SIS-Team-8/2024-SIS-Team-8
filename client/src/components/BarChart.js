@@ -68,9 +68,6 @@ const BarChartComponent = ({ data, xAxisLabel, yAxisLabel, tooltipText, barColor
         ...item,
         name: t[item.name] || item.name
     }));
-    
-    console.log(data);
-
     return (
         <ResponsiveContainer width="50%" height="40%">
             <BarChart id="bar-chart" data={data} margin={{bottom: 30}}>

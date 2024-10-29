@@ -123,92 +123,6 @@ export default function History({data, historyUpdate, theme, language}) {
         console.log(data);
     }, [location.state?.month]);
 
-    // const getYearlyHistoryStatistics = (year) => {
-    //     const monthlyHistoryStatistics = {};
-
-    //     for (let month = 1; month <= 12; month++) {
-    //         const monthStr = month < 10 ? `0${month}` : `${month}`;
-
-    //         const monthHistoryData = Object.entries(historyData)
-    //             .filter(([date]) => date.startsWith(`${year}-${monthStr}`))
-    //             .map(([_, data]) => data.emotion);
-
-    //         if (monthHistoryData.length === 0) {
-    //             monthlyHistoryStatistics[monthStr] = "N/A";
-    //             continue;
-    //         }
-
-    //         const emoteFreq = monthHistoryData.reduce((acc, emotion) => {
-    //             acc[emotion] = (acc[emotion] || 0) + 1;
-    //             return acc;
-    //         }, {});
-    //     }
-
-    //     return monthlyHistoryStatistics;
-    // };
-
-    // const getMonthlyHistoryStatistics = (month, year) => {
-    //     const monthlyHistoryStatistics = {};
-
-    //     for (let month = 1; month <= 12; month++) {
-    //         const monthStr = month < 10 ? `0${month}` : `${month}`;
-
-    //         const monthHistoryData = Object.entries(historyData)
-    //             .filter(([date]) => date.startsWith(`${year}-${monthStr}`))
-    //             .map(([_, data]) => data.emotion);
-
-    //         if (monthHistoryData.length === 0) {
-    //             monthlyHistoryStatistics[monthStr] = "N/A";
-    //             continue;
-    //         }
-
-    //         const moodCount = monthHistoryData.reduce((acc, emotion) => {
-    //             acc[emotion] = (acc[emotion] || 0) + 1;
-    //             return acc;
-    //         }, {});
-    //     }
-
-    //     return monthlyHistoryStatistics;
-    // };
-
-    // const getWeeklyHistoryStatistics = (year) => {
-    //     const monthlyHistoryStatistics = {};
-    //     const weeklyHistoryStatistics = {};
-
-    //     for (let month = 1; month <= 12; month++) {
-    //          const monthStr = month < 10 ? `0${month}` : `${month}`;
-
-    //          const weekHistoryData = Object.entries(historyData)
-    //              .filter(([date]) => date.startsWith(`${year}-${monthStr}-${weekStr}`))
-    //              .map(([_, data]) => data.mood);
-
-    //              if (monthHistoryData.length === 0) {
-    //                  monthlyHistoryStatistics[monthStr] = "N/A";
-    //                  continue;
-    //              }
-
-    //          for (let week = 1; week <= 4; week++) {
-    //              const weekStr = week < 5 ? `0${week}` : `${week}`;
-
-    //              const weekHistoryData = Object.entries(historyData)
-    //                  .filter(([date]) => date.startsWith(`${year}-${monthStr}-${weekStr}`))
-    //                  .map(([_, data]) => data.emotion);
-
-    //              if (weekHistoryData.length === 0) {
-    //                  weekHistoryStatistics[weekStr] = "N/A";
-    //                  continue;
-    //              }
-
-    //              const emotionCount = monthHistoryData.reduce((acc, emotion) => {
-    //                  acc[emotion] = (acc[emotion] || 0) + 1;
-    //                  return acc;
-    //              }, {});
-    //          }
-    //      }
-
-    //     return monthlyHistoryStatistics;
-    // };
-
     const toggleViewMode = () => {
         const viewModes = { monthly: "weekly", weekly: "yearly", yearly: "monthly" };
         const nextMode = viewModes[viewMode];
@@ -219,6 +133,7 @@ export default function History({data, historyUpdate, theme, language}) {
         } else if (nextMode === "weekly") {
             setCurrentWeek(1);
         }
+        getHistory(nextMode);
     };
 
     const changeMonth = (direction) => {
@@ -228,6 +143,7 @@ export default function History({data, historyUpdate, theme, language}) {
             const newMonth = new Date(currentMonth.setMonth(currentMonth.getMonth() + direction));
             setCurrentMonth(newMonth);
         }
+        getHistory(viewMode);
     };
 
     const changeWeek = (direction) => {
@@ -236,6 +152,7 @@ export default function History({data, historyUpdate, theme, language}) {
         const nextWeek = currentWeek + direction;
 
         setCurrentWeek(nextWeek < 1 ? weeksInMonth : nextWeek > weeksInMonth ? 1 : nextWeek);
+        getHistory(viewMode);
     };
 
     const getHeading = () => {
@@ -254,59 +171,20 @@ export default function History({data, historyUpdate, theme, language}) {
         return `${monthName} ${currentMonth.getFullYear()}`;
     };
 
-    // const generateDateKey = (day) => {
-    //     const year = currentMonth.getFullYear();
-    //     const month = currentMonth.getMonth() + 1;
-    //     return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
-    // };
+    const generateMonthKey = (month, yearChange) => {
+        const year = currentMonth.getFullYear() + yearChange;
+        if (yearChange === 1) {
+            month = 1;
+        }
+        else {
+            month = month + 1;
+        }
+        return `${year}-${month < 10 ? '0' : ''}${month}-01`;
+    };
 
-    // const generateWeekKey = (year, week) => {
-    //     return `${year}-01-${week}`;
-    // };
-
-    // const generateYearKey = (year) => {
-    //     return `${year}-01-01`;
-    // };
-
-    // const getHistory = async (year) => {
-    //     try {
-    //         const { data } = await axios.post(
-    //             "http://localhost:3000/api/requestHistory",
-    //             {
-    //                 startDate: generateYearKey(year),
-    //                 endDate: generateYearKey(year + 1)
-    //             },
-    //             {}
-    //         );
-    //
-    //         let emoji = "";
-    //
-    //         for (let i = 0; i < data.journal.length; i++){
-    //             emoji = data.journal[i].emoji.toString().concat(data.journal[i].intensity.toString());
-    //             historyUpdate(data.journal[i].time_code.split("T")[0], emoji, data.journal[i].text);
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
-    // const chartData = [
-    //     { name: t.chart.xLabels[0], emoteFreq: history.emoji_count },
-    //     { name: t.chart.xLabels[1], emoteFreq: history.emoji_count },
-    //     { name: t.chart.xLabels[2], emoteFreq: history.emoji_count },
-    //     { name: t.chart.xLabels[3], emoteFreq: history.emoji_count },
-    //     { name: t.chart.xLabels[4], emoteFreq: history.emoji_count }
-    // ];
-
-    /*
-    const chartData = [
-        { name: t.chart.xLabels[0], emoteFreq: 5 },
-        { name: t.chart.xLabels[1], emoteFreq: 5 },
-        { name: t.chart.xLabels[2], emoteFreq: 10 },
-        { name: t.chart.xLabels[3], emoteFreq: 5 },
-        { name: t.chart.xLabels[4], emoteFreq: 5 }
-    ];
-    */
+    const generateYearKey = (year) => {
+        return `${year}-01-01`;
+    };
 
     let defaultEmoteData = [
         {
@@ -331,32 +209,60 @@ export default function History({data, historyUpdate, theme, language}) {
         },
     ];
 
-    const getHistory = async () => {
+    const getHistory = async (viewMode) => {
+        let firstDate = "";
+        let secondDate = "";
+        console.log(viewMode);
+        console.log(currentMonth.getFullYear());
         try {
+            if (viewMode === "monthly") {
+                firstDate =  generateMonthKey(currentMonth.getMonth(), 0);
+                console.log(currentMonth.getMonth());
+                if (currentMonth.getMonth() === 11) {
+                    secondDate = generateMonthKey(currentMonth.getMonth() + 1, 1)
+                }
+                else {
+                    secondDate = generateMonthKey(currentMonth.getMonth() + 1, 0);
+                }
+            }
+            else if (viewMode === "yearly") {
+                firstDate =  generateYearKey(currentYear);
+                secondDate = generateYearKey(currentYear + 1);
+            }
             const { data } = await axios.post(
                 "http://localhost:3000/api/requestHistory",
                 {
-                    startDate: "2024-01-01",
-                    endDate: "2025-01-01"
+                    startDate: firstDate,
+                    endDate: secondDate
                 },
                 {}
             );
-            defaultEmoteData[0].emoteFreq = data.emojiCount[0];
-            defaultEmoteData[1].emoteFreq = data.emojiCount[1];
-            defaultEmoteData[2].emoteFreq = data.emojiCount[2];
-            defaultEmoteData[3].emoteFreq = data.emojiCount[3];
-            defaultEmoteData[4].emoteFreq = data.emojiCount[4];
+                /*
+                defaultEmoteData[0].emoteFreq = data.emojiCount[0];
+                defaultEmoteData[1].emoteFreq = data.emojiCount[1];
+                defaultEmoteData[2].emoteFreq = data.emojiCount[2];
+                defaultEmoteData[3].emoteFreq = data.emojiCount[3];
+                defaultEmoteData[4].emoteFreq = data.emojiCount[4];
+                */
+                for (let i = 0; i < 5; i++) {
+                    defaultEmoteData[i].emoteFreq = data.emojiCount[i];
+                }
             
             setTranslatedData(defaultEmoteData);
-            console.log(translatedData);
         } catch (error) {
+            for (let i = 0; i < 5; i++) {
+                defaultEmoteData[i].emoteFreq = 0;
+            }
+            setTranslatedData(defaultEmoteData);
             console.log(error);
         }
+        console.log(firstDate);
+        console.log(secondDate);
     } 
 
     useEffect(() => {
-        getHistory();
-    })
+        getHistory(viewMode);
+    }, [])
 
     
 
