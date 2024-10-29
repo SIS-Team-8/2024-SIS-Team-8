@@ -26,9 +26,28 @@
     transition: background-color 0.3s;
 }
 
+.dark #onboarding-button {
+    color: #0F3D4B;
+}
+
 #onboarding-button:hover {
     background-color: #0f7b8e;
     color: white;
+}
+
+.dark #onboarding-button:hover {
+    background-color: #0C6270;
+    color: white;
+}
+
+.light #onboarding-container {
+    background-color: #189ab4;
+    color: white;
+}
+
+.dark #onboarding-container {
+    background-color: #0F3D4B !important;
+    color: white !important;
 }
 
 #swap-button {
